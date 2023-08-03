@@ -17,7 +17,7 @@ import Findpw from './pages/Findpw';
 import Login from './pages/Login';
 import FindId from './pages/FindId';
 import Petinfo from './pages/Petinfo';
-
+import Findpw2 from './pages/Findpw2';
 
 
 // 유정) 메인 페이지 화면입니다
@@ -42,11 +42,9 @@ const Main = () => {
                 <Route path='/petinfo' element = {<Petinfo/>}></Route>
                 <Route path='/findid' element = {<FindId/>}></Route>
                 <Route path='/findpw' element = {<Findpw/>}></Route>
-
                 <Route path='/main2' element = {<Mainpage2 mainArr={mainArr}/>}></Route>
-
-                
                 <Route path='/mypage' element = {<Mypage/>}></Route>
+                <Route path='/findpw2' element = {<Findpw2/>}></Route>
 
 
             </Routes>

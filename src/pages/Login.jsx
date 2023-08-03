@@ -6,23 +6,21 @@ import Button from 'react-bootstrap/Button';
 import '../Main.css';
 
 const Login = () => {
+
   const box1 = {
-    border: '3px solid #cccccc',
-    borderRadius: '10px',
     margin: '0 auto',
     padding: '20px',
-    textAlign: 'justify',
-    fontSize: '19px',
-  };
-
-  const box2 = {
-    border: '3px solid #cccccc',
-    margin: '0 auto',
+    width: '800px',
+    height: '600px',
+    backgroundColor: '#F0F0F0',
+    marginBottom: '100px',
+    borderRadius: '20px',
     padding: '20px',
     textAlign: 'center',
     fontSize: '19px',
     fontWeight: 'bold',
-  };
+  }
+
 
   // 로그인 버튼 구현 - 유민
   const idRef = useRef(); // 사용자 아이디
@@ -60,10 +58,9 @@ const Login = () => {
         />
       </Link>
 
-      <h1 style={{ textAlign: 'center', fontSize: '60px' }}>PUPPIET</h1>
 
       <div style={box1}>
-        <div>
+        <div style={{ margin: '30px', marginTop: '70px' }}>
 
           <Form onSubmit={handleLogin}>
             {/* 아이디 입력란 */}
@@ -79,11 +76,17 @@ const Login = () => {
             </Form.Group>
 
             {/* 로그인 버튼 */}
-            <div style={box2}>
-              <Button variant='primary' type='submit'>
-                로그인
-              </Button>
-            </div>
+
+          <div style={{ display: 'flex', justifyContent: 'center', margin: '50px' }}>
+            {/* 확인 버튼 */}
+            <Button variant='primary' type='submit' style={{
+              backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+              width: '300px', height: '60px'
+            }}>
+              로그인
+            </Button>
+
+          </div>
           </Form>
           <br />
 

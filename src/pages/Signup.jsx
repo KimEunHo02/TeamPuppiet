@@ -123,9 +123,11 @@ const Signup = () => {
         </div><br />
 
         {/* ------------------------------------------------------------- */}
-
-        <Button variant="outline-dark">회원가입</Button>
-
+        
+        {/* 회원가입 버튼 클릭 시 반려견 정보 페이지로 이동 */}
+        <Link to='/petinfo'>
+          <Button variant="outline-dark">회원가입</Button>
+        </Link>
 
 
         <div>
