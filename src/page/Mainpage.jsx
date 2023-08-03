@@ -1,5 +1,4 @@
 import React from 'react'
-import Boxs from './Boxs'
 import { Link } from 'react-router-dom';
 import picSrc from '../img/PUPPIET_logo.png'
 
@@ -12,6 +11,18 @@ const Mainpage = () => {
         fontWeight: 'bold',
         fontSize: '18px',
     };
+
+    const Box = {
+        border: '2px solid white',
+        weight: '1940px',
+        height: '150px',
+        padding: '20px',
+        backgroundColor: 'lightgray',
+        textAlign: 'center',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 
     return (
         <div>
@@ -43,33 +54,43 @@ const Mainpage = () => {
 
             {/* 서비스 소개 */}
 
-            <Boxs />
+            <div style={{ ...Box}}>
+                <a className='additional'>서비스 소개</a>
+            </div>
 
             <br />
 
             {/* 다이어트 정보 예시 */}
 
-            <Boxs />
+            <div style={{ ...Box}}>
+                <a className='additional'>다이어트 정보 예시</a>
+            </div>
 
             <br />
 
             {/* 이벤트 캘린더 */}
 
-            <Boxs />
+            <div style={{ ...Box}}>
+                <a className='additional'>Event 캘린더</a>
+            </div>
 
             <br />
 
             {/* 사료 추천 */}
 
             <a style={textstyle}>사료 Top 10</a>
-            <Boxs />
+            <div style={{ ...Box}}>
+                <a className='additional'>사료 추천</a>
+            </div>
 
             <br />
 
             {/* 간식 레시피 추천 */}
 
             <a style={textstyle}>간식 레시피 Top 10</a>
-            <Boxs />
+            <div style={{ ...Box}}>
+                <a className='additional'>간식 레시피 추천</a>
+            </div>
 
         </div>
     )
