@@ -53,3 +53,13 @@
     color: black;
     margin: 20px;
 }
+
+.txt{text-decoration: none;
+    font-weight: bold;
+    color: black;
+    padding: 20px;
+}
+
+.txt:hover{
+    color : blue;
+}

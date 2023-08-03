@@ -9,6 +9,8 @@ import Feed from './page/Feed';
 import Recipe from './page/Recipe';
 import Calendar from './page/Calendar';
 import Petinfo from './page/Petinfo';
+import Findpw from './page/Findpw';
+import FindId from './page/FindId';
 
 
 // 유정) 메인 페이지 화면입니다
@@ -30,6 +32,8 @@ const Main = () => {
                 <Route path='/recipe' element = {<Recipe/>}></Route>
                 <Route path='/calendar' element = {<Calendar/>}></Route>
                 <Route path='/petinfo' element = {<Petinfo/>}></Route>
+                <Route path='/findid' element = {<FindId/>}></Route>
+                <Route path='/findpw' element = {<Findpw/>}></Route>
 
             </Routes>
 

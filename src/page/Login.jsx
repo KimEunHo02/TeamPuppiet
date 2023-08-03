@@ -24,7 +24,7 @@ const Login = () => {
     textAlign: 'center',
     fontSize: '19px',
     fontWeight: 'bold'
-    
+
   }
 
   return (
@@ -57,9 +57,9 @@ const Login = () => {
             <Form.Control type="text" placeholder="아이디" />
           </Form.Group>
 
-           {/* 비밀번호 입력창 */}
-          
-           <Form.Group className="mb-3" controlId="formBasicID">
+          {/* 비밀번호 입력창 */}
+
+          <Form.Group className="mb-3" controlId="formBasicID">
             <Form.Label></Form.Label>
             <Form.Control type="text" placeholder="비밀번호" />
           </Form.Group>
@@ -68,29 +68,24 @@ const Login = () => {
             <a>로그인</a>
           </div>
 
-          <br/>
+          <br />
 
           <div className='logintext'
-                style={{ display: 'flex', justifyContent: 'center'}}>
-          <span style={{ display: 'inline-block', marginRight: '100px'}}>아이디 찾기</span>
-          <span style={{ display: 'inline-block', marginRight: '100px'}}>비밀번호 찾기</span>
-          <span style={{ display: 'inline-block', marginRight: '100px'}}>회원가입</span>
+            style={{ display: 'flex', justifyContent: 'center' }}>
+            <Link to="/findid" className='txt'>아이디 찾기</Link>
+            <Link to="/findpw" className='txt'>비밀번호 찾기</Link>
+            <Link to="/signup" className='txt'>회원가입</Link>
+
           </div>
 
 
         </div>
 
       </div>
-      
-      <div className='logintext'
-      style={{ display: 'flex', justifyContent: 'center'}}>
-      <span style={{ display: 'inline-block', marginRight: '100px'}}>아이디 찾기</span>{" "}
-      <span style={{ display: 'inline-block', marginRight: '100px'}}>비밀번호 찾기</span>{" "}
-      <Link to="/signup">회원가입</Link>
 
       </div>
 
-    </div>
+
   )
 }
 
