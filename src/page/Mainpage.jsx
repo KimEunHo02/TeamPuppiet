@@ -12,7 +12,6 @@ const Mainpage = () => {
         fontWeight: 'bold',
         fontSize: '18px',
     };
-<p>유민 test</p>
 
     return (
         <div>
