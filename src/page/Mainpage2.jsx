@@ -60,7 +60,7 @@ const Mainpage2 = () => {
       <div style={{ ...Box, width: '3000px', height: '200px' }}>
       </div>
 
-      {/* 사료 추천 */}
+      {/* 간식 레시피 추천 */}
       <a style={textstyle}>간식 레시피 추천</a>
       <div style={{ ...Box, width: '3000px', height: '200px' }}>
       </div>
