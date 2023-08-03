@@ -1,9 +1,14 @@
 import React from 'react'
+import Login from '../pages/Login'
+
 import { Link } from 'react-router-dom';
 import picSrc from '../img/PUPPIET_logo.png'
 
 
-const Mainpage2 = () => {
+const Mainpage2 = ({ mainArr }) => {
+
+  let sessionData = sessionStorage.getItem('userId')
+  console.log('session :', sessionData)
 
   const Box = {
     border: '2px solid white',
@@ -64,6 +69,12 @@ const Mainpage2 = () => {
       <a style={textstyle}>간식 레시피 추천</a>
       <div style={{ ...Box, width: '3000px', height: '200px' }}>
       </div>
+
+
+      {sessionData == 'puppiet'
+        ? <p>app쁘조님 환영합니다! 메인2 페이지입니다</p>
+        : <p>로그인이 필요합니다.</p>}
+      {mainArr.map(item => <Login key={item.url} obj={item} />)}
     </div>
   )
 }
