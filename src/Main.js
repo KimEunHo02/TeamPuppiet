@@ -15,6 +15,8 @@ import Petinfo from './page/Petinfo';
 
 const Main = () => {
 
+    <p>은호 테스트</p>
+
     return (
 
         <div>
