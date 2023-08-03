@@ -98,9 +98,9 @@ const Petinfo = () => {
                     </div><hr />
 
                     {/* 중성화 여부 선택창 */}<div>
-                        <input type='radio' /> 남아
+                        중성화 <input type='radio' /> O
                         {" "}
-                        <input type='radio' /> 여아
+                        <input type='radio' /> X
                     </div><hr />
 
                     {/* 완료 박스 */}
