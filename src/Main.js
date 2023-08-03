@@ -1,6 +1,8 @@
 import React from 'react'
 import './Main.css';
 import { Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
+
 
 import Mainpage from './page/Mainpage';
 import Information from './page/Information';
@@ -21,6 +23,7 @@ import Petinfo from './pages/Petinfo';
 
 const Main = () => {
 
+    const [mainArr, setMainArr] = useState([])
     return (
 
         <div>
@@ -38,7 +41,7 @@ const Main = () => {
                 <Route path='/petinfo' element = {<Petinfo/>}></Route>
                 <Route path='/findid' element = {<FindId/>}></Route>
                 <Route path='/findpw' element = {<Findpw/>}></Route>
-                <Route path='/main2' element = {<Mainpage2/>}></Route>
+                <Route path='/main2' element = {<Mainpage2 mainArr={mainArr}/>}></Route>
 
             </Routes>
 
