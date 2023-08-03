@@ -1,16 +1,20 @@
 import React from 'react'
 import './Main.css';
 import { Routes, Route } from 'react-router-dom';
-import Login from './page/Login';
-import Signup from './page/Signup';
+
 import Mainpage from './page/Mainpage';
 import Information from './page/Information';
 import Feed from './page/Feed';
 import Recipe from './page/Recipe';
 import Calendar from './page/Calendar';
-import Petinfo from './page/Petinfo';
-import Findpw from './page/Findpw';
-import FindId from './page/FindId';
+import Mainpage2 from './page/Mainpage2';
+
+import Signup from './pages/Signup';
+import Findpw from './pages/Findpw';
+import Login from './pages/Login';
+import FindId from './pages/FindId';
+import Petinfo from './pages/Petinfo';
+
 
 
 // 유정) 메인 페이지 화면입니다
@@ -34,6 +38,7 @@ const Main = () => {
                 <Route path='/petinfo' element = {<Petinfo/>}></Route>
                 <Route path='/findid' element = {<FindId/>}></Route>
                 <Route path='/findpw' element = {<Findpw/>}></Route>
+                <Route path='/main2' element = {<Mainpage2/>}></Route>
 
             </Routes>
 

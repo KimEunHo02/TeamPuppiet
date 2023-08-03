@@ -15,6 +15,16 @@ const Petinfo = () => {
         fontSize: '19px'
     }
 
+    const box2 = {
+        border: '3px solid #cccccc',
+        margin: '0 auto',
+        padding: '20px',
+        textAlign: 'center',
+        fontSize: '19px',
+        fontWeight: 'bold'
+
+    }
+
 
     return (
         <div>
@@ -50,7 +60,7 @@ const Petinfo = () => {
                             <Form.Label></Form.Label>
                             <Form.Control type="text" placeholder="이름" />
                         </Form.Group>
-                    </div><hr/>
+                    </div><hr />
 
 
                     {/* 견종 입력창 */}
@@ -59,13 +69,44 @@ const Petinfo = () => {
                         <Form.Group className="mb-3" controlId="formBasicID">
                             <Form.Label></Form.Label>
                             <Form.Control type="text" placeholder="견종" />
+
                         </Form.Group>
-                    </div><hr/>
+                    </div><hr />
 
-                    <input type='radio' /> 남성
-                    {" "}
-                    <input type='radio' /> 여성
+                    {/* 성별 선택창 */}
+                    <div>
+                        <input type='radio' /> 남아
+                        {" "}
+                        <input type='radio' /> 여아
+                    </div><hr />
 
+                    {/* 생년월일 입력창 */}
+                    <div>
+                        <Form.Group className="mb-3" controlId="formBasicbirth">
+                            <Form.Label></Form.Label>
+                            <Form.Control type="text" placeholder="생년월일 8자리 ex)19990101" />
+                        </Form.Group>
+                    </div><hr />
+
+                    {/* 몸무게 입력창 */}
+                    <div>
+                        <Form.Group className="mb-3" controlId="formBasicID">
+                            <Form.Label></Form.Label>
+                            <Form.Control type="text" placeholder="                   kg" />
+
+                        </Form.Group>
+                    </div><hr />
+
+                    {/* 중성화 여부 선택창 */}<div>
+                        <input type='radio' /> 남아
+                        {" "}
+                        <input type='radio' /> 여아
+                    </div><hr />
+
+                    {/* 완료 박스 */}
+                    <div style={box2}>
+                        <a>완료</a>
+                    </div>
 
 
                 </div>

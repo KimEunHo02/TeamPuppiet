@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link } from 'react-router-dom';
 import picSrc from '../img/PUPPIET_logo.png'
 import Form from 'react-bootstrap/Form';
@@ -27,6 +27,30 @@ const Login = () => {
 
   }
 
+// 로그인 버튼 구현 - 유민
+  const idRef = useRef()
+  const pwRef = useRef()
+
+  const handelLogin = (e) => {
+
+    e.preventDefault();
+    console.log('handle Login Function', idRef.current.value, pwRef.current.value)
+    if (idRef.current.value == 'puppiet' && pwRef.current.value == 'app') {
+
+      // 데이터 저장
+      sessionStorage.setItem('userId', idRef.current.value)
+      window.location.replace('/main2')
+
+    } else {
+      alert('로그인 실패' + <br>'로그인 실패하였습니다. 다시 시도해주시기 바랍니다.'</br>)
+      idRef.current.value = ''
+      pwRef.current.value = ''
+      idRef.current.focus()
+      window.location.replace('/login')
+    }
+
+
+    }
   return (
 
     <div>
@@ -64,10 +88,10 @@ const Login = () => {
             <Form.Control type="text" placeholder="비밀번호" />
           </Form.Group>
 
+          {/* 로그인 버튼 클릭 시 메인2 이동 */}
           <div style={box2}>
-            <a>로그인</a>
+            <Link to="/main2" className='mainpage2'>로그인</Link>
           </div>
-
           <br />
 
           <div className='logintext'
@@ -83,7 +107,7 @@ const Login = () => {
 
       </div>
 
-      </div>
+    </div>
 
 
   )
