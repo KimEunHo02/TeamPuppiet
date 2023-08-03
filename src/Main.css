@@ -1,0 +1,55 @@
+.header {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    /* flex-wrap: wrap; */
+
+  }
+
+.logo{
+    flex-basis: 20%;
+    padding: 30px;
+}
+
+.bartext{
+    font-size : 17px;
+    flex-basis: 30%;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+
+
+}
+
+.login{
+    font-size : 14px;
+    flex-basis: 10%;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+
+}
+
+.signUp{
+    font-size : 14px;
+    flex-basis: 10%;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+
+}
+.login:hover {
+    color :peru;
+}
+
+.signUp:hover {
+    color :peru
+}
+
+.logintext{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    margin: 20px;
+}
