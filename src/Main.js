@@ -8,6 +8,7 @@ import Feed from './page/Feed';
 import Recipe from './page/Recipe';
 import Calendar from './page/Calendar';
 import Mainpage2 from './page/Mainpage2';
+import Mypage from './page/Mypage';
 
 import Signup from './pages/Signup';
 import Findpw from './pages/Findpw';
@@ -39,6 +40,7 @@ const Main = () => {
                 <Route path='/findid' element = {<FindId/>}></Route>
                 <Route path='/findpw' element = {<Findpw/>}></Route>
                 <Route path='/main2' element = {<Mainpage2/>}></Route>
+                <Route path='/mypage' element = {<Mypage/>}></Route>
 
             </Routes>
 

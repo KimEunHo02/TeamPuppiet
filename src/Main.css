@@ -2,6 +2,7 @@
 .header {
     display: flex;
     align-items: center;
+    
   }
 
 /* 로고 이미지 */
@@ -81,4 +82,21 @@
 .mainpage2:hover {
     color : #777777 ;
 
+}
+
+/* Mainpage2에서 새로운 상단바 text */
+.main2txt{
+    font-size : 14px;
+    flex-basis: 10%;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+/* Main 페이지 부가 설명 */
+.additional{
+    text-decoration: none;
+    color: white;
+    font-size: 19px;
+    font-weight: bold;
 }
