@@ -1,5 +1,4 @@
 import React from 'react'
-import './Main.css';
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -11,6 +10,7 @@ import Recipe from './page/Recipe';
 import Calendar from './page/Calendar';
 import Mainpage2 from './page/Mainpage2';
 import Mypage from './page/Mypage';
+import Logo from './page/Logo';
 
 import Signup from './pages/Signup';
 import Findpw from './pages/Findpw';

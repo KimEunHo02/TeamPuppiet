@@ -1,120 +1,57 @@
 /* 메인 페이지 상단바 */
 .header {
-    display: flex;
     align-items: center;
-    
+    justify-self: space-between;
+    padding: '10px'
   }
+
+/* 퍼피어트 텍스트 (상단바) */
+.puppiettxt{
+    padding: 30px;
+    font-weight: bold;
+    flex-basis: 30%;
+}
 
 /* 로고 이미지 */
 .logo{
-    flex-basis: 20%;
-    padding: 30px;
+    padding: 10px;
+    width: 200px;
+    flex-basis: 70%;
+
+}
+
+/* 로고 오른쪽 */
+.maintext {
+    font-size : 15px;
+    color : #FFC9C9;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.maintext:hover {
+    color :#FFC9C9;
 }
 
 /* 상단바 타이틀 */
+.bar-container{
+        display: flex;
+        justify-content: center;
+        gap: 90px;   /* 여백 */
+        background-color: #FFC9C9;
+        height: 50px;
+        align-items: center;
+}
+
 .bartext{
-    font-size : 17px;
-    flex-basis: 30%;
-    text-align: center;
     text-decoration: none;
-    font-weight: bold;
-    color: black;
-
-
-}
-
-/* 메인 페이지 로그인 */
-.login{
-    font-size : 14px;
-    flex-basis: 10%;
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-
-}
-
-.login:hover {
-    color :peru;
-}
-
-/* 메인 페이지 회원가입 */
-.signUp{
-    font-size : 14px;
-    flex-basis: 10%;
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-
-}
-
-.signUp:hover {
-    color :peru
-}
-
-/* 로그인 페이지 text */
-
-.logintext{
-    text-decoration: none;
-    font-weight: bold;
-    color: black;
-    margin: 20px;
-}
-
-.txt{text-decoration: none;
-    font-weight: bold;
-    color: gray;
-    padding: 20px;
-}
-
-.txt:hover{
-    text-decoration: underline;
-}
-
-
-/* 로그인 페이지에서 mainpage2 이동 */
-
-.mainpage2{text-decoration: none;
-    font-weight: bold;
-    color: black;
-    padding: 20px;
-}
-
-.mainpage2:hover {
-    color : #777777 ;
-
-}
-
-/* Mainpage2에서 새로운 상단바 text */
-.main2txt{
-    font-size : 14px;
-    flex-basis: 10%;
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
+    color: dimgrey;
 }
 
 /* Main 페이지 부가 설명 */
 .additional{
     text-decoration: none;
-    color: white;
+    color: #777777;
     font-size: 19px;
     font-weight: bold;
-}
-
-/* FindId 페이지 타이틀 */
-.findTitle{
-    font-size: 26px;
-    padding: 20px;
-    text-decoration: none;
-    font-weight: bold;
-    color: black;
-    text-decoration: underline;
-    
-}
-
-.hideTitle{
-    font-size: 26px;
-    padding: 20px;
-    text-decoration: none;
-    color: gray;
 }

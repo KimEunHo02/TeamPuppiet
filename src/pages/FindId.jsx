@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import picSrc from '../img/PUPPIET_logo.png';
 import { Form, Button } from 'react-bootstrap';
+import '../find.css'
 
 const FindId = () => {
 

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import picSrc from '../img/PUPPIET_logo.png';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import '../Main.css';
+import '../login.css';
 
 const Login = () => {
 
@@ -45,6 +45,8 @@ const Login = () => {
 
   return (
     <div>
+      <br/>
+      
       <Link to='/'>
         <img
           className='logo'
@@ -59,7 +61,8 @@ const Login = () => {
       </Link>
 
 
-      <div style={box1}>
+      <div style={{...box1, marginTop : '40px'}}>
+        {/*  */}
         <div style={{ margin: '30px', marginTop: '70px' }}>
 
           <Form onSubmit={handleLogin}>
@@ -77,8 +80,7 @@ const Login = () => {
 
             {/* 로그인 버튼 */}
 
-          <div style={{ display: 'flex', justifyContent: 'center', margin: '50px' }}>
-            {/* 확인 버튼 */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop : '70px'}}>
             <Button variant='primary' type='submit' style={{
               backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
               width: '300px', height: '60px'
@@ -91,12 +93,6 @@ const Login = () => {
           <br />
 
           <div className='logintext' style={{ display: 'flex', justifyContent: 'center' }}>
-            <Link to='/findid' className='txt'>
-              아이디 찾기
-            </Link>
-            <Link to='/findpw' className='txt'>
-              비밀번호 찾기
-            </Link>
             <Link to='/signup' className='txt'>
               회원가입
             </Link>

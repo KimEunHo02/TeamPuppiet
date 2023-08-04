@@ -100,8 +100,7 @@ const Signup = () => {
         />
       </Link>
 
-      {/* 로고 */}
-      <h1 style={{ textAlign: 'center', fontSize: '60px' }}>PUPPIET</h1>
+
 
       {/* 가장 바깥 박스 */}
       <div style={box1}>
