@@ -1,0 +1,32 @@
+.txt{text-decoration: none;
+    font-weight: bold;
+    color: gray;
+    padding: 20px;
+}
+
+.txt:hover{
+    text-decoration: underline;
+}
+
+/* 로그인 페이지 text */
+
+.logintext{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    font-size: 16px;
+    margin: 20px;
+}
+
+/* 로그인 페이지에서 mainpage2 이동 */
+/* 
+.mainpage2{text-decoration: none;
+    font-weight: bold;
+    color: black;
+    padding: 20px;
+}
+
+.mainpage2:hover {
+    color : #777777 ;
+
+} */

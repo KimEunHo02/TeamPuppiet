@@ -1,0 +1,18 @@
+/* FindId 페이지 타이틀 */
+
+.findTitle{
+    font-size: 26px;
+    padding: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    text-decoration: underline;
+    
+}
+
+.hideTitle{
+    font-size: 26px;
+    padding: 20px;
+    text-decoration: none;
+    color: gray;
+}
