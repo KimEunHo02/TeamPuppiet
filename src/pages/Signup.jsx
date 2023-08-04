@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import picSrc from '../img/PUPPIET_logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+
+import './Signup.css';
 
 const Signup = () => {
+
+  const nav = useNavigate()
+
   // 박스1 스타일 정의
   const box1 = {
     border: '3px solid #cccccc',
@@ -22,7 +30,7 @@ const Signup = () => {
     password: '',
     confirmPassword: '',
     name: '',
-    birth: '', // 초기값으로 빈 문자열 설정
+    birth: '',
     gender: '',
   });
 
@@ -30,14 +38,53 @@ const Signup = () => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+
+    // 입력값이 있을 때만 비밀번호 오류 상태를 변경
+    if (name === 'password') {
+      setIsPasswordInvalid(!validateInput(value, 'password'));
+    }
+
+    // 아이디와 비밀번호에 대한 오류 메시지 상태
+    let idErrorMessage = '';
+    let passwordErrorMessage = '';
+    let nameErrorMessage = '';
+    let birthErrorMessage = '';
+
+    if (name === 'username') {
+      idErrorMessage = value === '' ? '아이디를 입력해 주세요.' : '';
+    } else if (name === 'password') {
+      passwordErrorMessage = value === '' ? '비밀번호를 입력해 주세요.' : '';
+      setIsPasswordInvalid(!validateInput(value, 'password'));
+    } else if (name === 'name') {
+      nameErrorMessage = value === '' ? '이름을 입력해 주세요.' : '';
+      setIsPasswordInvalid(!validateInput(value, 'name'));
+    } else if (name === 'birth') {
+      birthErrorMessage = value === '' ? '생년월일을 입력해 주세요.' : '';
+      setIsPasswordInvalid(!validateInput(value, 'birth'));
+    } 
+
+    // 오류 메시지 상태 업데이트
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+      idErrorMessage,
+      passwordErrorMessage,
+      nameErrorMessage,
+      birthErrorMessage,
+    }));
   };
 
   // 비밀번호 확인 체크 핸들러
   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
 
+  // 비밀번호 오류 여부를 상태로 저장
+  const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
+
+  // 비밀번호 확인 체크 핸들러
   const handleConfirmPasswordChange = (event) => {
     const { value } = event.target;
-    setIsPasswordMatch(formData.password === value);
+    setFormData((prevData) => ({ ...prevData, confirmPassword: value })); // 입력된 값으로 confirmPassword 업데이트
+    setIsPasswordMatch(value === formData.password);
   };
 
   // 폼 유효성 검사 함수
@@ -51,22 +98,36 @@ const Signup = () => {
       passwordPattern.test(formData.password) &&
       formData.password === formData.confirmPassword &&
       namePattern.test(formData.name) &&
-      formData.gender !== '' &&
-      formData.birth.length === 8 // 생년월일이 8자리여야 유효하도록 추가
+      formData.gender !== ''
     );
+  };
+
+  // 생년월일 유효성 검사 함수
+  const isBirthValid = (value) => {
+    const birthPattern = /^\d{8}$/;
+    return birthPattern.test(value);
   };
 
   // 폼 제출 시 호출되는 함수
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    // 생년월일 유효성 검사 추가
+    if (!isBirthValid(formData.birth)) {
+      alert('생년월일은 8자리 숫자로 입력해주세요.');
+      return;
+    }
+
     if (isFormValid()) {
       console.log('회원가입 폼 데이터:', formData);
-      // 여기에 회원가입 로직을 추가할 수 있습니다.
+      // 여기에 회원가입 로직을 추가할 수 있음
     } else {
       alert('입력값이 유효하지 않습니다. 모든 필드를 올바르게 입력해주세요.');
     }
   };
+
+  // 다음 버튼의 활성화 여부를 결정하는 변수
+  const isNextButtonEnabled = isFormValid() && isBirthValid(formData.birth);
 
   // 입력값 유효성 검사 함수
   const validateInput = (value, type) => {
@@ -83,6 +144,7 @@ const Signup = () => {
         return true;
     }
   };
+
 
   return (
     <div>
@@ -120,10 +182,11 @@ const Signup = () => {
                   onChange={handleInputChange}
                   isInvalid={!validateInput(formData.username, 'username')}
                 />
-                <Form.Control.Feedback type="invalid">
+                <Form.Control.Feedback type="invalid" className="error-message">
                   영문, 숫자, 특수기호(+. @, ., _, -)만 입력 가능합니다.
                 </Form.Control.Feedback>
-                <Button variant="secondary">중복확인</Button> {/* 중복확인 버튼 */}
+                {formData.idErrorMessage && <Form.Text className="error-message">{formData.idErrorMessage}</Form.Text>}
+                {/* <Button variant="secondary">중복확인</Button> 중복확인 버튼 */}
               </Form.Group>
             </div>
 
@@ -138,11 +201,13 @@ const Signup = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleInputChange}
-                isInvalid={!validateInput(formData.password, 'password')}
+                isInvalid={isPasswordInvalid} // 오류 메시지 표시 여부
               />
-              <Form.Control.Feedback type="invalid">
+              {/* 비밀번호 오류 메시지 */}
+              <Form.Control.Feedback type="invalid" className="error-message">
                 영문 + 숫자 + 특수기호(+. @, ., _, -) 8 ~ 15자리 조합으로 입력해 주세요.
               </Form.Control.Feedback>
+              {formData.passwordErrorMessage && <Form.Text id="passwordHelpBlock" className="error-message">{formData.passwordErrorMessage}</Form.Text>}
             </div>
 
             {/* 비밀번호 재입력창 */}
@@ -155,12 +220,14 @@ const Signup = () => {
                 placeholder="비밀번호 확인"
                 name="confirmPassword"
                 value={formData.confirmPassword}
-                onChange={handleConfirmPasswordChange}
+                onChange={handleConfirmPasswordChange} // handleConfirmPasswordChange 함수를 여기서 사용
+                isInvalid={!isPasswordMatch} // 오류 메시지 표시 여부
               />
-              {!isPasswordMatch && <Form.Text id="passwordHelpBlock" style={{ color: 'pink' }}>입력하신 비밀번호가 맞지 않습니다. 확인 후 다시 입력해 주세요.</Form.Text>}
+              {!isPasswordMatch && <Form.Text id="passwordHelpBlock" className="error-message">입력하신 비밀번호가 맞지 않습니다. 확인 후 다시 입력해 주세요.</Form.Text>}
             </div>
           </Form>
         </div>
+
         {/* ------------------------------------------------------------- */}
 
         {/* 이름, 생년월일 박스 */}
@@ -175,28 +242,32 @@ const Signup = () => {
               value={formData.name}
               onChange={handleInputChange}
             />
+            {formData.nameErrorMessage && <Form.Text className="error-message">{formData.nameErrorMessage}</Form.Text>}
           </Form.Group>
 
           {/* 생년월일 입력창 */}
-          <Form.Group className="mb-3" controlId="formBasicbirth">
-            <Form.Label></Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="생년월일 8자리 숫자로 입력해 주세요"
-              name="birth"
-              value={formData.birth}
-              onChange={handleInputChange}
-              isInvalid={!formData.birth.match(/^\d{8}$/)} // 생년월일이 8자리 숫자가 아니면 유효하지 않음
-            />
-            <Form.Control.Feedback type="invalid">
-              생년월일은 8자리 숫자로 입력해 주세요.
-            </Form.Control.Feedback>
-          </Form.Group>
+          <Form.Label htmlFor="inputBirth">생년월일</Form.Label>
+          <Form.Control
+            type="text" // 숫자만 입력 가능하도록 수정
+            id="inputBirth"
+            placeholder="생년월일 8자리 ex)19990101"
+            name="birth"
+            value={formData.birth}
+            onChange={handleInputChange}
+            isInvalid={!isBirthValid(formData.birth) && formData.birth !== ''} // 숫자 8자리가 아니거나 빈 값인 경우 오류 메시지 표시
+          />
+          {!isBirthValid(formData.birth) && formData.birth !== '' && (
+            <Form.Text className="error-message">생년월일은 8자리 숫자로 입력해주세요.</Form.Text>
+          )}
+          {formData.birthErrorMessage && <Form.Text className="error-message">{formData.birthErrorMessage}</Form.Text>}
+
         </div>
+
         {/* ------------------------------------------------------------- */}
 
         {/* 성별 박스 */}
         <div style={box1}>
+
           {/* 성별 입력 */}
           <div>
             <input
@@ -220,12 +291,11 @@ const Signup = () => {
         {/* ------------------------------------------------------------- */}
 
         {/* 회원가입 버튼 클릭 시 반려견 정보 페이지로 이동 */}
-        <Link to='/petinfo'>
-          <Button variant="outline-dark">다음</Button>
-        </Link>
+        <Button variant="outline-dark" disabled={!isNextButtonEnabled} onClick={() => { nav('/petinfo') }}>다음</Button>
       </div>
     </div>
   );
 };
 
 export default Signup;
+
