@@ -52,7 +52,7 @@ const Signup = () => {
       setIsPasswordInvalid(!validateInput(value, 'password'));
     }
 
-    // 아이디와 비밀번호에 대한 오류 메시지 상태
+    // 아이디, 비밀번호, 이름, 생년월일에 대한 오류 메시지 상태
     let idErrorMessage = '';
     let passwordErrorMessage = '';
     let nameErrorMessage = '';
@@ -120,7 +120,7 @@ const Signup = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // 생년월일 유효성 검사 추가
+    // 생년월일 유효성 검사
     if (!isBirthValid(formData.birth)) {
       alert('생년월일은 8자리 숫자로 입력해주세요.');
       return;
@@ -192,27 +192,34 @@ const Signup = () => {
                   name="username"
                   value={formData.username}
                   onChange={handleInputChange}
-                  isInvalid={!validateInput(formData.username, 'username')
-                  }
+                  isInvalid={!validateInput(formData.username, 'username')}
                   style={{ width: '350px' }}
                 />
-
                 {/* 중복확인 버튼 */}
                 <Button variant='primary' style={{
                   marginLeft: '20px', backgroundColor: '#FFC9C9',
                   borderColor: '#FFC9C9', color: 'gray'
                 }}>
                   중복 확인
-                </Button></div>
-
-              {/* 이미지, 입력창, 버튼 정렬했을 때 Form.Control과 Form.Control.Feedback
-                같은 부모 요소에 있지 않아 오류 메시지 안 뜨는 오류 생성 */}
-
-              <Form.Control.Feedback type="invalid" className="error-message">
-                영문, 숫자, 특수기호(+. @, ., _, -)만 입력 가능합니다.
-              </Form.Control.Feedback>
-              {formData.idErrorMessage && <Form.Text className="error-message">{formData.idErrorMessage}</Form.Text>}
+                </Button>
+              </div>
             </Form.Group>
+            {formData.username && (
+              <div
+                className="error-message"
+                style={{
+                  fontSize: '14px',
+                  color: 'red',
+                  marginLeft: '-100px',
+                  marginTop: '2.7px',
+                }}
+              >
+                영문, 숫자, 특수기호(+. @, ., _, -)만 입력 가능합니다.
+              </div>
+            )}
+            {formData.idErrorMessage && (
+              <Form.Text className="error-message">{formData.idErrorMessage}</Form.Text>
+            )}
 
             {/* --------------------------------------------------------------------------------- */}
 
@@ -221,7 +228,6 @@ const Signup = () => {
               <Form.Label htmlFor="inputPassword5"></Form.Label>
               <div className="d-flex align-items-center" style={{ display: 'flex' }}>
                 <img src={pwImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-
                 <Form.Control
                   type="password"
                   id="inputPassword5"
@@ -231,13 +237,25 @@ const Signup = () => {
                   value={formData.password}
                   onChange={handleInputChange}
                   isInvalid={isPasswordInvalid} // 오류 메시지 표시 여부
-                /></div>
-
-              {/* 비밀번호 오류 메시지 */}
-              <Form.Control.Feedback type="invalid" className="error-message">
-                영문 + 숫자 + 특수기호(+. @, ., _, -) 8 ~ 15자리 조합으로 입력해 주세요.
-              </Form.Control.Feedback>
+                />
+              </div>
               {formData.passwordErrorMessage && <Form.Text id="passwordHelpBlock" className="error-message">{formData.passwordErrorMessage}</Form.Text>}
+
+              {formData.password && (
+                <div
+                  className="error-message"
+                  style={{
+                    fontSize: '14px',
+                    color: 'red',
+                    marginLeft: '-100px',
+                    marginTop: '2.7px',
+                  }}
+                >
+                  {!validateInput(formData.password, 'password') && (
+                    '영문, 숫자, 특수기호(+. @, ., _, -)만 입력 가능합니다.'
+                  )}
+                </div>
+              )}
             </div>
 
             {/* ------------------------------------------------------------------ */}
@@ -326,14 +344,27 @@ const Signup = () => {
 
           {/* 디자인 적용시킨 후 동작 안 됨 */}
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '70px' }}>
-          <Button variant="outline-dark"
-            disabled={!isNextButtonEnabled} onClick={() => { nav('/petinfo') }}
-            style={{
-                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
-                width: '300px', height: '60px'
-              }}>
-            다음</Button>
-            </div>
+            <Button
+              variant="outline-dark"
+              disabled={!isNextButtonEnabled}
+              onClick={() => {
+                nav('/petinfo');
+              }}
+              style={{
+                backgroundColor: '#FFC9C9',
+                borderColor: '#FFC9C9',
+                color: 'gray',
+                width: '300px',
+                height: '60px',
+                position: 'fixed', // 고정 위치 설정
+                bottom: '20px', // 아래에서 20px 위에 위치하도록 설정
+                left: '50%', // 화면 가운데 위치
+                transform: 'translateX(-50%)', // 가로 방향으로 중앙 정렬
+              }}
+            >
+              다음
+            </Button>
+          </div>
 
         </div>
         {/* 박스 div */}
