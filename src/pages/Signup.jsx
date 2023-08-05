@@ -345,26 +345,13 @@ const Signup = () => {
 
           {/* 디자인 적용시킨 후 동작 안 됨 */}
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '70px' }}>
-            <Button
-              variant="outline-dark"
-              disabled={!isNextButtonEnabled}
-              onClick={() => {
-                nav('/petinfo');
-              }}
+            <Button variant="outline-dark"
+              disabled={!isNextButtonEnabled} onClick={() => { nav('/petinfo') }}
               style={{
-                backgroundColor: '#FFC9C9',
-                borderColor: '#FFC9C9',
-                color: 'gray',
-                width: '300px',
-                height: '60px',
-                position: 'fixed', // 고정 위치 설정
-                bottom: '20px', // 아래에서 20px 위에 위치하도록 설정
-                left: '50%', // 화면 가운데 위치
-                transform: 'translateX(-50%)', // 가로 방향으로 중앙 정렬
-              }}
-            >
-              다음
-            </Button>
+                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+                width: '300px', height: '60px'
+              }}>
+              다음</Button>
           </div>
 
         </div>
