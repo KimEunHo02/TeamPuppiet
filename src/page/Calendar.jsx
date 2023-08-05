@@ -3,12 +3,15 @@ import Logo from './Logo'
 import {format, addMonths, subMonths} from 'date-fns';
 import {startOfMonth, endOfMonth, startOfWeek, endOfWeek} from 'date-fns';
 import {isSameMonth, isSameDay, addDays, parse} from 'date-fns';
+import '../calendar.css';
+
 
 // 월, 년 표시 & 전월, 명월 버튼
 const RenderHeader = ({currentMonth, preMonth, nextMonth}) => {
     return (
         <div className='header row'>
             <div className='col col-start'>
+                <span className='cal_title'>캘린더</span>
                 <span className='text'>
                     <span className='text month'>
                         {format(currentMonth,'M')}월
