@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import '../login.css';
 import '../input.css';
-import Boxcustom from './Boxcustom'
 
 import iconImage from '../icon/name.png'
 import pwImage from '../icon/password.png'
@@ -14,7 +13,6 @@ const Login = () => {
 
   const box1 = {
     margin: '0 auto',
-    padding: '20px',
     width: '600px',
     height: '600px',
     backgroundColor: '#F0F0F0',
@@ -70,17 +68,16 @@ const Login = () => {
         {/*  */}
         <div style={{ margin: '30px', marginTop: '70px' }}>
 
-          
+
           <Form onSubmit={handleLogin}>
             {/* 아이디 입력란 */}
 
-            <Boxcustom/>
             <Form.Group className="mb-3" controlId="formBasicID">
               <Form.Label></Form.Label>
               <div className="d-flex align-items-center">
                 <img src={iconImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
                 <Form.Control type="text" placeholder="아이디" ref={idRef} className="custom-input" /> </div>
-              
+
 
             </Form.Group>
             {/* 비밀번호 입력란 */}
@@ -88,7 +85,7 @@ const Login = () => {
               <Form.Label></Form.Label>
               <div className="d-flex align-items-center">
                 <img src={pwImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-              <Form.Control type='password' placeholder='비밀번호' ref={pwRef} className="custom-input" /> </div>
+                <Form.Control type='password' placeholder='비밀번호' ref={pwRef} className="custom-input" /> </div>
             </Form.Group>
 
             {/* 로그인 버튼 */}
@@ -103,9 +100,9 @@ const Login = () => {
 
             </div>
 
-            
+
           </Form>
-          
+
           <br />
 
           <div className='logintext' style={{ display: 'flex', justifyContent: 'center' }}>

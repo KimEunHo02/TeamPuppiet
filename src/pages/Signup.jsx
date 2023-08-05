@@ -6,6 +6,13 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import '../input.css';
+import './Signup.css';
+
+import iconImage from '../icon/name.png'
+import pwImage from '../icon/password.png'
+import birthImage from '../icon/birthday.png'
+import genderImage from '../icon/gender.png'
 
 
 import './Signup.css';
@@ -16,12 +23,13 @@ const Signup = () => {
 
   // 박스1 스타일 정의
   const box1 = {
-    border: '3px solid #cccccc',
-    borderRadius: '10px',
     margin: '0 auto',
     padding: '20px',
-    textAlign: 'justify',
-    fontSize: '19px'
+    width: '600px',
+    height: '600px',
+    backgroundColor: '#F0F0F0',
+    marginBottom: '100px',
+    borderRadius: '20px',
   }
 
   // 폼 데이터 상태 초기값 설정
@@ -61,7 +69,7 @@ const Signup = () => {
     } else if (name === 'birth') {
       birthErrorMessage = value === '' ? '생년월일을 입력해 주세요.' : '';
       setIsPasswordInvalid(!validateInput(value, 'birth'));
-    } 
+    }
 
     // 오류 메시지 상태 업데이트
     setFormData((prevData) => ({
@@ -148,60 +156,83 @@ const Signup = () => {
 
   return (
     <div>
-      {/* 이미지 */}
-      <Link to='/'>
-        <img
-          className='logo'
-          style={{
-            display: 'block', /* img 태그를 블록 수준 요소로 변경 */
-            margin: '0 auto', /* 가로 방향으로 가운데 정렬 */
-            width: '200px'
-          }}
-          src={picSrc}
-          alt="PUPPIET Logo"
-        />
-      </Link>
 
-
+      <div style={{ marginTop: '25px' }}>
+        {/* 이미지 */}
+        <Link to='/'>
+          <img
+            className='logo'
+            style={{
+              display: 'block', /* img 태그를 블록 수준 요소로 변경 */
+              margin: '0 auto', /* 가로 방향으로 가운데 정렬 */
+              width: '200px'
+            }}
+            src={picSrc}
+            alt="PUPPIET Logo"
+          />
+        </Link>
+      </div>
 
       {/* 가장 바깥 박스 */}
-      <div style={box1}>
-        {/* 아이디, 비밀번호 박스 */}
-        <div style={box1}>
+      <div style={{ ...box1, marginTop: '40px' }}>
+        <div style={{ margin: '30px' }}>
+
+
+          {/* 회원가입 폼 */}
           <Form onSubmit={handleSubmit}>
+
             {/* 아이디 입력창 */}
-            <div>
-              <Form.Group className="mb-3" controlId="formBasicID">
-                <Form.Label></Form.Label>
+            <Form.Group controlId="formBasicID">
+              <Form.Label></Form.Label>
+              <div className="d-flex align-items-center" style={{ display: 'flex' }}>
+                <img src={iconImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
                 <Form.Control
                   type="text"
                   placeholder="아이디"
                   name="username"
                   value={formData.username}
                   onChange={handleInputChange}
-                  isInvalid={!validateInput(formData.username, 'username')}
+                  isInvalid={!validateInput(formData.username, 'username')
+                  }
+                  style={{ width: '350px' }}
                 />
-                <Form.Control.Feedback type="invalid" className="error-message">
-                  영문, 숫자, 특수기호(+. @, ., _, -)만 입력 가능합니다.
-                </Form.Control.Feedback>
-                {formData.idErrorMessage && <Form.Text className="error-message">{formData.idErrorMessage}</Form.Text>}
-                {/* <Button variant="secondary">중복확인</Button> 중복확인 버튼 */}
-              </Form.Group>
-            </div>
+
+                {/* 중복확인 버튼 */}
+                <Button variant='primary' style={{
+                  marginLeft: '20px', backgroundColor: '#FFC9C9',
+                  borderColor: '#FFC9C9', color: 'gray'
+                }}>
+                  중복 확인
+                </Button></div>
+
+              {/* 이미지, 입력창, 버튼 정렬했을 때 Form.Control과 Form.Control.Feedback
+                같은 부모 요소에 있지 않아 오류 메시지 안 뜨는 오류 생성 */}
+
+              <Form.Control.Feedback type="invalid" className="error-message">
+                영문, 숫자, 특수기호(+. @, ., _, -)만 입력 가능합니다.
+              </Form.Control.Feedback>
+              {formData.idErrorMessage && <Form.Text className="error-message">{formData.idErrorMessage}</Form.Text>}
+            </Form.Group>
+
+            {/* --------------------------------------------------------------------------------- */}
 
             {/* 비밀번호 입력창 */}
             <div>
               <Form.Label htmlFor="inputPassword5"></Form.Label>
-              <Form.Control
-                type="password"
-                id="inputPassword5"
-                aria-describedby="passwordHelpBlock"
-                placeholder="비밀번호"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                isInvalid={isPasswordInvalid} // 오류 메시지 표시 여부
-              />
+              <div className="d-flex align-items-center" style={{ display: 'flex' }}>
+                <img src={pwImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
+
+                <Form.Control
+                  type="password"
+                  id="inputPassword5"
+                  aria-describedby="passwordHelpBlock"
+                  placeholder="비밀번호"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  isInvalid={isPasswordInvalid} // 오류 메시지 표시 여부
+                /></div>
+
               {/* 비밀번호 오류 메시지 */}
               <Form.Control.Feedback type="invalid" className="error-message">
                 영문 + 숫자 + 특수기호(+. @, ., _, -) 8 ~ 15자리 조합으로 입력해 주세요.
@@ -209,9 +240,12 @@ const Signup = () => {
               {formData.passwordErrorMessage && <Form.Text id="passwordHelpBlock" className="error-message">{formData.passwordErrorMessage}</Form.Text>}
             </div>
 
+            {/* ------------------------------------------------------------------ */}
+
             {/* 비밀번호 재입력창 */}
-            <div>
-              <Form.Label htmlFor="inputPassword5"></Form.Label>
+            <Form.Label htmlFor="inputPassword5"></Form.Label>
+            <div className="d-flex align-items-center" style={{ display: 'flex' }}>
+              <img src={pwImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
               <Form.Control
                 type="password"
                 id="inputPassword5"
@@ -221,76 +255,87 @@ const Signup = () => {
                 value={formData.confirmPassword}
                 onChange={handleConfirmPasswordChange} // handleConfirmPasswordChange 함수를 여기서 사용
                 isInvalid={!isPasswordMatch} // 오류 메시지 표시 여부
-              />
-              {!isPasswordMatch && <Form.Text id="passwordHelpBlock" className="error-message">입력하신 비밀번호가 맞지 않습니다. 확인 후 다시 입력해 주세요.</Form.Text>}
+              /></div>
+            {!isPasswordMatch && <Form.Text id="passwordHelpBlock" className="error-message">입력하신 비밀번호가 맞지 않습니다. 확인 후 다시 입력해 주세요.</Form.Text>}
+
+            {/* ------------------------------------------------------------------ */}
+
+            {/* 이름 입력창 */}
+            <Form.Group controlId="formBasicID">
+              <Form.Label></Form.Label>
+              <div className="d-flex align-items-center" style={{ display: 'flex' }}>
+                <img src={iconImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
+                <Form.Control
+                  type="text"
+                  placeholder="이름"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                /></div>
+              {formData.nameErrorMessage && <Form.Text className="error-message">{formData.nameErrorMessage}</Form.Text>}
+            </Form.Group>
+
+            {/* ------------------------------------------------------------------ */}
+
+            {/* 생년월일 입력창 */}
+            <Form.Label htmlFor="inputBirth"></Form.Label>
+            <div className="d-flex align-items-center" style={{ display: 'flex' }}>
+              <img src={birthImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
+              <Form.Control
+                type="text" // 숫자만 입력 가능하도록 수정
+                id="inputBirth"
+                placeholder="생년월일 8자리 ex)19990101"
+                name="birth"
+                value={formData.birth}
+                onChange={handleInputChange}
+                isInvalid={!isBirthValid(formData.birth) && formData.birth !== ''} // 숫자 8자리가 아니거나 빈 값인 경우 오류 메시지 표시
+              /></div>
+            {!isBirthValid(formData.birth) && formData.birth !== '' && (
+              <Form.Text className="error-message">생년월일은 8자리 숫자로 입력해주세요.</Form.Text>
+            )}
+            {formData.birthErrorMessage && <Form.Text className="error-message">{formData.birthErrorMessage}</Form.Text>}
+
+            {/* ------------------------------------------------------------------ */}
+
+            {/* 성별 입력 */}
+            <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
+              <img src={genderImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
+              <div className='custom-box'>
+                <div className="custom-input-box" style={{ width: '450px' }}>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="남성"
+                    onChange={handleInputChange}
+                  />{' '}
+                  남성
+                  {' '}
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="여성"
+                    onChange={handleInputChange}
+                  />{' '}
+                  여성
+                </div>
+              </div>
             </div>
           </Form>
-        </div>
 
-        {/* ------------------------------------------------------------- */}
-
-        {/* 이름, 생년월일 박스 */}
-        <div style={box1}>
-          {/* 이름 입력창 */}
-          <Form.Group className="mb-3" controlId="formBasicID">
-            <Form.Label></Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="이름"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-            />
-            {formData.nameErrorMessage && <Form.Text className="error-message">{formData.nameErrorMessage}</Form.Text>}
-          </Form.Group>
-
-          {/* 생년월일 입력창 */}
-          <Form.Label htmlFor="inputBirth">생년월일</Form.Label>
-          <Form.Control
-            type="text" // 숫자만 입력 가능하도록 수정
-            id="inputBirth"
-            placeholder="생년월일 8자리 ex)19990101"
-            name="birth"
-            value={formData.birth}
-            onChange={handleInputChange}
-            isInvalid={!isBirthValid(formData.birth) && formData.birth !== ''} // 숫자 8자리가 아니거나 빈 값인 경우 오류 메시지 표시
-          />
-          {!isBirthValid(formData.birth) && formData.birth !== '' && (
-            <Form.Text className="error-message">생년월일은 8자리 숫자로 입력해주세요.</Form.Text>
-          )}
-          {formData.birthErrorMessage && <Form.Text className="error-message">{formData.birthErrorMessage}</Form.Text>}
+          {/* 회원가입 버튼 클릭 시 반려견 정보 페이지로 이동 */}
+          <div  style={{ display: 'flex', justifyContent: 'center', marginTop: '70px' }}>
+          <Button variant="outline-dark"
+            disabled={!isNextButtonEnabled} onClick={() => { nav('/petinfo') }}
+            style={{
+              backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+              width: '300px', height: '60px'
+            }}>
+            다음</Button>
+            </div>
 
         </div>
+        {/* 박스 div */}
 
-        {/* ------------------------------------------------------------- */}
-
-        {/* 성별 박스 */}
-        <div style={box1}>
-
-          {/* 성별 입력 */}
-          <div>
-            <input
-              type="radio"
-              name="gender"
-              value="남성"
-              onChange={handleInputChange}
-            />{' '}
-            남성
-            {' '}
-            <input
-              type="radio"
-              name="gender"
-              value="여성"
-              onChange={handleInputChange}
-            />{' '}
-            여성
-          </div>
-        </div>
-
-        {/* ------------------------------------------------------------- */}
-
-        {/* 회원가입 버튼 클릭 시 반려견 정보 페이지로 이동 */}
-        <Button variant="outline-dark" disabled={!isNextButtonEnabled} onClick={() => { nav('/petinfo') }}>다음</Button>
       </div>
     </div>
   );
