@@ -323,13 +323,15 @@ const Signup = () => {
           </Form>
 
           {/* 회원가입 버튼 클릭 시 반려견 정보 페이지로 이동 */}
-          <div  style={{ display: 'flex', justifyContent: 'center', marginTop: '70px' }}>
+
+          {/* 디자인 적용시킨 후 동작 안 됨 */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '70px' }}>
           <Button variant="outline-dark"
             disabled={!isNextButtonEnabled} onClick={() => { nav('/petinfo') }}
             style={{
-              backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
-              width: '300px', height: '60px'
-            }}>
+                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+                width: '300px', height: '60px'
+              }}>
             다음</Button>
             </div>
 
