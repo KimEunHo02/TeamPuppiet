@@ -1,6 +1,6 @@
 .calendar{
     margin-left: 300px;
-    margin-top : 50px;
+    margin-top : 30px;
     width: 900px;
 }
 
@@ -28,13 +28,12 @@
 
 /* 요일 */
 .days.row{
-    background-color: #FFC9C9; 
+    background-color: #FFC9C9;
+    text-align: center;
 }
 
 /* 달력 contents */
 .body{
-    /* border: 0.4px solid gray; */
-    border-radius: 3px;
     width: 900px;
     height: 400px;
 }
@@ -42,7 +41,7 @@
 /* 달력 셀 표시 */
 .col.cell{
     border: 0.4px solid gray;
-    height: 100px;
+    height: 110px;
 }
 
 /* 오늘 날짜표시 */
@@ -57,15 +56,15 @@
     margin-left: 1250px;
     margin-right:300px;
     margin-top: -425px;
-    border-radius: 3px;
-    height: 200px;
+    border-radius: 30px;
+    height: 180px;
 
     /* 내용 정렬 */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
 }
 
 .challenge_title{
@@ -88,6 +87,23 @@
     border-radius: 10px;
 }
 
-.exercise-content{
+/* stamp 구역 */
+.stamp_area{
+    border: 0.4px solid gray;
+    margin-left: 1250px;
+    margin-right:300px;
+    margin-top: 20px;
+    border-radius: 30px;
+    height: 370px;
     
+    /* 내용 정렬 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.stamp_content{
+    margin-top: 10px;
+    font-size: 18px;
 }

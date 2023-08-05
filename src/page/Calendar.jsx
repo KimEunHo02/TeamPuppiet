@@ -1,9 +1,14 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import Logo from './Logo'
 import {format, addMonths, subMonths} from 'date-fns';
 import {startOfMonth, endOfMonth, startOfWeek, endOfWeek} from 'date-fns';
 import {isSameMonth, isSameDay, addDays, parse} from 'date-fns';
 import '../calendar.css';
+
+import stamp1 from '../stamp/stamp1.png'
+import stamp2 from '../stamp/stamp2.png'
+import stamp3 from '../stamp/stamp3.png'
+import stamp4 from '../stamp/stamp4.png'
 
 // 랜덤 운동 목록
 const ExerciseContent = () => {
@@ -27,13 +32,23 @@ const ExerciseContent = () => {
 
 };
 
-// const Stamp = ({imageSrc})=>{
-//   return(
-//     <div className='stamp'>
-//       <img ></img>
-//     </div>
-//   )
-// }
+const Stamp = ()=>{
+  return(
+    <div className='stamp_area'>
+      <p className='stamp_content'>스탬프를 선택해주세요</p>
+      <div>
+        <img src={stamp1} className='stamp-image' width='120px'></img>
+        <img src={stamp2} className='stamp-image' width='120px'></img>
+      </div>
+      <div>
+        <img src={stamp3} className='stamp-image' width='120px'></img>
+        <img src={stamp4} className='stamp-image' width='120px'></img>
+      </div>
+      <button className='challenge_btn'>스탬프찍기</button>
+
+    </div>
+  );
+};
 
 
 // 월, 년 표시 & 전월, 명월 버튼
@@ -151,17 +166,10 @@ export const Calendar = () => {
   const onDateClick =(day) =>{
     setSelectedDate(day);
   }
-
-  // useEffect(()=>{
-  //   if(isSameDay(selectedDate, new Date())){
-  //     setSelectedDate(new Date())
-  //   }
-    
-  // },[selectedDate])
-
   
   return (
-    <div><Logo/>
+    <div>
+      <Logo/>
       <div className='calender_container'>
         <div className='calendar'>
           <RenderHeader 
@@ -182,6 +190,7 @@ export const Calendar = () => {
         </div>
         <div className='exercise-container'>
           <ExerciseContent/>
+          <Stamp/>
         </div>
       </div>
     </div>
