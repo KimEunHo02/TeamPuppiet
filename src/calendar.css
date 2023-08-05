@@ -4,6 +4,7 @@
     width: 900px;
 }
 
+/* 캘린더 글자 */
 .cal_title{
     font-weight: bold;
     font-size : 2em;
@@ -11,11 +12,13 @@
     margin-right: 10px;
 }
 
+/* 년도 & 해당 월에 속하지 않는 날짜 */
 .text{
     font-size: 0.8em;
     color: gray;
 }
 
+/* 월 */
 .text.month{
     margin-right: 5px;
     font-weight: bold;
@@ -23,18 +26,68 @@
     color: gray;
 }
 
+/* 요일 */
 .days.row{
     background-color: #FFC9C9; 
 }
 
+/* 달력 contents */
 .body{
     /* border: 0.4px solid gray; */
     border-radius: 3px;
     width: 900px;
-    height: 500px;
+    height: 400px;
 }
 
+/* 달력 셀 표시 */
 .col.cell{
     border: 0.4px solid gray;
     height: 100px;
+}
+
+/* 오늘 날짜표시 */
+.selected{
+    background-color: lightgrey;
+}
+
+/* 랜덤 운동 챌린지 */
+.exercise-content{
+    /* 위치조정 */
+    border: 0.4px solid gray;
+    margin-left: 1250px;
+    margin-right:300px;
+    margin-top: -425px;
+    border-radius: 3px;
+    height: 200px;
+
+    /* 내용 정렬 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.challenge_title{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.challenge_content{
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.challenge_btn{
+    margin-top: 15px;
+    padding: 8px 20px;
+    font-size: 16px;
+    background-color: #FFC9C9;
+    border:none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.exercise-content{
+    
 }

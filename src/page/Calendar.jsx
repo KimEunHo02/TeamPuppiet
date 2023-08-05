@@ -1,9 +1,39 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Logo from './Logo'
 import {format, addMonths, subMonths} from 'date-fns';
 import {startOfMonth, endOfMonth, startOfWeek, endOfWeek} from 'date-fns';
 import {isSameMonth, isSameDay, addDays, parse} from 'date-fns';
 import '../calendar.css';
+
+// 랜덤 운동 목록
+const ExerciseContent = () => {
+  const dogExercises = [
+    "산책 15분하기",
+    "산책 20분하기",
+    "산책 30분하기",
+    "공놀이 10분하기",
+    "공놀이 20분하기"
+  ];
+
+  const randomExercise = dogExercises[Math.floor(Math.random()*dogExercises.length)];
+
+  return(
+    <div className='exercise-content'>
+      <p className='challenge_title'>오늘의 운동!</p>
+      <p className='challenge_content'>{randomExercise} 🐶</p>
+      <button className='challenge_btn'>챌린지 완료</button>
+    </div>
+  )
+
+};
+
+// const Stamp = ({imageSrc})=>{
+//   return(
+//     <div className='stamp'>
+//       <img ></img>
+//     </div>
+//   )
+// }
 
 
 // 월, 년 표시 & 전월, 명월 버튼
@@ -66,12 +96,16 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick}) =>{
       days.push(
         <div 
           className={`col cell ${
+            // disabled : 현재 월에 속하지 않은 날짜
             !isSameMonth(day, monthStart)
             ? 'disabled'
+            // selected : 선택된 날짜
             : isSameDay(day, selectedDate)
             ? 'selected'
+            // not-valid : 현재 월과 날짜의 월이 다른 경우
             : format(currentMonth,'M') !== format(day, 'M')
             ? 'not-valid'
+            // valid : 위 조건 해당 x
             : 'valid'
           }`}
           key={day}
@@ -117,23 +151,38 @@ export const Calendar = () => {
   const onDateClick =(day) =>{
     setSelectedDate(day);
   }
+
+  // useEffect(()=>{
+  //   if(isSameDay(selectedDate, new Date())){
+  //     setSelectedDate(new Date())
+  //   }
+    
+  // },[selectedDate])
+
   
   return (
     <div><Logo/>
+      <div className='calender_container'>
+        <div className='calendar'>
+          <RenderHeader 
+            currentMonth = {currentMonth}
+            preMonth = {preMonth}
+            nextMonth = {nextMonth}>
+          </RenderHeader>
+          <RenderDays/>
+          <RenderCells
+            currentMonth={currentMonth}
+            // selectedDate={preMonth}
+            // nextMonth={onDateClick}
+            selectedDate={selectedDate}
+            onDateClick={onDateClick}
+            >
 
-      <div className='calendar'>
-        <RenderHeader 
-          currentMonth = {currentMonth}
-          preMonth = {preMonth}
-          nextMonth = {nextMonth}>
-        </RenderHeader>
-        <RenderDays/>
-        <RenderCells
-          currentMonth={currentMonth}
-          selectedDate={preMonth}
-          nextMonth={onDateClick}>
-
-        </RenderCells>
+          </RenderCells>
+        </div>
+        <div className='exercise-container'>
+          <ExerciseContent/>
+        </div>
       </div>
     </div>
   )
