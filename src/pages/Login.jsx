@@ -4,13 +4,18 @@ import picSrc from '../img/PUPPIET_logo.png';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import '../login.css';
+import '../input.css';
+import Boxcustom from './Boxcustom'
+
+import iconImage from '../icon/name.png'
+import pwImage from '../icon/password.png'
 
 const Login = () => {
 
   const box1 = {
     margin: '0 auto',
     padding: '20px',
-    width: '800px',
+    width: '600px',
     height: '600px',
     backgroundColor: '#F0F0F0',
     marginBottom: '100px',
@@ -45,8 +50,8 @@ const Login = () => {
 
   return (
     <div>
-      <br/>
-      
+      <br />
+
       <Link to='/'>
         <img
           className='logo'
@@ -61,35 +66,46 @@ const Login = () => {
       </Link>
 
 
-      <div style={{...box1, marginTop : '40px'}}>
+      <div style={{ ...box1, marginTop: '40px' }}>
         {/*  */}
         <div style={{ margin: '30px', marginTop: '70px' }}>
 
+          
           <Form onSubmit={handleLogin}>
             {/* 아이디 입력란 */}
-            <Form.Group className='mb-3' controlId='formBasicID'>
-              <Form.Label></Form.Label>
-              <Form.Control type='text' placeholder='아이디' ref={idRef} />
-            </Form.Group>
 
+            <Boxcustom/>
+            <Form.Group className="mb-3" controlId="formBasicID">
+              <Form.Label></Form.Label>
+              <div className="d-flex align-items-center">
+                <img src={iconImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
+                <Form.Control type="text" placeholder="아이디" ref={idRef} className="custom-input" /> </div>
+              
+
+            </Form.Group>
             {/* 비밀번호 입력란 */}
             <Form.Group className='mb-3' controlId='formBasicPassword'>
               <Form.Label></Form.Label>
-              <Form.Control type='password' placeholder='비밀번호' ref={pwRef} />
+              <div className="d-flex align-items-center">
+                <img src={pwImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
+              <Form.Control type='password' placeholder='비밀번호' ref={pwRef} className="custom-input" /> </div>
             </Form.Group>
 
             {/* 로그인 버튼 */}
 
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop : '70px'}}>
-            <Button variant='primary' type='submit' style={{
-              backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
-              width: '300px', height: '60px'
-            }}>
-              로그인
-            </Button>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '70px' }}>
+              <Button variant='primary' type='submit' style={{
+                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+                width: '300px', height: '60px'
+              }}>
+                로그인
+              </Button>
 
-          </div>
+            </div>
+
+            
           </Form>
+          
           <br />
 
           <div className='logintext' style={{ display: 'flex', justifyContent: 'center' }}>

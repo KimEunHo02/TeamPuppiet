@@ -76,4 +76,26 @@
 }
 
 
+.maingraybox{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.maintopbox{
+    display: flex;
+    flex-direction: column;
+}
+
+.mainboxcontent{
+    text-decoration: none;
+    color: #777777;
+}
+
+.imgboxcontent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 230%;
+}

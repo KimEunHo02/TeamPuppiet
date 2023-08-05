@@ -2,32 +2,38 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import picSrc from '../img/PUPPIET_logo.png'
+import Button from 'react-bootstrap/Button';
+import '../input.css'
+
+import petImage from '../icon/dog_info.png'
+import Image from '../icon/name.png'
+import dogimage from '../icon/dog_kind.png'
+
 
 const Petinfo = () => {
 
     const box1 = {
-
-        border: '3px solid #cccccc',
-        borderRadius: '10px',
         margin: '0 auto',
         padding: '20px',
-        textAlign: 'justify',
-        fontSize: '19px'
-    }
-
-    const box2 = {
-        border: '3px solid #cccccc',
-        margin: '0 auto',
+        width: '800px',
+        height: '800px',
+        backgroundColor: '#F0F0F0',
+        marginBottom: '100px',
+        borderRadius: '20px',
         padding: '20px',
         textAlign: 'center',
         fontSize: '19px',
-        fontWeight: 'bold'
-
+        fontWeight: 'bold',
     }
 
+    const inputstyle = {
+        backgroundColor: 'white',
+    }
 
     return (
         <div>
+            <br />
+
             {/* 이미지 */}
 
             <Link to='/'>
@@ -43,41 +49,39 @@ const Petinfo = () => {
                 </img>
             </Link>
 
-            {/* 로고 */}
-            <h1 style={{ textAlign: 'center', fontSize: '60px' }}>PUPPIET</h1>
+
+            {/* 내용 박스 */}
 
 
-            {/* 가장 바깥 */}
-            <div style={box1}>
 
-                {/* 내용 박스 */}
-                <div style={box1}>
 
-                    {/* 아이디 입력창 */}
+            <div style={{ ...box1, marginTop: '40px' }}>
 
+                {/* 이름 */}
+                <img src={petImage} style={{ width: '50px' }} />
+                <div style={{ margin: '30px' }}>
                     <div>
-                        <Form.Group className="mb-3" controlId="formBasicID">
+                        <Form.Group className="mb-3">
                             <Form.Label></Form.Label>
-                            <Form.Control type="text" placeholder="이름" />
+                            <div className="d-flex align-items-center">
+                                <img src={Image} style={{ width: '25px', marginRight: '10px' }} alt="Icon" />
+                                <Form.Control type="text" placeholder="이름" className="custom-input" /> </div>
                         </Form.Group>
-                    </div><hr />
 
-
-                    {/* 견종 입력창 */}
-
-                    <div>
-                        <Form.Group className="mb-3" controlId="formBasicID">
+                        {/* 견종 */}
+                        <Form.Group className="mb-3">
                             <Form.Label></Form.Label>
-                            <Form.Control type="text" placeholder="견종" />
-
+                            <div className="d-flex align-items-center">
+                                <img src={dogimage} style={{ width: '25px', marginRight: '10px' }} alt="Icon" />
+                                <Form.Control type="text" placeholder="견종" className="custom-input" /> </div>
                         </Form.Group>
-                    </div><hr />
 
+                    </div>
                     {/* 성별 선택창 */}
                     <div>
-                        <input type='radio' /> 남아
+                        <input type='radio' /> 암컷
                         {" "}
-                        <input type='radio' /> 여아
+                        <input type='radio' /> 수컷
                     </div><hr />
 
                     {/* 생년월일 입력창 */}
@@ -103,15 +107,23 @@ const Petinfo = () => {
                         <input type='radio' /> X
                     </div><hr />
 
-                    {/* 완료 박스 */}
-                    <div style={box2}>
-                        <a>완료</a>
-                    </div>
 
+                    {/* 로그인 버튼 */}
+
+                    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '70px' }}>
+                        <Button variant='primary' type='submit' style={{
+                            backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+                            width: '300px', height: '60px'
+                        }}>
+                            로그인
+                        </Button>
+
+                    </div>
 
                 </div>
             </div>
         </div>
+
     )
 }
 
