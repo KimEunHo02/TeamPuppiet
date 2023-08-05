@@ -204,7 +204,7 @@ const Signup = () => {
                 </Button>
               </div>
             </Form.Group>
-            {formData.username && (
+            {formData.username && !validateInput(formData.username, 'username') && (
               <div
                 className="error-message"
                 style={{
@@ -220,6 +220,7 @@ const Signup = () => {
             {formData.idErrorMessage && (
               <Form.Text className="error-message">{formData.idErrorMessage}</Form.Text>
             )}
+
 
             {/* --------------------------------------------------------------------------------- */}
 
