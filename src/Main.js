@@ -10,7 +10,7 @@ import Recipe from './page/Recipe';
 import Calendar from './page/Calendar';
 import Mainpage2 from './page/Mainpage2';
 import Mypage from './page/Mypage';
-import Logo from './page/Logo';
+import Mypage2 from './page/Mypage2'
 
 import Signup from './pages/Signup';
 import Findpw from './pages/Findpw';
@@ -44,6 +44,7 @@ const Main = () => {
                 <Route path='/findpw' element = {<Findpw/>}></Route>
                 <Route path='/main2' element = {<Mainpage2 mainArr={mainArr}/>}></Route>
                 <Route path='/mypage' element = {<Mypage/>}></Route>
+                <Route path='/mypage2' element = {<Mypage2/>}></Route>
                 <Route path='/findpw2' element = {<Findpw2/>}></Route>
 
 
