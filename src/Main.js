@@ -37,7 +37,7 @@ const Main = () => {
                 <Route path='/signup' element = {<Signup/>}></Route>
                 <Route path='/information' element = {<Information/>}></Route>
                 <Route path='/feed' element = {<Feed/>}></Route>
-                <Route path='/recipe' element = {<Recipe/>}></Route>
+                <Route path='/recipe/*' element = {<Recipe/>}></Route>
                 <Route path='/calendar' element = {<Calendar/>}></Route>
                 <Route path='/petinfo' element = {<Petinfo/>}></Route>
                 <Route path='/findid' element = {<FindId/>}></Route>

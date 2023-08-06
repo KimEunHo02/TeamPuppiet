@@ -5,11 +5,14 @@ import './index.css';
 import Main from './Main';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import Recipe from './page/Recipe';
+import ImageDetail from './page/ImageDetail';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 <BrowserRouter>
     <Main />
+    <ImageDetail />
 </BrowserRouter>
 );
 

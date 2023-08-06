@@ -2,9 +2,31 @@ import React, { useState } from 'react';
 import Logo from './Logo';
 import Button from 'react-bootstrap/Button';
 
+import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
+import ImageDetail from './ImageDetail';
+
 const Recipe = () => {
+
+  // 이미지 상세 페이지 라우팅을 생성하는 함수
+  const generateRoutes = () => {
+    const dummyRecipes = Array.from({ length: 627 }, (_, index) => index + 1);
+
+    return (
+      <Routes>
+        {dummyRecipes.map((recipeId) => (
+          <Route
+            key={recipeId}
+            path={`/ImageDetail/:recipeId`}
+            element={<ImageDetail />}
+          />
+        ))}
+      </Routes>
+    );
+  }
+
+  // ------------------------------------ 레시피 재료 선택 박스 --------------------------------------
   const [selectedIngredients, setSelectedIngredients] = useState([]);
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState(''); // 검색어 입력 상태 관리
 
   const ingredients = [
     '고구마', '감자', '당근', '호박', '닭고기', '돼지고기', '소고기', '연어',
@@ -73,8 +95,76 @@ const Recipe = () => {
   );
 
 
-  // -----------------------------------------------------------------------------------------------------------------------------------------
-  // return문
+  // ---------------------------------------- 레시피 추천 박스 --------------------------------------------------
+  // 이미지 박스 스타일
+  const imageBoxStyle = {
+    display: 'inline-block',
+    width: 'calc(25% - 40px)',
+    margin: 'auto',
+    overflow: 'hidden',
+    position: 'relative'
+  };
+
+  // 이미지 박스 컨테이너 스타일
+  const imageBoxContainerStyle = {
+    display: 'flex',
+    flexWrap: 'wrap', // 한 줄에 4개씩
+    justifyContent: 'space-between', // 좌우 간격 맞춤
+  };
+
+  // 이미지 스타일
+  const imageStyle = {
+    width: '100%',
+    height: 'auto',
+    maxHeight: '100%'
+  };
+
+
+  // 이미지 설명 스타일
+  const descriptionStyle = {
+    textAlign: 'center',
+    padding: '10px',
+    color: 'gray',
+    textDecoration: 'none',
+    transition: 'color 0.3s', // 색 변화에 트랜지션 적용
+  };
+
+  // 링크 스타일
+  const linkStyle = {
+    textDecoration: 'none',
+    color: 'gray',
+    transition: 'color 0.3s', // 색 변화에 트랜지션 적용
+  };
+
+  // 이미지 박스를 동적으로 생성
+  const dummyRecipes = Array.from({ length: 627 }, (_, index) => ({
+    id: index + 1,
+    description: `Recipe ${index + 1}`,
+  }));
+
+  const imageBoxes = dummyRecipes.map((recipe) => (
+    <div key={recipe.id} style={imageBoxStyle}>
+      <Link to={`/ImageDetail/${recipe.id}`} style={linkStyle}>
+        <div style={{ backgroundColor: 'gray', width: '100%', height: '200px' }}></div>
+        <p style={descriptionStyle}>{recipe.description}</p>
+      </Link>
+    </div>
+  ));
+
+
+  // ------------------------------------------------
+  // 페이지 맨 위로 이동 버튼 클릭 핸들러
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // 페이지 맨 아래로 이동 버튼 클릭 핸들러
+  const scrollToBottom = () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  };
+
+
+  // -------------------------------------------------return문---------------------------------------------------
   return (
     <div style={{ backgroundColor: '#F0F0F0' }}>
       <Logo />
@@ -94,9 +184,22 @@ const Recipe = () => {
         </div>
         <strong style={{ color: 'gray', fontSize: '18px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>n개의 간식 레시피 추천</strong>
       </div>
-      <div style={{ margin: 'auto', width: '1000px', height: '1000px', backgroundColor: 'white', borderRadius: '20px', padding: '10px' }}>
 
+      {/* 레시피 추천 박스 컨테이너 */}
+      <div style={{ margin: 'auto', width: '1000px', backgroundColor: 'white', borderRadius: '20px', padding: '60px 40px 10px 40px' }}>
+        <div style={imageBoxContainerStyle}>{imageBoxes}</div>
       </div>
+
+      {/* 페이지 맨 위로/아래로 이동 버튼 */}
+      <div style={{ position: 'fixed', right: '20px', bottom: '20px', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', zIndex: 999 }}>
+        <Button variant="light" onClick={scrollToTop} style={{ marginBottom: '10px' }}>
+          <span style={{ color: 'gray' }}>▲</span>
+        </Button>
+        <Button variant="light" onClick={scrollToBottom}>
+          <span style={{ color: 'gray' }}>▼</span>
+        </Button>
+      </div>
+      {generateRoutes()}
     </div>
   );
 };
