@@ -1,6 +1,11 @@
+.calender_container{
+    background-color: #f0f0f0;
+    padding-top : 50px
+}
+
 .calendar{
-    margin-left: 300px;
-    margin-top : 30px;
+    margin-left: 150px;
+    margin-top : -20px;
     width: 900px;
 }
 
@@ -41,6 +46,7 @@
 /* 달력 셀 표시 */
 .col.cell{
     border: 0.4px solid gray;
+    background-color: white;
     height: 110px;
 }
 
@@ -53,8 +59,9 @@
 .exercise-content{
     /* 위치조정 */
     border: 0.4px solid gray;
-    margin-left: 1250px;
-    margin-right:300px;
+    background-color: white;
+    margin-left: 1100px;
+    margin-right:150px;
     margin-top: -425px;
     border-radius: 30px;
     height: 180px;
@@ -90,8 +97,9 @@
 /* stamp 구역 */
 .stamp_area{
     border: 0.4px solid gray;
-    margin-left: 1250px;
-    margin-right:300px;
+    background-color: white;
+    margin-left: 1100px;
+    margin-right:150px;
     margin-top: 20px;
     border-radius: 30px;
     height: 370px;
