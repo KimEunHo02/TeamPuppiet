@@ -1,0 +1,18 @@
+.mypagetext{
+    text-decoration: none;
+    color: gray;
+    display: block;
+    margin-left: 200px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.atagtext{
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+    font-size: 22px;
+    color: gray;
+
+}
