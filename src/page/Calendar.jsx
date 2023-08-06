@@ -142,7 +142,7 @@ const RenderDays = () => {
 }
 
 // 달력 그리기
-const RenderCells = ({currentMonth, selectedDate, onDateClick}) =>{
+const RenderCells = ({currentMonth, selectedDate, onDateClick, stamps, stampImages}) =>{
   // monthStart : 오늘이 속한 달의 시작일
   const monthStart = startOfMonth(currentMonth);
   // monthEnd : 오늘이 속한 달의 마자막일
