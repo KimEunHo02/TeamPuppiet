@@ -24,7 +24,7 @@ const Logo = () => {
                     {/* 이미지 */}
                     <div style={{ display: 'flex', alignItems: 'center',
                                     marginLeft : '140px'}}>
-                        <Link to='/'>
+                        <Link to='/main2'>
                             <img className='logo' src={picSrc} width='150px' alt="Logo"></img>
                         </Link>
                     </div>

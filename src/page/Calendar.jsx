@@ -9,9 +9,14 @@ import stamp1 from '../stamp/stamp1.png'
 import stamp2 from '../stamp/stamp2.png'
 import stamp3 from '../stamp/stamp3.png'
 import stamp4 from '../stamp/stamp4.png'
+import stamp1_1 from '../stamp/stamp1_click.png'
+import stamp2_1 from '../stamp/stamp2_click.png'
+import stamp3_1 from '../stamp/stamp3_click.png'
+import stamp4_1 from '../stamp/stamp4_click.png'
 
 // 랜덤 운동 목록
 const ExerciseContent = () => {
+  const[challengeCompleted, setChallengeCompleted] = useState(false);
   const dogExercises = [
     "산책 15분하기",
     "산책 20분하기",
@@ -22,30 +27,69 @@ const ExerciseContent = () => {
 
   const randomExercise = dogExercises[Math.floor(Math.random()*dogExercises.length)];
 
+  const handleChallengeComplete = () =>{
+    setChallengeCompleted(true);
+  }
+
   return(
     <div className='exercise-content'>
       <p className='challenge_title'>오늘의 운동!</p>
       <p className='challenge_content'>{randomExercise} 🐶</p>
-      <button className='challenge_btn'>챌린지 완료</button>
+      <button 
+        className={`challenge_btn ${challengeCompleted? '':'disabled'}`}
+        id='exercise_btn'
+        onClick={handleChallengeComplete}
+        disabled={challengeCompleted}>
+        챌린지 완료
+      </button>
     </div>
   )
 
 };
 
-const Stamp = ()=>{
+const Stamp = ({challengeCompleted})=>{
+  // 선택된 이미지를 인덱스에 저장
+  const[selectedImageIndex,setSelectedImageIndex] = useState(0);
+
+  const stampImages = [
+    {normal : stamp1, clicked : stamp1_1},
+    {normal : stamp2, clicked : stamp2_1},
+    {normal : stamp3, clicked : stamp3_1},
+    {normal : stamp4, clicked : stamp4_1}
+  ]
+
+  // 이미지 클릭 시 인덱트 변경
+  const handleImageClick = (index) => {
+    setSelectedImageIndex(index);
+  }
+
   return(
     <div className='stamp_area'>
       <p className='stamp_content'>스탬프를 선택해주세요</p>
       <div>
+        {stampImages.map((image, index) => (
+          <img
+            key={index}
+            src={selectedImageIndex === index ? image.clicked : image.normal}
+            className='stamp-image'
+            width='120px'
+            onClick={()=> handleImageClick(index)}></img>
+        ))}
+      </div>
+      {/* <div>
         <img src={stamp1} className='stamp-image' width='120px'></img>
         <img src={stamp2} className='stamp-image' width='120px'></img>
       </div>
       <div>
         <img src={stamp3} className='stamp-image' width='120px'></img>
         <img src={stamp4} className='stamp-image' width='120px'></img>
-      </div>
-      <button className='challenge_btn'>스탬프찍기</button>
-
+      </div> */}
+      <button 
+        className={`challenge_btn $ {isDisabled ? 'disabled' : ''}`}
+        id='stamp_btn'
+        disabled={!challengeCompleted}>
+        스탬프찍기
+      </button>
     </div>
   );
 };
@@ -154,6 +198,7 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick}) =>{
 export const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [challengeCompleted, setChallengeCompleted] = useState(false);
 
   const preMonth = () =>{
     setCurrentMonth(subMonths(currentMonth,1));
@@ -189,8 +234,8 @@ export const Calendar = () => {
           </RenderCells>
         </div>
         <div className='exercise-container'>
-          <ExerciseContent/>
-          <Stamp/>
+          <ExerciseContent challengeCompleted={challengeCompleted} setChallengeCompleted={setChallengeCompleted}/>
+          <Stamp challengeCompleted={challengeCompleted}/>
         </div>
       </div>
     </div>
