@@ -1,3 +1,7 @@
+col.cell.selectedtoday{
+    background-color:  #ffcc00;
+}
+
 .calender_container{
     background-color: #f0f0f0;
     padding-top : 50px
@@ -51,9 +55,11 @@
 }
 
 /* 오늘 날짜표시 */
-.selected{
+/* selected{
     background-color: lightgrey;
-}
+} */
+
+
 
 /* 랜덤 운동 챌린지 */
 .exercise-content{

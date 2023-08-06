@@ -157,11 +157,21 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick}) =>{
   let day = startDate;  
   let formattedDate = '';
 
+  const today = new Date();
+  
   while (day <= endDate){
     for (let i = 0; i<7; i++){
       formattedDate = format(day, 'd');
       const cloneDay = day;
-      days.push(
+      const isStamped = 
+      stamps && stamps.some(
+        (stamp) =>
+        isSameDay(parse(stamp.date), day) && stamp.imageIndex !== -1
+        );
+
+        const isToday = isSameDay(day, today);
+
+        days.push(
         <div 
           className={`col cell ${
             // disabled : 현재 월에 속하지 않은 날짜
@@ -175,9 +185,9 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick}) =>{
             ? 'not-valid'
             // valid : 위 조건 해당 x
             : 'valid'
-          }`}
+          }${isToday?'today':''}${isStamped ? 'stemped' : ''}`}
           key={day}
-          onClick={()=> onDateClick(parse(cloneDay))}
+          onClick={()=> onDateClick(cloneDay)}
           >
             <span 
               className={
@@ -187,10 +197,24 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick}) =>{
                 }
               >
                 {formattedDate}
+                {isStamped && (
+                  <img
+                  src={
+                    stampImages[
+                      stamps.find(
+                        (stamp) => isSameDay(parse(stamp.date), day)
+                      ).imageIndex
+                    ].normal
+                  }
+                  className={`stamp-icon ${
+                    isSameDay(today, day) ? 'today' : ''
+                  }`}
+                  ></img>
+                )}
 
             </span>
           
-        </div>,
+        </div>
       );
       day = addDays(day, 1);
     }
