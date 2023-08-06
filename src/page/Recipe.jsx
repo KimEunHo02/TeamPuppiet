@@ -72,17 +72,18 @@ const Recipe = () => {
     </div>
   );
 
+
+  // -----------------------------------------------------------------------------------------------------------------------------------------
+  // return문
   return (
     <div style={{ backgroundColor: '#F0F0F0' }}>
       <Logo />
 
-      <div style={{ margin: '20px auto', width: '1000px', backgroundColor: 'white', marginBottom: '100px', borderRadius: '20px', padding: '20px', textAlign: 'center', fontSize: '19px', fontWeight: 'bold' }}>
-        <p style={{ color: 'gray', fontSize: '15px', margin: '10px', marginBottom: '25px' }}>재료를 선택해 주세요.</p>
-        
-        {/* 두 줄로 배치 */}
+      <div style={{ margin: '20px auto', width: '1000px', backgroundColor: 'white', marginBottom: '50px', borderRadius: '20px', padding: '20px', textAlign: 'center', fontSize: '19px', fontWeight: 'bold', position: 'relative' }}>
+        <p style={{ color: 'gray', fontSize: '15px', margin: '10px', marginBottom: '25px' }}>재료를 선택해 주세요</p>
+
         {ingredientsRows}
 
-        {/* 초기화와 검색하기 버튼 */}
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
           <Button variant="light" style={{ ...ingredientButtonStyle, marginRight: '20px', backgroundColor: '#F0F0F0', color: 'gray', width: '100px' }}>
             초기화
@@ -91,6 +92,10 @@ const Recipe = () => {
             검색하기
           </Button>
         </div>
+        <strong style={{ color: 'gray', fontSize: '18px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>n개의 간식 레시피 추천</strong>
+      </div>
+      <div style={{ margin: 'auto', width: '1000px', height: '1000px', backgroundColor: 'white', borderRadius: '20px', padding: '10px' }}>
+
       </div>
     </div>
   );
