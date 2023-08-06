@@ -25,9 +25,6 @@ const Petinfo = () => {
         borderRadius: '20px',
     }
 
-    const inputstyle = {
-        backgroundColor: 'white',
-    }
 
     return (
         <div>
@@ -120,7 +117,7 @@ const Petinfo = () => {
                             name="weight"
                         /></div>
 
-                    {/* 중성화 여부 선택창 */}<div>
+                    {/* 중성화 여부 선택창 */}
                     <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
                         <img src={neuteredImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
                         <div className='custom-box'>
@@ -142,7 +139,6 @@ const Petinfo = () => {
                                 X
                             </div>
                         </div>
-                    </div>
                     </div>
 
 
