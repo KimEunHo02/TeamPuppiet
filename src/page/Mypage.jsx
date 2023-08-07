@@ -15,6 +15,51 @@ import dog3pf from '../profile/profile_smalldog.png'
 import manpf from '../profile/profile_man.png'
 import womanpf from '../profile/profile_woman.png'
 
+// GenderSelection 컴포넌트 정의 (남, 여 선택 버튼)
+const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
+  return (
+    <div className="d-flex align-items-center" style={{ marginTop: '20px' }}>
+      <img src={genderImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
+      성별
+      <div className='custom-box'>
+        <div className="custom-input-box" style={{ width: '450px', marginLeft: '-8px'}}>
+          {/* "남성" 버튼 */}
+          <Button
+            variant={selectedGender === "남성" ? 'primary' : 'light'}
+            style={{
+              backgroundColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
+              borderColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
+              color: 'gray',
+              width: '60px',
+              height: '40px',
+              margin: '-10px 50px',
+            }}
+            onClick={() => handleGenderButtonClick("남성")}
+          >
+            남성
+          </Button>
+          {' '}
+          {/* "여성" 버튼 */}
+          <Button
+            variant={selectedGender === "여성" ? 'primary' : 'light'}
+            style={{
+              backgroundColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
+              borderColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
+              color: 'gray',
+              width: '60px',
+              height: '40px',
+              margin: '1px 50px auto -15px',
+            }}
+            onClick={() => handleGenderButtonClick("여성")}
+          >
+            여성
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Mypage = () => {
 
   // 흰색 박스
@@ -24,7 +69,7 @@ const Mypage = () => {
     height: '600px',
     backgroundColor: 'white',
     padding: '20px',
-    borderRadius: '30px'
+    borderRadius: '0 30px 30px 30px'
   }
 
   // Signup 페이지에서 담긴 데이터
@@ -41,6 +86,11 @@ const Mypage = () => {
       ...prevData,
       [name]: value
     }));
+  };
+
+  // 성별 선택 버튼 클릭 이벤트 핸들러
+  const handleGenderButtonClick = (gender) => {
+    setData({ ...data, gender: gender });
   };
 
   const getImagePath = () => {
@@ -68,14 +118,16 @@ const Mypage = () => {
         backgroundColor: '#F0F0F0', minHeight: '1000px',
         paddingTop: '80px'
       }}>
+        <div style={{backgroundColor:'white', borderRadius:'20px 20px 0 0', width:'200px', height:'40px'}}>
+          <a className='mypagetext' style={{padding:'10px', }}>마이페이지</a>
 
-        <a className='mypagetext'>마이페이지</a>
+        </div>
 
         {/* 하얀 박스 div */}
         <div style={{ ...Box }}>
 
           {/* 링크 태그 div */}
-          
+
           <div style={{ display: 'flex', justifyContent: 'center' }}>
 
             <span className='title'>내 정보</span>
@@ -84,8 +136,10 @@ const Mypage = () => {
           </div>
           {/* 링크 div 끝 */}
 
-          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center',
-                      marginTop: '20px' }}>
+          <div style={{
+            display: 'flex', flexDirection: 'row', justifyContent: 'center',
+            marginTop: '20px'
+          }}>
 
             {/* 이미지 */}
             <div style={{ marginLeft: '200px' }}>
@@ -109,7 +163,7 @@ const Mypage = () => {
                     name="name"
                     value={data.name}
                     onChange={handleChange}
-                    style={{ width: '200px', marginLeft: '20px' }}
+                    style={{ width: '200px', marginLeft: '52px' }}
                   />
                 </div>
               </Form.Group>
@@ -124,35 +178,12 @@ const Mypage = () => {
                   name="birth"
                   value={data.birth}
                   onChange={handleChange}
-                  style={{ width: '200px', marginLeft: '20px' }}
+                  style={{ width: '200px', marginLeft: '20px', marginTop: '10px' }}
                 />
               </div>
 
-              {/* 성별 */}
-              <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
-                <img src={genderImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-                <div className='custom-box'>
-                  <div className="custom-input-box" style={{ width: '450px' }}>
-                    <input
-                      type="radio"
-                      name="gender"
-                      value="남성"
-                      checked={data.gender === "남성"}
-                      onChange={handleChange}
-                    />{' '}
-                    남성
-                    {' '}
-                    <input
-                      type="radio"
-                      name="gender"
-                      value="여성"
-                      checked={data.gender === "여성"}
-                      onChange={handleChange}
-                    />{' '}
-                    여성
-                  </div>
-                </div>
-              </div>
+              {/* GenderSelection 컴포넌트 사용 / 남, 여 선택 */}
+              <GenderSelection selectedGender={data.gender} handleGenderButtonClick={handleGenderButtonClick} />
             </div>
           </div>
           {/* 수정하기 버튼 */}
