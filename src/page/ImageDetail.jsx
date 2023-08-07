@@ -29,7 +29,7 @@ const ImageDetail = () => {
       </div>
       
       {/* 나중에 DB 받으면 recipeId 값으로 받아오기 */}
-      <h2>Recipe 상세 페이지 - {recipeId}</h2>
+      <h6>Recipe 상세 페이지 - {recipeId}</h6>
     </div>
   );
 };

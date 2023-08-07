@@ -20,8 +20,8 @@ import dog3pf from '../profile/profile_smalldog.png'
 const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
     return (
         <div className="d-flex align-items-center" style={{ marginTop: '20px', marginBottom: '10px' }}>
-            <img src={genderImage} style={{ width: '20px', marginRight: '10px', marginTop: '5px'}} alt="Icon" />
-            <a style={{ marginTop: '5px', marginLeft: '17px'}}>성별</a>
+            <img src={genderImage} style={{ width: '20px', marginRight: '10px', marginTop: '5px' }} alt="Icon" />
+            <a style={{ marginTop: '5px', marginLeft: '20px' }}>성별</a>
             <div className='custom-box'>
                 <div className="custom-input-box" style={{ width: '450px', marginLeft: '-16px' }}>
                     {/* "수컷" 버튼 */}
@@ -64,46 +64,46 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
 // 중성화 여부 선택 버튼
 const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
     return (
-      <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
-        <img src={neuteredImage} style={{ width: '20px', marginTop: '19px' }} alt="Icon" />
-        <div className='custom-box'>
-          <div className="custom-input-box" style={{ width: '450px', marginTop: '10px'}}>
-            <a style={{ marginTop: '10px', marginLeft: '15px'}}>중성화</a>
-            <Button
-              variant={selectedNeutered === "O" ? 'primary' : 'light'}
-              style={{
-                backgroundColor: selectedNeutered === "O" ? '#F6E781' : '#F0F0F0',
-                borderColor: selectedNeutered === "O" ? '#F6E781' : '#F0F0F0',
-                color: 'gray',
-                width: '60px',
-                height: '40px',
-                margin: '-10px 50px -10px 33px',
-              }}
-              onClick={() => handleNeuteredButtonClick("O")}
-            >
-              O
-            </Button>
-            {' '}
-            <Button
-              variant={selectedNeutered === "X" ? 'primary' : 'light'}
-              style={{
-                backgroundColor: selectedNeutered === "X" ? '#F6E781' : '#F0F0F0',
-                borderColor: selectedNeutered === "X" ? '#F6E781' : '#F0F0F0',
-                color: 'gray',
-                width: '60px',
-                height: '40px',
-                margin: '21px 50px 20px -15px',
-              }}
-              onClick={() => handleNeuteredButtonClick("X")}
-            >
-              X
-            </Button>
-          </div>
+        <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
+            <img src={neuteredImage} style={{ width: '20px', marginTop: '19px' }} alt="Icon" />
+            <div className='custom-box'>
+                <div className="custom-input-box" style={{ width: '450px', marginTop: '10px' }}>
+                    <a style={{ marginTop: '10px', marginLeft: '15px' }}>중성화</a>
+                    <Button
+                        variant={selectedNeutered === "O" ? 'primary' : 'light'}
+                        style={{
+                            backgroundColor: selectedNeutered === "O" ? '#F6E781' : '#F0F0F0',
+                            borderColor: selectedNeutered === "O" ? '#F6E781' : '#F0F0F0',
+                            color: 'gray',
+                            width: '60px',
+                            height: '40px',
+                            margin: '-10px 50px -10px 33px',
+                        }}
+                        onClick={() => handleNeuteredButtonClick("O")}
+                    >
+                        O
+                    </Button>
+                    {' '}
+                    <Button
+                        variant={selectedNeutered === "X" ? 'primary' : 'light'}
+                        style={{
+                            backgroundColor: selectedNeutered === "X" ? '#F6E781' : '#F0F0F0',
+                            borderColor: selectedNeutered === "X" ? '#F6E781' : '#F0F0F0',
+                            color: 'gray',
+                            width: '60px',
+                            height: '40px',
+                            margin: '21px 50px 20px -15px',
+                        }}
+                        onClick={() => handleNeuteredButtonClick("X")}
+                    >
+                        X
+                    </Button>
+                </div>
+            </div>
         </div>
-      </div>
     );
-  };
-  
+};
+
 const Mypage2 = () => {
 
     const Box = {
@@ -158,11 +158,11 @@ const Mypage2 = () => {
     };
 
     // 중성화 여부 선택 버튼 클릭 이벤트 핸들러
-const handleNeuteredButtonClick = (neutered) => {
-    setData({ ...data, neutered: neutered });
-  };
+    const handleNeuteredButtonClick = (neutered) => {
+        setData({ ...data, neutered: neutered });
+    };
 
-  
+
     return (
         <div
             style={{ backgroundColor: '#F0F0F0' }}>
@@ -173,10 +173,10 @@ const handleNeuteredButtonClick = (neutered) => {
                 paddingTop: '80px'
             }}>
 
-                <div style={{backgroundColor:'white', borderRadius:'20px 20px 0 0', width:'200px', height:'40px'}}>
-          <a className='mypagetext' style={{padding:'10px', }}>마이페이지</a>
+                <div style={{ backgroundColor: 'white', borderRadius: '20px 20px 0 0', width: '200px', height: '40px', marginLeft: '360px' }}>
+                    <a className='mypagetext' style={{ padding: '10px' }}>마이페이지</a>
 
-        </div>
+                </div>
 
                 {/* 하얀 박스 div */}
                 <div style={{ ...Box }}>
@@ -210,13 +210,13 @@ const handleNeuteredButtonClick = (neutered) => {
                                 <Form.Label></Form.Label>
                                 <div className="d-flex align-items-center">
                                     <img src={iconImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-                                    <a style={{marginLeft: '17px'}}>이름</a>
+                                    <a style={{ marginLeft: '20px' }}>이름</a>
                                     <Form.Control
                                         type="text"
                                         name="name"
                                         value={data.name}
                                         onChange={handleChange}
-                                        style={{ width: '200px', marginLeft: '41px'}}
+                                        style={{ width: '200px', marginLeft: '45px' }}
                                     />
                                 </div>
                             </Form.Group>
@@ -226,13 +226,13 @@ const handleNeuteredButtonClick = (neutered) => {
                                 <Form.Label></Form.Label>
                                 <div className="d-flex align-items-center">
                                     <img src={dogimage} style={{ width: '20px', marginRight: '10px', marginTop: '10px' }} alt="Icon" />
-                                    <a style={{ marginTop: '10px', marginLeft: '17px'}}>견종</a>
+                                    <a style={{ marginTop: '10px', marginLeft: '20px' }}>견종</a>
                                     <Form.Control
                                         type="text"
                                         name="dogkind"
                                         value={data.dogkind}
                                         onChange={handleChange}
-                                        style={{ width: '200px', marginLeft: '41px', marginTop: '10px' }} />
+                                        style={{ width: '200px', marginLeft: '45px', marginTop: '10px' }} />
                                 </div>
                             </Form.Group>
 
@@ -242,28 +242,28 @@ const handleNeuteredButtonClick = (neutered) => {
 
                             {/* 생년월일 */}
                             <Form.Label htmlFor="inputBirth"></Form.Label>
-                            <div className="d-flex align-items-center" style={{marginBottom: '10px'}}>
+                            <div className="d-flex align-items-center" style={{ marginBottom: '10px' }}>
                                 <img src={birthImage} style={{ width: '20px', marginTop: '10px', marginRight: '10px' }} alt="Icon" />
-                                <a style={{ marginTop: '10px', marginLeft: '8px'}}>생년월일</a>
+                                <a style={{ marginTop: '10px', marginLeft: '8px' }}>생년월일</a>
                                 <Form.Control
                                     type="text"
                                     name="birth"
                                     value={data.birth}
                                     onChange={handleChange}
-                                    style={{ width: '200px', marginLeft: '23px', marginTop: '10px' }}
+                                    style={{ width: '200px', marginLeft: '25px', marginTop: '10px' }}
                                 /></div>
 
                             {/* 몸무게 입력창 */}
                             <Form.Label htmlFor="inputWeight"></Form.Label>
                             <div className="d-flex align-items-center" style={{ display: 'flex' }}>
-                                <img src={weightImage} style={{ width: '20px',  marginTop: '10px', marginRight: '10px' }} alt="Icon" />
-                                <a style={{ marginTop: '10px', marginLeft: '15px'}}>몸무게</a>
+                                <img src={weightImage} style={{ width: '20px', marginTop: '10px', marginRight: '10px' }} alt="Icon" />
+                                <a style={{ marginTop: '10px', marginLeft: '15px' }}>몸무게</a>
                                 <Form.Control
                                     type="text" // 숫자만 입력 가능하도록 수정
                                     value={data.weight}
                                     name="weight"
                                     onChange={handleChange}
-                                    style={{ width: '200px', marginLeft: '32px', marginTop: '10px' }}
+                                    style={{ width: '200px', marginLeft: '34px', marginTop: '10px' }}
                                 /></div>
 
                             {/* 중성화 여부 선택 버튼 */}

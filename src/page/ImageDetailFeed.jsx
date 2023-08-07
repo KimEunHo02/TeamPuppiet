@@ -29,7 +29,7 @@ const ImageDetailFeed = () => {
       </div>
 
       {/* 나중에 DB 받으면 feedId 값으로 받아오기 */}
-      <h2>Feed 상세 페이지 - {feedId}</h2> 
+      <h6>Feed 상세 페이지 - {feedId}</h6> 
     </div>
   );
 };

@@ -17,6 +17,51 @@ import genderImage from '../icon/gender.png'
 
 import './Signup.css';
 
+// GenderSelection 컴포넌트 정의 (남, 여 선택 버튼)
+const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
+  return (
+    <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
+      <img src={genderImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
+      <p style={{marginTop: '15px', marginLeft: '12px'}}>성별</p>
+      <div className='custom-box'>
+        <div className="custom-input-box d-flex" style={{ width: '250px', marginLeft: '100px', display: 'flex' }}>
+          {/* "남성" 버튼 */}
+          <Button
+            variant={selectedGender === "남성" ? 'primary' : 'light'}
+            style={{
+              backgroundColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
+              borderColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
+              color: 'gray',
+              width: '60px',
+              height: '40px',
+              marginRight: '10px', // 간격을 조절하여 가로로 나열
+            }}
+            onClick={() => handleGenderButtonClick("남성")}
+          >
+            남성
+          </Button>
+          {/* "여성" 버튼 */}
+          <Button
+            variant={selectedGender === "여성" ? 'primary' : 'light'}
+            style={{
+              backgroundColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
+              borderColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
+              color: 'gray',
+              width: '60px',
+              height: '40px',
+              marginRight: '10px', // 간격을 조절하여 가로로 나열
+            }}
+            onClick={() => handleGenderButtonClick("여성")}
+          >
+            여성
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
 const Signup = () => {
 
   const nav = useNavigate()
@@ -153,7 +198,20 @@ const Signup = () => {
     }
   };
 
+  // 성별 선택 버튼 클릭 이벤트 핸들러
+  const handleGenderButtonClick = (gender) => {
+    setData((prevData) => ({
+      ...prevData,
+      gender: gender,
+    }));
+  };
 
+  // Signup 페이지에서 담긴 데이터
+  const [data, setData] = useState({
+    name: '',
+    birth: '',
+    gender: '여성',
+  });
   return (
     <div>
 
@@ -197,7 +255,7 @@ const Signup = () => {
                 />
                 {/* 중복확인 버튼 */}
                 <Button variant='primary' style={{
-                  marginLeft: '20px', backgroundColor: '#FFC9C9',
+                  marginLeft: '25px', backgroundColor: '#FFC9C9',
                   borderColor: '#FFC9C9', color: 'gray'
                 }}>
                   중복 확인
@@ -317,28 +375,8 @@ const Signup = () => {
             {/* ------------------------------------------------------------------ */}
 
             {/* 성별 입력 */}
-            <div className="d-flex align-items-center" style={{ marginTop: '20px' }}>
-              <img src={genderImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-              <div className='custom-box'>
-                <div className="custom-input-box" style={{ width: '450px' }}>
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="남성"
-                    onChange={handleInputChange}
-                  />{' '}
-                  남성
-                  {' '}
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="여성"
-                    onChange={handleInputChange}
-                  />{' '}
-                  여성
-                </div>
-              </div>
-            </div>
+            {/* GenderSelection 컴포넌트 사용 / 남, 여 선택 */}
+            <GenderSelection selectedGender={data.gender} handleGenderButtonClick={handleGenderButtonClick} />
           </Form>
 
           {/* 회원가입 버튼 클릭 시 반려견 정보 페이지로 이동 */}

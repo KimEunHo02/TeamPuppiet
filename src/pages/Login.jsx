@@ -39,7 +39,7 @@ const Login = () => {
       nav('/main2');
 
     } else {
-      alert('로그인 실패')
+      alert('로그인 실패 - 아이디 또는 비밀번호를 올바르게 입력해 주세요.')
       idRef.current.value = '';
       pwRef.current.value = '';
       idRef.current.focus();

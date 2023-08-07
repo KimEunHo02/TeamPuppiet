@@ -118,8 +118,8 @@ const Mypage = () => {
         backgroundColor: '#F0F0F0', minHeight: '1000px',
         paddingTop: '80px'
       }}>
-        <div style={{backgroundColor:'white', borderRadius:'20px 20px 0 0', width:'200px', height:'40px'}}>
-          <a className='mypagetext' style={{padding:'10px', }}>마이페이지</a>
+        <div style={{backgroundColor:'white', borderRadius:'20px 20px 0 0', width:'200px', height:'40px', marginLeft: '360px'}}>
+          <a className='mypagetext' style={{padding:'10px'}}>마이페이지</a>
 
         </div>
 
