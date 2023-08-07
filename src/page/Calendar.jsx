@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Logo from './Logo'
-import {format, addMonths, subMonths} from 'date-fns';
+import {format, addMonths, subMonths, lastDayOfDecade } from 'date-fns';
 import {startOfMonth, endOfMonth, startOfWeek, endOfWeek} from 'date-fns';
 import {isSameMonth, isSameDay, addDays, parse} from 'date-fns';
 import '../calendar.css';
@@ -67,21 +67,30 @@ const Stamp = ({challengeCompleted, selectedDate,stamps, setStamps})=>{
     }
   }
 
-  const handleStampClick = () =>{
-    if (selectedImageIndex !== -1){
-      // const stampDate = format(selectedDate, 'yyyy-MM-dd');
-      const stampDate = selectedDate.toISOString().split('T')[0];
-      // console.log('stampDate:', stampDate)
+  const handleStampClick = () => {
+    if (challengeCompleted && selectedImageIndex !== -1) {
+      const stampDate = format(selectedDate, 'yyyy-MM-dd');
       const newStamps = [...stamps];
-      newStamps.push({date:stampDate, imageIndex: selectedImageIndex});
-      setStamps(newStamps)
+      const stampIndex = newStamps.findIndex(
+        (stamp) => isSameDay(parse(stamp.date), selectedDate)
+      );
+      if (stampIndex !== -1) {
+        newStamps[stampIndex].imageIndex = selectedImageIndex;
+      } else {
+        newStamps.push({ date: stampDate, imageIndex: selectedImageIndex });
+      }
+      setStamps(newStamps);
+  
+      // 이미지 선택 초기화
+      setSelectedImageIndex(-1);
     }
-  }
+  };
 
   return(
     <div className='stamp_area'>
       <p className='stamp_content'>스탬프를 선택해주세요</p>
       <div>
+        {/* 스탬프 목록 */}
         {stampImages.map((image, index) => (
           <img
             key={index}
@@ -92,10 +101,10 @@ const Stamp = ({challengeCompleted, selectedDate,stamps, setStamps})=>{
           </img>
         ))}
       </div>
-      <button 
-        className={`challenge_btn $ {!challengeCompleted ? 'disabled' : ''}`}
+      <button
+        className={`challenge_btn ${!challengeCompleted ? 'disabled' : ''}`}
         id='stamp_btn'
-        disabled={!challengeCompleted}
+        disabled={!challengeCompleted || selectedImageIndex === -1}
         onClick={handleStampClick}>
         스탬프찍기
       </button>
@@ -142,8 +151,7 @@ const RenderDays = () => {
 }
 
 // 달력 그리기
-const RenderCells = ({currentMonth, selectedDate, onDateClick, stamps, stampImages}) =>{
-  // monthStart : 오늘이 속한 달의 시작일
+const RenderCells = ({ currentMonth, selectedDate, onDateClick, stamps, stampImages }) => {
   const monthStart = startOfMonth(currentMonth);
   // monthEnd : 오늘이 속한 달의 마자막일
   const monthEnd = endOfMonth(monthStart);
@@ -159,61 +167,47 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, stamps, stampImag
 
   const today = new Date();
   
-  while (day <= endDate){
-    for (let i = 0; i<7; i++){
+  while (day <= endDate) {
+    for (let i = 0; i < 7; i++) {
       formattedDate = format(day, 'd');
-      const cloneDay = day;
-      const isStamped = 
-      stamps && stamps.some(
+      const cloneDay = new Date(day);
+      const isToday = isSameDay(day, today);
+      const isSelected = isSameDay(day, selectedDate);
+
+      // 현재 날짜에 스탬프가 있는지 확인
+      const stampedInfo = stamps.find(
         (stamp) =>
-        isSameDay(parse(stamp.date), day) && stamp.imageIndex !== -1
-        );
+          isSameDay(parse(stamp.date, 'yyyy-MM-dd', new Date()), day) &&
+          stamp.imageIndex !== -1
+      );
 
-        const isToday = isSameDay(day, today);
-
-        days.push(
-        <div 
-          className={`col cell ${
-            // disabled : 현재 월에 속하지 않은 날짜
-            !isSameMonth(day, monthStart)
-            ? 'disabled'
-            // selected : 선택된 날짜
-            : isSameDay(day, selectedDate)
-            ? 'selected'
-            // not-valid : 현재 월과 날짜의 월이 다른 경우
-            : format(currentMonth,'M') !== format(day, 'M')
-            ? 'not-valid'
-            // valid : 위 조건 해당 x
-            : 'valid'
-          }${isToday?'today':''}${isStamped ? 'stemped' : ''}`}
+      days.push(
+        <div
+          className={`col cell
+            ${!isSameMonth(day, monthStart) ? 'disabled' : ''}
+            ${isSameDay(day, selectedDate) ? 'selected' : ''}
+            ${format(currentMonth, 'M') !== format(day, 'M') ? 'not-valid' : ''}
+            ${isSameDay(day, new Date()) ? 'today' : ''}
+            ${stampedInfo ? 'stamped' : ''}`}
           key={day}
-          onClick={()=> onDateClick(cloneDay)}
-          >
-            <span 
-              className={
-                format(currentMonth, 'M')!== format(day, 'M')
+          onClick={() => onDateClick(cloneDay)}
+        >
+          <span
+            className={
+              format(currentMonth, 'M') !== format(day, 'M')
                 ? 'text not-valid'
                 : ''
-                }
-              >
-                {formattedDate}
-                {isStamped && (
-                  <img
-                  src={
-                    stampImages[
-                      stamps.find(
-                        (stamp) => isSameDay(parse(stamp.date), day)
-                      ).imageIndex
-                    ].normal
-                  }
-                  className={`stamp-icon ${
-                    isSameDay(today, day) ? 'today' : ''
-                  }`}
-                  ></img>
-                )}
-
-            </span>
-          
+            }
+          >
+            {formattedDate}
+            {stampedInfo && isToday && (
+              <img
+                src={stampImages[stampedInfo.imageIndex].normal}
+                alt=""
+                className="stamp-icon today"
+              />
+            )}
+          </span>
         </div>
       );
       day = addDays(day, 1);
@@ -221,18 +215,28 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, stamps, stampImag
     rows.push(
       <div className='row' key={day}>
         {days}
-      </div>,
+      </div>
     );
     days = [];
   }
-  return <div className='body'>{rows}</div>
-}
+  return <div className='body'>{rows}</div>;
+};
+
+
+
 
 export const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [challengeCompleted, setChallengeCompleted] = useState(false);
   const [stamps, setStamps] = useState([])
+
+  const stampImages = [
+    { normal: stamp1, clicked: stamp1_1 },
+    { normal: stamp2, clicked: stamp2_1 },
+    { normal: stamp3, clicked: stamp3_1 },
+    { normal: stamp4, clicked: stamp4_1 }
+  ];
 
   const preMonth = () =>{
     setCurrentMonth(subMonths(currentMonth,1));
@@ -249,33 +253,37 @@ export const Calendar = () => {
   return (
     <div>
       <Logo/>
-      <div className='calender_container'>
-        <div className='calendar'>
-          <RenderHeader 
-            currentMonth = {currentMonth}
-            preMonth = {preMonth}
-            nextMonth = {nextMonth}>
-          </RenderHeader>
-          <RenderDays/>
-          <RenderCells
-            currentMonth={currentMonth}
-            // selectedDate={preMonth}
-            // nextMonth={onDateClick}
-            selectedDate={selectedDate}
-            onDateClick={onDateClick}
-            >
+      <div id='area' style={{width:'1920px', height:'850px'}}>
+        <div className='calender_container'>
+          <div className='calendar'>
+            <RenderHeader 
+              currentMonth = {currentMonth}
+              preMonth = {preMonth}
+              nextMonth = {nextMonth}>
+            </RenderHeader>
+            <RenderDays/>
+            <RenderCells
+              currentMonth={currentMonth}
+              // selectedDate={preMonth}
+              // nextMonth={onDateClick}
+              selectedDate={selectedDate}
+              onDateClick={onDateClick}
+              stamps={stamps}
+              stampImages={stampImages}
+              >
 
-          </RenderCells>
-        </div>
-        <div className='exercise-container'>
-          <ExerciseContent 
-            challengeCompleted={challengeCompleted} 
-            setChallengeCompleted={setChallengeCompleted}/>
-          <Stamp 
-            challengeCompleted={challengeCompleted}
-            selectedDate={selectedDate}
-            stamps={stamps}
-            setStamps={setStamps}/>
+            </RenderCells>
+          </div>
+          <div className='exercise-container'>
+            <ExerciseContent 
+              challengeCompleted={challengeCompleted} 
+              setChallengeCompleted={setChallengeCompleted}/>
+            <Stamp 
+              challengeCompleted={challengeCompleted}
+              selectedDate={selectedDate}
+              stamps={stamps}
+              setStamps={setStamps}/>
+          </div>
         </div>
       </div>
     </div>

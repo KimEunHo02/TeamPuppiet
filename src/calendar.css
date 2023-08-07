@@ -1,14 +1,17 @@
-col.cell.selectedtoday{
-    background-color:  #ffcc00;
+
+
+.today{
+    color: red;
+    /* background-color: yellow; */
 }
 
 .calender_container{
-    background-color: #f0f0f0;
+    /* background-color: #f0f0f0; */
     padding-top : 50px
 }
 
 .calendar{
-    margin-left: 150px;
+    margin-left: 350px;
     margin-top : -20px;
     width: 900px;
 }
@@ -17,14 +20,14 @@ col.cell.selectedtoday{
 .cal_title{
     font-weight: bold;
     font-size : 2em;
-    color: gray;
+    color: #707070;
     margin-right: 10px;
 }
 
 /* 년도 & 해당 월에 속하지 않는 날짜 */
 .text{
     font-size: 0.8em;
-    color: gray;
+    color: #707070;
 }
 
 /* 월 */
@@ -32,7 +35,7 @@ col.cell.selectedtoday{
     margin-right: 5px;
     font-weight: bold;
     font-size: 1.6em;
-    color: gray;
+    color:#707070;
 }
 
 /* 요일 */
@@ -44,31 +47,32 @@ col.cell.selectedtoday{
 /* 달력 contents */
 .body{
     width: 900px;
-    height: 400px;
+    height: 350px;
 }
 
 /* 달력 셀 표시 */
 .col.cell{
     border: 0.4px solid gray;
-    background-color: white;
+    /* background-color: white; */
     height: 110px;
 }
 
 /* 오늘 날짜표시 */
-/* selected{
-    background-color: lightgrey;
-} */
+.selected{
+    /* background-color: lightgrey; */
+    color:blue; 
+} 
 
 
 
 /* 랜덤 운동 챌린지 */
 .exercise-content{
     /* 위치조정 */
-    border: 0.4px solid gray;
+    /* border: 0.4px solid gray; */
     background-color: white;
-    margin-left: 1100px;
-    margin-right:150px;
-    margin-top: -425px;
+    margin-left: 1300px;
+    margin-right:350px;
+    margin-top: -380px;
     border-radius: 30px;
     height: 180px;
 
@@ -102,13 +106,13 @@ col.cell.selectedtoday{
 
 /* stamp 구역 */
 .stamp_area{
-    border: 0.4px solid gray;
+    /* border: 0.4px solid gray;/ */
     background-color: white;
-    margin-left: 1100px;
-    margin-right:150px;
+    margin-left: 1300px;
+    margin-right:350px;
     margin-top: 20px;
     border-radius: 30px;
-    height: 370px;
+    height: 380px;
     
     /* 내용 정렬 */
     display: flex;
@@ -122,8 +126,33 @@ col.cell.selectedtoday{
     font-size: 18px;
 }
 
-.disabeld{
+/* .disabeld{
     background-color: #707070;
     color: white;
     cursor: not-allowed;
-}
+} */
+
+.stamp-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin: 0 auto;
+    border-radius: 50%;
+    transition: border 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  }
+  
+  .stamp-icon.today {
+    /* border: 2px solid red;
+    background-image: url('./stamp/stamp1.png');  */
+    width: 80px;
+    height: 80px;
+    background-size: cover;
+  }
+  
+  .stamp-icon.not-today {
+    border: 2px solid gray;
+  }
+  
+  .stamp-icon.stamped {
+    background-color: #FFC9C9;
+  }
