@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import picSrc from '../img/logo_name(x).png'
-
+import logotext from '../img/logo_name.png'
 
 const Logo = () => {
     return (
@@ -16,9 +16,10 @@ const Logo = () => {
                     alignItems: 'center',
                     justifyContent: 'space-between', padding: '10px'
                 }}>
-                    {/* 텍스트 */}
+                    {/* 텍스트 이미지 */}
                     <div>
-                        <h1 style={{ fontSize: '30px' }} className='puppiettxt'>PUPPIET</h1>
+                        <img className='' src = {logotext}
+                        style={{width: '150px'}}></img>
                     </div>
 
                     {/* 이미지 */}

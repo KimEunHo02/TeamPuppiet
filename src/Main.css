@@ -40,9 +40,15 @@
         gap: 90px;   /* 여백 */
         background-color: #FFC9C9;
         height: 50px;
-        align-items: center;
+    font-weight: bold;
+    align-items: center;
 }
 
+.bartext:hover{
+    font-weight: bold;
+    color: black;
+
+}
 .bartext{
     text-decoration: none;
     color: dimgrey;

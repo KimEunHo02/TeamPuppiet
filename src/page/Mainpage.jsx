@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import picSrc from '../img/logo_name(x).png'
+import logotext from '../img/logo_name.png'
 import '../Main.css'
 
 // 유정) 로고 이미지 눌렀을 때 Main 화면 보이게 설정한 페이지입니다.
@@ -37,9 +38,9 @@ const Mainpage = () => {
                     display: 'flex', alignItems: 'center',
                     justifyContent: 'space-between', padding: '10px'
                 }}>
-                    {/* 텍스트 */}
                     <div>
-                        <h1 style={{ fontSize: '30px' }} className='puppiettxt'>PUPPIET</h1>
+                        <img className='' src = {logotext}
+                        style={{width: '150px'}}></img>
                     </div>
 
                     {/* 이미지 */}

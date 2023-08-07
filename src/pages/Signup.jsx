@@ -343,7 +343,6 @@ const Signup = () => {
 
           {/* 회원가입 버튼 클릭 시 반려견 정보 페이지로 이동 */}
 
-          {/* 디자인 적용시킨 후 동작 안 됨 */}
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
             <Button variant="outline-dark"
               disabled={!isNextButtonEnabled} onClick={() => { nav('/petinfo') }}
