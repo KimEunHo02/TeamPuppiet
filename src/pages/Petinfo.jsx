@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import picSrc from '../img/PUPPIET_logo.png'
 import Button from 'react-bootstrap/Button';
 import '../input.css'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Signup from './Signup';
+import Mainpage2 from '../page/Mainpage2';
 
 import genderImage from '../icon/gender.png'
 import Image from '../icon/name.png'
@@ -20,12 +23,31 @@ const Petinfo = () => {
         padding: '20px',
         width: '600px',
         height: '600px',
-        backgroundColor: '#F0F0F0',
+        backgroundColor: 'white',
         marginBottom: '100px',
         borderRadius: '20px',
     }
 
+    // 값이 다 입력됐을 때 완료 버튼 누르게 하는 기능
 
+    const [inputValues, setInputValues] = useState({
+        // 여러 개의 입력창의 상태를 객체로 관리
+        name: '',
+        dogkind: '',
+        gender: '',
+        birth: '',
+        neutered: '',
+    });
+
+    const isInputsValid = Object.values(inputValues).every((value) => value.trim() !== '');
+
+    const handleInputChange = (inputName, inputValue) => {
+        setInputValues((prevValues) => ({
+            ...prevValues,
+            [inputName]: inputValue,
+        }));
+
+    };
     return (
         <div>
             <br />
@@ -61,7 +83,9 @@ const Petinfo = () => {
                             <Form.Label></Form.Label>
                             <div className="d-flex align-items-center">
                                 <img src={Image} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-                                <Form.Control type="text" placeholder="이름" className="custom-input" /> </div>
+                                <Form.Control type="text" placeholder="이름" className="custom-input"
+                                    value={inputValues.name}
+                                    onChange={(e) => handleInputChange('name', e.target.value)} /> </div>
                         </Form.Group>
 
                         {/* 견종 */}
@@ -69,7 +93,9 @@ const Petinfo = () => {
                             <Form.Label></Form.Label>
                             <div className="d-flex align-items-center">
                                 <img src={dogimage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-                                <Form.Control type="text" placeholder="견종" className="custom-input" /> </div>
+                                <Form.Control type="text" placeholder="견종" className="custom-input"
+                                    value={inputValues.dogkind}
+                                    onChange={(e) => handleInputChange('dogkind', e.target.value)} /> </div>
                         </Form.Group>
 
                     </div>
@@ -81,14 +107,16 @@ const Petinfo = () => {
                                 <input
                                     type="radio"
                                     name="gender"
-                                    value="남성"
+                                    checked={inputValues.gender === '남성'}
+                                    onChange={(e) => handleInputChange('gender', '남성')}
                                 />{' '}
                                 남성
                                 {' '}
                                 <input
                                     type="radio"
                                     name="gender"
-                                    value="여성"
+                                    checked={inputValues.gender === '여성'}
+                                    onChange={(e) => handleInputChange('gender', '여성')}
                                 />{' '}
                                 여성
                             </div>
@@ -104,6 +132,8 @@ const Petinfo = () => {
                             id="inputBirth"
                             placeholder="생년월일 8자리 ex)19990101"
                             name="birth"
+                            value={inputValues.birth}
+                            onChange={(e) => handleInputChange('birth', e.target.value)}
                         /></div>
 
                     {/* 몸무게 입력창 */}
@@ -115,26 +145,30 @@ const Petinfo = () => {
                             id="inputWeight"
                             placeholder="        kg"
                             name="weight"
+                            value={inputValues.weight}
+                            onChange={(e) => handleInputChange('weight', e.target.value)}
                         /></div>
 
                     {/* 중성화 여부 선택창 */}
-                    <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
+                    <div className="d-flex align-items-center" style={{ marginTop: '20px' }}>
                         <img src={neuteredImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
                         <div className='custom-box'>
                             <div className="custom-input-box" style={{ width: '450px' }}>
-                                <a style={{color: 'gray'}}>중성화 여부</a>
+                                <a style={{ color: 'gray' }}>중성화 여부</a>
                                 <input
                                     type="radio"
                                     name="neutered"
-                                    value="남성"
-                                    style = {{marginLeft: '10px'}}
+                                    style={{ marginLeft: '10px' }}
+                                    checked={inputValues.neutered === 'O'}
+                                    onChange={(e) => handleInputChange('neutered', 'O')}
                                 />{' '}
                                 O
                                 {' '}
                                 <input
                                     type="radio"
                                     name="neutered"
-                                    value="여성"
+                                    checked={inputValues.neutered === 'X'}
+                                    onChange={(e) => handleInputChange('neutered', 'X')}
                                 />{' '}
                                 X
                             </div>
@@ -144,20 +178,23 @@ const Petinfo = () => {
 
                     {/* 로그인 버튼 */}
 
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '50px'}}>
-                        <Button variant='primary' type='submit' style={{
-                            backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
-                            width: '160px', height: '50px', margin:'0 50px'
-                        }}>
-                            이전
-                        </Button>
-                        <Button variant='primary' type='submit' style={{
-                            backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
-                            width: '160px', height: '50px', margin:' 0 50px'
-                        }}>
-                            완료
-                        </Button>
-
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px' }}>
+                        <Link to="/signup">
+                            <Button variant='primary' style={{
+                                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+                                width: '160px', height: '50px', margin: '0 50px'
+                            }}>
+                                이전
+                            </Button>
+                        </Link>
+                        <Link to={isInputsValid ? '/main2' : '#'}>
+                            <Button variant='primary' style={{
+                                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+                                width: '160px', height: '50px', margin: ' 0 50px'
+                            }} disabled={!isInputsValid}>
+                                완료
+                            </Button>
+                        </Link>
                     </div>
 
                 </div>

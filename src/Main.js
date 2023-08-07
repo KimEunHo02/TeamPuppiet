@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 import Mainpage from './page/Mainpage';
@@ -18,21 +18,44 @@ import Login from './pages/Login';
 import FindId from './pages/FindId';
 import Petinfo from './pages/Petinfo';
 import Findpw2 from './pages/Findpw2';
+
 import ImageDetail from './page/ImageDetail';
 import ImageDetailFeed from './page/ImageDetailFeed';
+
+
+import styles from './Main.module.css';
+
 
 // 유정) 메인 페이지 화면입니다
 
 const Main = () => {
 
+    // 로그인 페이지 Map 함수 호출 (Mainpage2)
     const [mainArr, setMainArr] = useState([])
+
+
+    // 창 크기 고정
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    
+    const handleWindowResize = () => {
+        setWindowWidth(window.innerWidth);
+    };
+
+    useEffect(() => {
+        window.addEventListener('resize', handleWindowResize);
+        return () => {
+            window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []);
+
     return (
 
-        <div>
-            
+        <div className={styles.container}>
 
-        {/* 페이지 이동할 수 있도록 경로 설정 */}
+            {/* 페이지 이동할 수 있도록 경로 설정 */}
             <Routes>
+
                 <Route path='/' element = {<Mainpage/>}></Route>
                 <Route path='/login' element = {<Login/>}></Route>
                 <Route path='/signup' element = {<Signup/>}></Route>
@@ -51,10 +74,11 @@ const Main = () => {
                 <Route path='/ImageDetailFeed/:feedId' element={<ImageDetailFeed/>}></Route>
 
 
+
             </Routes>
 
 
-        <footer></footer>
+            <footer></footer>
 
         </div>
     )

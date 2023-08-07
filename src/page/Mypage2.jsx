@@ -93,7 +93,7 @@ const Mypage2 = () => {
                             {/* 이미지 */}
                             <div style={{ marginLeft: '200px' }}>
                                 <img src={getImagePath()}
-                                    style={{ width: '300px', height: '300px' }} alt='profile' />
+                                    style={{ width: '300px', height: '300px' }} />
                             </div>
                             {/* 정보 입력 */}
                             <div style={{

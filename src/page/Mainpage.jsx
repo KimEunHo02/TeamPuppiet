@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import picSrc from '../img/logo_name(x).png'
+import logotext from '../img/logo_name.png'
 import '../Main.css'
 
 // 유정) 로고 이미지 눌렀을 때 Main 화면 보이게 설정한 페이지입니다.
@@ -13,24 +14,21 @@ const Mainpage = () => {
     };
 
     const Box = {
-        border: '2px solid white',
-        weight: '1940px',
+        width: '1200px',
         height: '150px',
-        backgroundColor: '#F0F0F0',
+        backgroundColor: 'white',
 
     }
 
     const imgbox = {
-        width: '250px',
-        height: '250px',
-        backgroundColor: 'white',
-        marginRight: '20px', // 수정 필요(박스 고정)
-        flexShrink: 0,
+        width: '200px',
+        height: '200px',
+        backgroundColor: '#F0F0F0',
     }
 
     return (
 
-        <div className='fixed'>
+        <div>
 
             {/* ----------- 상단바 ------------ */}
 
@@ -40,9 +38,9 @@ const Mainpage = () => {
                     display: 'flex', alignItems: 'center',
                     justifyContent: 'space-between', padding: '10px'
                 }}>
-                    {/* 텍스트 */}
                     <div>
-                        <h1 style={{ fontSize: '30px' }} className='puppiettxt'>PUPPIET</h1>
+                        <img className='' src = {logotext}
+                        style={{width: '150px'}}></img>
                     </div>
 
                     {/* 이미지 */}
@@ -67,9 +65,10 @@ const Mainpage = () => {
             </div>
 
             {/* ------------------------------------ */}
+
             {/* 서비스 소개 */}
             <br />
-
+            <div>
             <div style={{ ...Box }} className='maingraybox'>
                 <a className='additional'>서비스 소개</a>
             </div>
@@ -94,7 +93,7 @@ const Mainpage = () => {
 
             {/* 사료 추천 */}
 
-            <div style={{ ...Box, height: '1250px' }} className='maintopbox'>
+            <div style={{ ...Box, height: '1050px' }} className='maintopbox'>
                 <a style={{ ...textstyle, margin: '50px' }} className='mainboxcontent'>사료 Top 10</a>
 
                 <div style={{
@@ -166,6 +165,7 @@ const Mainpage = () => {
 
             </div>
 
+        </div>
         </div>
     )
 }

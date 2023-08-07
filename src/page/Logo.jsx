@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import picSrc from '../img/logo_name(x).png'
-
+import logotext from '../img/logo_name.png'
 
 const Logo = () => {
     return (
@@ -16,21 +16,21 @@ const Logo = () => {
                     alignItems: 'center',
                     justifyContent: 'space-between', padding: '10px'
                 }}>
-                    {/* 텍스트 */}
+                    {/* 텍스트 이미지 */}
                     <div>
-                        <h1 style={{ fontSize: '30px' }} className='puppiettxt'>PUPPIET</h1>
+                        <img className='' src = {logotext}
+                        style={{width: '150px'}}></img>
                     </div>
 
                     {/* 이미지 */}
                     <div style={{ display: 'flex', alignItems: 'center',
-                                    marginLeft : '140px'}}>
+                                    marginLeft : '30px'}}>
                         <Link to='/main2'>
                             <img className='logo' src={picSrc} width='150px' alt="Logo"></img>
                         </Link>
                     </div>
                     
                     <div>
-                        <Link to="/petinfo" style={{ marginRight: '30px' }} className='maintext'>반려견 정보</Link>
                         <Link to="/mypage" style={{ marginRight: '30px' }} className='maintext'>마이페이지</Link>
                         <Link to="/" style={{ marginRight: '30px' }} className='maintext'>로그아웃</Link>
                     </div>

@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #F0F0F0;
+  justify-content: space-around; /* 컨텐츠를 페이지 전체에 걸쳐 분포시킴 */
+  flex-direction: column;
+  align-items: center;
+}
+
+.content {
+  flex: 1; /* 컨텐츠 영역이 페이지 전체 높이를 차지하도록 설정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

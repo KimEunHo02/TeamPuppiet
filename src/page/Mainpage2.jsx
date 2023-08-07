@@ -8,22 +8,17 @@ const Mainpage2 = ({ mainArr }) => {
   let sessionData = sessionStorage.getItem('userId')
   console.log('session :', sessionData)
 
-  const Box = {
-    border: '2px solid white',
-    padding: '20px',
-    marginBottom: '10px',
-    backgroundColor: '#F0F0F0',
-    // textAlign: 'center',
-    // display: 'flex',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // maxWidth: '100%'
-  }
+ const Box = {
+        width: '1200px',
+        height: '150px',
+        backgroundColor: 'white',
+        marginTop: '20px'
+    }
 
   const imgbox = {
     width: '250px',
     height: '250px',
-    backgroundColor: 'white',
+    backgroundColor: '#F0F0F0',
     marginRight: '20px', 
     // flexShrink: 0 // 수정 필요(박스 고정)
 }
