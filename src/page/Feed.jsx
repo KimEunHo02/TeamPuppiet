@@ -63,7 +63,7 @@ const Feed = () => {
   const resetButtonStyle = {
     width: '100px',
     height: '40px',
-    marginRight: '20px',
+    marginRight: '30px',
     backgroundColor: isResetActive ? '#FFC9C9' : '#F0F0F0',
     color: 'gray',
     fontSize: '13px',
@@ -76,7 +76,7 @@ const Feed = () => {
   const searchButtonStyle = {
     width: '100px',
     height: '40px',
-    marginRight: '80px',
+    // marginRight: '80px',
     backgroundColor: isSearchActive ? '#FFC9C9' : '#F0F0F0',
     color: 'gray',
     fontSize: '13px',
@@ -136,8 +136,8 @@ const Feed = () => {
   });
 
   const strongStyle = {
-    fontSize: '15px',
-    marginLeft: '20px',
+    fontSize: '16px',
+    marginLeft: '40px',
     padding: '10px'
   }
 
@@ -217,7 +217,7 @@ const Feed = () => {
       <Logo />
 
       {/* 사료 정보 선택 div */}
-      <div style={{ margin: '20px auto', width: '1200px', height: '300px', backgroundColor: 'white', marginBottom: '50px', borderRadius: '20px', padding: '40px 50px 40px 50px', textAlign: 'center', fontSize: '19px', fontWeight: 'bold', position: 'relative' }}>
+      <div style={{ margin: '20px auto', width: '1200px', height: '330px', backgroundColor: 'white', marginBottom: '50px', borderRadius: '20px', padding: '60px 90px 40px 50px', textAlign: 'center', fontSize: '19px', fontWeight: 'bold', position: 'relative' }}>
         <div style={{ display: 'flex', marginBottom: '10px' }}>
           <strong style={strongStyle}>구 분</strong>
           {categories.map((category, index) => (

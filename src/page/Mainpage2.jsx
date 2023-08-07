@@ -27,7 +27,7 @@ const Mainpage2 = ({ mainArr }) => {
     fontSize: '18px',
   };
   return (
-    <div>
+    <div style={{marginBottom: '30px'}}>
       <Logo />
 
       {/* 다이어트 정보 표시 영역 */}

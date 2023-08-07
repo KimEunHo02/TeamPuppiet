@@ -28,7 +28,7 @@ const Mainpage = () => {
 
     return (
 
-        <div>
+        <div style={{marginBottom: '44px'}}>
 
             {/* ----------- 상단바 ------------ */}
 

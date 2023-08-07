@@ -182,7 +182,7 @@ const Recipe = () => {
             검색하기
           </Button>
         </div>
-        <strong style={{ color: 'gray', fontSize: '18px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>n개의 간식 레시피 추천</strong>
+        <strong style={{ color: 'gray', fontSize: '18px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>627개의 간식 레시피 추천</strong>
       </div>
 
       {/* 레시피 추천 박스 컨테이너 */}
