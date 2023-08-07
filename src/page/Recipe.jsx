@@ -136,7 +136,7 @@ const Recipe = () => {
     transition: 'color 0.3s', // 색 변화에 트랜지션 적용
   };
 
-  // 이미지 박스를 동적으로 생성
+  // 이미지 박스 클릭 시 각 레시피의 상세페이지 이동
   const dummyRecipes = Array.from({ length: 627 }, (_, index) => ({
     id: index + 1,
     description: `Recipe ${index + 1}`,
@@ -169,7 +169,7 @@ const Recipe = () => {
     <div style={{ backgroundColor: '#F0F0F0' }}>
       <Logo />
 
-      <div style={{ margin: '20px auto', width: '1000px', backgroundColor: 'white', marginBottom: '50px', borderRadius: '20px', padding: '20px', textAlign: 'center', fontSize: '19px', fontWeight: 'bold', position: 'relative' }}>
+      <div style={{ margin: '20px auto', width: '1200px', backgroundColor: 'white', marginBottom: '50px', borderRadius: '20px', padding: '20px', textAlign: 'center', fontSize: '19px', fontWeight: 'bold', position: 'relative' }}>
         <p style={{ color: 'gray', fontSize: '15px', margin: '10px', marginBottom: '25px' }}>재료를 선택해 주세요</p>
 
         {ingredientsRows}
@@ -186,7 +186,7 @@ const Recipe = () => {
       </div>
 
       {/* 레시피 추천 박스 컨테이너 */}
-      <div style={{ margin: 'auto', width: '1000px', backgroundColor: 'white', borderRadius: '20px', padding: '60px 40px 10px 40px' }}>
+      <div style={{ margin: 'auto', width: '1200px', backgroundColor: 'white', borderRadius: '20px', padding: '60px 40px 10px 40px' }}>
         <div style={imageBoxContainerStyle}>{imageBoxes}</div>
       </div>
 

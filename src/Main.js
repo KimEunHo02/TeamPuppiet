@@ -18,7 +18,8 @@ import Login from './pages/Login';
 import FindId from './pages/FindId';
 import Petinfo from './pages/Petinfo';
 import Findpw2 from './pages/Findpw2';
-
+import ImageDetail from './page/ImageDetail';
+import ImageDetailFeed from './page/ImageDetailFeed';
 
 // 유정) 메인 페이지 화면입니다
 
@@ -36,7 +37,7 @@ const Main = () => {
                 <Route path='/login' element = {<Login/>}></Route>
                 <Route path='/signup' element = {<Signup/>}></Route>
                 <Route path='/information' element = {<Information/>}></Route>
-                <Route path='/feed' element = {<Feed/>}></Route>
+                <Route path='/feed/*' element = {<Feed/>}></Route>
                 <Route path='/recipe/*' element = {<Recipe/>}></Route>
                 <Route path='/calendar' element = {<Calendar/>}></Route>
                 <Route path='/petinfo' element = {<Petinfo/>}></Route>
@@ -46,6 +47,8 @@ const Main = () => {
                 <Route path='/mypage' element = {<Mypage/>}></Route>
                 <Route path='/mypage2' element = {<Mypage2/>}></Route>
                 <Route path='/findpw2' element = {<Findpw2/>}></Route>
+                <Route path='/ImageDetail/:recipeId' element={<ImageDetail/>}></Route>
+                <Route path='/ImageDetailFeed/:feedId' element={<ImageDetailFeed/>}></Route>
 
 
             </Routes>
