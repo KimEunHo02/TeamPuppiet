@@ -4,6 +4,9 @@ import Form from 'react-bootstrap/Form';
 import picSrc from '../img/PUPPIET_logo.png'
 import Button from 'react-bootstrap/Button';
 import '../input.css'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Signup from './Signup';
+import Mainpage2 from '../page/Mainpage2';
 
 import genderImage from '../icon/gender.png'
 import Image from '../icon/name.png'
@@ -20,7 +23,7 @@ const Petinfo = () => {
         padding: '20px',
         width: '600px',
         height: '600px',
-        backgroundColor: '#F0F0F0',
+        backgroundColor: 'white',
         marginBottom: '100px',
         borderRadius: '20px',
     }
@@ -118,16 +121,16 @@ const Petinfo = () => {
                         /></div>
 
                     {/* 중성화 여부 선택창 */}
-                    <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
+                    <div className="d-flex align-items-center" style={{ marginTop: '20px' }}>
                         <img src={neuteredImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
                         <div className='custom-box'>
                             <div className="custom-input-box" style={{ width: '450px' }}>
-                                <a style={{color: 'gray'}}>중성화 여부</a>
+                                <a style={{ color: 'gray' }}>중성화 여부</a>
                                 <input
                                     type="radio"
                                     name="neutered"
                                     value="남성"
-                                    style = {{marginLeft: '10px'}}
+                                    style={{ marginLeft: '10px' }}
                                 />{' '}
                                 O
                                 {' '}
@@ -144,20 +147,23 @@ const Petinfo = () => {
 
                     {/* 로그인 버튼 */}
 
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '50px'}}>
-                        <Button variant='primary' type='submit' style={{
-                            backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
-                            width: '160px', height: '50px', margin:'0 50px'
-                        }}>
-                            이전
-                        </Button>
-                        <Button variant='primary' type='submit' style={{
-                            backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
-                            width: '160px', height: '50px', margin:' 0 50px'
-                        }}>
-                            완료
-                        </Button>
-
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px' }}>
+                        <Link to="/signup">
+                            <Button variant='primary' style={{
+                                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+                                width: '160px', height: '50px', margin: '0 50px'
+                            }}>
+                                이전
+                            </Button>
+                        </Link>
+                        <Link to="/main2">
+                            <Button variant='primary' style={{
+                                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+                                width: '160px', height: '50px', margin: ' 0 50px'
+                            }}>
+                                완료
+                            </Button>
+                        </Link>
                     </div>
 
                 </div>

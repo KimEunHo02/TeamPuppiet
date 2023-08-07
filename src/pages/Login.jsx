@@ -15,7 +15,7 @@ const Login = () => {
     margin: '0 auto',
     width: '600px',
     height: '600px',
-    backgroundColor: '#F0F0F0',
+    backgroundColor: 'white',
     marginBottom: '100px',
     borderRadius: '20px',
     padding: '20px',

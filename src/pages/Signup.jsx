@@ -27,7 +27,7 @@ const Signup = () => {
     padding: '20px',
     width: '600px',
     height: '600px',
-    backgroundColor: '#F0F0F0',
+    backgroundColor: 'white',
     marginBottom: '100px',
     borderRadius: '20px',
   }
@@ -317,7 +317,7 @@ const Signup = () => {
             {/* ------------------------------------------------------------------ */}
 
             {/* 성별 입력 */}
-            <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
+            <div className="d-flex align-items-center" style={{ marginTop: '20px' }}>
               <img src={genderImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
               <div className='custom-box'>
                 <div className="custom-input-box" style={{ width: '450px' }}>
@@ -344,7 +344,7 @@ const Signup = () => {
           {/* 회원가입 버튼 클릭 시 반려견 정보 페이지로 이동 */}
 
           {/* 디자인 적용시킨 후 동작 안 됨 */}
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '70px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
             <Button variant="outline-dark"
               disabled={!isNextButtonEnabled} onClick={() => { nav('/petinfo') }}
               style={{

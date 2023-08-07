@@ -23,14 +23,13 @@ const Logo = () => {
 
                     {/* 이미지 */}
                     <div style={{ display: 'flex', alignItems: 'center',
-                                    marginLeft : '140px'}}>
+                                    marginLeft : '30px'}}>
                         <Link to='/main2'>
                             <img className='logo' src={picSrc} width='150px' alt="Logo"></img>
                         </Link>
                     </div>
                     
                     <div>
-                        <Link to="/petinfo" style={{ marginRight: '30px' }} className='maintext'>반려견 정보</Link>
                         <Link to="/mypage" style={{ marginRight: '30px' }} className='maintext'>마이페이지</Link>
                         <Link to="/" style={{ marginRight: '30px' }} className='maintext'>로그아웃</Link>
                     </div>
