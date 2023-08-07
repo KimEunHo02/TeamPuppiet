@@ -31,7 +31,8 @@ const Mainpage2 = ({ mainArr }) => {
       <Logo />
 
       {/* 다이어트 정보 표시 영역 */}
-
+      <div style={{marginLeft : '350px',
+                        marginRight : '350px'}}>
       <div style={{ ...Box, height: '500px' }} className='maingraybox'>
         <a className='additional'>다이어트 정보 표시 영역</a>
       </div>
@@ -89,7 +90,7 @@ const Mainpage2 = ({ mainArr }) => {
           </div>
 
         </div>
-
+</div>
         {sessionData == 'puppiet'
           ? <p></p>
           : <p>로그인이 필요합니다.</p>}

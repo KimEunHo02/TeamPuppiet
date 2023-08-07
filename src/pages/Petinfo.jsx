@@ -4,9 +4,10 @@ import Form from 'react-bootstrap/Form';
 import picSrc from '../img/PUPPIET_logo.png'
 import Button from 'react-bootstrap/Button';
 import '../input.css'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Signup from './Signup';
-import Mainpage2 from '../page/Mainpage2';
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import Signup from './Signup';
+// import Mainpage2 from '../page/Mainpage2';
+import Dogkind from './Dogkind';
 
 import genderImage from '../icon/gender.png'
 import Image from '../icon/name.png'
@@ -27,6 +28,15 @@ const Petinfo = () => {
         marginBottom: '100px',
         borderRadius: '20px',
     }
+
+    // 견종 데이터 선택 기능
+    const dataOptions = [
+        { label: '김은호', value: 'option1' },
+        { label: '류하경', value: 'option2' },
+        { label: '서유민', value: 'option3' },
+        { label: '서유정', value: 'option4' },
+        { label: '정희석', value: 'option5' },
+    ];
 
     // 값이 다 입력됐을 때 완료 버튼 누르게 하는 기능
 
@@ -71,8 +81,6 @@ const Petinfo = () => {
             {/* 내용 박스 */}
 
 
-
-
             <div style={{ ...box1, marginTop: '40px' }}>
 
                 {/* 이름 */}
@@ -93,12 +101,15 @@ const Petinfo = () => {
                             <Form.Label></Form.Label>
                             <div className="d-flex align-items-center">
                                 <img src={dogimage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-                                <Form.Control type="text" placeholder="견종" className="custom-input"
-                                    value={inputValues.dogkind}
-                                    onChange={(e) => handleInputChange('dogkind', e.target.value)} /> </div>
+                                {/* input.css에 스타일 정의 */}
+                                    <Dogkind options={dataOptions}/>
+
+                            </div>
                         </Form.Group>
 
                     </div>
+
+
                     {/* 성별 입력 */}
                     <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
                         <img src={genderImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />

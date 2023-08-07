@@ -1,10 +1,10 @@
 import React from 'react'
-import Mainpage from './Mainpage'
+import Logo from './Logo'
 
 
 const Information = () => {
   return (
-    <div><Mainpage/></div>
+    <div><Logo/></div>
 
   )
 }

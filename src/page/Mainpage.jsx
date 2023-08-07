@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import picSrc from '../img/logo_name(x).png'
 import logotext from '../img/logo_name.png'
+import '../Main.module.css';
 import '../Main.css'
 
 // 유정) 로고 이미지 눌렀을 때 Main 화면 보이게 설정한 페이지입니다.
@@ -32,7 +33,8 @@ const Mainpage = () => {
 
             {/* ----------- 상단바 ------------ */}
 
-            <header style={{ backgroundColor: '#F0F0F0' }} className="header" >
+            <header style={{ backgroundColor: '#F0F0F0' }} 
+            className="header" >
 
                 <div style={{
                     display: 'flex', alignItems: 'center',
@@ -68,8 +70,9 @@ const Mainpage = () => {
 
             {/* 서비스 소개 */}
             <br />
-            <div>
-            <div style={{ ...Box }} className='maingraybox'>
+            <div style={{marginLeft : '350px',
+                        marginRight : '350px'}}>
+            <div style={{ ...Box}} className='maingraybox'>
                 <a className='additional'>서비스 소개</a>
             </div>
 

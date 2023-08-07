@@ -34,21 +34,21 @@ const Main = () => {
     const [mainArr, setMainArr] = useState([])
 
 
-    // 창 크기 고정
+    // // 창 크기 고정
 
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     
-    const handleWindowResize = () => {
-        setWindowWidth(window.innerWidth);
-    };
+    // const handleWindowResize = () => {
+    //     setWindowWidth(window.innerWidth);
+    // };
 
-    useEffect(() => {
-        window.addEventListener('resize', handleWindowResize);
-        return () => {
-            window.removeEventListener('resize', handleWindowResize);
-        };
-    }, []);
-
+    // useEffect(() => {
+    //     window.addEventListener('resize', handleWindowResize);
+    //     return () => {
+    //         window.removeEventListener('resize', handleWindowResize);
+    //     };
+    // }, []);
+    
     return (
 
         <div className={styles.container}>
