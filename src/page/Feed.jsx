@@ -24,38 +24,55 @@ const Feed = () => {
     );
   }
 
-  // ------------------------------------ 레시피 재료 선택 박스 --------------------------------------
-  const [selectedCategory, setSelectedCategory] = useState(''); // 선택된 카테고리
-  const [selectedType, setSelectedType] = useState(''); // 선택된 유형
-  const [selectedNutrient, setSelectedNutrient] = useState(''); // 선택된 영양소
+  // ------------------------------------ 사료별 선택 박스 --------------------------------------
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedTypes, setSelectedTypes] = useState([]);
+  const [selectedNutrients, setSelectedNutrients] = useState([]);
   const [isResetActive, setIsResetActive] = useState(false); // 초기화 버튼 활성화 상태 관리
   const [isSearchActive, setIsSearchActive] = useState(false); // 검색하기 버튼 활성화 상태 관리
 
   const categories = ['소형견', '중형견', '대형견'];
   const types = ['건식', '습식'];
-  const nutrients = ['초단백질', '조단백', '조지방', '조섬유', '조회분', '칼슘', '인'];
+  const nutrients = ['조단백', '조지방', '조섬유', '조회분', '칼슘', '인', '수분'];
 
   // 카테고리 선택 핸들러
   const handleCategoryClick = (category) => {
-    setSelectedCategory(selectedCategory === category ? '' : category);
+    setSelectedCategories((prevSelectedCategories) => {
+      if (prevSelectedCategories.includes(category)) {
+        return prevSelectedCategories.filter((c) => c !== category);
+      } else {
+        return [...prevSelectedCategories, category];
+      }
+    });
   };
-
 
   // 유형 선택 핸들러
   const handleTypeClick = (type) => {
-    setSelectedType(selectedType === type ? '' : type);
+    setSelectedTypes((prevSelectedTypes) => {
+      if (prevSelectedTypes.includes(type)) {
+        return prevSelectedTypes.filter((t) => t !== type);
+      } else {
+        return [...prevSelectedTypes, type];
+      }
+    });
   };
 
   // 영양소 선택 핸들러
   const handleNutrientClick = (nutrient) => {
-    setSelectedNutrient(selectedNutrient === nutrient ? '' : nutrient);
+    setSelectedNutrients((prevSelectedNutrients) => {
+      if (prevSelectedNutrients.includes(nutrient)) {
+        return prevSelectedNutrients.filter((n) => n !== nutrient);
+      } else {
+        return [...prevSelectedNutrients, nutrient];
+      }
+    });
   };
 
   // 초기화 버튼 클릭 핸들러
   const handleResetClick = () => {
-    setSelectedCategory(''); // 카테고리 선택 초기화
-    setSelectedType(''); // 유형 선택 초기화
-    setSelectedNutrient(''); // 영양소 선택 초기화
+    setSelectedCategories([]);
+    setSelectedTypes([]);
+    setSelectedNutrients([]);
     setIsResetActive(!isResetActive); // 활성화 상태 토글
   };
 
@@ -93,9 +110,9 @@ const Feed = () => {
   };
 
   // 선택된 카테고리/유형/영양소에 따라 스타일 적용
-  // 구분
+  // 구분 버튼 스타일
   const getCategoryButtonStyle = (category) => ({
-    backgroundColor: '#F0F0F0',
+    backgroundColor: selectedCategories.includes(category) ? '#FFC9C9' : '#F0F0F0',
     color: 'gray',
     border: 'none',
     fontSize: '13px',
@@ -104,12 +121,11 @@ const Feed = () => {
     marginBottom: '10px',
     marginLeft: '110px',
     marginRight: '-80px',
-    backgroundColor: selectedCategory === category ? '#FFC9C9' : '#F0F0F0',
   });
 
-  // 건조별
+  // 건조별 버튼 스타일
   const getTypeButtonStyle = (type) => ({
-    backgroundColor: '#F0F0F0',
+    backgroundColor: selectedTypes.includes(type) ? '#FFC9C9' : '#F0F0F0',
     color: 'gray',
     border: 'none',
     fontSize: '13px',
@@ -118,12 +134,11 @@ const Feed = () => {
     marginBottom: '10px',
     marginLeft: '100px',
     marginRight: '-70px',
-    backgroundColor: selectedType === type ? '#FFC9C9' : '#F0F0F0',
   });
 
-  // 성분
+  // 성분 버튼 스타일
   const getNutrientButtonStyle = (nutrient) => ({
-    backgroundColor: '#F0F0F0',
+    backgroundColor: selectedNutrients.includes(nutrient) ? '#FFC9C9' : '#F0F0F0',
     color: 'gray',
     border: 'none',
     fontSize: '13px',
@@ -132,7 +147,6 @@ const Feed = () => {
     marginBottom: '10px',
     marginLeft: '110px',
     marginRight: '-80px',
-    backgroundColor: selectedNutrient === nutrient ? '#FFC9C9' : '#F0F0F0',
   });
 
   const strongStyle = {
