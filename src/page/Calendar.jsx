@@ -160,13 +160,15 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick, stamps, stampIma
   // endDate : monthEnd가 속한 주의 마지막일
   const endDate = endOfWeek(monthEnd);
 
+  const [selectedImageIndex, setSelectedImageIndex] = useState(-1);
+
   const rows = [];  //[일월화수목금토] 한 주 * 4주 or 5주
   let days = [];    //[일월화수목금토] 한 주
   let day = startDate;  
   let formattedDate = '';
 
   const today = new Date();
-  
+
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
       formattedDate = format(day, 'd');
@@ -202,7 +204,7 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick, stamps, stampIma
             {formattedDate}
             {stampedInfo && isToday && (
               <img
-                src={stampImages[stampedInfo.imageIndex].normal}
+                src={stampedInfo.imageIndex === selectedImageIndex ? stampImages[stampedInfo.imageIndex].clicked : stampImages[stampedInfo.imageIndex].normal}
                 alt=""
                 className="stamp-icon today"
               />
