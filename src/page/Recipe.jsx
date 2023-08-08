@@ -45,9 +45,9 @@ const Recipe = () => {
   // 재료 버튼 스타일
   const ingredientButtonStyle = {
     backgroundColor: '#F0F0F0',
-    color: 'gray',
+    color: 'black',
     border: 'none',
-    fontSize: '13px',
+    fontSize: '15px',
     width: '90px',
     height: '40px',
     marginBottom: '10px',
@@ -124,7 +124,7 @@ const Recipe = () => {
   const descriptionStyle = {
     textAlign: 'center',
     padding: '10px',
-    color: 'gray',
+    color: 'black',
     textDecoration: 'none',
     transition: 'color 0.3s', // 색 변화에 트랜지션 적용
   };
@@ -132,7 +132,7 @@ const Recipe = () => {
   // 링크 스타일
   const linkStyle = {
     textDecoration: 'none',
-    color: 'gray',
+    color: 'black',
     transition: 'color 0.3s', // 색 변화에 트랜지션 적용
   };
 
@@ -170,19 +170,19 @@ const Recipe = () => {
       <Logo />
 
       <div style={{ margin: '20px auto', width: '1200px', backgroundColor: 'white', marginBottom: '50px', borderRadius: '20px', padding: '20px', textAlign: 'center', fontSize: '19px', fontWeight: 'bold', position: 'relative' }}>
-        <p style={{ color: 'gray', fontSize: '15px', margin: '10px', marginBottom: '25px' }}>재료를 선택해 주세요</p>
+        <p style={{ color: 'black', fontSize: '17px', margin: '10px', marginBottom: '25px' }}>재료를 선택해 주세요</p>
 
         {ingredientsRows}
 
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
-          <Button variant="light" style={{ ...ingredientButtonStyle, marginRight: '20px', backgroundColor: '#F0F0F0', color: 'gray', width: '100px' }}>
+          <Button variant="light" style={{ ...ingredientButtonStyle, marginRight: '20px', backgroundColor: '#F0F0F0', color: 'black', width: '100px' }}>
             초기화
           </Button>
-          <Button variant="primary" style={{ ...ingredientButtonStyle, marginRight: '100px', backgroundColor: '#F0F0F0', color: 'gray', width: '100px' }}>
+          <Button variant="primary" style={{ ...ingredientButtonStyle, marginRight: '100px', backgroundColor: '#F0F0F0', color: 'black', width: '100px' }}>
             검색하기
           </Button>
         </div>
-        <strong style={{ color: 'gray', fontSize: '18px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>627개의 간식 레시피 추천</strong>
+        <strong style={{ color: 'black', fontSize: '20px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>627개의 간식 레시피 추천</strong>
       </div>
 
       {/* 레시피 추천 박스 컨테이너 */}
@@ -193,10 +193,10 @@ const Recipe = () => {
       {/* 페이지 맨 위로/아래로 이동 버튼 */}
       <div style={{ position: 'fixed', right: '20px', bottom: '20px', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', zIndex: 999 }}>
         <Button variant="light" onClick={scrollToTop} style={{ marginBottom: '10px' }}>
-          <span style={{ color: 'gray' }}>▲</span>
+          <span style={{ color: 'black' }}>▲</span>
         </Button>
         <Button variant="light" onClick={scrollToBottom}>
-          <span style={{ color: 'gray' }}>▼</span>
+          <span style={{ color: 'black' }}>▼</span>
         </Button>
       </div>
       {generateRoutes()}

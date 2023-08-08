@@ -82,8 +82,8 @@ const Feed = () => {
     height: '40px',
     marginRight: '30px',
     backgroundColor: isResetActive ? '#FFC9C9' : '#F0F0F0',
-    color: 'gray',
-    fontSize: '13px',
+    color: 'black',
+    fontSize: '15px',
     border: 'none', // 기본 테두리 제거
     boxShadow: 'none', // 기본 박스 쉐도우 제거
     outline: 'none', // 포커스 테두리 제거
@@ -95,8 +95,8 @@ const Feed = () => {
     height: '40px',
     // marginRight: '80px',
     backgroundColor: isSearchActive ? '#FFC9C9' : '#F0F0F0',
-    color: 'gray',
-    fontSize: '13px',
+    color: 'black',
+    fontSize: '15px',
     border: 'none', // 기본 테두리 제거
     boxShadow: 'none', // 기본 박스 쉐도우 제거
     outline: 'none', // 포커스 테두리 제거
@@ -113,9 +113,9 @@ const Feed = () => {
   // 구분 버튼 스타일
   const getCategoryButtonStyle = (category) => ({
     backgroundColor: selectedCategories.includes(category) ? '#FFC9C9' : '#F0F0F0',
-    color: 'gray',
+    color: 'black',
     border: 'none',
-    fontSize: '13px',
+    fontSize: '15px',
     width: '90px',
     height: '40px',
     marginBottom: '10px',
@@ -126,22 +126,22 @@ const Feed = () => {
   // 건조별 버튼 스타일
   const getTypeButtonStyle = (type) => ({
     backgroundColor: selectedTypes.includes(type) ? '#FFC9C9' : '#F0F0F0',
-    color: 'gray',
+    color: 'black',
     border: 'none',
-    fontSize: '13px',
+    fontSize: '15px',
     width: '90px',
     height: '40px',
     marginBottom: '10px',
-    marginLeft: '100px',
-    marginRight: '-70px',
+    marginLeft: '105px',
+    marginRight: '-75px',
   });
 
   // 성분 버튼 스타일
   const getNutrientButtonStyle = (nutrient) => ({
     backgroundColor: selectedNutrients.includes(nutrient) ? '#FFC9C9' : '#F0F0F0',
-    color: 'gray',
+    color: 'black',
     border: 'none',
-    fontSize: '13px',
+    fontSize: '15px',
     width: '90px',
     height: '40px',
     marginBottom: '10px',
@@ -184,7 +184,7 @@ const Feed = () => {
   const descriptionStyle = {
     textAlign: 'center',
     padding: '10px',
-    color: 'gray',
+    color: 'black',
     textDecoration: 'none',
     transition: 'color 0.3s', // 색 변화에 트랜지션 적용
   };
@@ -192,7 +192,7 @@ const Feed = () => {
   // 링크 스타일
   const linkStyle = {
     textDecoration: 'none',
-    color: 'gray',
+    color: 'black',
     transition: 'color 0.3s', // 색 변화에 트랜지션 적용
   };
 
@@ -287,7 +287,7 @@ const Feed = () => {
             검색하기
           </Button>
         </div>
-        <strong style={{ color: 'gray', fontSize: '18px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>237개의 사료 추천</strong>
+        <strong style={{ color: 'black', fontSize: '20px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>237개의 사료 추천</strong>
       </div>
 
       {/* 사료 추천 박스 컨테이너 */}
@@ -298,10 +298,10 @@ const Feed = () => {
       {/* 페이지 맨 위로/아래로 이동 버튼 */}
       <div style={{ position: 'fixed', right: '20px', bottom: '20px', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', zIndex: 999 }}>
         <Button variant="light" onClick={scrollToTop} style={{ marginBottom: '10px' }}>
-          <span style={{ color: 'gray' }}>▲</span>
+          <span style={{ color: 'black' }}>▲</span>
         </Button>
         <Button variant="light" onClick={scrollToBottom}>
-          <span style={{ color: 'gray' }}>▼</span>
+          <span style={{ color: 'black' }}>▼</span>
         </Button>
       </div>
       {generateRoutes()}

@@ -30,6 +30,7 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
               width: '60px',
               height: '40px',
               margin: '-10px 50px',
+              marginLeft: '51px'
             }}
             onClick={() => handleGenderButtonClick("남성")}
           >
@@ -175,7 +176,7 @@ const Mypage = () => {
                   name="birth"
                   value={data.birth}
                   onChange={handleChange}
-                  style={{ width: '200px', marginLeft: '20px', marginTop: '10px' }}
+                  style={{ width: '200px', marginLeft: '29px', marginTop: '10px' }}
                 />
               </div>
 
