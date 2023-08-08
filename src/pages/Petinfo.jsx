@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import picSrc from '../img/PUPPIET_logo.png'
 import Button from 'react-bootstrap/Button';
@@ -20,8 +20,8 @@ import neuteredImage from '../icon/neutered.png'
 const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
     return (
         <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
-            <img src={genderImage} style={{ width: '20px', marginRight: '10px', marginLeft: '100px'}} alt="Icon" />
-            <p style={{ marginTop: '20px', marginLeft: '22px' }}>성</p><p style={{ marginTop: '20px'}}>별</p>
+            <img src={genderImage} style={{ width: '20px', marginRight: '10px', marginLeft: '100px' }} alt="Icon" />
+            <p style={{ marginTop: '20px', marginLeft: '22px' }}>성</p><p style={{ marginTop: '20px' }}>별</p>
             <div className='custom-box'>
                 <div className="custom-input-box d-flex" style={{ width: '200px', marginLeft: '100px', display: 'flex' }}>
                     {/* "남성" 버튼 */}
@@ -33,7 +33,7 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
                             color: 'gray',
                             width: '60px',
                             height: '40px',
-                            marginRight: '35px', 
+                            marginRight: '35px',
                             marginLeft: '-68px'
                         }}
                         onClick={() => handleGenderButtonClick("남성")}
@@ -64,7 +64,7 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
 // 중성화 여부 선택 버튼
 const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
     return (
-        <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
+        <div className="d-flex align-items-center" style={{ marginTop: '8px', marginBottom: '8px' }}>
             <img src={neuteredImage} style={{ width: '23px', marginTop: '19px', marginLeft: '100px' }} alt="Icon" />
             <div className='custom-box'>
                 <div className="custom-input-box" style={{ width: '400px', marginTop: '10px' }}>
@@ -107,6 +107,8 @@ const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
 
 const Petinfo = () => {
 
+    const nav = useNavigate()
+
     const box1 = {
         margin: '0 auto',
         padding: '20px',
@@ -127,17 +129,26 @@ const Petinfo = () => {
     ];
 
     // 값이 다 입력됐을 때 완료 버튼 누르게 하는 기능
-
     const [inputValues, setInputValues] = useState({
         // 여러 개의 입력창의 상태를 객체로 관리
         name: '',
-        dogkind: '',
+        // dogkind: '',
         gender: '',
         birth: '',
         neutered: '',
+        weight: '',
     });
 
-    const isInputsValid = Object.values(inputValues).every((value) => value.trim() !== '');
+
+    const isInputsValid = () => {
+        return (
+            inputValues.name.trim() !== '' &&
+            inputValues.gender.trim() !== '' &&
+            inputValues.birth.trim() !== '' &&
+            inputValues.weight.trim() !== '' &&
+            inputValues.neutered.trim() !== ''
+        );
+    }
 
     const handleInputChange = (inputName, inputValue) => {
         setInputValues((prevValues) => ({
@@ -164,6 +175,22 @@ const Petinfo = () => {
         setData({ ...data, neutered: neutered });
     };
 
+    const areAllFieldsFilled = () => {
+        // 제외할 필드 이름을 배열에 저장
+        const excludedFields = ['gender', 'dogkind', 'neutered'];
+
+        for (const key in inputValues) {
+            if (inputValues.hasOwnProperty(key)) {
+                if (!excludedFields.includes(key) && inputValues[key] === '') {
+                    return false; // 하나라도 비어있으면 false 반환
+                }
+            }
+        }
+        if (data.neutered === '') {
+            return false; // 중성화 여부가 비어있으면 false 반환
+        }
+        return true; // 모든 필드가 채워져있을 때 true 반환
+    };
 
     return (
         <div>
@@ -192,14 +219,14 @@ const Petinfo = () => {
 
                 {/* 이름 */}
 
-                <div style={{ margin: '30px', width: '400px'}}>
+                <div style={{ margin: '30px', width: '400px' }}>
                     <div>
                         <Form.Group className="mb-3">
                             <Form.Label></Form.Label>
                             <div className="d-flex align-items-center">
                                 <img src={Image} style={{ width: '20px', marginRight: '10px', marginLeft: '100px' }} alt="Icon" />
                                 <Form.Control type="text" placeholder="이름" className="custom-input"
-                                    style={{width: '250px'}}
+                                    style={{ width: '250px' }}
                                     value={inputValues.name}
                                     onChange={(e) => handleInputChange('name', e.target.value)} /> </div>
                         </Form.Group>
@@ -207,7 +234,7 @@ const Petinfo = () => {
                         {/* 견종 */}
                         <Form.Group className="mb-3">
                             <Form.Label></Form.Label>
-                            <div className="d-flex align-items-center">
+                            <div className="d-flex align-items-center" style={{ marginTop: '-10px'}}>
                                 <img src={dogimage} style={{ width: '20px', marginRight: '10px', marginLeft: '100px' }} alt="Icon" />
                                 {/* input.css에 스타일 정의 */}
                                 <Dogkind options={dataOptions} />
@@ -222,6 +249,9 @@ const Petinfo = () => {
                     {/* GenderSelection 컴포넌트 사용 / 남, 여 선택 */}
                     <GenderSelection selectedGender={data.gender} handleGenderButtonClick={handleGenderButtonClick} />
 
+                    {/* 중성화 여부 선택 버튼 */}
+                    <NeuteredSelection selectedNeutered={data.neutered} handleNeuteredButtonClick={handleNeuteredButtonClick} />
+
                     {/* 생년월일 입력창 */}
                     <Form.Label htmlFor="inputBirth"></Form.Label>
                     <div className="d-flex align-items-center" style={{ display: 'flex' }}>
@@ -231,7 +261,7 @@ const Petinfo = () => {
                             id="inputBirth"
                             placeholder="생년월일 8자리 ex)19990101"
                             name="birth"
-                            style={{width: '250px'}}
+                            style={{ width: '250px' }}
                             value={inputValues.birth}
                             onChange={(e) => handleInputChange('birth', e.target.value)}
                         /></div>
@@ -245,17 +275,14 @@ const Petinfo = () => {
                             id="inputWeight"
                             placeholder="        kg"
                             name="weight"
-                            style={{width: '250px'}}
+                            style={{ width: '50px' }}
                             value={inputValues.weight}
                             onChange={(e) => handleInputChange('weight', e.target.value)}
-                        /></div>
-
-                    {/* 중성화 여부 선택 버튼 */}
-                    <NeuteredSelection selectedNeutered={data.neutered} handleNeuteredButtonClick={handleNeuteredButtonClick} />
+                        />
+                        <p style={{marginLeft: '10px', marginBottom: '-7px'}}>kg</p></div>
 
 
-                    {/* 로그인 버튼 */}
-
+                    {/* 이전 버튼 */}
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px' }}>
                         <Link to="/signup">
                             <Button variant='primary' style={{
@@ -265,14 +292,22 @@ const Petinfo = () => {
                                 이전
                             </Button>
                         </Link>
-                        <Link to={isInputsValid ? '/main2' : '#'}>
-                            <Button variant='primary' style={{
+
+                    {/* 성별 버튼 */}
+                    <div>
+                        <Button
+                            variant='primary'
+                            style={{
                                 backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
-                                width: '160px', height: '50px', margin: ' 0 50px'
-                            }} disabled={!isInputsValid}>
-                                완료
-                            </Button>
-                        </Link>
+                                width: '160px', height: '50px', margin: '0 50px',
+                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            }}
+                            disabled={!areAllFieldsFilled()}
+                            onClick={() => { nav('/main2'); }}
+                            >
+                            <p style={{marginTop: '15px'}}>성</p><p style={{marginTop: '15px'}}>별</p>
+                        </Button>
+                    </div>
                     </div>
 
                 </div>

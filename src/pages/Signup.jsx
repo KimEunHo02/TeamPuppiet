@@ -180,8 +180,6 @@ const Signup = () => {
     }
   };
 
-  // 다음 버튼의 활성화 여부를 결정하는 변수
-  // const isNextButtonEnabled = isFormValid() && isBirthValid(formData.birth);
   const isNextButtonEnabled = isFormValid() && (!formData.birth || isBirthValid(formData.birth));
 
 
