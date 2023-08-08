@@ -26,7 +26,7 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
             style={{
               backgroundColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
               borderColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
-              color: 'gray',
+              color: 'black',
               width: '60px',
               height: '40px',
               margin: '-10px 50px',
@@ -42,7 +42,7 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
             style={{
               backgroundColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
               borderColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
-              color: 'gray',
+              color: 'black',
               width: '60px',
               height: '40px',
               margin: '1px 50px auto -15px',
@@ -187,7 +187,7 @@ const Mypage = () => {
           <div style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
             <Button variant='primary' type='submit'
               style={{
-                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9',  color: 'black',
                 width: '160px', height: '50px', margin: '0 50px',
               }}
               // 수정했을 때 일단 console에 출력되게 구현

@@ -1,39 +1,13 @@
-import React, { useState } from 'react';
-
-const Dogkind = ({ options }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  const toggleDogkind = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleOptionSelect = (option) => {
-    setSelectedOption(option);
-    setIsOpen(false);
-  };
-
+const Dogkind = ({ options, onSelect }) => {
   return (
-    <div className={`dogkind ${isOpen ? 'open' : ''}`}>
-      <button className="dogkind-toggle" onClick={toggleDogkind}>
-        {selectedOption ? selectedOption.label : '견종을 선택하세요'}
-      </button>
-      <div className={`dogkind-list ${isOpen ? 'open' : ''}`}>
-        {isOpen && (
-          <ul>
-            {options.map((option) => (
-              <li
-                key={option.value}
-                onClick={() => handleOptionSelect(option)}
-                className="dogkind-item"
-              >
-                {option.label}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </div>
+    <select className="dogkind-select" onChange={(e) => onSelect(e.target.value)}>
+      <option value="">견종을 선택하세요</option>
+      {options.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </select>
   );
 };
 

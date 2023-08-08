@@ -18,13 +18,12 @@ const Logo = () => {
                 }}>
                     {/* 텍스트 이미지 */}
                     <div>
-                        <img className='' src = {logotext}
-                        style={{width: '150px', marginLeft : '30px'}}></img>
+                        <h1 style={{ fontSize: '40px', color: 'black' }} className='puppiettxt'>PUPPIET</h1>
                     </div>
 
                     {/* 이미지 */}
                     <div style={{ display: 'flex', alignItems: 'center',
-                                    marginLeft : '30px'}}>
+                                    }}>
                         <Link to='/main2'>
                             <img className='logo' src={picSrc} width='150px' alt="Logo"></img>
                         </Link>

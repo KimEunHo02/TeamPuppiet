@@ -126,6 +126,7 @@ const Petinfo = () => {
         { label: '서유민', value: 'option3' },
         { label: '서유정', value: 'option4' },
         { label: '정희석', value: 'option5' },
+
     ];
 
     // 값이 다 입력됐을 때 완료 버튼 누르게 하는 기능
@@ -232,22 +233,18 @@ const Petinfo = () => {
                         </Form.Group>
 
                         {/* 견종 */}
+
                         <Form.Group className="mb-3">
                             <Form.Label></Form.Label>
-                            <div className="d-flex align-items-center" style={{ marginTop: '-10px'}}>
+                            <div className="d-flex align-items-center" style={{ marginTop: '-10px' }}>
                                 <img src={dogimage} style={{ width: '20px', marginRight: '10px', marginLeft: '100px' }} alt="Icon" />
-                                {/* input.css에 스타일 정의 */}
-                                <Dogkind options={dataOptions} />
-
+                                <Dogkind options={dataOptions} onSelect={(selectedValue) => { /* 선택된 값 처리 */ }} />
                             </div>
                         </Form.Group>
 
-                    </div>
-
-
-                    {/* 성별 입력 */}
-                    {/* GenderSelection 컴포넌트 사용 / 남, 여 선택 */}
-                    <GenderSelection selectedGender={data.gender} handleGenderButtonClick={handleGenderButtonClick} />
+                        {/* 성별 입력 */}
+                        {/* GenderSelection 컴포넌트 사용 / 남, 여 선택 */}
+                        <GenderSelection selectedGender={data.gender} handleGenderButtonClick={handleGenderButtonClick} />
 
                     {/* 중성화 여부 선택 버튼 */}
                     <NeuteredSelection selectedNeutered={data.neutered} handleNeuteredButtonClick={handleNeuteredButtonClick} />
@@ -292,7 +289,7 @@ const Petinfo = () => {
                             </Button>
                         </Link>
 
-                    {/* 성별 버튼 */}
+                    {/* 완료 버튼 */}
                     <div>
                         <Button
                             variant='primary'
@@ -304,13 +301,14 @@ const Petinfo = () => {
                             disabled={!areAllFieldsFilled()}
                             onClick={() => { nav('/main2'); }}
                             >
-                            <p style={{marginTop: '15px'}}>성</p><p style={{marginTop: '15px'}}>별</p>
+                            <p style={{marginTop: '15px'}}>완</p><p style={{marginTop: '15px'}}>료</p>
                         </Button>
                     </div>
                     </div>
 
                 </div>
             </div>
+        </div>
         </div>
 
     )

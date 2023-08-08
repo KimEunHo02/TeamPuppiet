@@ -22,7 +22,7 @@
 
 /* 로고 오른쪽 */
 .maintext {
-    font-size : 15px;
+    font-size : 20px;
     color : #FFC9C9;
     text-decoration: none;
     color: black;
@@ -47,12 +47,13 @@
 
 .bartext:hover{
     font-weight: bold;
-    color: black;
 
 }
 .bartext{
     text-decoration: none;
-    color: dimgrey;
+    color: black;
+    font-size: 20px;
+
 }
 
 /* Main 페이지 부가 설명 */
@@ -105,4 +106,9 @@
     align-items: center;
     justify-content: center;
     height: 230%;
+}
+
+
+*{
+    font-family: 'KyoboHand';
 }

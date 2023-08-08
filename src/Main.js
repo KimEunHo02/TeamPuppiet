@@ -24,6 +24,7 @@ import ImageDetailFeed from './page/ImageDetailFeed';
 
 
 import styles from './Main.module.css';
+import './font.css'
 
 
 // 유정) 메인 페이지 화면입니다
@@ -51,7 +52,7 @@ const Main = () => {
     
     return (
 
-        <div className={styles.container}>
+        <div className={styles.container} id='font'>
 
             {/* 페이지 이동할 수 있도록 경로 설정 */}
             <Routes>
