@@ -9,9 +9,6 @@ import iconImage from '../icon/name.png'
 import birthImage from '../icon/birthday.png'
 import genderImage from '../icon/gender.png'
 
-import dog1pf from '../profile/profile_largedog.png'
-import dog2pf from '../profile/profile_mediumdog.png'
-import dog3pf from '../profile/profile_smalldog.png'
 import manpf from '../profile/profile_man.png'
 import womanpf from '../profile/profile_woman.png'
 
