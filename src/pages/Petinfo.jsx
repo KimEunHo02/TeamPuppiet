@@ -16,6 +16,94 @@ import birthImage from '../icon/birthday.png'
 import weightImage from '../icon/weight.png'
 import neuteredImage from '../icon/neutered.png'
 
+// GenderSelection 컴포넌트 정의 (남, 여 선택 버튼)
+const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
+    return (
+        <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
+            <img src={genderImage} style={{ width: '20px', marginRight: '10px', marginLeft: '100px'}} alt="Icon" />
+            <p style={{ marginTop: '20px', marginLeft: '22px' }}>성</p><p style={{ marginTop: '20px'}}>별</p>
+            <div className='custom-box'>
+                <div className="custom-input-box d-flex" style={{ width: '200px', marginLeft: '100px', display: 'flex' }}>
+                    {/* "남성" 버튼 */}
+                    <Button
+                        variant={selectedGender === "남성" ? 'primary' : 'light'}
+                        style={{
+                            backgroundColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
+                            borderColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
+                            color: 'gray',
+                            width: '60px',
+                            height: '40px',
+                            marginRight: '35px', 
+                            marginLeft: '-68px'
+                        }}
+                        onClick={() => handleGenderButtonClick("남성")}
+                    >
+                        남성
+                    </Button>
+                    {/* "여성" 버튼 */}
+                    <Button
+                        variant={selectedGender === "여성" ? 'primary' : 'light'}
+                        style={{
+                            backgroundColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
+                            borderColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
+                            color: 'gray',
+                            width: '60px',
+                            height: '40px',
+                            marginRight: '10px', // 간격을 조절하여 가로로 나열
+                        }}
+                        onClick={() => handleGenderButtonClick("여성")}
+                    >
+                        여성
+                    </Button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// 중성화 여부 선택 버튼
+const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
+    return (
+        <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
+            <img src={neuteredImage} style={{ width: '23px', marginTop: '19px', marginLeft: '100px' }} alt="Icon" />
+            <div className='custom-box'>
+                <div className="custom-input-box" style={{ width: '400px', marginTop: '10px' }}>
+                    <a style={{ marginTop: '13px', marginLeft: '15px' }}>중성화</a>
+                    <Button
+                        variant={selectedNeutered === "O" ? 'primary' : 'light'}
+                        style={{
+                            backgroundColor: selectedNeutered === "O" ? '#F6E781' : '#F0F0F0',
+                            borderColor: selectedNeutered === "O" ? '#F6E781' : '#F0F0F0',
+                            color: 'gray',
+                            width: '60px',
+                            height: '40px',
+                            margin: '-10px 50px -10px 31px',
+                        }}
+                        onClick={() => handleNeuteredButtonClick("O")}
+                    >
+                        O
+                    </Button>
+                    {' '}
+                    <Button
+                        variant={selectedNeutered === "X" ? 'primary' : 'light'}
+                        style={{
+                            backgroundColor: selectedNeutered === "X" ? '#F6E781' : '#F0F0F0',
+                            borderColor: selectedNeutered === "X" ? '#F6E781' : '#F0F0F0',
+                            color: 'gray',
+                            width: '60px',
+                            height: '40px',
+                            margin: '21px 50px 20px -20px',
+                        }}
+                        onClick={() => handleNeuteredButtonClick("X")}
+                    >
+                        X
+                    </Button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 
 const Petinfo = () => {
 
@@ -58,6 +146,25 @@ const Petinfo = () => {
         }));
 
     };
+
+    // 성별 선택 버튼 클릭 이벤트 핸들러
+    const handleGenderButtonClick = (gender) => {
+        setData({ ...data, gender: gender });
+    };
+
+    // 성별 담긴 데이터
+    const [data, setData] = useState({
+        name: '',
+        birth: '',
+        gender: '여성',
+    });
+
+    // 중성화 여부 선택 버튼 클릭 이벤트 핸들러
+    const handleNeuteredButtonClick = (neutered) => {
+        setData({ ...data, neutered: neutered });
+    };
+
+
     return (
         <div>
             <br />
@@ -85,13 +192,14 @@ const Petinfo = () => {
 
                 {/* 이름 */}
 
-                <div style={{ margin: '30px' }}>
+                <div style={{ margin: '30px', width: '400px'}}>
                     <div>
                         <Form.Group className="mb-3">
                             <Form.Label></Form.Label>
                             <div className="d-flex align-items-center">
-                                <img src={Image} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
+                                <img src={Image} style={{ width: '20px', marginRight: '10px', marginLeft: '100px' }} alt="Icon" />
                                 <Form.Control type="text" placeholder="이름" className="custom-input"
+                                    style={{width: '250px'}}
                                     value={inputValues.name}
                                     onChange={(e) => handleInputChange('name', e.target.value)} /> </div>
                         </Form.Group>
@@ -100,9 +208,9 @@ const Petinfo = () => {
                         <Form.Group className="mb-3">
                             <Form.Label></Form.Label>
                             <div className="d-flex align-items-center">
-                                <img src={dogimage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
+                                <img src={dogimage} style={{ width: '20px', marginRight: '10px', marginLeft: '100px' }} alt="Icon" />
                                 {/* input.css에 스타일 정의 */}
-                                    <Dogkind options={dataOptions}/>
+                                <Dogkind options={dataOptions} />
 
                             </div>
                         </Form.Group>
@@ -111,38 +219,19 @@ const Petinfo = () => {
 
 
                     {/* 성별 입력 */}
-                    <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
-                        <img src={genderImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-                        <div className='custom-box'>
-                            <div className="custom-input-box" style={{ width: '450px' }}>
-                                <input
-                                    type="radio"
-                                    name="gender"
-                                    checked={inputValues.gender === '남성'}
-                                    onChange={(e) => handleInputChange('gender', '남성')}
-                                />{' '}
-                                남성
-                                {' '}
-                                <input
-                                    type="radio"
-                                    name="gender"
-                                    checked={inputValues.gender === '여성'}
-                                    onChange={(e) => handleInputChange('gender', '여성')}
-                                />{' '}
-                                여성
-                            </div>
-                        </div>
-                    </div>
+                    {/* GenderSelection 컴포넌트 사용 / 남, 여 선택 */}
+                    <GenderSelection selectedGender={data.gender} handleGenderButtonClick={handleGenderButtonClick} />
 
                     {/* 생년월일 입력창 */}
                     <Form.Label htmlFor="inputBirth"></Form.Label>
                     <div className="d-flex align-items-center" style={{ display: 'flex' }}>
-                        <img src={birthImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
+                        <img src={birthImage} style={{ width: '20px', marginRight: '10px', marginLeft: '100px' }} alt="Icon" />
                         <Form.Control
                             type="text" // 숫자만 입력 가능하도록 수정
                             id="inputBirth"
                             placeholder="생년월일 8자리 ex)19990101"
                             name="birth"
+                            style={{width: '250px'}}
                             value={inputValues.birth}
                             onChange={(e) => handleInputChange('birth', e.target.value)}
                         /></div>
@@ -150,41 +239,19 @@ const Petinfo = () => {
                     {/* 몸무게 입력창 */}
                     <Form.Label htmlFor="inputWeight"></Form.Label>
                     <div className="d-flex align-items-center" style={{ display: 'flex' }}>
-                        <img src={weightImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
+                        <img src={weightImage} style={{ width: '20px', marginRight: '10px', marginLeft: '100px' }} alt="Icon" />
                         <Form.Control
                             type="text" // 숫자만 입력 가능하도록 수정
                             id="inputWeight"
                             placeholder="        kg"
                             name="weight"
+                            style={{width: '250px'}}
                             value={inputValues.weight}
                             onChange={(e) => handleInputChange('weight', e.target.value)}
                         /></div>
 
-                    {/* 중성화 여부 선택창 */}
-                    <div className="d-flex align-items-center" style={{ marginTop: '20px' }}>
-                        <img src={neuteredImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-                        <div className='custom-box'>
-                            <div className="custom-input-box" style={{ width: '450px' }}>
-                                <a style={{ color: 'gray' }}>중성화 여부</a>
-                                <input
-                                    type="radio"
-                                    name="neutered"
-                                    style={{ marginLeft: '10px' }}
-                                    checked={inputValues.neutered === 'O'}
-                                    onChange={(e) => handleInputChange('neutered', 'O')}
-                                />{' '}
-                                O
-                                {' '}
-                                <input
-                                    type="radio"
-                                    name="neutered"
-                                    checked={inputValues.neutered === 'X'}
-                                    onChange={(e) => handleInputChange('neutered', 'X')}
-                                />{' '}
-                                X
-                            </div>
-                        </div>
-                    </div>
+                    {/* 중성화 여부 선택 버튼 */}
+                    <NeuteredSelection selectedNeutered={data.neutered} handleNeuteredButtonClick={handleNeuteredButtonClick} />
 
 
                     {/* 로그인 버튼 */}
