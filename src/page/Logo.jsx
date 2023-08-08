@@ -19,7 +19,7 @@ const Logo = () => {
                     {/* 텍스트 이미지 */}
                     <div>
                         <img className='' src = {logotext}
-                        style={{width: '150px'}}></img>
+                        style={{width: '150px', marginLeft : '30px'}}></img>
                     </div>
 
                     {/* 이미지 */}
@@ -39,7 +39,7 @@ const Logo = () => {
 
             {/* 타이틀 */}
             <div className='bar-container'>
-                <Link to="/information" className='bartext'>정보 보기</Link>
+                <Link to="/main2" className='bartext'>정보 보기</Link>
                 <Link to="/feed" className='bartext'>사료 추천</Link>
                 <Link to="/recipe" className='bartext'>간식 레시피 추천</Link>
                 <Link to="/calendar" className='bartext'>캘린더</Link>

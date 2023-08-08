@@ -40,9 +40,11 @@ const Mainpage = () => {
                     display: 'flex', alignItems: 'center',
                     justifyContent: 'space-between', padding: '10px'
                 }}>
+
+                    {/* 텍스트 이미지 */}
                     <div>
                         <img className='' src = {logotext}
-                        style={{width: '150px'}}></img>
+                        style={{width: '150px' ,marginLeft : '30px'}}></img>
                     </div>
 
                     {/* 이미지 */}
@@ -55,15 +57,16 @@ const Mainpage = () => {
                         <Link to="/login" style={{ marginRight: '30px' }} className='maintext'>로그인</Link>
                         <Link to="/signup" style={{ marginRight: '30px' }} className='maintext'>회원가입</Link>
                     </div>
+                    
                 </div>
             </header>
 
             {/* 타이틀 */}
             <div className='bar-container'>
-                <Link to="/information" className='bartext'>정보 보기</Link>
-                <Link to="/feed" className='bartext'>사료 추천</Link>
-                <Link to="/recipe" className='bartext'>간식 레시피 추천</Link>
-                <Link to="/calendar" className='bartext'>캘린더</Link>
+                <Link to="/login" className='bartext'>정보 보기</Link>
+                <Link to="/login" className='bartext'>사료 추천</Link>
+                <Link to="/login" className='bartext'>간식 레시피 추천</Link>
+                <Link to="/login" className='bartext'>캘린더</Link>
             </div>
 
             {/* ------------------------------------ */}
