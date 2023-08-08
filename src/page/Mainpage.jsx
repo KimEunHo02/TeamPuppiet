@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import picSrc from '../img/logo_name(x).png'
 import logotext from '../img/logo_name.png'
@@ -26,6 +26,14 @@ const Mainpage = () => {
         height: '200px',
         backgroundColor: '#F0F0F0',
     }
+
+
+    // 로그인하지 않은 상태이므로 메뉴바 눌렀을 때 로그인 페이지로 이동하게 설정
+    const handleMenuClick = () => {
+        alert("로그인이 필요합니다.");
+        window.location.href = '/login'; // 로그인 페이지 경로로 변경
+      };
+    
 
     return (
 
@@ -63,10 +71,10 @@ const Mainpage = () => {
 
             {/* 타이틀 */}
             <div className='bar-container'>
-                <Link to="/login" className='bartext'>정보 보기</Link>
-                <Link to="/login" className='bartext'>사료 추천</Link>
-                <Link to="/login" className='bartext'>간식 레시피 추천</Link>
-                <Link to="/login" className='bartext'>캘린더</Link>
+                <Link href="#" onClick={handleMenuClick} className='bartext'>정보 보기</Link>
+                <Link href="#" onClick={handleMenuClick} className='bartext'>사료 추천</Link>
+                <Link href="#" onClick={handleMenuClick} className='bartext'>간식 레시피 추천</Link>
+                <Link href="#" onClick={handleMenuClick} className='bartext'>캘린더</Link>
             </div>
 
             {/* ------------------------------------ */}
