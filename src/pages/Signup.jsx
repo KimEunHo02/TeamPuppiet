@@ -145,13 +145,14 @@ const Signup = () => {
     const idPattern = /^[a-zA-Z0-9@._+-]*$/;
     const passwordPattern = /^[a-zA-Z0-9@._+-]{8,15}$/;
     const namePattern = /^[가-힣a-zA-Z\s]+$/;
-
+  
     return (
       idPattern.test(formData.username) &&
       passwordPattern.test(formData.password) &&
       formData.password === formData.confirmPassword &&
       namePattern.test(formData.name) &&
-      formData.gender !== ''
+      // formData.gender !== '' &&
+      isBirthValid(formData.birth)
     );
   };
 
@@ -180,7 +181,9 @@ const Signup = () => {
   };
 
   // 다음 버튼의 활성화 여부를 결정하는 변수
-  const isNextButtonEnabled = isFormValid() && isBirthValid(formData.birth);
+  // const isNextButtonEnabled = isFormValid() && isBirthValid(formData.birth);
+  const isNextButtonEnabled = isFormValid() && (!formData.birth || isBirthValid(formData.birth));
+
 
   // 입력값 유효성 검사 함수
   const validateInput = (value, type) => {
@@ -212,6 +215,14 @@ const Signup = () => {
     birth: '',
     gender: '여성',
   });
+
+  // 유효성 검사 콘솔출력 해보기
+  console.log('isFormValid:', isFormValid());
+  console.log('isBirthValid:', isBirthValid(formData.birth));
+  console.log('isNextButtonEnabled:', isNextButtonEnabled);
+
+
+
   return (
     <div>
 
@@ -306,12 +317,12 @@ const Signup = () => {
                   style={{
                     fontSize: '14px',
                     color: 'red',
-                    marginLeft: '-100px',
+                    marginLeft: '-20px',
                     marginTop: '2.7px',
                   }}
                 >
                   {!validateInput(formData.password, 'password') && (
-                    '영문, 숫자, 특수기호(+. @, ., _, -)만 입력 가능합니다.'
+                    '8~15자리의 영문, 숫자, 특수기호(+. @, ., _, -)만 입력 가능합니다.'
                   )}
                 </div>
               )}
