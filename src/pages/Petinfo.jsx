@@ -273,7 +273,6 @@ const Petinfo = () => {
                         <Form.Control
                             type="text" // 숫자만 입력 가능하도록 수정
                             id="inputWeight"
-                            placeholder="        kg"
                             name="weight"
                             style={{ width: '50px' }}
                             value={inputValues.weight}
