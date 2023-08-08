@@ -5,6 +5,9 @@ import logotext from '../img/logo_name.png'
 import '../Main.module.css';
 import '../Main.css'
 
+import dietGif from '../images/diet.gif'; // 이미지 가져오기
+import calendarGif from '../images/calendar.gif'; // 이미지 가져오기
+
 // 유정) 로고 이미지 눌렀을 때 Main 화면 보이게 설정한 페이지입니다.
 
 const Mainpage = () => {
@@ -32,17 +35,17 @@ const Mainpage = () => {
     const handleMenuClick = () => {
         alert("로그인이 필요합니다.");
         window.location.href = '/login'; // 로그인 페이지 경로로 변경
-      };
-    
+    };
+
 
     return (
 
-        <div style={{marginBottom: '44px'}}>
+        <div style={{ marginBottom: '44px' }}>
 
             {/* ----------- 상단바 ------------ */}
 
-            <header style={{ backgroundColor: '#F0F0F0' }} 
-            className="header" >
+            <header style={{ backgroundColor: '#F0F0F0' }}
+                className="header" >
 
                 <div style={{
                     display: 'flex', alignItems: 'center',
@@ -51,8 +54,8 @@ const Mainpage = () => {
 
                     {/* 텍스트 이미지 */}
                     <div>
-                        <img className='' src = {logotext}
-                        style={{width: '150px' ,marginLeft : '30px'}}></img>
+                        <img className='' src={logotext}
+                            style={{ width: '150px', marginLeft: '30px' }}></img>
                     </div>
 
                     {/* 이미지 */}
@@ -65,7 +68,7 @@ const Mainpage = () => {
                         <Link to="/login" style={{ marginRight: '30px' }} className='maintext'>로그인</Link>
                         <Link to="/signup" style={{ marginRight: '30px' }} className='maintext'>회원가입</Link>
                     </div>
-                    
+
                 </div>
             </header>
 
@@ -80,106 +83,97 @@ const Mainpage = () => {
             {/* ------------------------------------ */}
 
             {/* 서비스 소개 */}
-            <br />
-            <div style={{marginLeft : '350px',
-                        marginRight : '350px'}}>
-            <div style={{ ...Box}} className='maingraybox'>
-                <a className='additional'>서비스 소개</a>
-            </div>
+            <div style={{
+                marginLeft: '350px',
+                marginRight: '350px'
+            }}>
 
-            <br />
-
-            {/* 다이어트 정보 예시 */}
-
-            <div style={{ ...Box }} className='maingraybox'>
-                <a className='additional'>다이어트 정보 예시</a>
-            </div>
-
-            <br />
-
-            {/* 이벤트 캘린더 */}
-
-            <div style={{ ...Box }} className='maingraybox'>
-                <a className='additional'>Event 캘린더</a>
-            </div>
-
-            <br />
-
-            {/* 사료 추천 */}
-
-            <div style={{ ...Box, height: '1050px' }} className='maintopbox'>
-                <a style={{ ...textstyle, margin: '50px' }} className='mainboxcontent'>사료 Top 10</a>
-
-                <div style={{
-                    display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
-                    margin: '60px'
-                }}
-                    className='mainboxcontainer'>
-                    <div style={imgbox} className='mainboxcontent'>
-                        <div className='imgboxcontent'>
-                            제품명
-                        </div>
-                    </div>
-                    <div style={imgbox} className='mainboxcontent'>
-                        <div className='imgboxcontent'>
-                            제품명
-                        </div>
-                    </div>
-                    <div style={imgbox} className='mainboxcontent'>
-                        <div className='imgboxcontent'>
-                            제품명
-                        </div>
-                    </div>
-                    <div style={imgbox} className='mainboxcontent'>
-                        <div className='imgboxcontent'>
-                            제품명
-                        </div>
-                    </div>
-                    <div style={imgbox} className='mainboxcontent'>
-                        <div className='imgboxcontent'>
-                            제품명
-                        </div>
-                    </div>
+                <div style={{ ...Box }} className='maingraybox'>
+                    <a className='additional'>서비스 소개</a>
                 </div>
-                {/* 간식 레시피 추천 */}
 
-                <a style={{ ...textstyle, margin: '50px' }} className='mainboxcontent'>간식 레시피 Top 10</a>
+                {/* 반려견 다이어트 정보 */}
+                <div style={{ height: '404px', width: '1200px', background: `url(${dietGif}) no-repeat center`, backgroundSize: 'cover' }}></div>
 
-                <div style={{
-                    display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
-                    margin: '60px'
-                }}
-                    className='mainboxcontainer'>
-                    <div style={imgbox} className='mainboxcontent'>
-                        <div className='imgboxcontent'>
-                            레시피명
+                {/* 이벤트 캘린더 이미지 */}
+                <div style={{ height: '404px', width: '1200px', background: `url(${calendarGif}) no-repeat center`, backgroundSize: 'cover' }}></div>
+
+
+                {/* 사료 추천 */}
+                <div style={{ ...Box, height: '1050px' }} className='maintopbox'>
+                    <a style={{ ...textstyle, margin: '50px' }} className='mainboxcontent'>사료 Top 10</a>
+
+                    <div style={{
+                        display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
+                        margin: '60px'
+                    }}
+                        className='mainboxcontainer'>
+                        <div style={imgbox} className='mainboxcontent'>
+                            <div className='imgboxcontent'>
+                                제품명
+                            </div>
+                        </div>
+                        <div style={imgbox} className='mainboxcontent'>
+                            <div className='imgboxcontent'>
+                                제품명
+                            </div>
+                        </div>
+                        <div style={imgbox} className='mainboxcontent'>
+                            <div className='imgboxcontent'>
+                                제품명
+                            </div>
+                        </div>
+                        <div style={imgbox} className='mainboxcontent'>
+                            <div className='imgboxcontent'>
+                                제품명
+                            </div>
+                        </div>
+                        <div style={imgbox} className='mainboxcontent'>
+                            <div className='imgboxcontent'>
+                                제품명
+                            </div>
                         </div>
                     </div>
-                    <div style={imgbox} className='mainboxcontent'>
-                        <div className='imgboxcontent'>
-                            레시피명
+
+
+                    {/* 간식 레시피 추천 */}
+                    <a style={{ ...textstyle, margin: '50px' }} className='mainboxcontent'>간식 레시피 Top 10</a>
+
+                    <div style={{
+                        display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
+                        margin: '60px'
+                    }}
+                        className='mainboxcontainer'>
+                        <div style={imgbox} className='mainboxcontent'>
+                            <div className='imgboxcontent'>
+                                레시피명
+                            </div>
+                        </div>
+                        <div style={imgbox} className='mainboxcontent'>
+                            <div className='imgboxcontent'>
+                                레시피명
+                            </div>
+                        </div>
+                        <div style={imgbox} className='mainboxcontent'>
+                            <div className='imgboxcontent'>
+                                레시피명
+                            </div>
+                        </div>
+                        <div style={imgbox} className='mainboxcontent'>
+                            <div className='imgboxcontent'>
+                                레시피명
+                            </div>
+                        </div>
+                        <div style={imgbox} className='mainboxcontent'>
+                            <div className='imgboxcontent'>
+                                레시피명
+                            </div>
                         </div>
                     </div>
-                    <div style={imgbox} className='mainboxcontent'>
-                        <div className='imgboxcontent'>
-                            레시피명
-                        </div>
-                    </div>
-                    <div style={imgbox} className='mainboxcontent'>
-                        <div className='imgboxcontent'>
-                            레시피명
-                        </div>
-                    </div>
-                    <div style={imgbox} className='mainboxcontent'>
-                        <div className='imgboxcontent'>
-                            레시피명
-                        </div>
-                    </div>
+
                 </div>
 
             </div>
-
-        </div>
         </div>
     )
 }
