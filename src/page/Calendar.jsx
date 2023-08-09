@@ -249,7 +249,7 @@ export const Calendar = () => {
   };
 
   const onDateClick =(day) =>{
-    setSelectedDate(day);
+    // setSelectedDate(day);
   }
   
   return (
