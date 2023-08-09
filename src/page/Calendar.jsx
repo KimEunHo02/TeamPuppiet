@@ -119,12 +119,12 @@ const RenderHeader = ({currentMonth, preMonth, nextMonth}) => {
         <div className='header row'>
             <div className='col col-start'>
                 <span className='cal_title'>캘린더</span>
-                <span className='text'>
                     <span className='text month'>
                         {format(currentMonth,'M')}월
                     </span>
-                    {format(currentMonth, 'yyyy')}                    
-                </span>
+                    <span className='text year'>
+                        {format(currentMonth, 'yyyy')}                    
+                    </span>
             </div>
             <div className='col col-end'>
               <button onClick={preMonth}>{"<"}</button>

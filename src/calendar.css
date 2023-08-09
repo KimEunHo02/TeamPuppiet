@@ -41,7 +41,7 @@
 .cal_title{
     font-weight: bold;
     font-size : 2em;
-    color: #707070;
+    color: black;
     margin-right: 10px;
 }
 
@@ -56,7 +56,12 @@
     margin-right: 5px;
     font-weight: bold;
     font-size: 1.6em;
-    color:#707070;
+    color:black;
+}
+/* 년도 */
+.text.year{
+    font-size: 0.8em;
+    color:black;
 }
 
 /* 요일 */
