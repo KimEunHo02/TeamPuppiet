@@ -73,7 +73,10 @@ const Feed = () => {
     setSelectedCategories([]);
     setSelectedTypes([]);
     setSelectedNutrients([]);
-    setIsResetActive(!isResetActive); // 활성화 상태 토글
+    setIsResetActive(true); // 초기화 상태로 설정
+    setTimeout(() => {
+      setIsResetActive(false); // 일정 시간 후에 초기화 상태 해제
+    }, 300); // 300ms (0.3초) 후에 초기화 상태 해제
   };
 
   // 초기화 버튼 스타일
@@ -105,7 +108,38 @@ const Feed = () => {
   // 검색하기 버튼 클릭 핸들러
   const handleSearchClick = () => {
     // 검색 로직 구현
-    setIsSearchActive(!isSearchActive); // 활성화 상태 토글
+    setIsSearchActive(true); // 활성화 상태로 설정
+    setTimeout(() => {
+      setIsSearchActive(false); // 일정 시간 후에 검색하기 상태 해제
+    }, 300); // 300ms (0.3초) 후에 검색하기 상태 해제
+  };
+
+  // 초기화 버튼 마우스 오버 이벤트 핸들러
+  const handleResetMouseOver = () => {
+    if (!isResetActive) {
+      setIsResetActive(true);
+    }
+  };
+
+  // 초기화 버튼 마우스 아웃 이벤트 핸들러
+  const handleResetMouseOut = () => {
+    if (isResetActive) {
+      setIsResetActive(false);
+    }
+  };
+
+  // 검색하기 버튼 마우스 오버 이벤트 핸들러
+  const handleSearchMouseOver = () => {
+    if (!isSearchActive) {
+      setIsSearchActive(true);
+    }
+  };
+
+  // 검색하기 버튼 마우스 아웃 이벤트 핸들러
+  const handleSearchMouseOut = () => {
+    if (isSearchActive) {
+      setIsSearchActive(false);
+    }
   };
 
   // 선택된 카테고리/유형/영양소에 따라 스타일 적용
@@ -275,6 +309,8 @@ const Feed = () => {
             variant="light"
             style={resetButtonStyle}
             onClick={handleResetClick}
+            onMouseOver={handleResetMouseOver}
+            onMouseOut={handleResetMouseOut}
           >
             초기화
           </Button>
@@ -282,6 +318,8 @@ const Feed = () => {
             variant="light"
             style={searchButtonStyle}
             onClick={handleSearchClick}
+            onMouseOver={handleSearchMouseOver}
+            onMouseOut={handleSearchMouseOut}
           >
             검색하기
           </Button>
