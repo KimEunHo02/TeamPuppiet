@@ -121,7 +121,7 @@ const Mainpage2 = ({ mainArr }) => {
 
 
        {/* 사료 추천 */}
-       <div style={{ ...Box, height: '900px' }}>
+       <div style={{ ...Box, height: '900px', marginTop:'0px' }}>
           <br />
           <br />
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: '50px' }}>
