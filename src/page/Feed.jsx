@@ -73,7 +73,10 @@ const Feed = () => {
     setSelectedCategories([]);
     setSelectedTypes([]);
     setSelectedNutrients([]);
-    setIsResetActive(!isResetActive); // 활성화 상태 토글
+    setIsResetActive(true); // 초기화 상태로 설정
+    setTimeout(() => {
+      setIsResetActive(false); // 일정 시간 후에 초기화 상태 해제
+    }, 300); // 300ms (0.3초) 후에 초기화 상태 해제
   };
 
   // 초기화 버튼 스타일
@@ -83,7 +86,7 @@ const Feed = () => {
     marginRight: '30px',
     backgroundColor: isResetActive ? '#FFC9C9' : '#F0F0F0',
     color: 'black',
-    fontSize: '15px',
+    fontSize: '20px',
     border: 'none', // 기본 테두리 제거
     boxShadow: 'none', // 기본 박스 쉐도우 제거
     outline: 'none', // 포커스 테두리 제거
@@ -93,10 +96,9 @@ const Feed = () => {
   const searchButtonStyle = {
     width: '100px',
     height: '40px',
-    // marginRight: '80px',
     backgroundColor: isSearchActive ? '#FFC9C9' : '#F0F0F0',
     color: 'black',
-    fontSize: '15px',
+    fontSize: '20px',
     border: 'none', // 기본 테두리 제거
     boxShadow: 'none', // 기본 박스 쉐도우 제거
     outline: 'none', // 포커스 테두리 제거
@@ -106,7 +108,38 @@ const Feed = () => {
   // 검색하기 버튼 클릭 핸들러
   const handleSearchClick = () => {
     // 검색 로직 구현
-    setIsSearchActive(!isSearchActive); // 활성화 상태 토글
+    setIsSearchActive(true); // 활성화 상태로 설정
+    setTimeout(() => {
+      setIsSearchActive(false); // 일정 시간 후에 검색하기 상태 해제
+    }, 300); // 300ms (0.3초) 후에 검색하기 상태 해제
+  };
+
+  // 초기화 버튼 마우스 오버 이벤트 핸들러
+  const handleResetMouseOver = () => {
+    if (!isResetActive) {
+      setIsResetActive(true);
+    }
+  };
+
+  // 초기화 버튼 마우스 아웃 이벤트 핸들러
+  const handleResetMouseOut = () => {
+    if (isResetActive) {
+      setIsResetActive(false);
+    }
+  };
+
+  // 검색하기 버튼 마우스 오버 이벤트 핸들러
+  const handleSearchMouseOver = () => {
+    if (!isSearchActive) {
+      setIsSearchActive(true);
+    }
+  };
+
+  // 검색하기 버튼 마우스 아웃 이벤트 핸들러
+  const handleSearchMouseOut = () => {
+    if (isSearchActive) {
+      setIsSearchActive(false);
+    }
   };
 
   // 선택된 카테고리/유형/영양소에 따라 스타일 적용
@@ -115,11 +148,11 @@ const Feed = () => {
     backgroundColor: selectedCategories.includes(category) ? '#FFC9C9' : '#F0F0F0',
     color: 'black',
     border: 'none',
-    fontSize: '15px',
+    fontSize: '20px',
     width: '90px',
     height: '40px',
     marginBottom: '10px',
-    marginLeft: '110px',
+    marginLeft: '100px',
     marginRight: '-80px',
   });
 
@@ -128,11 +161,11 @@ const Feed = () => {
     backgroundColor: selectedTypes.includes(type) ? '#FFC9C9' : '#F0F0F0',
     color: 'black',
     border: 'none',
-    fontSize: '15px',
+    fontSize: '20px',
     width: '90px',
     height: '40px',
     marginBottom: '10px',
-    marginLeft: '105px',
+    marginLeft: '93px',
     marginRight: '-75px',
   });
 
@@ -141,18 +174,18 @@ const Feed = () => {
     backgroundColor: selectedNutrients.includes(nutrient) ? '#FFC9C9' : '#F0F0F0',
     color: 'black',
     border: 'none',
-    fontSize: '15px',
+    fontSize: '20px',
     width: '90px',
     height: '40px',
     marginBottom: '10px',
-    marginLeft: '110px',
+    marginLeft: '100px',
     marginRight: '-80px',
   });
 
   const strongStyle = {
-    fontSize: '16px',
-    marginLeft: '40px',
-    padding: '10px'
+    fontSize: '25px',
+    marginLeft: '50px',
+    padding: '5px'
   }
 
   // ---------------------------------------- 사료 추천 박스 --------------------------------------------------
@@ -231,7 +264,7 @@ const Feed = () => {
       <Logo />
 
       {/* 사료 정보 선택 div */}
-      <div style={{ margin: '20px auto', width: '1200px', height: '330px', backgroundColor: 'white', marginBottom: '50px', borderRadius: '20px', padding: '60px 90px 40px 50px', textAlign: 'center', fontSize: '19px', fontWeight: 'bold', position: 'relative' }}>
+      <div style={{ margin: '20px auto', width: '1200px', height: '330px', backgroundColor: 'white', marginBottom: '70px', borderRadius: '20px', padding: '60px 90px 40px 50px', textAlign: 'center', fontSize: '19px', fontWeight: 'bold', position: 'relative' }}>
         <div style={{ display: 'flex', marginBottom: '10px' }}>
           <strong style={strongStyle}>구 분</strong>
           {categories.map((category, index) => (
@@ -276,6 +309,8 @@ const Feed = () => {
             variant="light"
             style={resetButtonStyle}
             onClick={handleResetClick}
+            onMouseOver={handleResetMouseOver}
+            onMouseOut={handleResetMouseOut}
           >
             초기화
           </Button>
@@ -283,11 +318,13 @@ const Feed = () => {
             variant="light"
             style={searchButtonStyle}
             onClick={handleSearchClick}
+            onMouseOver={handleSearchMouseOver}
+            onMouseOut={handleSearchMouseOut}
           >
             검색하기
           </Button>
         </div>
-        <strong style={{ color: 'black', fontSize: '20px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>237개의 사료 추천</strong>
+        <strong style={{ color: 'black', fontSize: '25px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>237개의 사료 추천</strong>
       </div>
 
       {/* 사료 추천 박스 컨테이너 */}

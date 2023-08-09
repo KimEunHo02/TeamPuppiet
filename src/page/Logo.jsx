@@ -22,7 +22,7 @@ const Logo = () => {
                     </div>
 
                     {/* 이미지 */}
-                    <div style={{ display: 'flex', alignItems: 'center',
+                    <div style={{ display: 'flex', alignItems: 'center', marginRight: '62px'
                                     }}>
                         <Link to='/main2'>
                             <img className='logo' src={picSrc} width='150px' alt="Logo"></img>

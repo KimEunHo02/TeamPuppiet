@@ -7,6 +7,7 @@ import kongsoon from '../main2Image/kongsoon2.png'
 import feedicon from '../main2Image/feedicon.png'
 import exerciseicon from '../main2Image/exerciseicon.png'
 
+import { Link } from 'react-router-dom';
 
 const Mainpage2 = ({ mainArr }) => {
 
@@ -28,24 +29,22 @@ const Mainpage2 = ({ mainArr }) => {
     }
   },[])
 
-
- const Box = {
-        width: '1200px',
-        height: '150px',
-        backgroundColor: 'white',
-        marginTop: '20px'
-    }
+  const Box = {
+    width: '1200px',
+    height: '150px',
+    backgroundColor: 'white',
+    marginTop: '20px'
+  }
 
   const imgbox = {
     width: '250px',
     height: '250px',
-    backgroundColor: '#F0F0F0',
-    marginRight: '20px', 
+    marginRight: '20px',
     // flexShrink: 0 // 수정 필요(박스 고정)
-}
+  }
   const textstyle = {
     fontWeight: 'bold',
-    fontSize: '18px',
+    fontSize: '23px',
   }
 
   const kongsoonStyle = {
@@ -71,8 +70,15 @@ const Mainpage2 = ({ mainArr }) => {
     zIndex:3
   }
 
+
+  const imageStyle = {
+    width: '100%',
+    height: 'auto',
+    maxHeight: '100%',
+  };
+
   return (
-    <div style={{marginBottom: '30px'}}>
+    <div style={{ marginBottom: '30px' }}>
       <Logo />
 
       {/* 다이어트 정보 표시 영역 */}
@@ -110,70 +116,79 @@ const Mainpage2 = ({ mainArr }) => {
           </div>
           
         </div>
-        {/* </div> */}
-      </div>
-
-      {/* 사료 추천 */}
-
-      <div style={{ ...Box, height: '1250px' }} className='maintopbox'>
-        <a style={{ ...textstyle, margin: '50px' }} className='mainboxcontent'>사료 Top 10</a>
-
-        <div style={{
-          display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
-          margin: '60px'
-        }}
-          className='mainboxcontainer'>
-          <div style={imgbox} className='mainboxcontent'>
-            <div className='imgboxcontent'>
-              제품명
-            </div>
-          </div>
-          <div style={imgbox} className='mainboxcontent'>
-            <div className='imgboxcontent'>
-              제품명
-            </div>
-          </div>
-          <div style={imgbox} className='mainboxcontent'>
-            <div className='imgboxcontent'>
-              제품명
-            </div>
-
-          </div>
         </div>
-        {/* 간식 레시피 추천 */}
+      
 
-        <a style={{ ...textstyle, margin: '50px' }} className='mainboxcontent'>간식 레시피 Top 10</a>
 
-        <div style={{
-          display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
-          margin: '60px'
-        }}
-          className='mainboxcontainer'>
-          <div style={imgbox} className='mainboxcontent'>
-            <div className='imgboxcontent'>
-              레시피명
+       {/* 사료 추천 */}
+       <div style={{ ...Box, height: '900px' }}>
+          <br />
+          <br />
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: '50px' }}>
+            <a style={textstyle} className='mainboxcontent'>🍖 사료 추천 🍖</a>
+            <Link to={'/recipe'} className='more'>▷ 더보기</Link>
+          </div>
+
+          <div style={{
+            display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
+            margin: '60px'
+          }}
+            className='mainboxcontainer'>
+            <div style={imgbox} className='mainboxcontent'>
+              <img src='\img\사료.jpg' alt='사료 임시 사진' style={imageStyle} />
+              사료1
+            </div>
+
+            <div style={imgbox} className='mainboxcontent'>
+              <img src='\img\사료.jpg' alt='사료 임시 사진' style={imageStyle} />
+              사료2
+            </div>
+
+            <div style={imgbox} className='mainboxcontent'>
+              <img src='\img\사료.jpg' alt='사료 임시 사진' style={imageStyle} />
+              사료3
             </div>
           </div>
-          <div style={imgbox} className='mainboxcontent'>
-            <div className='imgboxcontent'>
-              레시피명
-            </div>
+
+
+          {/* 간식 레시피 추천 */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: '50px' }}>
+            <a style={textstyle} className='mainboxcontent'>🦴 간식 레시피 🦴</a>
+            <Link to={'/recipe'} className='more'>▷ 더보기</Link>
           </div>
-          <div style={imgbox} className='mainboxcontent'>
-            <div className='imgboxcontent'>
-              레시피명
+
+          <div style={{
+            display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
+            margin: '60px'
+          }}
+            className='mainboxcontainer'>
+
+
+            <div style={imgbox} className='mainboxcontent'>
+              <img src='\img\간식.jpg' alt='간식 임시 사진' style={imageStyle} />
+              간식1
+            </div>
+
+            <div style={imgbox} className='mainboxcontent'>
+              <img src='\img\간식.jpg' alt='간식 임시 사진' style={imageStyle} />
+              간식2
+            </div>
+
+            <div style={imgbox} className='mainboxcontent'>
+              <img src='\img\간식.jpg' alt='간식 임시 사진' style={imageStyle} />
+              간식3
             </div>
           </div>
 
         </div>
-</div>
+
         {sessionData == 'puppiet'
           ? <p></p>
           : <p>로그인이 필요합니다.</p>}
         {mainArr.map(item => <Login key={item.url} obj={item} />)}
       </div>
       </div>
-      )
+  )
 }
 
-      export default Mainpage2
+export default Mainpage2
