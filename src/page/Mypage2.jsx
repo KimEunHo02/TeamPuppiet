@@ -4,6 +4,9 @@ import '../mypage.css'
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import Dogkind2 from '../pages/Dogkind2';
+import '../input.css'
+
 
 import iconImage from '../icon/name.png'
 import birthImage from '../icon/birthday.png'
@@ -26,32 +29,32 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
                 <div className="custom-input-box" style={{ width: '450px', marginLeft: '-16px' }}>
                     {/* "수컷" 버튼 */}
                     <Button
-                        variant={selectedGender === "남성" ? 'primary' : 'light'}
+                        variant={selectedGender === "수컷" ? 'primary' : 'light'}
                         style={{
-                            backgroundColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
-                            borderColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
-                            color: 'gray',
+                            backgroundColor: selectedGender === "수컷" ? 'skyblue' : '#F0F0F0',
+                            borderColor: selectedGender === "수컷" ? 'skyblue' : '#F0F0F0',
+                            color: 'black',
                             width: '60px',
                             height: '40px',
                             margin: '-10px 50px',
                         }}
-                        onClick={() => handleGenderButtonClick("남성")}
+                        onClick={() => handleGenderButtonClick("수컷")}
                     >
                         수컷
                     </Button>
                     {' '}
                     {/* "암컷" 버튼 */}
                     <Button
-                        variant={selectedGender === "여성" ? 'primary' : 'light'}
+                        variant={selectedGender === "암컷" ? 'primary' : 'light'}
                         style={{
-                            backgroundColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
-                            borderColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
-                            color: 'gray',
+                            backgroundColor: selectedGender === "암컷" ? '#FFC9C9' : '#F0F0F0',
+                            borderColor: selectedGender === "암컷" ? '#FFC9C9' : '#F0F0F0',
+                            color: 'black',
                             width: '60px',
                             height: '40px',
                             margin: '1px 50px auto -15px',
                         }}
-                        onClick={() => handleGenderButtonClick("여성")}
+                        onClick={() => handleGenderButtonClick("암컷")}
                     >
                         암컷
                     </Button>
@@ -74,10 +77,10 @@ const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
                         style={{
                             backgroundColor: selectedNeutered === "O" ? '#F6E781' : '#F0F0F0',
                             borderColor: selectedNeutered === "O" ? '#F6E781' : '#F0F0F0',
-                            color: 'gray',
+                            color: 'black',
                             width: '60px',
                             height: '40px',
-                            margin: '-10px 50px -10px 33px',
+                            margin: '-10px 50px -10px 34px',
                         }}
                         onClick={() => handleNeuteredButtonClick("O")}
                     >
@@ -89,7 +92,7 @@ const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
                         style={{
                             backgroundColor: selectedNeutered === "X" ? '#F6E781' : '#F0F0F0',
                             borderColor: selectedNeutered === "X" ? '#F6E781' : '#F0F0F0',
-                            color: 'gray',
+                            color: 'black',
                             width: '60px',
                             height: '40px',
                             margin: '21px 50px 20px -15px',
@@ -118,13 +121,25 @@ const Mypage2 = () => {
     // Signup 페이지에서 담긴 데이터
     const [data, setData] = useState({
         name: '',
-        dogkind: '소형견',
         gender: '',
         birth: '',
         weight: '',
         neutered: ''
     });
 
+    // 개견 종류 선택 데이터
+    const dataOptions = [
+        { label: '소형견', value: '소형견' },
+        { label: '중형견', value: '중형견' },
+        { label: '대형견', value: '대형견' },
+    ];
+
+    // 수정된 데이터 출력
+    const handleSave = () => {
+        console.log('저장된 데이터:', data);
+        console.log('견종:', selectedDogkind)
+        // 여기에 저장 또는 수정 로직을 추가할 수 있습니다.
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -134,23 +149,26 @@ const Mypage2 = () => {
         }));
     };
 
+    // 개견 종류 데이터 분류
+
+    const [selectedDogkind, setSelectedDogkind] = useState('');
+
+    const handleDogkindSelect = (value) => {
+        setSelectedDogkind(value);
+    };
+
     const getImagePath = () => {
-        if (data.dogkind === "소형견") {
+        if (selectedDogkind === "소형견") {
             return dog3pf;
-        } else if (data.dogkind === "중형견") {
+        } else if (selectedDogkind === "중형견") {
             return dog2pf;
-        } else if (data.dogkind === "대형견") {
+        } else if (selectedDogkind === "대형견") {
             return dog1pf;
         } else {
             return null; // 기본 이미지 경로 또는 처리
         }
     };
 
-    // 수정된 데이터 출력
-    const handleSave = () => {
-        console.log('저장된 데이터:', data);
-        // 여기에 저장 또는 수정 로직을 추가할 수 있습니다.
-    };
 
     // 성별 선택 버튼 클릭 이벤트 핸들러
     const handleGenderButtonClick = (gender) => {
@@ -216,7 +234,7 @@ const Mypage2 = () => {
                                         name="name"
                                         value={data.name}
                                         onChange={handleChange}
-                                        style={{ width: '200px', marginLeft: '45px' }}
+                                        style={{ width: '200px', marginLeft: '40px' }}
                                     />
                                 </div>
                             </Form.Group>
@@ -227,12 +245,10 @@ const Mypage2 = () => {
                                 <div className="d-flex align-items-center">
                                     <img src={dogimage} style={{ width: '20px', marginRight: '10px', marginTop: '10px' }} alt="Icon" />
                                     <a style={{ marginTop: '10px', marginLeft: '20px' }}>견종</a>
-                                    <Form.Control
-                                        type="text"
-                                        name="dogkind"
-                                        value={data.dogkind}
-                                        onChange={handleChange}
-                                        style={{ width: '200px', marginLeft: '45px', marginTop: '10px' }} />
+                                    <div style={{ marginLeft: '42px' }}>
+                                        <Dogkind2 options={dataOptions} onSelect={handleDogkindSelect} />
+
+                                    </div>
                                 </div>
                             </Form.Group>
 
@@ -250,7 +266,7 @@ const Mypage2 = () => {
                                     name="birth"
                                     value={data.birth}
                                     onChange={handleChange}
-                                    style={{ width: '200px', marginLeft: '25px', marginTop: '10px' }}
+                                    style={{ width: '200px', marginLeft: '30px', marginTop: '10px' }}
                                 /></div>
 
                             {/* 몸무게 입력창 */}
@@ -263,7 +279,7 @@ const Mypage2 = () => {
                                     value={data.weight}
                                     name="weight"
                                     onChange={handleChange}
-                                    style={{ width: '200px', marginLeft: '34px', marginTop: '10px' }}
+                                    style={{ width: '200px', marginLeft: '33px', marginTop: '10px' }}
                                 /></div>
 
                             {/* 중성화 여부 선택 버튼 */}
@@ -275,7 +291,7 @@ const Mypage2 = () => {
                     <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '100px' }}>
                         <Button variant='primary' type='submit'
                             style={{
-                                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+                                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'black',
                                 width: '160px', height: '50px', margin: '0 50px',
                             }}
                             // 수정했을 때 일단 console에 출력되게 구현

@@ -24,3 +24,13 @@
   width: 100%; /* 선택창의 너비를 조절 */
   width: 252px
 }
+
+.dogkind-select2 {
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 8px;
+  cursor: pointer;
+  width: 100%; /* 선택창의 너비를 조절 */
+  width: 200px
+}

@@ -7,7 +7,7 @@ import '../Main.css'
 
 import dietGif from '../images/diet.gif'; // 이미지 가져오기
 import calendarGif from '../images/calendar.gif'; // 이미지 가져오기
-import serviceGif from '../images/service.gif'; // 이미지 가져오기
+// import serviceGif from '../images/service.gif'; // 이미지 가져오기
 
 // 유정) 로고 이미지 눌렀을 때 Main 화면 보이게 설정한 페이지입니다.
 
@@ -55,8 +55,7 @@ const Mainpage = () => {
 
                     {/* 텍스트 이미지 */}
                     <div>
-                        <img className='' src={logotext}
-                            style={{ width: '150px', marginLeft: '30px' }}></img>
+                        <h1 style={{ fontSize: '40px', color: 'black' }} className='puppiettxt'>PUPPIET</h1>
                     </div>
 
                     {/* 이미지 */}
@@ -88,19 +87,12 @@ const Mainpage = () => {
                 marginLeft: '350px',
                 marginRight: '350px'
             }}>
-            {/* <br/> */}
-
-                {/* 서비스 소개 */}
-                <div style={{ height: '404px', width: '1200px', background: `url(${serviceGif}) no-repeat center`, backgroundSize: 'cover' }}></div>
-                {/* <br/> */}
 
                 {/* 반려견 다이어트 정보 */}
                 <div style={{ height: '404px', width: '1200px', background: `url(${dietGif}) no-repeat center`, backgroundSize: 'cover' }}></div>
-                {/* <br/> */}
 
                 {/* 이벤트 캘린더 이미지 */}
                 <div style={{ height: '404px', width: '1200px', background: `url(${calendarGif}) no-repeat center`, backgroundSize: 'cover' }}></div>
-                {/* <br/> */}
 
                 {/* 사료 추천 */}
                 <div style={{ ...Box, height: '1050px' }} className='maintopbox'>
