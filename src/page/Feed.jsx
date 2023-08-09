@@ -83,7 +83,7 @@ const Feed = () => {
     marginRight: '30px',
     backgroundColor: isResetActive ? '#FFC9C9' : '#F0F0F0',
     color: 'black',
-    fontSize: '15px',
+    fontSize: '20px',
     border: 'none', // 기본 테두리 제거
     boxShadow: 'none', // 기본 박스 쉐도우 제거
     outline: 'none', // 포커스 테두리 제거
@@ -93,10 +93,9 @@ const Feed = () => {
   const searchButtonStyle = {
     width: '100px',
     height: '40px',
-    // marginRight: '80px',
     backgroundColor: isSearchActive ? '#FFC9C9' : '#F0F0F0',
     color: 'black',
-    fontSize: '15px',
+    fontSize: '20px',
     border: 'none', // 기본 테두리 제거
     boxShadow: 'none', // 기본 박스 쉐도우 제거
     outline: 'none', // 포커스 테두리 제거
@@ -115,11 +114,11 @@ const Feed = () => {
     backgroundColor: selectedCategories.includes(category) ? '#FFC9C9' : '#F0F0F0',
     color: 'black',
     border: 'none',
-    fontSize: '15px',
+    fontSize: '20px',
     width: '90px',
     height: '40px',
     marginBottom: '10px',
-    marginLeft: '110px',
+    marginLeft: '100px',
     marginRight: '-80px',
   });
 
@@ -128,11 +127,11 @@ const Feed = () => {
     backgroundColor: selectedTypes.includes(type) ? '#FFC9C9' : '#F0F0F0',
     color: 'black',
     border: 'none',
-    fontSize: '15px',
+    fontSize: '20px',
     width: '90px',
     height: '40px',
     marginBottom: '10px',
-    marginLeft: '105px',
+    marginLeft: '93px',
     marginRight: '-75px',
   });
 
@@ -141,18 +140,18 @@ const Feed = () => {
     backgroundColor: selectedNutrients.includes(nutrient) ? '#FFC9C9' : '#F0F0F0',
     color: 'black',
     border: 'none',
-    fontSize: '15px',
+    fontSize: '20px',
     width: '90px',
     height: '40px',
     marginBottom: '10px',
-    marginLeft: '110px',
+    marginLeft: '100px',
     marginRight: '-80px',
   });
 
   const strongStyle = {
-    fontSize: '16px',
-    marginLeft: '40px',
-    padding: '10px'
+    fontSize: '25px',
+    marginLeft: '50px',
+    padding: '5px'
   }
 
   // ---------------------------------------- 사료 추천 박스 --------------------------------------------------
@@ -231,7 +230,7 @@ const Feed = () => {
       <Logo />
 
       {/* 사료 정보 선택 div */}
-      <div style={{ margin: '20px auto', width: '1200px', height: '330px', backgroundColor: 'white', marginBottom: '50px', borderRadius: '20px', padding: '60px 90px 40px 50px', textAlign: 'center', fontSize: '19px', fontWeight: 'bold', position: 'relative' }}>
+      <div style={{ margin: '20px auto', width: '1200px', height: '330px', backgroundColor: 'white', marginBottom: '70px', borderRadius: '20px', padding: '60px 90px 40px 50px', textAlign: 'center', fontSize: '19px', fontWeight: 'bold', position: 'relative' }}>
         <div style={{ display: 'flex', marginBottom: '10px' }}>
           <strong style={strongStyle}>구 분</strong>
           {categories.map((category, index) => (
@@ -287,7 +286,7 @@ const Feed = () => {
             검색하기
           </Button>
         </div>
-        <strong style={{ color: 'black', fontSize: '20px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>237개의 사료 추천</strong>
+        <strong style={{ color: 'black', fontSize: '25px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>237개의 사료 추천</strong>
       </div>
 
       {/* 사료 추천 박스 컨테이너 */}

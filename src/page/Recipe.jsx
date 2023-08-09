@@ -47,7 +47,7 @@ const Recipe = () => {
     backgroundColor: '#F0F0F0',
     color: 'black',
     border: 'none',
-    fontSize: '15px',
+    fontSize: '19px',
     width: '90px',
     height: '40px',
     marginBottom: '10px',
@@ -169,20 +169,20 @@ const Recipe = () => {
     <div style={{ backgroundColor: '#F0F0F0' }}>
       <Logo />
 
-      <div style={{ margin: '20px auto', width: '1200px', backgroundColor: 'white', marginBottom: '50px', borderRadius: '20px', padding: '20px', textAlign: 'center', fontSize: '19px', fontWeight: 'bold', position: 'relative' }}>
-        <p style={{ color: 'black', fontSize: '17px', margin: '10px', marginBottom: '25px' }}>재료를 선택해 주세요</p>
+      <div style={{ margin: '20px auto', width: '1200px', backgroundColor: 'white', marginBottom: '70px', borderRadius: '20px', padding: '20px', textAlign: 'center', fontSize: '19px', fontWeight: 'bold', position: 'relative' }}>
+        <p style={{ color: 'black', fontSize: '20px', margin: '10px', marginBottom: '30px' }}>재료를 선택해 주세요</p>
 
         {ingredientsRows}
 
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
-          <Button variant="light" style={{ ...ingredientButtonStyle, marginRight: '20px', backgroundColor: '#F0F0F0', color: 'black', width: '100px' }}>
+          <Button variant="light" className='btnClass' style={{ ...ingredientButtonStyle, marginRight: '20px', backgroundColor: '#F0F0F0', color: 'black', width: '100px' }}>
             초기화
           </Button>
           <Button variant="primary" style={{ ...ingredientButtonStyle, marginRight: '100px', backgroundColor: '#F0F0F0', color: 'black', width: '100px' }}>
             검색하기
           </Button>
         </div>
-        <strong style={{ color: 'black', fontSize: '20px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>627개의 간식 레시피 추천</strong>
+        <strong style={{ color: 'black', fontSize: '25px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>627개의 간식 레시피 추천</strong>
       </div>
 
       {/* 레시피 추천 박스 컨테이너 */}
