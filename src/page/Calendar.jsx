@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Logo from './Logo'
-import {format, addMonths, subMonths, lastDayOfDecade } from 'date-fns';
+import {format, addMonths, subMonths} from 'date-fns';
 import {startOfMonth, endOfMonth, startOfWeek, endOfWeek} from 'date-fns';
 import {isSameMonth, isSameDay, addDays, parse} from 'date-fns';
 import '../calendar.css';
@@ -16,7 +16,6 @@ import stamp4_1 from '../stamp/stamp4_click.png'
 
 // 랜덤 운동 목록
 const ExerciseContent = ({challengeCompleted, setChallengeCompleted}) => {
-  // const[challengeCompleted, setChallengeCompleted] = useState(false);
   const dogExercises = [
     "산책 15분하기",
     "산책 20분하기",
@@ -28,7 +27,10 @@ const ExerciseContent = ({challengeCompleted, setChallengeCompleted}) => {
   const randomExercise = dogExercises[Math.floor(Math.random()*dogExercises.length)];
 
   const handleChallengeComplete = () =>{
-    setChallengeCompleted(true);
+    if(!challengeCompleted){
+      setChallengeCompleted(true);
+
+    }
   }
 
   return(
@@ -48,7 +50,7 @@ const ExerciseContent = ({challengeCompleted, setChallengeCompleted}) => {
 };
 
 // Stamp선택
-const Stamp = ({challengeCompleted, selectedDate,stamps, setStamps})=>{
+const Stamp = ({challengeCompleted, selectedDate,stamps, setStamps, setChallengeCompleted})=>{
   // 선택된 이미지를 인덱스에 저장
   const[selectedImageIndex,setSelectedImageIndex] = useState(-1);
   // const[stamps, setStamps] = useState([])
@@ -63,7 +65,9 @@ const Stamp = ({challengeCompleted, selectedDate,stamps, setStamps})=>{
   // 이미지 클릭 시 인덱스 변경
   const handleImageClick = (index) => {
     if(challengeCompleted){
+      if(selectedImageIndex !== index){
       setSelectedImageIndex(index);
+      }
     }
   }
 
@@ -72,7 +76,7 @@ const Stamp = ({challengeCompleted, selectedDate,stamps, setStamps})=>{
       const stampDate = format(selectedDate, 'yyyy-MM-dd');
       const newStamps = [...stamps];
       const stampIndex = newStamps.findIndex(
-        (stamp) => isSameDay(parse(stamp.date), selectedDate)
+        (stamp) => isSameDay(parse(stamp.date, 'yyyy-MM-dd', new Date()), selectedDate)
       );
       if (stampIndex !== -1) {
         newStamps[stampIndex].imageIndex = selectedImageIndex;
@@ -80,9 +84,15 @@ const Stamp = ({challengeCompleted, selectedDate,stamps, setStamps})=>{
         newStamps.push({ date: stampDate, imageIndex: selectedImageIndex });
       }
       setStamps(newStamps);
+      
+    
   
       // 이미지 선택 초기화
       setSelectedImageIndex(-1);
+
+      // 챌린지 완료 상태를 false로 변경
+      // setChallengeCompleted(false);
+    
     }
   };
 
@@ -95,7 +105,7 @@ const Stamp = ({challengeCompleted, selectedDate,stamps, setStamps})=>{
           <img
             key={index}
             src={selectedImageIndex === index ? image.clicked : image.normal}
-            className='stamp-image'
+            className={`stamp-image ${!challengeCompleted ? 'disabled' : ''}`}
             width='120px'
             onClick={()=> handleImageClick(index)}>
           </img>
@@ -284,7 +294,8 @@ export const Calendar = () => {
               challengeCompleted={challengeCompleted}
               selectedDate={selectedDate}
               stamps={stamps}
-              setStamps={setStamps}/>
+              setStamps={setStamps}
+              setChallengeCompleted={setChallengeCompleted}/>
           </div>
         </div>
       </div>
