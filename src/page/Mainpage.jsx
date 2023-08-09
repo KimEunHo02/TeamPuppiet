@@ -15,7 +15,7 @@ const Mainpage = () => {
 
     const textstyle = {
         fontWeight: 'bold',
-        fontSize: '18px',
+        fontSize: '23px',
     };
 
     const Box = {
@@ -30,6 +30,12 @@ const Mainpage = () => {
         height: '200px',
         backgroundColor: '#F0F0F0',
     }
+
+    const imageStyle = {
+        width: '100%',
+        height: 'auto',
+        maxHeight: '100%'
+      };
 
 
     // 로그인하지 않은 상태이므로 메뉴바 눌렀을 때 로그인 페이지로 이동하게 설정
@@ -55,16 +61,20 @@ const Mainpage = () => {
 
                     {/* 텍스트 이미지 */}
                     <div>
-                        <h1 style={{ fontSize: '40px', color: 'black' }} className='puppiettxt'>PUPPIET</h1>
+                        <h1 className='puppiettxt'>PUPPIET</h1>
                     </div>
 
                     {/* 이미지 */}
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div 
+                    style={{marginRight: '94px' }}
+                    >
                         <Link to='/'>
-                            <img className='logo' src={picSrc} width='150px' alt="Logo"></img>
+                            <img className='logo' 
+                            src={picSrc} 
+                             alt="Logo"></img>
                         </Link>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <div>
                         <Link to="/login" style={{ marginRight: '30px' }} className='maintext'>로그인</Link>
                         <Link to="/signup" style={{ marginRight: '30px' }} className='maintext'>회원가입</Link>
                     </div>
@@ -95,10 +105,16 @@ const Mainpage = () => {
 
                 {/* 이벤트 캘린더 이미지 */}
                 <div style={{ height: '404px', width: '1200px', background: `url(${calendarGif}) no-repeat center`, backgroundSize: 'cover' }}></div>
-
+                
                 {/* 사료 추천 */}
-                <div style={{ ...Box, height: '1050px' }} className='maintopbox'>
-                    <a style={{ ...textstyle, margin: '50px' }} className='mainboxcontent'>사료 Top 10</a>
+                <div style={{ ...Box, height: '900px'}}>
+                    <br/>
+                    <br/>
+                    {/* 사료 추천 텍스트, 더보기 */}
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: '50px' }}>
+                        <a style={textstyle} className='mainboxcontent'>🍖 사료 추천 🍖</a>
+                        <Link to={'/recipe'} className='more'>▷ 더보기</Link> 
+                    </div>
 
                     <div style={{
                         display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
@@ -106,65 +122,69 @@ const Mainpage = () => {
                     }}
                         className='mainboxcontainer'>
                         <div style={imgbox} className='mainboxcontent'>
-                            <div className='imgboxcontent'>
-                                제품명
-                            </div>
+                           <img src='\img\사료.jpg' alt = '사료 임시 사진' style={imageStyle}/>
+                            사료1
                         </div>
+                        
                         <div style={imgbox} className='mainboxcontent'>
-                            <div className='imgboxcontent'>
-                                제품명
-                            </div>
+                           <img src='\img\사료.jpg' alt = '사료 임시 사진' style={imageStyle}/>
+                            사료2
                         </div>
+
                         <div style={imgbox} className='mainboxcontent'>
-                            <div className='imgboxcontent'>
-                                제품명
-                            </div>
+                           <img src='\img\사료.jpg' alt = '사료 임시 사진' style={imageStyle}/>
+                            사료3
                         </div>
+
                         <div style={imgbox} className='mainboxcontent'>
-                            <div className='imgboxcontent'>
-                                제품명
-                            </div>
+                           <img src='\img\사료.jpg' alt = '사료 임시 사진' style={imageStyle}/>
+                            사료4
                         </div>
+
                         <div style={imgbox} className='mainboxcontent'>
-                            <div className='imgboxcontent'>
-                                제품명
-                            </div>
+                           <img src='\img\사료.jpg' alt = '사료 임시 사진' style={imageStyle}/>
+                            사료5
                         </div>
                     </div>
 
+                    <br/>
 
                     {/* 간식 레시피 추천 */}
-                    <a style={{ ...textstyle, margin: '50px' }} className='mainboxcontent'>간식 레시피 Top 10</a>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: '50px' }}>
+                        <a style={textstyle} className='mainboxcontent'>🦴 간식 레시피 🦴</a>
+                        <Link to={'/recipe'} className='more'>▷ 더보기</Link> 
+                    </div>
 
                     <div style={{
                         display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
                         margin: '60px'
                     }}
                         className='mainboxcontainer'>
+
+
                         <div style={imgbox} className='mainboxcontent'>
-                            <div className='imgboxcontent'>
-                                레시피명
-                            </div>
+                           <img src='\img\간식.jpg' alt = '간식 임시 사진' style={imageStyle}/>
+                            간식1
                         </div>
+
                         <div style={imgbox} className='mainboxcontent'>
-                            <div className='imgboxcontent'>
-                                레시피명
-                            </div>
+                           <img src='\img\간식.jpg' alt = '간식 임시 사진' style={imageStyle}/>
+                            간식2
                         </div>
+
                         <div style={imgbox} className='mainboxcontent'>
-                            <div className='imgboxcontent'>
-                                레시피명
-                            </div>
+                           <img src='\img\간식.jpg' alt = '간식 임시 사진' style={imageStyle}/>
+                            간식3
                         </div>
+
                         <div style={imgbox} className='mainboxcontent'>
-                            <div className='imgboxcontent'>
-                                레시피명
-                            </div>
+                           <img src='\img\간식.jpg' alt = '간식 임시 사진' style={imageStyle}/>
+                            간식4
                         </div>
+
                         <div style={imgbox} className='mainboxcontent'>
-                            <div className='imgboxcontent'>
-                                레시피명
-                            </div>
+                           <img src='\img\간식.jpg' alt = '간식 임시 사진' style={imageStyle}/>
+                            간식5
                         </div>
                     </div>
 
