@@ -22,7 +22,7 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
         <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
             <img src={genderImage} style={{ width: '20px', marginRight: '10px', marginLeft: '100px' }} alt="Icon" />
             <p style={{ marginTop: '20px', marginLeft: '22px' }}>성</p><p style={{ marginTop: '20px' }}>별</p>
-            <div className='custom-box'>
+            <div className='custom-box' style={{width: '300px'}}>
                 <div className="custom-input-box d-flex" style={{ width: '200px', marginLeft: '100px', display: 'flex' }}>
                     {/* "남성" 버튼 */}
                     <Button
@@ -66,7 +66,7 @@ const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
     return (
         <div className="d-flex align-items-center" style={{ marginTop: '8px', marginBottom: '8px' }}>
             <img src={neuteredImage} style={{ width: '23px', marginTop: '19px', marginLeft: '100px' }} alt="Icon" />
-            <div className='custom-box' style={{width: '320px'}}>
+            <div className='custom-box' style={{width: '310px'}}>
                 <div className="custom-input-box" style={{ width: '400px', marginTop: '10px' }}>
                     <a style={{ marginTop: '13px', marginLeft: '15px' }}>중성화</a>
                     <Button
