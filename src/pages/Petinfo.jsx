@@ -22,7 +22,7 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
         <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
             <img src={genderImage} style={{ width: '20px', marginRight: '10px', marginLeft: '100px' }} alt="Icon" />
             <p style={{ marginTop: '20px', marginLeft: '22px' }}>성</p><p style={{ marginTop: '20px' }}>별</p>
-            <div className='custom-box'>
+            <div className='custom-box' style={{width: '300px'}}>
                 <div className="custom-input-box d-flex" style={{ width: '200px', marginLeft: '100px', display: 'flex' }}>
                     {/* "남성" 버튼 */}
                     <Button
@@ -30,7 +30,7 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
                         style={{
                             backgroundColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
                             borderColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
-                            color: 'gray',
+                            color: 'black',
                             width: '60px',
                             height: '40px',
                             marginRight: '35px',
@@ -46,7 +46,7 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
                         style={{
                             backgroundColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
                             borderColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
-                            color: 'gray',
+                            color: 'black',
                             width: '60px',
                             height: '40px',
                             marginRight: '10px', // 간격을 조절하여 가로로 나열
@@ -66,7 +66,7 @@ const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
     return (
         <div className="d-flex align-items-center" style={{ marginTop: '8px', marginBottom: '8px' }}>
             <img src={neuteredImage} style={{ width: '23px', marginTop: '19px', marginLeft: '100px' }} alt="Icon" />
-            <div className='custom-box'>
+            <div className='custom-box' style={{width: '310px'}}>
                 <div className="custom-input-box" style={{ width: '400px', marginTop: '10px' }}>
                     <a style={{ marginTop: '13px', marginLeft: '15px' }}>중성화</a>
                     <Button
@@ -74,10 +74,10 @@ const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
                         style={{
                             backgroundColor: selectedNeutered === "O" ? '#F6E781' : '#F0F0F0',
                             borderColor: selectedNeutered === "O" ? '#F6E781' : '#F0F0F0',
-                            color: 'gray',
+                            color: 'black',
                             width: '60px',
                             height: '40px',
-                            margin: '-10px 50px -10px 31px',
+                            margin: '-10px 50px -10px 33px',
                         }}
                         onClick={() => handleNeuteredButtonClick("O")}
                     >
@@ -89,7 +89,7 @@ const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
                         style={{
                             backgroundColor: selectedNeutered === "X" ? '#F6E781' : '#F0F0F0',
                             borderColor: selectedNeutered === "X" ? '#F6E781' : '#F0F0F0',
-                            color: 'gray',
+                            color: 'black',
                             width: '60px',
                             height: '40px',
                             margin: '21px 50px 20px -20px',
@@ -114,7 +114,9 @@ const Petinfo = () => {
         padding: '20px',
         width: '600px',
         height: '600px',
-        backgroundColor: 'white',
+        backgroundImage: `url('/img/빼꼼.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         marginBottom: '100px',
         borderRadius: '20px',
     }
@@ -282,7 +284,7 @@ const Petinfo = () => {
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px' }}>
                         <Link to="/signup">
                             <Button variant='primary' style={{
-                                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+                                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'black',
                                 width: '160px', height: '50px', margin: '0 50px'
                             }}>
                                 이전
@@ -294,12 +296,12 @@ const Petinfo = () => {
                         <Button
                             variant='primary'
                             style={{
-                                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+                                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'black',
                                 width: '160px', height: '50px', margin: '0 50px',
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                             }}
                             disabled={!areAllFieldsFilled()}
-                            onClick={() => { nav('/main2'); }}
+                            onClick={() => { nav('/'); }}
                             >
                             <p style={{marginTop: '15px'}}>완</p><p style={{marginTop: '15px'}}>료</p>
                         </Button>

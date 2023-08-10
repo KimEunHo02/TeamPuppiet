@@ -15,7 +15,9 @@ const Login = () => {
     margin: '0 auto',
     width: '600px',
     height: '600px',
-    backgroundColor: 'white',
+    backgroundImage: `url('/img/로그인배경.png')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
     marginBottom: '100px',
     borderRadius: '20px',
     padding: '20px',
@@ -36,6 +38,7 @@ const Login = () => {
     console.log('handle Login Function', idRef.current.value, pwRef.current.value);
     if (idRef.current.value === 'puppiet' && pwRef.current.value === '1234') {
       sessionStorage.setItem('userId', idRef.current.value); // sessionStorage에 로그인 데이터 저장
+      alert(idRef.current.value + '님 환영합니다!');
       nav('/main2');
 
     } else {
@@ -92,8 +95,8 @@ const Login = () => {
 
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '70px' }}>
               <Button variant='primary' type='submit' style={{
-                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
-                width: '300px', height: '60px'
+                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'black',
+                width: '300px', height: '60px', fontSize: '20px'
               }}>
                 로그인
               </Button>
