@@ -266,7 +266,7 @@ export const Calendar = () => {
   return (
     <div>
       <Logo/>
-      <div id='area' style={{width:'1920px', height:'850px'}}>
+      <div id='area' style={{width:'1920px', height:'950px'}}>
         <div className='explanation'>
           <p style={{marginTop:'18px'}}>① 오늘의 운동은 하루에 한 번 초기화 됩니다!</p>
           <p>② 챌린지 완료 버튼을 누르면 스탬프를 선택할 수 있어요!</p>
