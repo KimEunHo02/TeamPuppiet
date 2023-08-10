@@ -69,24 +69,6 @@
 
 }
 
-/* FindId 페이지 타이틀 */
-/* .findTitle{
-    font-size: 26px;
-    padding: 20px;
-    text-decoration: none;
-    font-weight: bold;
-    color: black;
-    text-decoration: underline;
-    
-}
-
-.hideTitle{
-    font-size: 26px;
-    padding: 20px;
-    text-decoration: none;
-    color: gray;
-} */
-
 .maingraybox{
     text-align: center;
     display: flex;
@@ -98,6 +80,7 @@
     text-decoration: none;
     color: black;
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .imgboxcontent{
@@ -111,11 +94,27 @@
     text-decoration: none;
     color: rgb(98, 98, 98);
     margin-right: 50px;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 
 /* 전체 폰트 적용 */
 *{
     font-family: 'KyoboHand';
+}
+
+.foodtext{
+    font-size: 22px;
+    text-decoration: none;
+    color: black;
+}
+
+.foodbox{
+    border: 1px solid lightgray;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
