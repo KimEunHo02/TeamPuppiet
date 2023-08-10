@@ -10,34 +10,41 @@ import iconImage from '../icon/name.png'
 import pwImage from '../icon/password.png'
 
 // firebase login 정보 -- 정희석
-import {auth} from "../firebase"
+import { signINWithEmailAndPassword } from 'firebase/auth';
+import {auth} from "../config/firebase"
+import { useState } from 'react';
+import { set } from 'core-js/core/dict';
 
 
 const Login = () => {
+  
+  const box1 = {
+    margin: '0 auto',
+    width: '600px',
+    height: '600px',
+    backgroundColor: 'white',
+    marginBottom: '100px',
+    borderRadius: '20px',
+    padding: '20px',
+    textAlign: 'center',
+    fontSize: '19px',
+    fontWeight: 'bold',
+  }
+  
+  
   // 로그인
-  const Login = () => {
+  
     const [error, setError] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-      // 로그인 기능 함수
-  const handleLogin = (e) => {
-    e.preventDefault();
+    const navitage = useNavigate()
 
-    // firebase 영상 추가 작업 내용
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      // ...
-     })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-     });
-  }
-}
+  // // 로그인 버튼 구현 - 유민
+  // const idRef = useRef(); // 사용자 아이디
+  // const pwRef = useRef(); // 사용자 비번
+  // const nav = useNavigate();
+
   // 로그인 기능 함수
   const handleLogin = (e) => {
     e.preventDefault();
@@ -47,9 +54,11 @@ const Login = () => {
       .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
+      navitage('/main2')
       // ...
      })
     .catch((error) => {
+      setError(true)
       const errorCode = error.code;
       const errorMessage = error.message;
       // ..
@@ -98,7 +107,7 @@ const Login = () => {
               <Form.Label></Form.Label>
               <div className="d-flex align-items-center">
                 <img src={iconImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-                <Form.Control type="text" placeholder="아이디" ref={idRef} className="custom-input" /> </div>
+                <Form.Control type="email" placeholder="아이디" ref={idRef} className="custom-input" onChange={e=>setEmail(e.target.value)}/> </div>  {/*type=email로 변경  onChange추가*/}
 
 
             </Form.Group>
@@ -107,7 +116,7 @@ const Login = () => {
               <Form.Label></Form.Label>
               <div className="d-flex align-items-center">
                 <img src={pwImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-                <Form.Control type='password' placeholder='비밀번호' ref={pwRef} className="custom-input" /> </div>
+                <Form.Control type='password' placeholder='비밀번호' ref={pwRef} className="custom-input" onChange={e=>setPassword(e.target.value)}/> </div> {/*onChange추가*/}
             </Form.Group>
 
             {/* 로그인 버튼 */}
