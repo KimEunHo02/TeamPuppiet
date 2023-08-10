@@ -31,10 +31,11 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
             style={{
               backgroundColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
               borderColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
-              color: 'gray',
+              color: 'black',
               width: '60px',
               height: '40px',
               marginRight: '10px', // 간격을 조절하여 가로로 나열
+              marginLeft: '12px'
             }}
             onClick={() => handleGenderButtonClick("남성")}
           >
@@ -46,7 +47,7 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
             style={{
               backgroundColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
               borderColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
-              color: 'gray',
+              color: 'black',
               width: '60px',
               height: '40px',
               marginRight: '10px', // 간격을 조절하여 가로로 나열
@@ -264,8 +265,8 @@ const Signup = () => {
                 />
                 {/* 중복확인 버튼 */}
                 <Button variant='primary' style={{
-                  marginLeft: '25px', backgroundColor: '#FFC9C9',
-                  borderColor: '#FFC9C9', color: 'gray'
+                  marginLeft: '20px', backgroundColor: '#FFC9C9',
+                  borderColor: '#FFC9C9', color: 'black', width: '110px'
                 }}>
                   중복 확인
                 </Button>
@@ -394,7 +395,7 @@ const Signup = () => {
             <Button variant="outline-dark"
               disabled={!isNextButtonEnabled} onClick={() => { nav('/petinfo') }}
               style={{
-                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'black',
                 width: '300px', height: '60px'
               }}>
               다음</Button>

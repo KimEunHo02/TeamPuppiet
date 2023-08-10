@@ -30,7 +30,7 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
                         style={{
                             backgroundColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
                             borderColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
-                            color: 'gray',
+                            color: 'black',
                             width: '60px',
                             height: '40px',
                             marginRight: '35px',
@@ -46,7 +46,7 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
                         style={{
                             backgroundColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
                             borderColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
-                            color: 'gray',
+                            color: 'black',
                             width: '60px',
                             height: '40px',
                             marginRight: '10px', // 간격을 조절하여 가로로 나열
@@ -74,7 +74,7 @@ const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
                         style={{
                             backgroundColor: selectedNeutered === "O" ? '#F6E781' : '#F0F0F0',
                             borderColor: selectedNeutered === "O" ? '#F6E781' : '#F0F0F0',
-                            color: 'gray',
+                            color: 'black',
                             width: '60px',
                             height: '40px',
                             margin: '-10px 50px -10px 31px',
@@ -89,7 +89,7 @@ const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
                         style={{
                             backgroundColor: selectedNeutered === "X" ? '#F6E781' : '#F0F0F0',
                             borderColor: selectedNeutered === "X" ? '#F6E781' : '#F0F0F0',
-                            color: 'gray',
+                            color: 'black',
                             width: '60px',
                             height: '40px',
                             margin: '21px 50px 20px -20px',
@@ -282,7 +282,7 @@ const Petinfo = () => {
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px' }}>
                         <Link to="/signup">
                             <Button variant='primary' style={{
-                                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+                                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'black',
                                 width: '160px', height: '50px', margin: '0 50px'
                             }}>
                                 이전
@@ -294,7 +294,7 @@ const Petinfo = () => {
                         <Button
                             variant='primary'
                             style={{
-                                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
+                                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'black',
                                 width: '160px', height: '50px', margin: '0 50px',
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                             }}
