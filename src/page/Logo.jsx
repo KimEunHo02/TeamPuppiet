@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import picSrc from '../img/logo_name(x).png'
-import logotext from '../img/logo_name.png'
 
 const Logo = () => {
     return (

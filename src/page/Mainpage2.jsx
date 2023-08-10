@@ -76,7 +76,7 @@ const Mainpage2 = ({ mainArr }) => {
   };
 
   return (
-    <div style={{ marginBottom: '30px' }}>
+    <div style={{ marginBottom: '30px', backgroundColor: '#F0F0F0' }}>
       <Logo />
 
       {/* 다이어트 정보 표시 영역 */}

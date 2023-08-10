@@ -264,7 +264,7 @@ export const Calendar = () => {
   }
   
   return (
-    <div>
+    <div style={{backgroundColor: '#F0F0F0'}}>
       <Logo/>
       <div id='area' style={{width:'1920px', height:'950px'}}>
         <div className='explanation'>
