@@ -20,7 +20,7 @@ const ImageDetail = () => {
 
           {/* 레시피 이름 */}
           <div style={{marginTop: '40px'}}>
-            <h3 style={{backgroundColor: '#FFC9C9', width: '160px', margin: 'auto', borderRadius: '20px', marginBottom: '10px'}}>레시피 이름</h3><br/>
+            <h3 style={{backgroundColor: '#FFC9C9', width: '400px', margin: 'auto', borderRadius: '20px', marginBottom: '10px'}}>레시피 이름</h3><br/>
           </div>
         </div>
   
@@ -30,14 +30,14 @@ const ImageDetail = () => {
 
           {/* 레시피 재료 */}
           <div style={{marginBottom: '50px'}}>
-            <h3 style={{backgroundColor: '#FFC9C9', width: '160px', margin: 'auto', borderRadius: '20px', marginBottom: '10px'}}>레시피 재료</h3><br/>
+            <h3 style={{backgroundColor: '#FFC9C9', width: '240px', margin: 'auto', borderRadius: '20px', marginBottom: '10px'}}>🍽️ 레시피 재료 🍽️</h3><br/>
             <p>레시피 재료들 들어가야 합니다 요기에~</p>
           </div>
 
           {/* 레시피 조리 순서 */}
           <div>
             {/* p 태그로 감싸던지 br로 나누던지 해야함 */}
-            <h3 style={{backgroundColor: '#FFC9C9', width: '200px', margin: 'auto', borderRadius: '20px', marginBottom: '20px'}}>레시피 조리 순서</h3>
+            <h3 style={{backgroundColor: '#FFC9C9', width: '240px', margin: 'auto', borderRadius: '20px', marginBottom: '20px'}}>레시피 조리 순서</h3>
             <p>1. 어쩌고 저쩌고 한다</p>
             <p>2. 저쩌고 저쩌고 저쩌고 한다</p>
             <p>3. 어쩌고 저쩌고 어쩌고 저쩌고 한다</p>
