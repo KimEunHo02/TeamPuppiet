@@ -1,10 +1,10 @@
-// firebase 연동 -- 정희석
+// firebase 연동 - 정희석
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
-
+// SDK 설정 - 정희석
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  apiKey: "AIzaSyC6Tx6JUBz4zqGNIBG-P_4ovjG29vt8Io0",
   authDomain: "puppiet.firebaseapp.com",
   projectId: "puppiet",
   storageBucket: "puppiet.appspot.com",
@@ -14,7 +14,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app)
-const analytics = getAnalytics(app);
-export default app;
+const firebaseApp = initializeApp(firebaseConfig);
+const firebaseAuth = getAuth(firebaseApp);
+const analytics = getAnalytics(firebaseApp);
+
+// 꼭 이렇게 해야하는 건 아니니까 편한대로 해당 스크립트에서 import해서 사용해도 된다 - 정희석
+export { firebaseAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword };
+export default firebaseApp;

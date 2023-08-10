@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react'; //useState 추가 - 정희석
 import { Link, useNavigate } from 'react-router-dom';
 import picSrc from '../img/PUPPIET_logo.png';
 import Form from 'react-bootstrap/Form';
@@ -8,6 +8,8 @@ import '../input.css';
 
 import iconImage from '../icon/name.png'
 import pwImage from '../icon/password.png'
+
+import {auth} from "../config/firebase" // firebase login 정보 추가 - 정희석
 
 const Login = () => {
 
@@ -35,6 +37,9 @@ const Login = () => {
   // 로그인 기능 함수
   const handleLogin = (e) => {
     e.preventDefault();
+
+    
+
     console.log('handle Login Function', idRef.current.value, pwRef.current.value);
     if (idRef.current.value === 'puppiet' && pwRef.current.value === '1234') {
       sessionStorage.setItem('userId', idRef.current.value); // sessionStorage에 로그인 데이터 저장

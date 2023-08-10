@@ -7,15 +7,15 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import Recipe from './page/Recipe';
 import ImageDetail from './page/ImageDetail';
-import { AuthContextProvider } from './context/AuthContextProvider';
+//import { AuthContextProvider } from './context/AuthContextProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <AuthContextProvider>
+    //<AuthContextProvider>
         <BrowserRouter>
             <Main />
         </BrowserRouter>
-    </AuthContextProvider>
+    //</AuthContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

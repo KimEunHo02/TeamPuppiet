@@ -17,8 +17,15 @@ import genderImage from '../icon/gender.png'
 
 import './Signup.css';
 
+// firebase 회원가입 - 정희석
+import { firebaseAuth , createUserWithEmailAndPassword } from "../config/firebase";
+
+// `회원가입` 버튼의 onClick에 할당
+
+
 // GenderSelection 컴포넌트 정의 (남, 여 선택 버튼)
 const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
+  
   return (
     <div className="d-flex align-items-center" style={{ marginTop: '10px' }}>
       <img src={genderImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
@@ -221,6 +228,20 @@ const Signup = () => {
   console.log('isNextButtonEnabled:', isNextButtonEnabled);
 
 
+  const register = async () => {
+    try {
+      const createdUser = await createUserWithEmailAndPassword(firebaseAuth, formData.username, formData.password);
+      console.log(createdUser);
+      // 테스트후 이상하면 다시 복구
+      // setRegisterEmail("");
+      // setRegisterPassword("");
+      nav('/petinfo')
+    }catch(err){
+      console.log(err.code);
+    }
+  }
+
+
 
   return (
     <div>
@@ -393,7 +414,7 @@ const Signup = () => {
 
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
             <Button variant="outline-dark"
-              disabled={!isNextButtonEnabled} onClick={() => { nav('/petinfo') }}
+              disabled={!isNextButtonEnabled} onClick={() => { register() }}
               style={{
                 backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'black',
                 width: '300px', height: '60px'
@@ -403,6 +424,8 @@ const Signup = () => {
 
         </div>
         {/* 박스 div */}
+        
+        
 
       </div>
     </div>
