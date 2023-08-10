@@ -299,7 +299,7 @@ const Petinfo = () => {
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                             }}
                             disabled={!areAllFieldsFilled()}
-                            onClick={() => { nav('/main2'); }}
+                            onClick={() => { nav('/'); }}
                             >
                             <p style={{marginTop: '15px'}}>완</p><p style={{marginTop: '15px'}}>료</p>
                         </Button>
