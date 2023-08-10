@@ -271,7 +271,7 @@ export const Calendar = () => {
           <p style={{marginTop:'18px'}}>① 오늘의 운동은 하루에 한 번 초기화 됩니다!</p>
           <p>② 챌린지 완료 버튼을 누르면 스탬프를 선택할 수 있어요!</p>
           <p>③ 스탬프찍기 버튼을 누르면 오늘 날짜에 스탬프가 올라가요</p>
-          <p>④ 스탬프를 20개 모았을때 알려드려요! 반려견에게 수고했다는 보상을 선물해주세요</p>
+          <p>④ 스탬프를 20개 모았을 때 알려드려요! 반려견에게 수고했다는 보상을 선물해 주세요</p>
         </div>
         <div className='calender_container'>
           <div className='calendar'>
