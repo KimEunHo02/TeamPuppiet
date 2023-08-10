@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import '../ImageSlider.css'; // 스타일링을 위한 CSS 파일
 
+// Mainpage1에서 이미지 슬라이더에 쓰이는 컴포넌트 공간입니다
+// 사료 이미지 슬라이더
+
 const ImageSlider = ({ images }) => {
   const [startIndex, setStartIndex] = useState(0);
 
@@ -28,7 +31,7 @@ const ImageSlider = ({ images }) => {
           <div key={index} className="foodbox">
             <img src={image} alt={`Image ${startIndex + index + 1}`} />
 
-            {/* 제품명 들어갈 텍스트 공간 -> 데이터 넣을 시 수정 필요 */}
+            {/* 사료 제품명 들어갈 텍스트 공간 -> 데이터 넣을 시 수정 필요 */}
             <a className="foodtext">사료{startIndex + index + 1}</a>
           </div>
         ))}

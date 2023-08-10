@@ -92,8 +92,8 @@ const Login = () => {
 
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '70px' }}>
               <Button variant='primary' type='submit' style={{
-                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'gray',
-                width: '300px', height: '60px'
+                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'black',
+                width: '300px', height: '60px', fontSize: '20px'
               }}>
                 로그인
               </Button>

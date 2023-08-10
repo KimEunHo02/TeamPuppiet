@@ -126,7 +126,7 @@ const Mainpage2 = ({ mainArr }) => {
           <br />
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: '50px' }}>
             <a style={textstyle} className='mainboxcontent'>🍖 사료 추천 🍖</a>
-            <Link to={'/recipe'} className='more'>▷ 더보기</Link>
+            <Link to={'/recipe'} className='more'>더보기 ▷ </Link>
           </div>
 
           <div style={{
@@ -134,6 +134,10 @@ const Mainpage2 = ({ mainArr }) => {
             margin: '60px'
           }}
             className='mainboxcontainer'>
+
+
+              {/* 여기서부터 사료 이미지 들어가는 공간입니다 */}
+
             <div className='foodbox'>
               <div style={imgbox} className='mainboxcontent'>
                 <img src='\img\사료.jpg' alt='사료 임시 사진' style={imageStyle} />
@@ -154,13 +158,15 @@ const Mainpage2 = ({ mainArr }) => {
                 <a className='foodtext'>사료3</a>
               </div>
             </div>
+
           </div>
+          {/* 흰색 공간 div 끝 */}
 
 
           {/* 간식 레시피 추천 */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: '50px' }}>
             <a style={textstyle} className='mainboxcontent'>🦴 간식 레시피 🦴</a>
-            <Link to={'/recipe'} className='more'>▷ 더보기</Link>
+            <Link to={'/recipe'} className='more'>더보기 ▷ </Link>
           </div>
 
           <div style={{
@@ -168,6 +174,9 @@ const Mainpage2 = ({ mainArr }) => {
             margin: '60px'
           }}
             className='mainboxcontainer'>
+
+
+              {/* 여기서부터 간식 이미지 들어가는 공간입니다 */}
 
             <div className='foodbox'>
               <div style={imgbox} className='mainboxcontent'>
