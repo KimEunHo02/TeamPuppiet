@@ -13,11 +13,8 @@ import Mypage from './page/Mypage';
 import Mypage2 from './page/Mypage2'
 
 import Signup from './pages/Signup';
-import Findpw from './pages/Findpw';
 import Login from './pages/Login';
-import FindId from './pages/FindId';
 import Petinfo from './pages/Petinfo';
-import Findpw2 from './pages/Findpw2';
 
 import ImageDetail from './page/ImageDetail';
 import ImageDetailFeed from './page/ImageDetailFeed';
@@ -65,12 +62,9 @@ const Main = () => {
                 <Route path='/recipe/*' element = {<Recipe/>}></Route>
                 <Route path='/calendar' element = {<Calendar/>}></Route>
                 <Route path='/petinfo' element = {<Petinfo/>}></Route>
-                <Route path='/findid' element = {<FindId/>}></Route>
-                <Route path='/findpw' element = {<Findpw/>}></Route>
                 <Route path='/main2' element = {<Mainpage2 mainArr={mainArr}/>}></Route>
                 <Route path='/mypage' element = {<Mypage/>}></Route>
                 <Route path='/mypage2' element = {<Mypage2/>}></Route>
-                <Route path='/findpw2' element = {<Findpw2/>}></Route>
                 <Route path='/ImageDetail/:recipeId' element={<ImageDetail/>}></Route>
                 <Route path='/ImageDetailFeed/:feedId' element={<ImageDetailFeed/>}></Route>
 
