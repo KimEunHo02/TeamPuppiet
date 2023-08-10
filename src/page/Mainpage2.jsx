@@ -126,7 +126,7 @@ const Mainpage2 = ({ mainArr }) => {
           <br />
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: '50px' }}>
             <a style={textstyle} className='mainboxcontent'>🍖 사료 추천 🍖</a>
-            <Link to={'/feed'} className='more'>더보기 ▷ </Link>
+            <Link to={'/feed'} className='more' onClick={() => window.scrollTo(0, 0)}>더보기 ▷ </Link>
           </div>
 
           <div style={{
@@ -166,7 +166,7 @@ const Mainpage2 = ({ mainArr }) => {
           {/* 간식 레시피 추천 */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: '50px' }}>
             <a style={textstyle} className='mainboxcontent'>🦴 간식 레시피 🦴</a>
-            <Link to={'/recipe'} className='more'>더보기 ▷ </Link>
+            <Link to={'/recipe'} className='more' onClick={() => window.scrollTo(0, 0)}>더보기 ▷ </Link>
           </div>
 
           <div style={{
