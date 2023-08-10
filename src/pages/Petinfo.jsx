@@ -66,7 +66,7 @@ const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
     return (
         <div className="d-flex align-items-center" style={{ marginTop: '8px', marginBottom: '8px' }}>
             <img src={neuteredImage} style={{ width: '23px', marginTop: '19px', marginLeft: '100px' }} alt="Icon" />
-            <div className='custom-box'>
+            <div className='custom-box' style={{width: '320px'}}>
                 <div className="custom-input-box" style={{ width: '400px', marginTop: '10px' }}>
                     <a style={{ marginTop: '13px', marginLeft: '15px' }}>중성화</a>
                     <Button
@@ -77,7 +77,7 @@ const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
                             color: 'black',
                             width: '60px',
                             height: '40px',
-                            margin: '-10px 50px -10px 31px',
+                            margin: '-10px 50px -10px 33px',
                         }}
                         onClick={() => handleNeuteredButtonClick("O")}
                     >
@@ -114,7 +114,9 @@ const Petinfo = () => {
         padding: '20px',
         width: '600px',
         height: '600px',
-        backgroundColor: 'white',
+        backgroundImage: `url('/img/빼꼼.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         marginBottom: '100px',
         borderRadius: '20px',
     }
