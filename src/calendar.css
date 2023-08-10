@@ -5,6 +5,22 @@
     /* background-color: yellow; */
 }
 
+.explanation{
+    margin-top: 20px;
+    margin-left: 340px;
+    width: 1230px;
+    height: 180px;
+    border-radius: 30px;
+    background-image: url('./stamp/calendar_explanation.png');
+    background-size: cover;
+
+    /* 내용 정렬 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
 .calender_container{
     /* background-color: #f0f0f0; */
     padding-top : 50px

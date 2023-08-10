@@ -17,7 +17,7 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
   return (
     <div className="d-flex align-items-center" style={{ marginTop: '20px' }}>
       <img src={genderImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-      성별
+      <a style={{marginLeft:'15px'}}>성별</a>
       <div className='custom-box'>
         <div className="custom-input-box" style={{ width: '450px', marginLeft: '-8px'}}>
           {/* "남성" 버튼 */}
@@ -30,7 +30,7 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
               width: '60px',
               height: '40px',
               margin: '-10px 50px',
-              marginLeft: '51px'
+              marginLeft: '42px'
             }}
             onClick={() => handleGenderButtonClick("남성")}
           >
@@ -155,13 +155,13 @@ const Mypage = () => {
                 <Form.Label></Form.Label>
                 <div className="d-flex align-items-center">
                   <img src={iconImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-                  <a>이름</a>
+                  <a style={{marginLeft:'15px'}}>이름</a>
                   <Form.Control
                     type="text"
                     name="name"
                     value={data.name}
                     onChange={handleChange}
-                    style={{ width: '200px', marginLeft: '52px' }}
+                    style={{ width: '200px', marginLeft: '42px' }}
                   />
                 </div>
               </Form.Group>
@@ -170,7 +170,7 @@ const Mypage = () => {
               <Form.Label htmlFor="inputBirth"></Form.Label>
               <div className="d-flex align-items-center">
                 <img src={birthImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-                <a>생년월일</a>
+                <a style={{marginLeft:'5px'}}>생년월일</a>
                 <Form.Control
                   type="text"
                   name="birth"
