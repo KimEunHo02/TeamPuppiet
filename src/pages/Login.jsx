@@ -38,6 +38,7 @@ const Login = () => {
     console.log('handle Login Function', idRef.current.value, pwRef.current.value);
     if (idRef.current.value === 'puppiet' && pwRef.current.value === '1234') {
       sessionStorage.setItem('userId', idRef.current.value); // sessionStorage에 로그인 데이터 저장
+      alert(idRef.current.value + '님 환영합니다!');
       nav('/main2');
 
     } else {
