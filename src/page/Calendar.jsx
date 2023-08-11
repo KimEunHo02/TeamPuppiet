@@ -14,7 +14,6 @@ import stamp1_1 from '../stamp/stamp1_click.png'
 import stamp2_1 from '../stamp/stamp2_click.png'
 import stamp3_1 from '../stamp/stamp3_click.png'
 import stamp4_1 from '../stamp/stamp4_click.png'
-import calendar_explanation from '../stamp/calendar_explanation.png'
 
 // 랜덤 운동 목록
 const ExerciseContent = ({challengeCompleted, setChallengeCompleted}) => {

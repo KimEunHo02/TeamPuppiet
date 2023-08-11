@@ -3,7 +3,7 @@ import Login from '../pages/Login'
 import Logo from './Logo'
 
 import door from '../main2Image/door.png'
-import kongsoon from '../main2Image/kongsoon2.png'
+import kongsoon from '../main2Image/moongmoong2.png'
 import feedicon from '../main2Image/feedicon.png'
 import exerciseicon from '../main2Image/exerciseicon.png'
 
@@ -46,7 +46,7 @@ const Mainpage2 = ({ mainArr }) => {
   }
 
   const kongsoonStyle = {
-    width: '650px',
+    width: '550PX',
     height: 'auto',
     position: 'absolute',
     marginRight: '420px',
