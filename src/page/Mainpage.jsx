@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import picSrc from '../img/logo_name(x).png'
 import '../css/Main.module.css';
 import '../css/Main.css'
-import ImageSlider from './ImageSlider';
-import SnackImageSlider from './SnackImageSlider';
+import ImageSlider from '../pages/ImageSlider';
+import SnackImageSlider from '../pages/SnackImageSlider';
 
 import dietGif from '../images/diet.gif'; // 이미지 가져오기
 import calendarGif from '../images/calendar.gif'; // 이미지 가져오기
