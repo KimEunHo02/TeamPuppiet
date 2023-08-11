@@ -90,8 +90,14 @@ const Signup = () => {
     confirmPassword: '',
     name: '',
     birth: '',
+  });
+  console.log(formData)
+
+  // Signup 페이지에서 담긴 데이터
+  const [data, setData] = useState({
     gender: '',
   });
+  console.log(data)
 
   // 폼 입력값 변경 시 호출되는 핸들러
   const handleInputChange = (event) => {
@@ -213,12 +219,6 @@ const Signup = () => {
     }));
   };
 
-  // Signup 페이지에서 담긴 데이터
-  const [data, setData] = useState({
-    name: '',
-    birth: '',
-    gender: '여성',
-  });
 
   // 유효성 검사 콘솔출력 해보기
   console.log('isFormValid:', isFormValid());
