@@ -17,7 +17,14 @@ import genderImage from '../icon/gender.png'
 import './Signup.css';
 
 // firebase 회원가입 - 정희석
-import { firebaseAuth , createUserWithEmailAndPassword } from "../config/firebase";
+// import { firebaseAuth , createUserWithEmailAndPassword } from "../config/firebase";
+
+// firestore 초기화 설정
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+
+// import { firebaseApp } from "../config/firebase"; 
+import firebaseApp, { createUserWithEmailAndPassword, firebaseAuth } from "../config/firebase";
+
 
 // `회원가입` 버튼의 onClick에 할당
 
@@ -169,18 +176,34 @@ const Signup = () => {
   };
 
   // 폼 제출 시 호출되는 함수
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     // 생년월일 유효성 검사
     if (!isBirthValid(formData.birth)) {
       alert('생년월일은 8자리 숫자로 입력해주세요.');
       return;
     }
-
+  
     if (isFormValid()) {
-      console.log('회원가입 폼 데이터:', formData);
-      // 여기에 회원가입 로직을 추가할 수 있음
+      try {
+        // Firestore에 필요한 필드만 포함하는 새 객체 생성
+        const userDataForFirestore = {
+          username: formData.username,
+          name: formData.name,
+          password: formData.password,
+          birth: formData.birth,
+          gender: data.gender, // 'data'가 선택된 성별을 저장한다고 가정
+        };
+  
+        // 새 사용자 데이터를 Firestore "users" 컬렉션에 추가
+        const docRef = await addDoc(collection(db, "users"), userDataForFirestore);
+        console.log("Document written with ID: ", docRef.id);
+  
+        nav('/petinfo'); // 회원가입 후 원하는 페이지로 이동
+      } catch (error) {
+        console.error("Error adding document: ", error);
+      }
     } else {
       alert('입력값이 유효하지 않습니다. 모든 필드를 올바르게 입력해주세요.');
     }
@@ -238,6 +261,9 @@ const Signup = () => {
       console.log(err.code);
     }
   }
+
+  // Firestore 초기화
+  const db = getFirestore(firebaseApp);
 
 
 

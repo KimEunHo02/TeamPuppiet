@@ -13,11 +13,18 @@ const firebaseConfig = {
   measurementId: "G-WJF95GGBHF"
 };
 
-// Initialize Firebase
+// // Initialize Firebase
+// const firebaseApp = initializeApp(firebaseConfig);
+// const firebaseAuth = getAuth(firebaseApp);
+// const analytics = getAnalytics(firebaseApp);
+
+// // 꼭 이렇게 해야하는 건 아니니까 편한대로 해당 스크립트에서 import해서 사용해도 된다 - 정희석
+// export { firebaseAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword };
+// export default firebaseApp;
+
+// Initialize Firebase - 유민
 const firebaseApp = initializeApp(firebaseConfig);
 const firebaseAuth = getAuth(firebaseApp);
 const analytics = getAnalytics(firebaseApp);
 
-// 꼭 이렇게 해야하는 건 아니니까 편한대로 해당 스크립트에서 import해서 사용해도 된다 - 정희석
-export { firebaseAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword };
-export default firebaseApp;
+export { firebaseAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword, firebaseApp as default };
