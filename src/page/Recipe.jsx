@@ -31,8 +31,7 @@ const Recipe = () => {
   const [isSearchActive, setIsSearchActive] = useState(false); // 검색하기 버튼 활성화 상태 관리
 
   const ingredients = [
-    '고구마', '감자', '당근', '호박', '닭고기', '돼지고기', '소고기', '연어',
-    '사과', '바나나', '꿀', '귀리', '우유', '요거트', '치즈', '달걀'
+    '채소', '육류', '과일', '달걀', '유제품'
   ];
 
   // 재료 선택/해제 핸들러
@@ -49,10 +48,11 @@ const Recipe = () => {
     backgroundColor: '#F0F0F0',
     color: 'black',
     border: 'none',
-    fontSize: '19px',
-    width: '90px',
+    fontSize: '20px',
+    width: '110px',
     height: '40px',
     marginBottom: '10px',
+    marginRight: '40px'
   };
 
   // 초기화 버튼 스타일
@@ -128,42 +128,21 @@ const Recipe = () => {
 
   // 재료 버튼 두 줄로 나눠 표시하기 위한 배열
   const ingredientsRows = [];
-  const firstRowIngredients = ingredients.slice(0, 8);
-  const secondRowIngredients = ingredients.slice(8);
 
-  // 첫 번째 줄에 재료 버튼 추가
+  // 재료 버튼 추가
   ingredientsRows.push(
     <div key={1} style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
-      {firstRowIngredients.map((ingredient, index) => (
+      {ingredients.map((ingredient, index) => (
         <Button
           key={index}
           variant={selectedIngredients.includes(ingredient) ? 'secondary' : 'primary'}
           size="lg"
-          style={{ ...ingredientButtonStyle, marginRight: '10px', backgroundColor: selectedIngredients.includes(ingredient) ? '#FFC9C9' : '#F0F0F0' }}
+          style={{ ...ingredientButtonStyle, marginRight: '30px', backgroundColor: selectedIngredients.includes(ingredient) ? '#FFC9C9' : '#F0F0F0' }}
           onClick={() => handleIngredientClick(ingredient)}
         >
           {ingredient}
         </Button>
       ))}
-    </div>
-  );
-
-  // 두 번째 줄에 재료 버튼 추가
-  ingredientsRows.push(
-    <div key={2} style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
-      <div style={{ flex: '1' }}></div>
-      {secondRowIngredients.map((ingredient, index) => (
-        <Button
-          key={index}
-          variant={selectedIngredients.includes(ingredient) ? 'secondary' : 'primary'}
-          size="lg"
-          style={{ ...ingredientButtonStyle, marginRight: '10px', backgroundColor: selectedIngredients.includes(ingredient) ? '#FFC9C9' : '#F0F0F0' }}
-          onClick={() => handleIngredientClick(ingredient)}
-        >
-          {ingredient}
-        </Button>
-      ))}
-      <div style={{ flex: '1' }}></div>
     </div>
   );
 

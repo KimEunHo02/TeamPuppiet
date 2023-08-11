@@ -33,28 +33,19 @@ const Feed = () => {
 
   const categories = ['소형견', '중형견', '대형견'];
   const types = ['건식', '습식'];
-  const nutrients = ['조단백', '조지방', '조섬유', '조회분', '칼슘', '인', '수분'];
+  const nutrients = ['로얄캐닌', '뉴트리나', '네츄럴코어', '기타', '시저', '테라카니스', '네이처스', '기타'];
+
+  // 선택된 유형에 따른 영양소 버튼
+  const availableNutrients = selectedTypes.includes('건식') ? ['로얄캐닌', '뉴트리나', '네츄럴코어', '기타'] : ['시저', '테라카니스', '네이처스', '기타'];
 
   // 카테고리 선택 핸들러
   const handleCategoryClick = (category) => {
-    setSelectedCategories((prevSelectedCategories) => {
-      if (prevSelectedCategories.includes(category)) {
-        return prevSelectedCategories.filter((c) => c !== category);
-      } else {
-        return [...prevSelectedCategories, category];
-      }
-    });
+    setSelectedCategories([category]); // 선택한 카테고리만 선택된 상태로 설정
   };
 
   // 유형 선택 핸들러
   const handleTypeClick = (type) => {
-    setSelectedTypes((prevSelectedTypes) => {
-      if (prevSelectedTypes.includes(type)) {
-        return prevSelectedTypes.filter((t) => t !== type);
-      } else {
-        return [...prevSelectedTypes, type];
-      }
-    });
+    setSelectedTypes([type]); // 선택한 유형만 선택된 상태로 설정
   };
 
   // 영양소 선택 핸들러
@@ -149,11 +140,11 @@ const Feed = () => {
     color: 'black',
     border: 'none',
     fontSize: '20px',
-    width: '90px',
+    width: '110px',
     height: '40px',
     marginBottom: '10px',
     marginLeft: '100px',
-    marginRight: '-80px',
+    marginRight: '-78px',
   });
 
   // 건조별 버튼 스타일
@@ -162,11 +153,11 @@ const Feed = () => {
     color: 'black',
     border: 'none',
     fontSize: '20px',
-    width: '90px',
+    width: '110px',
     height: '40px',
     marginBottom: '10px',
     marginLeft: '93px',
-    marginRight: '-75px',
+    marginRight: '-72px',
   });
 
   // 성분 버튼 스타일
@@ -175,11 +166,11 @@ const Feed = () => {
     color: 'black',
     border: 'none',
     fontSize: '20px',
-    width: '90px',
+    width: '110px',
     height: '40px',
     marginBottom: '10px',
-    marginLeft: '100px',
-    marginRight: '-80px',
+    marginLeft: '90px',
+    marginRight: '-70px',
   });
 
   const strongStyle = {
@@ -293,7 +284,7 @@ const Feed = () => {
         </div>
         <div style={{ display: 'flex' }}>
           <strong style={strongStyle}>브랜드</strong>
-          {nutrients.map((nutrient, index) => (
+          {availableNutrients.map((nutrient, index) => (
             <Button
               key={index}
               variant="light"
