@@ -78,7 +78,6 @@ const Signup = () => {
     margin: '0 auto',
     padding: '20px',
     width: '600px',
-    height: '600px',
     backgroundColor: 'white',
     marginBottom: '100px',
     borderRadius: '20px',
@@ -263,6 +262,7 @@ const Signup = () => {
 
       {/* 가장 바깥 박스 */}
       <div style={{ ...box1, marginTop: '40px' }}>
+        <div style={{backgroundColor: 'white'}}>
         <div style={{ margin: '30px' }}>
 
 
@@ -336,7 +336,7 @@ const Signup = () => {
                   style={{
                     fontSize: '14px',
                     color: 'red',
-                    marginLeft: '-20px',
+                    marginLeft: '-90px',
                     marginTop: '2.7px',
                   }}
                 >
@@ -425,7 +425,7 @@ const Signup = () => {
         {/* 박스 div */}
         
         
-
+        </div>
       </div>
     </div>
   );
