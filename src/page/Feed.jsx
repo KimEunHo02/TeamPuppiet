@@ -292,7 +292,7 @@ const Feed = () => {
           ))}
         </div>
         <div style={{ display: 'flex' }}>
-          <strong style={strongStyle}>성 분</strong>
+          <strong style={strongStyle}>브랜드</strong>
           {nutrients.map((nutrient, index) => (
             <Button
               key={index}
