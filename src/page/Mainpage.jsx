@@ -118,7 +118,7 @@ const Mainpage = () => {
 
                     <div style={{
                         display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
-                        margin: '60px'
+                        margin: '80px', marginTop: '-30px'
                     }}
                         className='mainboxcontainer'>
 
@@ -138,7 +138,7 @@ const Mainpage = () => {
 
                     <div style={{
                         display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
-                        margin: '60px'
+                        margin: '80px', marginTop: '-30px'
                     }}
                         className='mainboxcontainer'>
 
