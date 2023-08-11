@@ -1,14 +1,30 @@
-import React, { useState } from 'react';
-import '../css/ImageSlider.css'; // 이미지 슬라이더와 공유하는 스타일 파일
+import React, { useState, useEffect } from 'react';
+import '../css/ImageSlider.css'; // 스타일링을 위한 CSS 파일
+import axios from 'axios';
 
-// Mainpage1에서 이미지 슬라이더에 쓰이는 컴포넌트 공간입니다
-// 간식 이미지 슬라이더
-
-const SnackImageSlider = ({ images }) => {
+const ImageSlider = () => {
   const [startIndex, setStartIndex] = useState(0);
+  const [data, setData] = useState([]);
+  const imageCount = 627; // 사료 이미지의 총 개수
+
+  useEffect(() => {
+    axios.get('recipebom.json') // 데이터 JSON 파일 경로를 수정해주세요
+      .then(response => {
+        setData(response.data);
+        setRandomStartIndex(imageCount);
+      })
+      .catch(error => {
+        console.error('데이터를 불러오는데 에러 발생:', error);
+      });
+  }, []);
+
+  const setRandomStartIndex = (count) => {
+    const randomIndex = Math.floor(Math.random() * (count - 3));
+    setStartIndex(randomIndex);
+  };
 
   const handleNextClick = () => {
-    if (startIndex < images.length - 1) {
+    if (startIndex < imageCount - 3) {
       setStartIndex(startIndex + 1);
     }
   };
@@ -19,29 +35,29 @@ const SnackImageSlider = ({ images }) => {
     }
   };
 
-  const visibleImages = images.slice(startIndex, startIndex + 3);
-
   return (
     <div className="image-slider">
       <button className="prev-button" onClick={handlePrevClick} disabled={startIndex === 0}>
         &lt;
       </button>
       <div className="image-container">
-        {visibleImages.map((image, index) => (
-          <div key={index} className="foodbox">
-            <img src={image} alt={`Snack Image ${startIndex + index + 1}`} />
-
-            {/* 제품명 들어갈 텍스트 공간 -> 데이터 넣을 시 수정 필요 */}
-
-            <a className="foodtext">간식{startIndex + index + 1}</a>
-          </div>
-        ))}
+        {[0, 1, 2].map((index) => {
+          const imageIndex = (startIndex + index) % imageCount + 1;
+          const imageName = `간식2/image (${imageIndex}).png`;
+          const imageData = data[imageIndex - 1]?.레시피명; // 이미지 인덱스에 해당하는 사료명 데이터 가져오기
+          return (
+            <div key={index} className="foodbox">
+              <img src={imageName} alt={`Image ${imageIndex}`} />
+              <a className="foodtext">{imageData}</a>
+            </div>
+          );
+        })}
       </div>
-      <button className="next-button" onClick={handleNextClick} disabled={startIndex === images.length -3}>
+      <button className="next-button" onClick={handleNextClick} disabled={startIndex === imageCount - 3}>
         &gt;
       </button>
     </div>
   );
 };
 
-export default SnackImageSlider;
+export default ImageSlider;
