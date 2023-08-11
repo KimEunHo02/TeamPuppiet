@@ -4,7 +4,6 @@ import '../css/mypage.css'
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import Dogkind2 from '../pages/Dogkind2';
 import '../css/input.css'
 
 
@@ -107,6 +106,22 @@ const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
     );
 };
 
+// 마이페이지 개견 종류 정보
+// 선택창
+const Dogkind2 = ({ options, onSelect }) => {
+
+  return (
+    <select className="dogkind-select2" onChange={(e) => onSelect(e.target.value)}>
+      <option value="">견종을 선택하세요</option>
+      {options.map((option) => (
+        <option key={option.value} value={option.label}>
+          {option.label}
+        </option>
+      ))}
+    </select>
+  );};
+
+
 const Mypage2 = () => {
 
     const Box = {
@@ -119,6 +134,9 @@ const Mypage2 = () => {
     }
 
     // Signup 페이지에서 담긴 데이터
+    // 이곳에 원래의 회원 정보 담겨야 함
+    // 지금은 임시로 비워 놓음
+
     const [data, setData] = useState({
         name: '',
         gender: '',
@@ -128,6 +146,7 @@ const Mypage2 = () => {
     });
 
     // 개견 종류 선택 데이터
+    
     const dataOptions = [
         { label: '소형견', value: '소형견' },
         { label: '중형견', value: '중형견' },
