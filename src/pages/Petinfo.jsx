@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import picSrc from '../img/PUPPIET_logo.png'
 import Button from 'react-bootstrap/Button';
@@ -14,6 +14,9 @@ import dogimage from '../icon/dog_kind.png'
 import birthImage from '../icon/birthday.png'
 import weightImage from '../icon/weight.png'
 import neuteredImage from '../icon/neutered.png'
+
+import { db } from '../config/firebase';
+import { setDoc, doc } from '@firebase/firestore';
 
 // GenderSelection 컴포넌트 정의 (남, 여 선택 버튼)
 const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
@@ -204,6 +207,29 @@ const Petinfo = () => {
         return true; // 모든 필드가 채워져있을 때 true 반환
     };
 
+    const formData = useLocation().state;
+    console.log(formData);
+
+    // 회원가입 정보 데이터베이스로 보내기
+    const createUser = async () => {
+        await setDoc(doc(db, "users", String(formData.username)),
+            {
+                email: formData.username,
+                userName: formData.name,
+                password: formData.password,
+                userBirth: formData.birth,
+                userGender: data.gender,
+                dogName : inputValues.name,
+                dog: inputValues.gender,
+                neutered: inputValues.neutered,
+                dogBirth: inputValues.birth,
+                weight: inputValues.weight
+
+
+            }
+        )
+    }
+
     return (
         <div>
             <br />
@@ -310,7 +336,7 @@ const Petinfo = () => {
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                             }}
                             disabled={!areAllFieldsFilled()}
-                            onClick={() => { nav('/'); }}
+                            onClick={() => { nav('/'); createUser();}}
                             >
                             <p style={{marginTop: '15px'}}>완</p><p style={{marginTop: '15px'}}>료</p>
                         </Button>
