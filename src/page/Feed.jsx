@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import Logo from './Logo';
 import Button from 'react-bootstrap/Button';
-
+import axios from 'axios';
 import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
 import ImageDetailFeed from './ImageDetailFeed';
 
 const Feed = () => {
+  
 
   // 이미지 상세 페이지 라우팅을 생성하는 함수
   const generateRoutes = () => {
-    const dummyFeeds = Array.from({ length: 237 }, (_, index) => index + 1);
+    const dummyFeeds = Array.from({ length: 214 }, (_, index) => ({
+      id : index + 1,
+      description: `Feed ${index + 1}`,
+      image: `건식${index + 1}.jpg`,}));
 
     return (
       <Routes>
@@ -221,15 +225,19 @@ const Feed = () => {
   };
 
   // 이미지 박스 클릭 시 각 사료의 상세페이지 이동
-  const dummyFeeds = Array.from({ length: 237 }, (_, index) => ({
+  const dummyFeeds = Array.from({ length: 214 }, (_, index) => ({
     id: index + 1,
     description: `Feed ${index + 1}`,
   }));
 
-  const imageBoxes = dummyFeeds.map((feed) => (
+  const imageBoxes = dummyFeeds.map((feed,index) => (
     <div key={feed.id} style={imageBoxStyle}>
       <Link to={`/ImageDetailFeed/${feed.id}`} style={linkStyle}>
-        <div style={{ backgroundColor: 'gray', width: '100%', height: '200px' }}></div>
+        <div style={{ 
+          backgroundImage: `url(${index < 181 ? `건식사진/건식${feed.id}.jpg` : `건식사진/습식${feed.id- 181}.jpg`})`, 
+          backgroundSize: 'cover',
+          width: '100%',
+          height: '200px',}}></div>
         <p style={descriptionStyle}>{feed.description}</p>
       </Link>
     </div>
