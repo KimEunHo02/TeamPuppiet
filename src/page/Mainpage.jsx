@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import picSrc from '../img/logo_name(x).png'
-import '../Main.module.css';
-import '../Main.css'
+import '../css/Main.module.css';
+import '../css/Main.css'
 import ImageSlider from './ImageSlider';
 import SnackImageSlider from './SnackImageSlider';
 

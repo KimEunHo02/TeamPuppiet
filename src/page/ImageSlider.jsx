@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../ImageSlider.css'; // 스타일링을 위한 CSS 파일
+import '../css/ImageSlider.css'; // 스타일링을 위한 CSS 파일
 
 // Mainpage1에서 이미지 슬라이더에 쓰이는 컴포넌트 공간입니다
 // 사료 이미지 슬라이더

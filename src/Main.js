@@ -19,8 +19,7 @@ import Petinfo from './pages/Petinfo';
 import ImageDetail from './page/ImageDetail';
 import ImageDetailFeed from './page/ImageDetailFeed';
 
-
-import styles from './Main.module.css';
+import styles from './css/Main.module.css';
 import './font.css'
 
 

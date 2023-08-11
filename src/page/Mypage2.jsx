@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import Logo from './Logo'
-import '../mypage.css'
+import '../css/mypage.css'
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Dogkind2 from '../pages/Dogkind2';
-import '../input.css'
+import '../css/input.css'
 
 
 import iconImage from '../icon/name.png'

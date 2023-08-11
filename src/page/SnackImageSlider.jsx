@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../ImageSlider.css'; // 이미지 슬라이더와 공유하는 스타일 파일
+import '../css/ImageSlider.css'; // 이미지 슬라이더와 공유하는 스타일 파일
 
 // Mainpage1에서 이미지 슬라이더에 쓰이는 컴포넌트 공간입니다
 // 간식 이미지 슬라이더

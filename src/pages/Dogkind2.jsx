@@ -1,4 +1,4 @@
-import '../input.css'
+import '../css/input.css'
 import React from 'react';
 
 const Dogkind2 = ({ options, onSelect }) => {

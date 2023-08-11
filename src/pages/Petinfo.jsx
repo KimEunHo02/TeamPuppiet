@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import picSrc from '../img/PUPPIET_logo.png'
 import Button from 'react-bootstrap/Button';
-import '../input.css'
+import '../css/input.css'
 // import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import Signup from './Signup';
 // import Mainpage2 from '../page/Mainpage2';

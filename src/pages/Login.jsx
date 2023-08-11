@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import picSrc from '../img/PUPPIET_logo.png';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import '../login.css';
-import '../input.css';
+import '../css/login.css';
+import '../css/input.css';
 
 import iconImage from '../icon/name.png'
 import pwImage from '../icon/password.png'

@@ -6,8 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 // import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import '../input.css';
-import './Signup.css';
+import '../css/input.css';
 
 import iconImage from '../icon/name.png'
 import pwImage from '../icon/password.png'
