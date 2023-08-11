@@ -13,6 +13,9 @@ const ImageSlider = ({ images }) => {
     axios.get('건식사료-성분.json') // JSON 파일의 경로를 적절히 수정해주세요.
       .then(response => {
         setData(response.data);
+
+        const randomIndex = Math.floor(Math.random() * (images.length - 3)); // 랜덤한 시작 인덱스 계산
+        setStartIndex(randomIndex);
       })
       .catch(error => {
         console.error('데이터를 불러오는데 에러 발생:', error);
