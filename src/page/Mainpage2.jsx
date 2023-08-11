@@ -46,7 +46,7 @@ const Mainpage2 = ({ mainArr }) => {
   }
 
   const kongsoonStyle = {
-    width: '650px',
+    width: '650PX',
     height: 'auto',
     position: 'absolute',
     marginRight: '420px',
