@@ -7,7 +7,6 @@ import '../css/input.css'
 // import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import Signup from './Signup';
 // import Mainpage2 from '../page/Mainpage2';
-import Dogkind from './Dogkind';
 
 import genderImage from '../icon/gender.png'
 import Image from '../icon/name.png'
@@ -104,7 +103,18 @@ const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
     );
 };
 
-
+const Dogkind = ({ options, onSelect }) => {
+    return (
+      <select className="dogkind-select" onChange={(e) => onSelect(e.target.value)}>
+        <option value="">견종을 선택하세요</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    );
+  };
 const Petinfo = () => {
 
     const nav = useNavigate()
@@ -135,7 +145,6 @@ const Petinfo = () => {
     const [inputValues, setInputValues] = useState({
         // 여러 개의 입력창의 상태를 객체로 관리
         name: '',
-        // dogkind: '',
         gender: '',
         birth: '',
         neutered: '',
