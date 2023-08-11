@@ -4,6 +4,7 @@ import {format, addMonths, subMonths} from 'date-fns';
 import {startOfMonth, endOfMonth, startOfWeek, endOfWeek} from 'date-fns';
 import {isSameMonth, isSameDay, addDays, parse} from 'date-fns';
 import '../calendar.css';
+import CalendarAlert from './CalendarAlert';
 
 import stamp1 from '../stamp/stamp1.png'
 import stamp2 from '../stamp/stamp2.png'
@@ -56,6 +57,9 @@ const Stamp = ({challengeCompleted, selectedDate,stamps, setStamps, setChallenge
   const[selectedImageIndex,setSelectedImageIndex] = useState(-1);
   // const[stamps, setStamps] = useState([])
 
+  // Stamp 20개 보상
+  const [showAlert, setShowAlert] = useState(false); // showAlert 상태 변수 추가
+
   const stampImages = [
     {normal : stamp1, clicked : stamp1_1},
     {normal : stamp2, clicked : stamp2_1},
@@ -90,16 +94,20 @@ const Stamp = ({challengeCompleted, selectedDate,stamps, setStamps, setChallenge
   
       // 이미지 선택 초기화
       setSelectedImageIndex(-1);
+      
 
       // 챌린지 완료 상태를 false로 변경
       // setChallengeCompleted(false);
+      
+      // 보상 알림 화면 표시(유정)
+      setShowAlert(true);
     
     }
   };
 
   return(
     <div className='stamp_area'>
-      <p className='stamp_content'>스탬프를 선택해주세요</p>
+      <p className='stamp_content'>스탬프를 선택해 주세요</p>
       <div>
         {/* 스탬프 목록 */}
         {stampImages.map((image, index) => (
@@ -111,14 +119,22 @@ const Stamp = ({challengeCompleted, selectedDate,stamps, setStamps, setChallenge
             onClick={()=> handleImageClick(index)}>
           </img>
         ))}
+         {showAlert && ( // showAlert 상태에 따라 CalendarAlert 컴포넌트 조건부 렌더링
+        <CalendarAlert onClose={() => setShowAlert(false)} />
+      )}
       </div>
+
+      
       <button
         className={`challenge_btn ${!challengeCompleted ? 'disabled' : ''}`}
-        id='stamp_btn'
+        id="stamp_btn"
         disabled={!challengeCompleted || selectedImageIndex === -1}
-        onClick={handleStampClick}>
-        스탬프찍기
+        onClick={handleStampClick}
+      >
+        스탬프 찍기
       </button>
+      
+     
     </div>
   );
 };
