@@ -110,7 +110,7 @@ const Signup = () => {
     let birthErrorMessage = '';
 
     if (name === 'username') {
-      idErrorMessage = value === '' ? '아이디를 입력해 주세요.' : '';
+      idErrorMessage = value === '' ? '이메일을 입력해 주세요.' : '';
     } else if (name === 'password') {
       passwordErrorMessage = value === '' ? '비밀번호를 입력해 주세요.' : '';
       setIsPasswordInvalid(!validateInput(value, 'password'));
@@ -233,13 +233,11 @@ const Signup = () => {
       // 테스트후 이상하면 다시 복구
       // setRegisterEmail("");
       // setRegisterPassword("");
-      nav('/petinfo')
+      nav('/petinfo', {state: formData})
     }catch(err){
       console.log(err.code);
     }
   }
-
-
 
   return (
     <div>
@@ -277,7 +275,7 @@ const Signup = () => {
                 <img src={iconImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
                 <Form.Control
                   type="text"
-                  placeholder="아이디"
+                  placeholder="ex) example@email.com"
                   name="username"
                   value={formData.username}
                   onChange={handleInputChange}
@@ -299,7 +297,7 @@ const Signup = () => {
                 style={{
                   fontSize: '14px',
                   color: 'red',
-                  marginLeft: '-100px',
+                  marginLeft: '-155px',
                   marginTop: '2.7px',
                 }}
               >
@@ -392,7 +390,7 @@ const Signup = () => {
               <Form.Control
                 type="text" // 숫자만 입력 가능하도록 수정
                 id="inputBirth"
-                placeholder="생년월일 8자리 ex)19990101"
+                placeholder="생년월일 8자리 ex) 19990101"
                 name="birth"
                 value={formData.birth}
                 onChange={handleInputChange}
@@ -414,7 +412,7 @@ const Signup = () => {
 
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
             <Button variant="outline-dark"
-              disabled={!isNextButtonEnabled} onClick={() => { register() }}
+              disabled={!isNextButtonEnabled} onClick={() => { register(); }}
               style={{
                 backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'black',
                 width: '300px', height: '60px'
