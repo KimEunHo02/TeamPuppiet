@@ -110,7 +110,7 @@ const Signup = () => {
     let birthErrorMessage = '';
 
     if (name === 'username') {
-      idErrorMessage = value === '' ? '아이디를 입력해 주세요.' : '';
+      idErrorMessage = value === '' ? '이메일을 입력해 주세요.' : '';
     } else if (name === 'password') {
       passwordErrorMessage = value === '' ? '비밀번호를 입력해 주세요.' : '';
       setIsPasswordInvalid(!validateInput(value, 'password'));
@@ -297,7 +297,7 @@ const Signup = () => {
                 style={{
                   fontSize: '14px',
                   color: 'red',
-                  marginLeft: '-100px',
+                  marginLeft: '-155px',
                   marginTop: '2.7px',
                 }}
               >
