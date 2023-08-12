@@ -1,10 +1,16 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Logo from './Logo';
+import { dummyFeeds } from './Feed'; // Feed에서 dummyFeeds를 가져옵니다.
 
-const ImageDetailFeed = () => {
+
+const ImageDetailFeed = ({ feed }) => { // feed 데이터를 속성으로 받아옴
   const { feedId } = useParams();
+  const selectedFeed = dummyFeeds.find(feed => feed.id === parseInt(feedId));
+  
 
+  
+  
   return (
     <div>
       <Logo />
@@ -15,7 +21,11 @@ const ImageDetailFeed = () => {
         {/* 왼쪽 이미지 넣을 div */}
         <div style={{ flex: 1, width: '400px', backgroundColor: 'white', padding: '20px', paddingTop: '30px', fontSize: '19px', fontWeight: 'bold', textAlign: 'center' }}>
           {/* 이미지 */}
-          <img src={process.env.PUBLIC_URL + '/saryoimg.jpg'} alt="사료 이미지" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+          <img
+            src={selectedFeed.id <= 181 ? `${process.env.PUBLIC_URL}/건식사진/건식${selectedFeed.id}.jpg` : `${process.env.PUBLIC_URL}/습식사진/습식${selectedFeed.id - 181}.jpg`}
+            alt="사료 이미지"
+            style={{ maxWidth: '100%', maxHeight: '100%' }}
+/>
 
           {/* 사료 이름 */}
           <div style={{ marginTop: '40px' }}>

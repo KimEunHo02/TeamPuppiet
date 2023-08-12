@@ -1,9 +1,12 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo from './Logo';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
 import ImageDetailFeed from './ImageDetailFeed';
+import dummyFeeds from './dummyFeedsData'; // dummyFeeds 데이터를 가져옵니다.
+
+
 
 const Feed = () => {
   const [dryFoodData, setDryFoodData] = useState([]);
@@ -47,14 +50,14 @@ const Feed = () => {
 
     return (
       <Routes>
-        {dummyFeeds.map((feedId) => (
-          <Route
-            key={feedId}
-            path={`/ImageDetailFeed/:feedId`}
-            element={<ImageDetailFeed />}
-          />
-        ))}
-      </Routes>
+      {dummyFeeds.map((feed) => (
+        <Route
+          key={feed.id}
+          path={`/ImageDetailFeed/${feed.id}`}
+          element={<ImageDetailFeed feed={feed} />}
+        />
+      ))}
+    </Routes>
     );
   }
 
@@ -395,3 +398,4 @@ const Feed = () => {
 };
 
 export default Feed;
+export { dummyFeeds };
