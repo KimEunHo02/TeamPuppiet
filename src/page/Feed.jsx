@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Logo from './Logo';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
@@ -6,6 +6,36 @@ import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
 import ImageDetailFeed from './ImageDetailFeed';
 
 const Feed = () => {
+  const [dryFoodData, setDryFoodData] = useState([]);
+  const [wetFoodData, setWetFoodData] = useState([]);
+
+  useEffect(() => {
+    // JSON 파일 경로
+    const dryJsonFilePath = '건식사료-성분.json';
+    const wetJsonFilePath = '습식사료-성분.json';
+
+    // JSON 파일 가져오기
+    axios.get(dryJsonFilePath)
+    .then(response => {
+      setDryFoodData(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching dry food data:', error);
+    });
+
+  // 습식 사료 데이터 가져오기
+    axios.get(wetJsonFilePath)
+    .then(response => {
+      setWetFoodData(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching wet food data:', error);
+    });
+    }, []);
+
+
+
+
   
 
   // 이미지 상세 페이지 라우팅을 생성하는 함수
@@ -230,18 +260,37 @@ const Feed = () => {
     description: `Feed ${index + 1}`,
   }));
 
-  const imageBoxes = dummyFeeds.map((feed,index) => (
+  
+
+  const imageBoxes = dummyFeeds.map((feed, index) => (
     <div key={feed.id} style={imageBoxStyle}>
       <Link to={`/ImageDetailFeed/${feed.id}`} style={linkStyle}>
-        <div style={{ 
-          backgroundImage: `url(${index < 181 ? `건식사진/건식${feed.id}.jpg` : `건식사진/습식${feed.id- 181}.jpg`})`, 
-          backgroundSize: 'cover',
-          width: '100%',
-          height: '200px',}}></div>
-        <p style={descriptionStyle}>{feed.description}</p>
+        <div
+          style={{
+            backgroundImage: `url(${
+              index < 181
+                ? `건식사진/건식${feed.id}.jpg`
+                : `건식사진/습식${feed.id - 181}.jpg`
+            })`,
+            backgroundSize: 'cover',
+            width: '100%',
+            height: '200px',
+          }}
+        ></div>
+        {feed.id <= 181 && dryFoodData.length > 0 && (
+          <p style={descriptionStyle}>
+            {dryFoodData[feed.id - 1]?.Column2}
+          </p>
+        )}
+        {feed.id > 181 && wetFoodData.length > 0 && (
+          <p style={descriptionStyle}>
+            {wetFoodData[feed.id - 182]?.Column2}
+          </p>
+        )}
       </Link>
     </div>
   ));
+  
 
 
   // ------------------------------------------------
@@ -323,7 +372,7 @@ const Feed = () => {
             검색하기
           </Button>
         </div>
-        <strong style={{ color: 'black', fontSize: '25px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>237개의 사료 추천</strong>
+        <strong style={{ color: 'black', fontSize: '25px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>214개의 사료 추천</strong>
       </div>
 
       {/* 사료 추천 박스 컨테이너 */}
