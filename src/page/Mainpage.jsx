@@ -6,9 +6,10 @@ import '../css/Main.css'
 import ImageSlider from '../pages/ImageSlider';
 import SnackImageSlider from '../pages/SnackImageSlider';
 
-import dietGif from '../images/diet.gif'; // 이미지 가져오기
-import calendarGif from '../images/calendar.gif'; // 이미지 가져오기
-import serviceGif from '../images/service.gif'; // 이미지 가져오기
+// import dietGif from '../images/diet.gif'; // 이미지 가져오기
+// import calendarGif from '../images/calendar.gif'; // 이미지 가져오기
+// import serviceGif from '../images/service.gif'; // 이미지 가져오기
+import maininfoGif from '../images/main_230813.gif'; // 이미지 가져오기
 
 // 유정) 로고 이미지 눌렀을 때 Main 화면 보이게 설정한 페이지입니다.
 
@@ -98,13 +99,15 @@ const Mainpage = () => {
                 marginRight: '350px'
             }}>
                 {/* 서비스 소개 */}
-                <div style={{ height: '404px', width: '1200px', background: `url(${serviceGif}) no-repeat center`, backgroundSize: 'cover' }}></div>
+                {/* <div style={{ height: '404px', width: '1200px', background: `url(${serviceGif}) no-repeat center`, backgroundSize: 'cover' }}></div> */}
 
                 {/* 반려견 다이어트 정보 */}
-                <div style={{ height: '404px', width: '1200px', background: `url(${dietGif}) no-repeat center`, backgroundSize: 'cover' }}></div>
+                {/* <div style={{ height: '404px', width: '1200px', background: `url(${dietGif}) no-repeat center`, backgroundSize: 'cover' }}></div> */}
 
                 {/* 이벤트 캘린더 이미지 */}
-                <div style={{ height: '404px', width: '1200px', background: `url(${calendarGif}) no-repeat center`, backgroundSize: 'cover' }}></div>
+                {/* <div style={{ height: '404px', width: '1200px', background: `url(${calendarGif}) no-repeat center`, backgroundSize: 'cover' }}></div> */}
+
+                <div style={{ height: '1222px', width: '1200px', background: `url(${maininfoGif}) no-repeat center`, backgroundSize: 'cover' }}></div>
 
                 {/* 사료 추천 */}
 
