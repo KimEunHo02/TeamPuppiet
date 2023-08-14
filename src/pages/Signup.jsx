@@ -13,11 +13,14 @@ import pwImage from '../icon/password.png'
 import birthImage from '../icon/birthday.png'
 import genderImage from '../icon/gender.png'
 
+// import { onAuthStateChanged } from "firebase/auth"; // 230814 -- 정희석 firebase 로그인
+// import { createUserWithEmailAndPassword } from "../config/firebase"; // Firebase 연동
 
 import './Signup.css';
 
 // firebase 회원가입 - 정희석
-import { firebaseAuth , createUserWithEmailAndPassword } from "../config/firebase";
+import { firebaseAuth, createUserWithEmailAndPassword } from "../config/firebase";
+
 
 // `회원가입` 버튼의 onClick에 할당
 
@@ -168,7 +171,7 @@ const Signup = () => {
   };
 
   // 폼 제출 시 호출되는 함수
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // 생년월일 유효성 검사
@@ -177,9 +180,27 @@ const Signup = () => {
       return;
     }
 
+    // if (isFormValid()) {
+    //   console.log('회원가입 폼 데이터:', formData);
+    //   // 여기에 회원가입 로직을 추가할 수 있음
+    //   register(); // 2330814 -- 정희석 추가(firebase 연동)
+    // } else {
+    //   alert('입력값이 유효하지 않습니다. 모든 필드를 올바르게 입력해주세요.');
+    // }
     if (isFormValid()) {
       console.log('회원가입 폼 데이터:', formData);
-      // 여기에 회원가입 로직을 추가할 수 있음
+      try {
+        const createdUser = await createUserWithEmailAndPassword(
+          firebaseAuth,
+          formData.username,
+          formData.password
+        );
+        console.log(createdUser);
+        sessionStorage.setItem('userId', createdUser.user.email);
+        nav('/petinfo', { state: formData });
+      } catch (err) {
+        console.log(err.code);
+      }
     } else {
       alert('입력값이 유효하지 않습니다. 모든 필드를 올바르게 입력해주세요.');
     }
@@ -223,18 +244,19 @@ const Signup = () => {
   console.log('isNextButtonEnabled:', isNextButtonEnabled);
 
 
-  const register = async () => {
-    try {
-      const createdUser = await createUserWithEmailAndPassword(firebaseAuth, formData.username, formData.password);
-      console.log(createdUser);
-      // 테스트후 이상하면 다시 복구
-      // setRegisterEmail("");
-      // setRegisterPassword("");
-      nav('/petinfo', {state: formData})
-    }catch(err){
-      console.log(err.code);
-    }
-  }
+  // const register = async () => {     ---> 사용할거면 버튼 맨 마지막 Onclick 함수 확인
+  //   try {
+  //     const createdUser = await createUserWithEmailAndPassword(firebaseAuth, formData.username, formData.password);
+  //     console.log(createdUser);
+  //     // 테스트후 이상하면 다시 복구
+  //     // setRegisterEmail("");
+  //     // setRegisterPassword("");
+  //     sessionStorage.setItem('userId', createdUser.user.email); // 2330814 -- 정희석 추가(firebase 연동)
+  //     nav('/petinfo', {state: formData})
+  //   }catch(err){
+  //     console.log(err.code);
+  //   }
+  // }
 
   return (
     <div>
@@ -409,7 +431,7 @@ const Signup = () => {
 
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
             <Button variant="outline-dark"
-              disabled={!isNextButtonEnabled} onClick={() => { register(); }}
+              disabled={!isNextButtonEnabled} onClick={handleSubmit}  // onClick={() => { register(); } -- 원래코드
               style={{
                 backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'black',
                 width: '300px', height: '60px'

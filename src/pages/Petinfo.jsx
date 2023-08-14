@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import picSrc from '../img/PUPPIET_logo.png'
@@ -17,6 +17,9 @@ import neuteredImage from '../icon/neutered.png'
 
 import { db } from '../config/firebase';
 import { setDoc, doc } from '@firebase/firestore';
+
+// breedsData = 강아지정보총합.json파일 불러오기 위한 명칭
+// import breedsData from './강아지정보총합.json';
 
 // GenderSelection 컴포넌트 정의 (남, 여 선택 버튼)
 const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
@@ -143,15 +146,34 @@ const Petinfo = () => {
         borderRadius: '20px',
     }
 
-    // 견종 데이터 선택 기능
-    const dataOptions = [
-        { label: '김은호', value: '김은호' },
-        { label: '류하경', value: '류하경' },
-        { label: '서유민', value: '서유민' },
-        { label: '서유정', value: '서유정' },
-        { label: '정희석', value: '정희석' },
+    // 견종 데이터 선택 기능 breedsData
+    // const dataOptions = [
+    //     { label: '김은호', value: '김은호' },
+    //     { label: '류하경', value: '류하경' },
+    //     { label: '서유민', value: '서유민' },
+    //     { label: '서유정', value: '서유정' },
+    //     { label: '정희석', value: '정희석' },
 
-    ];
+    // ];
+
+    const [breedsData, setBreedsData] = useState([]);
+
+    useEffect(() => {
+        // JSON 파일을 불러와서 breedsData에 저장
+        fetch('/강아지정보총합.json')
+            .then(response => response.json())
+            .then(data => {
+                const options = data.map(breed => ({
+                    label: breed.품종,
+                    value: breed.품종,
+                }));
+                setBreedsData(options);
+            })
+            .catch(error => {
+                console.error('Error fetching breeds data:', error);
+            });
+    }, []);
+
 
     // 값이 다 입력됐을 때 완료 버튼 누르게 하는 기능
     const [inputValues, setInputValues] = useState({
@@ -279,7 +301,8 @@ const Petinfo = () => {
                             <Form.Label></Form.Label>
                             <div className="d-flex align-items-center" style={{ marginTop: '-10px' }}>
                                 <img src={dogimage} style={{ width: '20px', marginRight: '10px', marginLeft: '100px' }} alt="Icon" />
-                                <Dogkind options={dataOptions} onSelect={handleDogKindSelect} />
+                                <Dogkind options={breedsData} onSelect={handleDogKindSelect} style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}} />
+                                {/*<Dogkind options={dataOptions} onSelect={handleDogKindSelect} />*/}
                             </div>
                         </Form.Group>
 
@@ -355,4 +378,4 @@ const Petinfo = () => {
     )
 }
 
-export default Petinfo
+export default Petinfo;
