@@ -1,16 +1,66 @@
+import { useEffect, useState } from 'react';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Logo from './Logo';
 import { dummyFeeds } from './Feed'; // Feed에서 dummyFeeds를 가져옵니다.
 
 
-const ImageDetailFeed = ({ feed }) => { // feed 데이터를 속성으로 받아옴
-  const { feedId } = useParams();
-  const selectedFeed = dummyFeeds.find(feed => feed.id === parseInt(feedId));
-  
+const getImageFilePath = (feedId) => {
+  if (feedId <= 181) {
+    return {
+      imagePath: `${process.env.PUBLIC_URL}/건식사진/건식${feedId}.jpg`,
+      nameData: `${process.env.PUBLIC_URL}/건식사료-성분.json`,
+    };
+  } else {
+    const wetFeedId = feedId - 181;
+    return {
+      imagePath: `${process.env.PUBLIC_URL}/습식사진/습식${wetFeedId}.jpg`,
+      nameData: `${process.env.PUBLIC_URL}/습식사료-성분.json`,
+    };
+  }
+};
 
-  
-  
+
+const ImageDetailFeed = ({  }) => {
+  const { feedId } = useParams();
+  const selectedFeed = dummyFeeds.find((feed) => feed.id === parseInt(feedId));
+
+  const [selectedFeedName, setSelectedFeedName] = useState("");
+   const [selectedFeedNutrition, setSelectedFeedNutrition] = useState([]);
+
+  const fetchFeedNameData = (dataUrl, targetId) => {
+    fetch(dataUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        const info = data.find((item) => item.Column1 === targetId);
+        setSelectedFeedName(info ? info.Column2 : '사료 정보 없음');
+      })
+      .catch((error) => {
+        console.error("Error fetching name data:", error);
+        setSelectedFeedName("사료 정보 없음");
+      });
+  };
+
+  useEffect(() => {
+    const imageInfo = getImageFilePath(selectedFeed.id);
+
+    if (imageInfo.nameData) {
+      // 건식 사료의 경우 추가로 이름 데이터 가져오기
+      if (selectedFeed.id <= 181) {
+        const dryNameDataUrl = `${process.env.PUBLIC_URL}/건식사료-성분.json`;
+        fetchFeedNameData(dryNameDataUrl, selectedFeed.id);
+      } else {
+        const wetNameDataUrl = `${process.env.PUBLIC_URL}/습식사료-성분.json`;
+        fetchFeedNameData(wetNameDataUrl, selectedFeed.id - 181);
+      }
+    } else {
+      setSelectedFeedName('사료 정보 없음');
+    }
+  }, [selectedFeed.id]);
+
+
+
+
   return (
     <div>
       <Logo />
@@ -22,14 +72,14 @@ const ImageDetailFeed = ({ feed }) => { // feed 데이터를 속성으로 받아
         <div style={{ flex: 1, width: '400px', backgroundColor: 'white', padding: '20px', paddingTop: '30px', fontSize: '19px', fontWeight: 'bold', textAlign: 'center' }}>
           {/* 이미지 */}
           <img
-            src={selectedFeed.id <= 181 ? `${process.env.PUBLIC_URL}/건식사진/건식${selectedFeed.id}.jpg` : `${process.env.PUBLIC_URL}/습식사진/습식${selectedFeed.id - 181}.jpg`}
+            src={getImageFilePath(selectedFeed.id).imagePath}
             alt="사료 이미지"
             style={{ maxWidth: '100%', maxHeight: '100%' }}
 />
 
           {/* 사료 이름 */}
           <div style={{ marginTop: '40px' }}>
-            <h3 style={{ backgroundColor: '#FFC9C9', width: '400px', margin: 'auto', borderRadius: '20px', marginBottom: '10px' }}>사료 이름</h3><br />
+            <h3 style={{ backgroundColor: '#FFC9C9', width: '400px', margin: 'auto', borderRadius: '20px', marginBottom: '10px' }}>{selectedFeedName}</h3><br />
           </div>
         </div>
 
@@ -51,7 +101,13 @@ const ImageDetailFeed = ({ feed }) => { // feed 데이터를 속성으로 받아
           {/* 사료 성분 */}
           <div>
             <h3 style={{ backgroundColor: '#FFC9C9', width: '200px', margin: 'auto', borderRadius: '20px', marginTop: '10px' }}>사료 성분</h3><br />
-            <p>사료는 맛있게 뭐랑 뭐랑 뭐랑 뭐랑 들어갔다</p>
+            <p>조단백질(%): {selectedFeedNutrition["조단백질(%)"]}</p>
+            <p>조지방(%): {selectedFeedNutrition["조지방(%)"]}</p>
+            <p>조섬유(%): {selectedFeedNutrition["조섬유(%)"]}</p>
+            <p>조회분(%): {selectedFeedNutrition["조회분(%)"]}</p>
+            <p>인(%): {selectedFeedNutrition["인(%)"]}</p>
+            <p>칼슘(%): {selectedFeedNutrition["칼슘(%)"]}</p>
+            <p>수분(%): {selectedFeedNutrition["수분(%)"]}</p>
           </div>
         </div>
 
