@@ -29,12 +29,12 @@ const Mainpage = () => {
 
     // 이미지 슬라이더 기능 (이미지 넣을 곳!!!!!!) -- 임시
 
-    // 사료 이미지
+    // 사료 이미지 빈리스트만남겨놓고 내용지워도됨
     const feedImages = ['/feedimg/습식사료4.jpg', '/feedimg/습식사료6.jpg', '/feedimg/습식사료8.jpg', '/feedimg/습식사료10.jpg',
     '/feedimg/습식사료12.jpg', '/feedimg/습식사료15.jpg', '/feedimg/습식사료17.jpg', '/feedimg/습식사료19.jpg'
 ];
 
-    // 간식 이미지
+    // 간식 이미지 
     const snackImages = ['/snackimg/간식1.png', '/snackimg/간식2.png', '/snackimg/간식3.png', '/snackimg/간식4.png',
     '/snackimg/간식5.png', '/snackimg/간식6.png', '/snackimg/간식7.png', '/snackimg/간식8.png',
 ];

@@ -11,6 +11,19 @@ import { Link } from 'react-router-dom';
 
 const Mainpage2 = ({ mainArr }) => {
 
+  const [snacksData, setSnacksData] = useState([]); // 초기 값 설정
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/recipebom.json`)
+      .then((response) => response.json())
+      .then((data) => {
+        setSnacksData(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching snacks data:", error);
+      });
+  }, []);
+
+
   let sessionData = sessionStorage.getItem('userId')
   console.log('session :', sessionData)
 
@@ -178,26 +191,22 @@ const Mainpage2 = ({ mainArr }) => {
 
               {/* 여기서부터 간식 이미지 들어가는 공간입니다 */}
 
-            <div className='foodbox'>
-              <div style={imgbox} className='mainboxcontent'>
-                <img src='\img\간식.jpg' alt='간식 임시 사진' style={imageStyle} />
-                <a className='foodtext'>간식1</a>
-              </div>
-            </div>
+              {snacksData.length > 0 && Array.from({ length: 3 }, (_, index) => {
+                const randomIndex = Math.floor(Math.random() * snacksData.length); // Declare it here
 
-            <div className='foodbox'>
-              <div style={imgbox} className='mainboxcontent'>
-                <img src='\img\간식.jpg' alt='간식 임시 사진' style={imageStyle} />
-                <a className='foodtext'>간식2</a>
-              </div>
-            </div>
-
-            <div className='foodbox'>
-              <div style={imgbox} className='mainboxcontent'>
-                <img src='\img\간식.jpg' alt='간식 임시 사진' style={imageStyle} />
-                <a className='foodtext'>간식3</a>
-              </div>
-            </div>
+                  // 선택한 랜덤 간식 이미지 표시
+                  return (
+                    <div className='foodbox' key={randomIndex}>
+                      <div style={imgbox} className='mainboxcontent'>
+                        {/* 이미지 주소를 생성하고 표시 */}
+                        {snacksData[randomIndex] && (
+                          <img src={`${process.env.PUBLIC_URL}/간식2/image (${snacksData[randomIndex].Column1}).png`} alt='간식 이미지' style={imageStyle} />
+                        )}
+                        <a className='foodtext'>{snacksData[randomIndex] && snacksData[randomIndex].레시피명}</a>
+                      </div>
+                    </div>
+                  );
+                })}
           </div>
 
         </div>
