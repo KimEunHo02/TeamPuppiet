@@ -10,23 +10,26 @@ const getImageFilePath = (feedId) => {
     return {
       imagePath: `${process.env.PUBLIC_URL}/건식사진/건식${feedId}.jpg`,
       nameData: `${process.env.PUBLIC_URL}/건식사료-성분.json`,
+      descriptionData: `${process.env.PUBLIC_URL}/건식사료특징.json`,
     };
   } else {
     const wetFeedId = feedId - 181;
     return {
       imagePath: `${process.env.PUBLIC_URL}/습식사진/습식${wetFeedId}.jpg`,
       nameData: `${process.env.PUBLIC_URL}/습식사료-성분.json`,
+      descriptionData: `${process.env.PUBLIC_URL}/습식사료특징.json`, 
     };
   }
 };
 
 
-const ImageDetailFeed = ({  }) => {
+const ImageDetailFeed = () => {
   const { feedId } = useParams();
   const selectedFeed = dummyFeeds.find((feed) => feed.id === parseInt(feedId));
 
   const [selectedFeedName, setSelectedFeedName] = useState("");
-   const [selectedFeedNutrition, setSelectedFeedNutrition] = useState([]);
+  const [selectedFeedNutrition, setSelectedFeedNutrition] = useState([]);
+  const [selectedFeedDescription, setSelectedFeedDescription] = useState("");
 
   const fetchFeedNameData = (dataUrl, targetId) => {
     fetch(dataUrl)
@@ -34,29 +37,59 @@ const ImageDetailFeed = ({  }) => {
       .then((data) => {
         const info = data.find((item) => item.Column1 === targetId);
         setSelectedFeedName(info ? info.Column2 : '사료 정보 없음');
+  
+        // 새로운 조건 추가: 181 이상인 경우 description도 업데이트
+        if (targetId > 181) {
+          setSelectedFeedDescription(info ? info.Column3 : '사료 설명 없음');
+        } else {
+          setSelectedFeedDescription(info ? info.Column4 : ''); // 181 이하인 경우의 설명 업데이트
+        }
       })
       .catch((error) => {
         console.error("Error fetching name data:", error);
         setSelectedFeedName("사료 정보 없음");
+        setSelectedFeedDescription("사료 설명 없음"); // 추가
       });
   };
 
+  
   useEffect(() => {
+    console.log("사료 ID에 대한 데이터 가져오는 중:", selectedFeed.id);
     const imageInfo = getImageFilePath(selectedFeed.id);
-
+  
     if (imageInfo.nameData) {
-      // 건식 사료의 경우 추가로 이름 데이터 가져오기
+      fetchFeedNameData(imageInfo.nameData, selectedFeed.id);
+  
       if (selectedFeed.id <= 181) {
-        const dryNameDataUrl = `${process.env.PUBLIC_URL}/건식사료-성분.json`;
-        fetchFeedNameData(dryNameDataUrl, selectedFeed.id);
+        const dryDataUrl = `${process.env.PUBLIC_URL}/건식사료-성분.json`;
+        fetchFeedData(dryDataUrl, selectedFeed.id); // 영양 정보와 설명 데이터 모두 가져오기
       } else {
-        const wetNameDataUrl = `${process.env.PUBLIC_URL}/습식사료-성분.json`;
-        fetchFeedNameData(wetNameDataUrl, selectedFeed.id - 181);
+        const wetDataUrl = `${process.env.PUBLIC_URL}/습식사료-성분.json`;
+        fetchFeedData(wetDataUrl, selectedFeed.id - 181); // 영양 정보와 설명 데이터 모두 가져오기
       }
     } else {
       setSelectedFeedName('사료 정보 없음');
+      setSelectedFeedDescription('사료 설명 없음');
+      setSelectedFeedNutrition({});
     }
   }, [selectedFeed.id]);
+
+  const fetchFeedData = (dataUrl, targetId) => {
+    fetch(dataUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        const feedInfo = data.find((item) => item.Column1 === targetId);
+        setSelectedFeedNutrition(feedInfo || {});
+        setSelectedFeedName(feedInfo ? feedInfo.Column2 : '사료 정보 없음');
+        setSelectedFeedDescription(feedInfo ? feedInfo.Column3 : '사료 설명 없음'); // 설명 업데이트
+      })
+      .catch((error) => {
+        console.error("데이터 가져오기 오류:", error);
+        setSelectedFeedNutrition({});
+        setSelectedFeedName("사료 정보 없음");
+        setSelectedFeedDescription("사료 설명 없음"); // 오류 발생 시 설명 설정
+      });
+  };
 
 
 
@@ -92,10 +125,7 @@ const ImageDetailFeed = ({  }) => {
           <div style={{marginBottom: '50px'}}>
             <h3 style={{ backgroundColor: '#FFC9C9', width: '200px', margin: 'auto', borderRadius: '20px', marginBottom: '10px' }}>🍖 사료 설명 🍖</h3><br />
             {/* p 태그로 감싸던지 br로 나누던지 해야함 */}
-            <p>1. 맛있는 사료!</p>
-            <p>2. 최고의 사료!</p>
-            <p>3. 최고의 사료!</p>
-            <p>4. 최고의 사료!</p>
+            <p>{selectedFeedDescription}</p>
           </div>
 
           {/* 사료 성분 */}
