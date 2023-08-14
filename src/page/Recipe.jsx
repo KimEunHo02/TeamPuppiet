@@ -1,11 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo from './Logo';
 import Button from 'react-bootstrap/Button';
-
+import axios from 'axios';
 import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
 import ImageDetail from './ImageDetail';
 
 const Recipe = () => {
+  const [recipeData, setRecipeData] = useState([]);
+
+useEffect(() => {
+  const recipefilePath = 'recipebom.json';
+  //간식레시피데이터 가져오기
+  axios.get(recipefilePath)
+  .then(response => {
+    setRecipeData(response.data);
+  })
+  .catch(error => {
+    console.error('Error fetching dry food data:', error);
+  })
+}, []);
+
+
+
 
   // 이미지 상세 페이지 라우팅을 생성하는 함수
   const generateRoutes = () => {
@@ -188,20 +204,28 @@ const Recipe = () => {
     transition: 'color 0.3s', // 색 변화에 트랜지션 적용
   };
 
+  
+
   // 이미지 박스 클릭 시 각 레시피의 상세페이지 이동
   const dummyRecipes = Array.from({ length: 627 }, (_, index) => ({
     id: index + 1,
     description: `Recipe ${index + 1}`,
   }));
+  const imageBoxes = dummyRecipes.map((recipe) => {
+    const recipeInfo = recipeData[recipe.id]; // 해당 레시피의 정보 가져오기
+    if (!recipeInfo) {
+      return null; // 해당 레시피 정보가 없을 경우 빈 컴포넌트 반환
+    }
 
-  const imageBoxes = dummyRecipes.map((recipe) => (
-    <div key={recipe.id} style={imageBoxStyle}>
-      <Link to={`/ImageDetail/${recipe.id}`} style={linkStyle}>
-        <div style={{ backgroundColor: 'gray', width: '100%', height: '200px' }}></div>
-        <p style={descriptionStyle}>{recipe.description}</p>
-      </Link>
-    </div>
-  ));
+    return (
+      <div key={recipe.id} style={imageBoxStyle}>
+        <Link to={`/ImageDetail/${recipe.id}`} style={linkStyle}>
+          <div style={{ backgroundImage: `url('/간식2/image (${recipe.id}).png')`, width: '100%', height: '200px', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+          <p style={descriptionStyle}>{recipeInfo.레시피명}</p>
+        </Link>
+      </div>
+    );
+  });
 
 
   // ------------------------------------------------
