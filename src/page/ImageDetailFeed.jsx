@@ -29,43 +29,71 @@ const ImageDetailFeed = () => {
 
   const [selectedFeedName, setSelectedFeedName] = useState("");
   const [selectedFeedNutrition, setSelectedFeedNutrition] = useState([]);
-  const [selectedFeedDescription, setSelectedFeedDescription] = useState("");
+  const [selectedFeedDescription, setSelectedFeedDescription] = useState(""); // 추가된 부분
 
+  const [feedDescriptions, setFeedDescriptions] = useState([]);
+
+
+  
   const fetchFeedNameData = (dataUrl, targetId) => {
+    const imageInfo = getImageFilePath(targetId); // imageInfo를 가져오기
+  
     fetch(dataUrl)
       .then((response) => response.json())
       .then((data) => {
         const info = data.find((item) => item.Column1 === targetId);
-        setSelectedFeedName(info ? info.Column2 : '사료 정보 없음');
+        setSelectedFeedName(info ? info.사료명 : '사료 정보 없음');
   
-        // 새로운 조건 추가: 181 이상인 경우 description도 업데이트
         if (targetId > 181) {
-          setSelectedFeedDescription(info ? info.Column3 : '사료 설명 없음');
+          fetchFeedDescriptionData(imageInfo.descriptionData, targetId - 181);
+        } else if (targetId <= 181 && info) {
+          const descriptionDataUrl = `${process.env.PUBLIC_URL}/건식사료특징.json`;
+          fetchFeedDescriptionData(descriptionDataUrl, targetId);
         } else {
-          setSelectedFeedDescription(info ? info.Column4 : ''); // 181 이하인 경우의 설명 업데이트
+          setSelectedFeedDescription('사료 설명 없음');
         }
       })
       .catch((error) => {
         console.error("Error fetching name data:", error);
         setSelectedFeedName("사료 정보 없음");
-        setSelectedFeedDescription("사료 설명 없음"); // 추가
+        setSelectedFeedDescription("사료 설명 없음");
       });
   };
 
-  
+  useEffect(() => {
+    // 여기서 건식사료특징.json 파일을 가져와서 데이터를 설정합니다.
+    fetch(`${process.env.PUBLIC_URL}/건식사료특징.json`)
+      .then((response) => response.json())
+      .then((data) => {
+        setFeedDescriptions(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching description data:", error);
+      });
+  }, []);
+
   useEffect(() => {
     console.log("사료 ID에 대한 데이터 가져오는 중:", selectedFeed.id);
+    
+    // getImageFilePath 함수를 호출하여 imageInfo를 가져옴
     const imageInfo = getImageFilePath(selectedFeed.id);
+    
   
+    // if 문으로 imageInfo가 정의되어 있는지 체크하고 데이터를 가져오는 함수 호출
     if (imageInfo.nameData) {
       fetchFeedNameData(imageInfo.nameData, selectedFeed.id);
-  
       if (selectedFeed.id <= 181) {
         const dryDataUrl = `${process.env.PUBLIC_URL}/건식사료-성분.json`;
-        fetchFeedData(dryDataUrl, selectedFeed.id); // 영양 정보와 설명 데이터 모두 가져오기
+        fetchFeedData(dryDataUrl, selectedFeed.id);
+  
+        // fetchFeedDescriptionData를 호출하도록 수정
+        fetchFeedDescriptionData(imageInfo.descriptionData, selectedFeed.id);
       } else {
         const wetDataUrl = `${process.env.PUBLIC_URL}/습식사료-성분.json`;
-        fetchFeedData(wetDataUrl, selectedFeed.id - 181); // 영양 정보와 설명 데이터 모두 가져오기
+        fetchFeedData(wetDataUrl, selectedFeed.id - 181);
+  
+        // fetchFeedDescriptionData를 호출하도록 수정
+        fetchFeedDescriptionData(imageInfo.descriptionData, selectedFeed.id - 181);
       }
     } else {
       setSelectedFeedName('사료 정보 없음');
@@ -73,6 +101,8 @@ const ImageDetailFeed = () => {
       setSelectedFeedNutrition({});
     }
   }, [selectedFeed.id]);
+
+
 
   const fetchFeedData = (dataUrl, targetId) => {
     fetch(dataUrl)
@@ -91,7 +121,25 @@ const ImageDetailFeed = () => {
       });
   };
 
-
+  const fetchFeedDescriptionData = (dataUrl, targetId) => {
+    fetch(dataUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        const descriptionData = data.find(
+          (item) => item.Column1 === targetId
+        );
+        if (descriptionData) {
+          const description = `${descriptionData.Column3 || ''}\n${descriptionData.Column4 || ''}\n${descriptionData.Column5 || ''}\n${descriptionData.Column6 || ''}`;
+          setSelectedFeedDescription(description);
+        } else {
+          setSelectedFeedDescription("사료 설명 없음");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching description data:", error);
+        setSelectedFeedDescription("사료 설명 없음");
+      });
+  };
 
 
   return (
@@ -122,12 +170,13 @@ const ImageDetailFeed = () => {
           {/* 텍스트 내용 */}
 
           {/* 사료 설명 */}
-          <div style={{marginBottom: '50px'}}>
-            <h3 style={{ backgroundColor: '#FFC9C9', width: '200px', margin: 'auto', borderRadius: '20px', marginBottom: '10px' }}>🍖 사료 설명 🍖</h3><br />
-            {/* p 태그로 감싸던지 br로 나누던지 해야함 */}
-            <p>{selectedFeedDescription}</p>
+          <div style={{ marginBottom: '50px' }}>
+            <h3 style={{ backgroundColor: '#FFC9C9', width: '200px', margin: 'auto', borderRadius: '20px', marginBottom: '10px' }}>🍖 사료 설명 🍖</h3>
+            {/* selectedFeedDescription이 정의되어 있을 때만 split 메서드 호출 */}
+            {selectedFeedDescription && selectedFeedDescription.split('\n').map((item, index) => (
+              <p key={index}>{item}</p>
+            ))}
           </div>
-
           {/* 사료 성분 */}
           <div>
             <h3 style={{ backgroundColor: '#FFC9C9', width: '200px', margin: 'auto', borderRadius: '20px', marginTop: '10px' }}>사료 성분</h3><br />
