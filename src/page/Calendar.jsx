@@ -15,17 +15,26 @@ import stamp2_1 from '../stamp/stamp2_click.png'
 import stamp3_1 from '../stamp/stamp3_click.png'
 import stamp4_1 from '../stamp/stamp4_click.png'
 
-// 랜덤 운동 목록
-const ExerciseContent = ({challengeCompleted, setChallengeCompleted}) => {
-  const dogExercises = [
-    "산책 15분하기",
-    "산책 20분하기",
-    "산책 30분하기",
-    "공놀이 10분하기",
-    "공놀이 20분하기"
-  ];
+// 파이어베이스
 
-  const randomExercise = dogExercises[Math.floor(Math.random()*dogExercises.length)];
+import { initializeApp } from 'firebase/app';
+import { firebaseApp, getFirestore } from '../config/firebase';
+import { firebaseConfig } from '../config/firebase';
+import { updateDoc, doc, addDoc, collection } from "@firebase/firestore";
+import { getDocs} from 'firebase/firestore';
+
+// 랜덤 운동 목록
+const ExerciseContent = ({challengeCompleted, setChallengeCompleted, randomExerciseProp,setRandomExerciseProp, dogExercises }) => {
+
+  const [randomExercise, setRandomExercise] = useState(randomExerciseProp); // 랜덤 운동 상태 추가
+
+  useEffect(() => {
+    if (!challengeCompleted) {
+      const initialRandomExercise = dogExercises[Math.floor(Math.random() * dogExercises.length)];
+      setRandomExercise(initialRandomExercise);
+      setRandomExerciseProp(initialRandomExercise);
+    }
+  }, [challengeCompleted, setRandomExerciseProp, dogExercises]); // 챌린지 완료 시 랜덤 운동 갱신
 
   const handleChallengeComplete = () =>{
     if(!challengeCompleted){
@@ -75,28 +84,49 @@ const Stamp = ({challengeCompleted, selectedDate,stamps, setStamps, setChallenge
     }
   }
 
-  const handleStampClick = () => {
-    if (challengeCompleted && selectedImageIndex !== -1) {
-      const stampDate = format(selectedDate, 'yyyy-MM-dd');
-      const newStamps = [...stamps];
-      const stampIndex = newStamps.findIndex(
-        (stamp) => isSameDay(parse(stamp.date, 'yyyy-MM-dd', new Date()), selectedDate)
-      );
-      if (stampIndex !== -1) {
-        newStamps[stampIndex].imageIndex = selectedImageIndex;
-      } else {
-        newStamps.push({ date: stampDate, imageIndex: selectedImageIndex });
-      }
-      setStamps(newStamps);
+
+  // Firebase (유정)
+  
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
+const stampsCollection = collection(db, "stamps");
+
+const handleStampClick = async () => {
+  if (challengeCompleted && selectedImageIndex !== -1) {
+    const stampDate = format(selectedDate, 'yyyy-MM-dd');
+    const newStamps = [...stamps];
+    const stampIndex = newStamps.findIndex(
+      (stamp) => isSameDay(parse(stamp.date, 'yyyy-MM-dd', new Date()), selectedDate)
+    );
+
+    // Firestore에 데이터 추가
+    if (stampIndex !== -1) {
+      newStamps[stampIndex].imageIndex = selectedImageIndex;
+      await updateDoc(doc(db, "stamps", newStamps[stampIndex].id), {
+        imageIndex: selectedImageIndex
+      });
+    } else {
+      const newStampData = {
+        date: stampDate,
+        imageIndex: selectedImageIndex
+      };
+      addDoc(stampsCollection, newStampData)
+      .then((docRef) => {
+        console.log("새로운 스탬프 문서가 추가되었습니다. 문서 ID:", docRef.id);
+      })
+      .catch((error) => {
+        console.error("스탬프 추가 중 오류가 발생했습니다:", error);
+      });
+
+    newStamps.push(newStampData);
+  }
+
+    setStamps(newStamps);
       
     
   
       // 이미지 선택 초기화
       setSelectedImageIndex(-1);
-      
-
-      // 챌린지 완료 상태를 false로 변경
-      // setChallengeCompleted(false);
       
       // 보상 알림 화면 표시(유정)
       setShowAlert(true);
@@ -258,6 +288,37 @@ export const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [challengeCompleted, setChallengeCompleted] = useState(false);
   const [stamps, setStamps] = useState([])
+  const [randomExercise, setRandomExercise] = useState("");
+
+  const dogExercises = [
+    "산책 15분하기",
+    "산책 20분하기",
+    "산책 30분하기",
+    "공놀이 10분하기",
+    "공놀이 20분하기"
+  ];
+
+  // useEffect를 사용하여 초기 랜덤 운동을 설정
+  useEffect(() => {
+    const initialRandomExercise = dogExercises[Math.floor(Math.random() * dogExercises.length)];
+    setRandomExercise(initialRandomExercise);
+  }, [])
+
+   // 마운트될 때 스탬프 데이터 불러오기
+   useEffect(() => {
+    const fetchData = async () => {
+      const db = getFirestore(firebaseApp); // firestore 객체 생성
+      const stampsCollection = collection(db, 'stamps'); // stamps 컬렉션 생성
+
+      const querySnapshot = await getDocs(stampsCollection);
+      const fetchedStamps = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setStamps(fetchedStamps);
+    };
+    fetchData();
+  }, []);
 
   const stampImages = [
     { normal: stamp1, clicked: stamp1_1 },
@@ -298,8 +359,6 @@ export const Calendar = () => {
             <RenderDays/>
             <RenderCells
               currentMonth={currentMonth}
-              // selectedDate={preMonth}
-              // nextMonth={onDateClick}
               selectedDate={selectedDate}
               onDateClick={onDateClick}
               stamps={stamps}
@@ -310,8 +369,11 @@ export const Calendar = () => {
           </div>
           <div className='exercise-container'>
             <ExerciseContent 
-              challengeCompleted={challengeCompleted} 
-              setChallengeCompleted={setChallengeCompleted}/>
+              challengeCompleted={challengeCompleted}
+              setChallengeCompleted={setChallengeCompleted}
+              randomExerciseProp={randomExercise}
+              setRandomExerciseProp={setRandomExercise}
+              dogExercises={dogExercises}/>
             <Stamp 
               challengeCompleted={challengeCompleted}
               selectedDate={selectedDate}

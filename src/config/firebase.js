@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "@firebase/firestore";
+import { getFirestore, updateDoc, doc, addDoc, collection } from "@firebase/firestore";
 
 import "firebase/firestore"
 // SDK 설정 - 정희석
@@ -38,9 +38,9 @@ onAuthStateChanged(auth, (user) => {
 
 
 // 꼭 이렇게 해야하는 건 아니니까 편한대로 해당 스크립트에서 import해서 사용해도 된다 - 정희석
-export { auth , db, firebaseApp, createUserWithEmailAndPassword, signInWithEmailAndPassword };
+export { auth , db, firebaseApp, firebaseConfig, getFirestore, updateDoc, doc, addDoc, collection, createUserWithEmailAndPassword, signInWithEmailAndPassword };
 // export const db = getFirestore(firebaseApp);
 
 
-
 export default firebaseApp;
+

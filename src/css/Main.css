@@ -159,3 +159,15 @@
     justify-content: center;
     padding: 20px;
 }
+
+/* 마이페이지 로그인이 필요합니다 모달 창 css */
+.custom-button {
+  background-color: #777777; /* 기존의 버튼 색상으로 변경 */
+  border-color: #777777; /* 기존의 버튼 색상으로 변경 */
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.custom-button:hover {
+  background-color: #FFC9C9; /* 마우스 호버 시의 원하는 색상으로 변경 */
+  border-color: #FFC9C9; /* 마우스 호버 시의 원하는 색상으로 변경 */
+}

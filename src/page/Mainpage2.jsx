@@ -11,7 +11,43 @@ import { Link } from 'react-router-dom';
 
 const Mainpage2 = ({ mainArr }) => {
 
+ //간식이미지불러오기
+ const [snacksData, setSnacksData] = useState([]);
+ const [randomSnackImages, setRandomSnackImages] = useState([]);
+
+  
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/recipebom.json`)
+      .then((response) => response.json())
+      .then((data) => {
+        setSnacksData(data);
+      })
+      .catch((error) => {
+        console.error("간식 데이터 가져오기 오류:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    // 랜덤 간식 이미지 설정
+    const newRandomSnackImages = Array.from({ length: 3 }, (_, index) => {
+      const randomIndex = Math.floor(Math.random() * snacksData.length);
+      const selectedSnack = snacksData[randomIndex];
+      return selectedSnack;
+    });
+    setRandomSnackImages(newRandomSnackImages);
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [snacksData]); // snacksData 변경 시에만 실행
+
+
+
   let sessionData = sessionStorage.getItem('userId')
+
+  
   console.log('session :', sessionData)
 
   // 스크롤 위치 상태 추가
@@ -20,6 +56,29 @@ const Mainpage2 = ({ mainArr }) => {
   const handleScroll = () => {
     setScrollY(window.scrollY)
   }
+
+  const getRandomSnackImage = () => {
+    if (snacksData.length > 0) {
+      const randomIndex = Math.floor(Math.random() * snacksData.length);
+      const selectedSnack = snacksData[randomIndex];
+      return (
+        <div className='foodbox' key={randomIndex}>
+          <div style={imgbox} className='mainboxcontent'>
+            {selectedSnack && (
+              <img
+                src={`${process.env.PUBLIC_URL}/간식2/image (${selectedSnack.Column1}).png`}
+                alt='간식 이미지'
+                style={imageStyle}
+              />
+            )}
+            <a className='foodtext'>{selectedSnack && selectedSnack.레시피명}</a>
+          </div>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -178,34 +237,26 @@ const Mainpage2 = ({ mainArr }) => {
 
               {/* 여기서부터 간식 이미지 들어가는 공간입니다 */}
 
-            <div className='foodbox'>
+              
+
+          {randomSnackImages.map((selectedSnack, index) => (
+            <div className='foodbox' key={index}>
               <div style={imgbox} className='mainboxcontent'>
-                <img src='\img\간식.jpg' alt='간식 임시 사진' style={imageStyle} />
-                <a className='foodtext'>간식1</a>
+                {selectedSnack && (
+                  <img
+                    src={`${process.env.PUBLIC_URL}/간식2/image (${selectedSnack.Column1}).png`}
+                    alt='간식 이미지'
+                    style={imageStyle}
+                  />
+                )}
+                <a className='foodtext'>{selectedSnack && selectedSnack.레시피명}</a>
               </div>
+            </div>
+              ))}
             </div>
 
-            <div className='foodbox'>
-              <div style={imgbox} className='mainboxcontent'>
-                <img src='\img\간식.jpg' alt='간식 임시 사진' style={imageStyle} />
-                <a className='foodtext'>간식2</a>
-              </div>
-            </div>
-
-            <div className='foodbox'>
-              <div style={imgbox} className='mainboxcontent'>
-                <img src='\img\간식.jpg' alt='간식 임시 사진' style={imageStyle} />
-                <a className='foodtext'>간식3</a>
-              </div>
-            </div>
           </div>
 
-        </div>
-
-        {sessionData == 'puppiet'
-          ? <p></p>
-          : <p>로그인이 필요합니다.</p>}
-        {mainArr.map(item => <Login key={item.url} obj={item} />)}
       </div>
     </div>
   )
