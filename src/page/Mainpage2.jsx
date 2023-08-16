@@ -257,10 +257,6 @@ const Mainpage2 = ({ mainArr }) => {
 
           </div>
 
-        {sessionData == 'puppiet'
-          ? <p></p>
-          : <p>로그인이 필요합니다.</p>}
-        {mainArr.map(item => <Login key={item.url} obj={item} />)}
       </div>
     </div>
   )
