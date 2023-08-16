@@ -23,7 +23,7 @@ const ImageDetail = () => {
       .then((response) => response.json())
       .then((data) => {
         try {
-          const recipe = data[recipeId];
+          const recipe = data[recipeId-1];
           if (recipe) {
             setRecipeName(recipe.레시피명);
     

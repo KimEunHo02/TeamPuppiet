@@ -212,7 +212,7 @@ useEffect(() => {
     description: `Recipe ${index + 1}`,
   }));
   const imageBoxes = dummyRecipes.map((recipe) => {
-    const recipeInfo = recipeData[recipe.id]; // 해당 레시피의 정보 가져오기
+    const recipeInfo = recipeData[recipe.id-1]; // 해당 레시피의 정보 가져오기
     if (!recipeInfo) {
       return null; // 해당 레시피 정보가 없을 경우 빈 컴포넌트 반환
     }
