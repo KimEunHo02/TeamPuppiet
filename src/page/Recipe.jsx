@@ -293,7 +293,7 @@ const Recipe = () => {
       </div>
 
       {/* 레시피 추천 박스 컨테이너 */}
-      <div style={{ margin: 'auto', width: '1200px', backgroundColor: 'white', borderRadius: '20px', padding: '60px 40px 10px 40px' }}>
+      <div style={{ margin: 'auto', width: '1200px', backgroundColor: 'white', borderRadius: '20px', padding: '40px 40px 10px 40px' }}>
         <div style={imageBoxContainerStyle}>{imageBoxes}</div>
       </div>
 
