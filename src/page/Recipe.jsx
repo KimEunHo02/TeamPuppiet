@@ -7,19 +7,18 @@ import ImageDetail from './ImageDetail';
 
 const Recipe = () => {
   const [recipeData, setRecipeData] = useState([]);
-  const [hoveredImageIndex, setHoveredImageIndex] = useState(null); // 이미지 hover
 
-  useEffect(() => {
-    const recipefilePath = 'recipebom.json';
-    //간식레시피데이터 가져오기
-    axios.get(recipefilePath)
-      .then(response => {
-        setRecipeData(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching dry food data:', error);
-      })
-  }, []);
+useEffect(() => {
+  const recipefilePath = 'recipebom.json';
+  //간식레시피데이터 가져오기
+  axios.get(recipefilePath)
+  .then(response => {
+    setRecipeData(response.data);
+  })
+  .catch(error => {
+    console.error('Error fetching dry food data:', error);
+  })
+}, []);
 
 
 
@@ -169,11 +168,9 @@ const Recipe = () => {
   const imageBoxStyle = {
     display: 'inline-block',
     width: 'calc(25% - 40px)',
-    margin: '15px auto',
+    margin: 'auto',
     overflow: 'hidden',
-    position: 'relative',
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)', // 그림자 효과
-    transition: 'transform 0.1s ease', // 트랜지션 설정
+    position: 'relative'
   };
 
   // 이미지 박스 컨테이너 스타일
@@ -183,24 +180,13 @@ const Recipe = () => {
     justifyContent: 'space-between', // 좌우 간격 맞춤
   };
 
-  // 이미지 박스 마우스 오버 효과 설정
-  const handleImageBoxMouseOver = (event, index) => {
-    setHoveredImageIndex(index); // 호버된 이미지 인덱스 설정
-    event.currentTarget.style.transform = 'scale(1.05)'; // 이미지 확대
-  };
-
-  // 이미지 박스 마우스 아웃 효과 설정
-  const handleImageBoxMouseOut = (event) => {
-    setHoveredImageIndex(null); // 호버된 이미지 인덱스 초기화
-    event.currentTarget.style.transform = ''; // 이미지 크기 원래대로 복원
-  };
-
   // 이미지 스타일
   const imageStyle = {
     width: '100%',
     height: 'auto',
     maxHeight: '100%'
   };
+
 
   // 이미지 설명 스타일
   const descriptionStyle = {
@@ -218,26 +204,50 @@ const Recipe = () => {
     transition: 'color 0.3s', // 색 변화에 트랜지션 적용
   };
 
+  
 
-
-  // 이미지 박스 클릭 시 각 레시피의 상세페이지 이동
   const dummyRecipes = Array.from({ length: 627 }, (_, index) => ({
     id: index + 1,
     description: `Recipe ${index + 1}`,
   }));
-  const imageBoxes = dummyRecipes.map((recipe, index) => {
-    const recipeInfo = recipeData[recipe.id - 1]; // 해당 레시피의 정보 가져오기
+  
+  const imageBoxes = dummyRecipes.map((recipe) => {
+    const recipeInfo = recipeData[recipe.id - 1];
     if (!recipeInfo) {
       return null; // 해당 레시피 정보가 없을 경우 빈 컴포넌트 반환
     }
-
+  
+    const ingredientsList = JSON.parse(recipeInfo['재료 (고구마, 감자, 호박, 닭, 돼지, 소, 연어, 당근, 사과, 바나나, 꿀, 귀리, 우유, 요거트, 치즈, 달걀)']);
+  
+    // 기준에 따라 재료 카테고리 분류
+    const categories = {
+      채소: ['고구마', '감자', '호박', '당근'],
+      육류: ['닭', '돼지', '소', '연어','고기'],
+      과일: ['사과', '바나나'],
+      유제품: ['우유', '요거트', '치즈'],
+      달걀: ['달걀'],
+    };
+  
+    // 선택한 재료 중에 각 카테고리에 속하는 재료가 있는지 체크
+    const shouldRender = selectedIngredients.length === 0 || selectedIngredients.some(ingredient => {
+      if (categories[ingredient]) {
+        return ingredientsList.some(listIngredient => {
+          if (ingredient === '육류' && listIngredient.includes('고기')) {
+            return true;
+          }
+          return categories[ingredient].includes(listIngredient);
+        });
+      }
+      return false;
+    });
+  
+    // 렌더링 조건 충족 시에만 레시피 렌더링
+    if (!shouldRender) {
+      return null;
+    }
+  
     return (
-      <div
-        key={recipe.id}
-        style={{ ...imageBoxStyle, transform: index === hoveredImageIndex ? 'scale(1.05)' : '' }}
-        onMouseOver={(event) => handleImageBoxMouseOver(event, index)} // 인덱스 전달
-        onMouseOut={handleImageBoxMouseOut}
-      >
+      <div key={recipe.id} style={imageBoxStyle}>
         <Link to={`/ImageDetail/${recipe.id}`} style={linkStyle}>
           <div style={{ backgroundImage: `url('/간식2/image (${recipe.id}).png')`, width: '100%', height: '200px', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
           <p style={descriptionStyle}>{recipeInfo.레시피명}</p>
@@ -245,8 +255,6 @@ const Recipe = () => {
       </div>
     );
   });
-
-
   // ------------------------------------------------
   // 페이지 맨 위로 이동 버튼 클릭 핸들러
   const scrollToTop = () => {
@@ -293,7 +301,7 @@ const Recipe = () => {
       </div>
 
       {/* 레시피 추천 박스 컨테이너 */}
-      <div style={{ margin: 'auto', width: '1200px', backgroundColor: 'white', borderRadius: '20px', padding: '40px 40px 10px 40px' }}>
+      <div style={{ margin: 'auto', width: '1200px', backgroundColor: 'white', borderRadius: '20px', padding: '60px 40px 10px 40px' }}>
         <div style={imageBoxContainerStyle}>{imageBoxes}</div>
       </div>
 
