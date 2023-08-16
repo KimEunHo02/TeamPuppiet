@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { useParams } from 'react-router-dom';
 import Logo from './Logo';
 import { dummyFeeds } from './Feed'; // Feed에서 dummyFeeds를 가져옵니다.
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 
 const getImageFilePath = (feedId) => {
@@ -28,7 +29,7 @@ const ImageDetailFeed = () => {
   const selectedFeed = dummyFeeds.find((feed) => feed.id === parseInt(feedId));
 
   const [selectedFeedName, setSelectedFeedName] = useState("");
-  const [selectedFeedNutrition, setSelectedFeedNutrition] = useState([]);
+  const [selectedFeedNutrition, setSelectedFeedNutrition] = useState({});
   const [selectedFeedDescription, setSelectedFeedDescription] = useState(""); // 추가된 부분
 
   const [feedDescriptions, setFeedDescriptions] = useState([]);
@@ -141,6 +142,38 @@ const ImageDetailFeed = () => {
       });
   };
 
+  // 성분 차트
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setData([
+      {
+        name: '조지방',
+        퍼센트: selectedFeedNutrition["조지방(%)"],
+      },
+      {
+        name: '조섬유',
+        퍼센트: selectedFeedNutrition["조섬유(%)"],
+      },
+      {
+        name: '조회분',
+        퍼센트: selectedFeedNutrition["조회분(%)"],
+      },
+      {
+        name: '인',
+        퍼센트: selectedFeedNutrition["인(%)"],
+      },
+      {
+        name: '칼슘',
+        퍼센트: selectedFeedNutrition["칼슘(%)"],
+      },
+      {
+        name: '수분',
+        퍼센트: selectedFeedNutrition["수분(%)"],
+      },
+    ]);
+  }, [selectedFeedNutrition]);
+
 
   return (
     <div>
@@ -169,7 +202,7 @@ const ImageDetailFeed = () => {
 
 
         {/* 오른쪽 텍스트 넣을 div */}
-        <div style={{ flex: 1, backgroundColor: 'white', padding: '20px', paddingTop: '80px', fontSize: '19px', fontWeight: 'bold', textAlign: 'center' }}>
+        <div style={{ flex: 1, backgroundColor: 'white', padding: '20px', paddingTop: '50px', fontSize: '19px', fontWeight: 'bold', textAlign: 'center' }}>
 
           {/* 텍스트 내용 */}
 
@@ -181,18 +214,29 @@ const ImageDetailFeed = () => {
             ))}
           </div>
 
-          {/* 사료 성분 */}
-          <div style={{ marginLeft: '15px' }}>
-            <div>
-              <strong style={{ fontSize: '30px', width: '200px', marginTop: '10px' }}>성분</strong>
-              <p style={{ marginTop: '12px'}}>조지방(%): {selectedFeedNutrition["조지방(%)"]}</p>
-              <p>조섬유(%): {selectedFeedNutrition["조섬유(%)"]}</p>
-              <p>조회분(%): {selectedFeedNutrition["조회분(%)"]}</p>
-              <p>인(%): {selectedFeedNutrition["인(%)"]}</p>
-              <p>칼슘(%): {selectedFeedNutrition["칼슘(%)"]}</p>
-              <p>수분(%): {selectedFeedNutrition["수분(%)"]}</p>
-            </div>
-          </div>
+          {/* 차트 */}
+          <ResponsiveContainer width="100%" height={400}>
+            <LineChart
+              width={500}
+              height={300}
+              data={data}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="퍼센트" stroke="#0404B4" strokeWidth={2} activeDot={{ r: 8 }} />
+            </LineChart>
+          </ResponsiveContainer>
+          {/* 차트 끝 */}
+
         </div>
       </div>
     </div>
