@@ -123,7 +123,7 @@ const Dogkind = ({ options, onSelect }) => {
 };
 
 const Petinfo = () => {
-
+    const navigate = useNavigate();
     // 강아지 종 선택 state
     const [selectedDogKind, setSelectedDogKind] = useState('');
 
@@ -237,7 +237,7 @@ const Petinfo = () => {
 
     const formData = useLocation().state;
     console.log(formData);
-
+    
     // 회원가입 정보 데이터베이스로 보내기
     const createUser = async () => {
         await setDoc(doc(db, "users", String(formData.username)),
@@ -255,7 +255,19 @@ const Petinfo = () => {
                 dogKind: selectedDogKind
             }
         )
-    }
+    };
+    navigate('/mypage2', { state: { selectedDogKind } });
+    // 추가 230815
+    <Link
+    to={{
+        pathname: '/mypage2',
+        state: {
+            dogName: inputValues.name, // 선택한 강아지 이름
+            dogKind: selectedDogKind, // 선택한 강아지 종류
+            // 여기에 다른 데이터도 추가할 수 있습니다.
+        },
+    }}
+    className='myButton'>My Page로</Link>
 
     return (
         <div>
