@@ -19,6 +19,12 @@ import { onAuthStateChanged } from "firebase/auth";
 
 // GenderSelection 컴포넌트 정의 (남, 여 선택 버튼)
 const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
+  const [selected, setSelected] = useState(selectedGender);
+
+    const handleButtonClick = (value) => {
+        setSelected(value);
+        handleGenderButtonClick(value);
+    };
   return (
     <div className="d-flex align-items-center" style={{ marginTop: '20px' }}>
       <img src={genderImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
@@ -28,16 +34,18 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
           {/* "남성" 버튼 */}
           <Button
             variant={selectedGender === "남성" ? 'primary' : 'light'}
+            onClick={() => handleButtonClick("남성")}
             style={{
-              backgroundColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
-              borderColor: selectedGender === "남성" ? 'skyblue' : '#F0F0F0',
-              color: 'black',
               width: '60px',
               height: '40px',
               margin: '-10px 50px',
-              marginLeft: '42px'
+              marginLeft: '42px',
+              backgroundColor: selected === "남성" ? 'skyblue' : null,
+              borderColor: selected === "남성" ? 'skyblue' : '#F0F0F0',
+              color: selected === "남성" ? 'black': null
+              
             }}
-            onClick={() => handleGenderButtonClick("남성")}
+            
           >
             남성
           </Button>
@@ -45,15 +53,17 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
           {/* "여성" 버튼 */}
           <Button
             variant={selectedGender === "여성" ? 'primary' : 'light'}
+            onClick={() => handleButtonClick("여성")}
             style={{
-              backgroundColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
-              borderColor: selectedGender === "여성" ? '#FFC9C9' : '#F0F0F0',
-              color: 'black',
               width: '60px',
               height: '40px',
               margin: '1px 50px auto -15px',
+              backgroundColor: selected === "여성" ? '#FFC9C9' : null,
+              borderColor: selected === "여성" ? '#FFC9C9' : '#F0F0F0',
+              color: selected === "여성" ? 'black': null
+              
             }}
-            onClick={() => handleGenderButtonClick("여성")}
+            
           >
             여성
           </Button>
@@ -83,34 +93,67 @@ const Mypage = () => {
     gender: '여성',
   });
   
-  // 현재 유저를 저장을 위해 useState 선언
+  // // 현재 유저를 저장을 위해 useState 선언
+  // const [currentUser, setCurrentUser] = useState({});
+
+  // // 현재 유저 정보를 currentUser에 저장
+  // useEffect(() => {
+  //   const unsub = onAuthStateChanged(auth, (user) => {
+  //     setCurrentUser(user);
+  //     console.log(user);
+  //   });
+  // }, []);
+  // // user 데이터 가져오기
+  // // firebase에서 현재 유저의 이메일 가져오기
+  // const userId = currentUser.email
+  
+  // const getUsers = async () => {
+  //   const docRef = doc(db, "users", String(userId));
+  //   const docSnap = await getDoc(docRef);
+  //   if (docSnap.exists()) {
+  //     console.log("Document data:", docSnap.data());
+  //     setData(docSnap.data());
+  //   } else {
+  //     console.log("No such document!");
+  //   }
+  // };
+
+  // useEffect(()=>{
+  //   getUsers();
+  // },[])
+
   const [currentUser, setCurrentUser] = useState({});
 
-  // 현재 유저 정보를 currentUser에 저장
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-      console.log(user);
-    });
-  }, []);
-  // user 데이터 가져오기
-  // firebase에서 현재 유저의 이메일 가져오기
-  const userId = currentUser.email
-  
-  const getUsers = async () => {
-    const docRef = doc(db, "users", String(userId));
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      setData(docSnap.data())
-    } else {
-      console.log("No such document!");
-    }
-  };
 
-  useEffect(()=>{
+// 현재 유저 정보를 currentUser에 저장
+useEffect(() => {
+  const unsub = onAuthStateChanged(auth, (user) => {
+    setCurrentUser(user);
+
+    console.log(user);
+  });
+}, []);
+
+// user 데이터 가져오기
+// firebase에서 현재 유저의 이메일 가져오기
+const userId = currentUser.email;
+
+const getUsers = async () => {
+  const docRef = doc(db, "users", String(userId));
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+    setData(docSnap.data());
+  } else {
+    console.log("No such document!");
+  }
+};
+
+useEffect(() => {
+  if (currentUser.email) {
     getUsers();
-  },[])
+  }
+}, [currentUser]); // currentUser 업데이트 시 getUsers() 호출
 
   // 마이페이지 2 이동
   const nav = useNavigate();
