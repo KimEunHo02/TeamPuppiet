@@ -52,6 +52,7 @@ const Mainpage = () => {
     //     window.location.href = '/login'; // 로그인 페이지 경로로 변경
     // };
 
+    // --------------------- 모달 창 띄우기 ----------------------------
     // 로그인 버튼 클릭 시 로그인 페이지로 이동하는 함수
     const handleLoginClick = () => {
         handleClose(); // 모달 닫기
@@ -108,6 +109,7 @@ const Mainpage = () => {
             setIsSearchActive(false);
         }
     };
+    // ----------------------- 모달 창 끝 ----------------------------
 
     return (
 
