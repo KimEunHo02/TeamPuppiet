@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "@firebase/firestore";
+import { getFirestore, updateDoc, doc, addDoc, collection, getDocs } from "@firebase/firestore";
 
 import "firebase/firestore"
 // SDK 설정 - 정희석
@@ -24,21 +24,30 @@ const analytics = getAnalytics(firebaseApp);
 const db = getFirestore(firebaseApp);
 
 // 어딘가에서 로그인 상태 변화를 감지하고 로그인 상태에 따라 다른 동작 수행
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth,  async (user) => {
   if (user) {
     // 로그인 상태일 때
     console.log("사용자가 로그인되었습니다.", user);
-    // 필요한 로직을 추가하거나 렌더링을 업데이트할 수 있습니다.
-  } else {
-    // 로그아웃 상태일 때
-    console.log("사용자가 로그아웃되었습니다.");
-    // 필요한 로직을 추가하거나 렌더링을 업데이트할 수 있습니다.
-  }
-});
+     // 사용자별 스탬프 컬렉션 참조
+     const userStampsCollection = collection(db, "userstamp", user.uid, "stamps");
+
+     // 스탬프 데이터 가져오기
+     const stampsSnapshot = await getDocs(userStampsCollection);
+     const userStamps = stampsSnapshot.docs.map((doc) => doc.data());
+ 
+   } else {
+     // 로그아웃 상태일 때
+     console.log("사용자가 로그아웃되었습니다.");
+     // 필요한 로직을 추가하거나 렌더링을 업데이트할 수 있습니다.
+   }
+ });
+ 
 
 
 // 꼭 이렇게 해야하는 건 아니니까 편한대로 해당 스크립트에서 import해서 사용해도 된다 - 정희석
-export { auth , db, firebaseApp, createUserWithEmailAndPassword, signInWithEmailAndPassword};
+export { auth , db, firebaseApp, createUserWithEmailAndPassword, signInWithEmailAndPassword
+   ,firebaseConfig, getFirestore, updateDoc, doc, addDoc, collection // 추가 (유정)
+};
 // export const db = getFirestore(firebaseApp);
 
 
