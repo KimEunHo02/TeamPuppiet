@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Logo from './Logo'
 import '../css/mypage.css'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import iconImage from '../icon/name.png'
 import birthImage from '../icon/birthday.png'
@@ -11,6 +11,10 @@ import genderImage from '../icon/gender.png'
 
 import manpf from '../profile/profile_man.png'
 import womanpf from '../profile/profile_woman.png'
+
+import { firebaseAuth } from '../config/firebase'; 
+import { db } from '../config/firebase'; 
+import { getDoc, doc, collection, getDocs, updateDoc } from 'firebase/firestore'
 
 // GenderSelection 컴포넌트 정의 (남, 여 선택 버튼)
 const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
@@ -59,6 +63,7 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
 };
 
 const Mypage = () => {
+  //230816 12:59(주석) const [user, setUser] = useState(null); // 230814 정희석  사용자 정보를 저장할 상태 변수
 
   // 흰색 박스
   const Box = {
@@ -72,11 +77,33 @@ const Mypage = () => {
 
   // Signup 페이지에서 담긴 데이터
   const [data, setData] = useState({
-    name: '',
+    name: 'test',
     birth: '',
     gender: '여성',
   });
 
+  // user 데이터 가져오기
+  const userId = sessionStorage.getItem('userId')
+  const getUsers = async () => {
+    const docRef = doc(db, "users", String(userId));
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      setData(docSnap.data())
+    } else {
+      console.log("No such document!");
+    }
+  };
+
+  useEffect(()=>{
+    getUsers();
+  },[])
+
+  // 마이페이지 2 이동
+  const nav = useNavigate();
+  const moveToMy2 = ()=>{
+    nav('/mypage2', {state : data})
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -92,9 +119,9 @@ const Mypage = () => {
   };
 
   const getImagePath = () => {
-    if (data.gender === "남성") {
+    if (data.userGender === "남성") {
       return manpf;
-    } else if (data.gender === "여성") {
+    } else if (data.userGender === "여성") {
       return womanpf;
     } else {
       return null; // 기본 이미지 경로 또는 처리
@@ -106,6 +133,20 @@ const Mypage = () => {
     console.log('저장된 데이터:', data);
     // 여기에 저장 또는 수정 로직을 추가할 수 있습니다.
   };
+  
+//   // 사용자 정보 가져오기 -- 230814 정희석
+//   useEffect(() => {
+//     const unsubscribe = firebaseAuth.onAuthStateChanged((authUser) => {
+//       if (authUser) {
+//         setUser(authUser);
+//       } else {
+//         setUser(null);
+//       }
+//     });
+
+//   return () => unsubscribe(); // 컴포넌트 언마운트 시에도 unsubscribe
+// }, []);
+
 
   return (
     <div
@@ -129,7 +170,7 @@ const Mypage = () => {
           <div style={{ display: 'flex', justifyContent: 'center' }}>
 
             <span className='title'>내 정보</span>
-            <Link to="/mypage2" className='hideTitle'>강아지 정보</Link>
+            <a onClick={moveToMy2} className='hideTitle'>강아지 정보</a>
 
           </div>
           {/* 링크 div 끝 */}
@@ -159,7 +200,7 @@ const Mypage = () => {
                   <Form.Control
                     type="text"
                     name="name"
-                    value={data.name}
+                    placeholder={data.userName}
                     onChange={handleChange}
                     style={{ width: '200px', marginLeft: '42px' }}
                   />
@@ -174,14 +215,14 @@ const Mypage = () => {
                 <Form.Control
                   type="text"
                   name="birth"
-                  value={data.birth}
+                  placeholder={data.userBirth}
                   onChange={handleChange}
                   style={{ width: '200px', marginLeft: '29px', marginTop: '10px' }}
                 />
               </div>
 
               {/* GenderSelection 컴포넌트 사용 / 남, 여 선택 */}
-              <GenderSelection selectedGender={data.gender} handleGenderButtonClick={handleGenderButtonClick} />
+              <GenderSelection selectedGender={data.userGender} handleGenderButtonClick={handleGenderButtonClick} />
             </div>
           </div>
           {/* 수정하기 버튼 */}
@@ -204,7 +245,7 @@ const Mypage = () => {
       </div>
       {/* 바탕화면 div 끝 */}
     </div>
-  )
-}
+  );
+};
 
 export default Mypage

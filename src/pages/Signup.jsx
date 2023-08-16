@@ -19,7 +19,7 @@ import genderImage from '../icon/gender.png'
 import './Signup.css';
 
 // firebase 회원가입 - 정희석
-import { firebaseAuth, createUserWithEmailAndPassword } from "../config/firebase";
+import { auth, createUserWithEmailAndPassword } from "../config/firebase";
 
 
 // `회원가입` 버튼의 onClick에 할당
@@ -191,11 +191,14 @@ const Signup = () => {
       console.log('회원가입 폼 데이터:', formData);
       try {
         const createdUser = await createUserWithEmailAndPassword(
-          firebaseAuth,
+          auth,
           formData.username,
           formData.password
         );
         console.log(createdUser);
+        // 회원가입 성공 후 품종 선택 정보 저장 -- 추가 230815
+        //await saveBreedSelection(createdUser.user.uid, selectedBreed);
+
         sessionStorage.setItem('userId', createdUser.user.email);
         nav('/petinfo', { state: formData });
       } catch (err) {

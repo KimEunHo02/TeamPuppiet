@@ -10,7 +10,7 @@ import Modal from 'react-bootstrap/Modal';
 import iconImage from '../icon/name.png'
 import pwImage from '../icon/password.png'
 
-import { firebaseAuth, signInWithEmailAndPassword } from '../config/firebase'; // firebase login 정보 추가 - 정희석
+import { auth, signInWithEmailAndPassword } from '../config/firebase'; // firebase login 정보 추가 - 정희석
 
 
 const Login = () => {
@@ -87,7 +87,7 @@ const Login = () => {
       const email = idRef.current.value;
       const password = pwRef.current.value;
       // Firebase Authentication을 통한 로그인 처리
-      await signInWithEmailAndPassword(firebaseAuth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
 
       // // 로그인 성공 처리
       // sessionStorage.setItem('userId', email);
