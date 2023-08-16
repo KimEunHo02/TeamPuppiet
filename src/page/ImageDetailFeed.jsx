@@ -160,7 +160,7 @@ const ImageDetailFeed = () => {
 
           {/* 사료 이름 */}
           <div style={{ marginTop: '40px' }}>
-            <h3 style={{ width: '550px', margin: 'auto', borderRadius: '20px', marginBottom: '10px', fontSize: '25px' }}>{selectedFeedName}</h3><br />
+            <h3 style={{ width: '550px', margin: 'auto', marginBottom: '10px', fontSize: '25px' }}>{selectedFeedName}</h3><br />
           </div>
         </div>
 
@@ -175,7 +175,6 @@ const ImageDetailFeed = () => {
 
           {/* 사료 설명 */}
           <div style={{ marginBottom: '50px', backgroundColor: 'white', marginLeft: '15px' }}>
-            {/* <strong style={{ fontSize: '30px',  width: '250px', borderRadius: '20px', marginBottom: '10px', textAlign: 'center' }}>🍖 사료 설명 🍖</strong> */}
             {/* selectedFeedDescription이 정의되어 있을 때만 split 메서드 호출 */}
             {selectedFeedDescription && selectedFeedDescription.split('\n').map((item, index) => (
               <p key={index}>{item}</p>
@@ -185,7 +184,7 @@ const ImageDetailFeed = () => {
           {/* 사료 성분 */}
           <div style={{ marginLeft: '15px' }}>
             <div>
-              <strong style={{ fontSize: '30px', width: '200px', borderRadius: '20px', marginTop: '10px' }}>성분</strong>
+              <strong style={{ fontSize: '30px', width: '200px', marginTop: '10px' }}>성분</strong>
               <p style={{ marginTop: '12px'}}>조지방(%): {selectedFeedNutrition["조지방(%)"]}</p>
               <p>조섬유(%): {selectedFeedNutrition["조섬유(%)"]}</p>
               <p>조회분(%): {selectedFeedNutrition["조회분(%)"]}</p>
