@@ -16,16 +16,17 @@ import stamp3_1 from '../stamp/stamp3_click.png'
 import stamp4_1 from '../stamp/stamp4_click.png'
 
 // 랜덤 운동 목록
-const ExerciseContent = ({challengeCompleted, setChallengeCompleted}) => {
-  const dogExercises = [
-    "산책 15분하기",
-    "산책 20분하기",
-    "산책 30분하기",
-    "공놀이 10분하기",
-    "공놀이 20분하기"
-  ];
+const ExerciseContent = ({challengeCompleted, setChallengeCompleted, randomExerciseProp,setRandomExerciseProp, dogExercises }) => {
 
-  const randomExercise = dogExercises[Math.floor(Math.random()*dogExercises.length)];
+  const [randomExercise, setRandomExercise] = useState(randomExerciseProp); // 랜덤 운동 상태 추가
+
+  useEffect(() => {
+    if (!challengeCompleted) {
+      const initialRandomExercise = dogExercises[Math.floor(Math.random() * dogExercises.length)];
+      setRandomExercise(initialRandomExercise);
+      setRandomExerciseProp(initialRandomExercise);
+    }
+  }, [challengeCompleted, setRandomExerciseProp, dogExercises]); // 챌린지 완료 시 랜덤 운동 갱신
 
   const handleChallengeComplete = () =>{
     if(!challengeCompleted){
@@ -93,10 +94,6 @@ const Stamp = ({challengeCompleted, selectedDate,stamps, setStamps, setChallenge
   
       // 이미지 선택 초기화
       setSelectedImageIndex(-1);
-      
-
-      // 챌린지 완료 상태를 false로 변경
-      // setChallengeCompleted(false);
       
       // 보상 알림 화면 표시(유정)
       setShowAlert(true);
@@ -258,6 +255,21 @@ export const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [challengeCompleted, setChallengeCompleted] = useState(false);
   const [stamps, setStamps] = useState([])
+  const [randomExercise, setRandomExercise] = useState("");
+
+  const dogExercises = [
+    "산책 15분하기",
+    "산책 20분하기",
+    "산책 30분하기",
+    "공놀이 10분하기",
+    "공놀이 20분하기"
+  ];
+
+  // useEffect를 사용하여 초기 랜덤 운동을 설정
+  useEffect(() => {
+    const initialRandomExercise = dogExercises[Math.floor(Math.random() * dogExercises.length)];
+    setRandomExercise(initialRandomExercise);
+  }, [])
 
   const stampImages = [
     { normal: stamp1, clicked: stamp1_1 },
@@ -298,8 +310,6 @@ export const Calendar = () => {
             <RenderDays/>
             <RenderCells
               currentMonth={currentMonth}
-              // selectedDate={preMonth}
-              // nextMonth={onDateClick}
               selectedDate={selectedDate}
               onDateClick={onDateClick}
               stamps={stamps}
@@ -310,8 +320,11 @@ export const Calendar = () => {
           </div>
           <div className='exercise-container'>
             <ExerciseContent 
-              challengeCompleted={challengeCompleted} 
-              setChallengeCompleted={setChallengeCompleted}/>
+              challengeCompleted={challengeCompleted}
+              setChallengeCompleted={setChallengeCompleted}
+              randomExerciseProp={randomExercise}
+              setRandomExerciseProp={setRandomExercise}
+              dogExercises={dogExercises}/>
             <Stamp 
               challengeCompleted={challengeCompleted}
               selectedDate={selectedDate}
