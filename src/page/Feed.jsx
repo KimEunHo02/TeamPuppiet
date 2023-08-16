@@ -19,46 +19,45 @@ const Feed = () => {
 
     // JSON 파일 가져오기
     axios.get(dryJsonFilePath)
-      .then(response => {
-        setDryFoodData(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching dry food data:', error);
-      });
+    .then(response => {
+      setDryFoodData(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching dry food data:', error);
+    });
 
-    // 습식 사료 데이터 가져오기
+  // 습식 사료 데이터 가져오기
     axios.get(wetJsonFilePath)
-      .then(response => {
-        setWetFoodData(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching wet food data:', error);
-      });
-  }, []);
+    .then(response => {
+      setWetFoodData(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching wet food data:', error);
+    });
+    }, []);
 
 
 
 
-
+  
 
   // 이미지 상세 페이지 라우팅을 생성하는 함수
   const generateRoutes = () => {
     const dummyFeeds = Array.from({ length: 214 }, (_, index) => ({
-      id: index + 1,
+      id : index + 1,
       description: `Feed ${index + 1}`,
-      image: `건식${index + 1}.jpg`,
-    }));
+      image: `건식${index + 1}.jpg`,}));
 
     return (
       <Routes>
-        {dummyFeeds.map((feed) => (
-          <Route
-            key={feed.id}
-            path={`/ImageDetailFeed/${feed.id}`}
-            element={<ImageDetailFeed feed={feed} />}
-          />
-        ))}
-      </Routes>
+      {dummyFeeds.map((feed) => (
+        <Route
+          key={feed.id}
+          path={`/ImageDetailFeed/${feed.id}`}
+          element={<ImageDetailFeed feed={feed} />}
+        />
+      ))}
+    </Routes>
     );
   }
 
@@ -83,14 +82,9 @@ const Feed = () => {
 
   // 유형 선택 핸들러
   const handleTypeClick = (type) => {
-    setSelectedTypes((prevSelectedTypes) => {
-      if (prevSelectedTypes.includes(type)) {
-        return prevSelectedTypes.filter((t) => t !== type);
-      } else {
-        return [...prevSelectedTypes, type];
-      }
-    });
+    setSelectedTypes([type]); // 선택한 유형만 선택된 상태로 설정
   };
+
   // 영양소 선택 핸들러
   const handleNutrientClick = (nutrient) => {
     setSelectedNutrients((prevSelectedNutrients) => {
@@ -227,11 +221,9 @@ const Feed = () => {
   const imageBoxStyle = {
     display: 'inline-block',
     width: 'calc(25% - 40px)',
-    margin: '15px auto',
+    margin: 'auto',
     overflow: 'hidden',
-    position: 'relative',
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)', // 그림자 효과
-    transition: 'transform 0.1s ease', // 트랜지션 설정
+    position: 'relative'
   };
 
   // 이미지 박스 컨테이너 스타일
@@ -239,16 +231,6 @@ const Feed = () => {
     display: 'flex',
     flexWrap: 'wrap', // 한 줄에 4개씩
     justifyContent: 'space-between', // 좌우 간격 맞춤
-  };
-
-  // 이미지 박스 마우스 오버 효과 설정
-  const handleImageBoxMouseOver = (event) => {
-    event.currentTarget.style.transform = 'scale(1.05)'; // 이미지 박스 확대
-  };
-
-  // 이미지 박스 마우스 아웃 효과 설정
-  const handleImageBoxMouseOut = (event) => {
-    event.currentTarget.style.transform = 'scale(1)'; // 이미지 박스 원래 크기로 복원
   };
 
   // 이미지 스타일
@@ -281,47 +263,37 @@ const Feed = () => {
     description: `Feed ${index + 1}`,
   }));
 
-
-
-  const imageBoxes = dummyFeeds.map((feed, index) => {
-    const isDry = feed.id <= 181;
-    const isWet = feed.id > 181;
-    const isDrySelected = selectedTypes.includes('건식');
-    const isWetSelected = selectedTypes.includes('습식');
   
-    // 아무 옵션이 선택되지 않은 경우 모든 사료를 표시
-    if ((selectedTypes.length === 0 || (isDry && isDrySelected) || (isWet && isWetSelected))) {
-      return (
-        <div key={feed.id} style={imageBoxStyle} onMouseOver={handleImageBoxMouseOver} onMouseOut={handleImageBoxMouseOut}>
-          <Link to={`/ImageDetailFeed/${feed.id}`} style={linkStyle}>
-            <div
-              style={{
-                backgroundImage: `url(${index < 181
-                  ? `건식사진/건식${feed.id}.jpg`
-                  : `건식사진/습식${feed.id - 181}.jpg`
-                })`,
-                backgroundSize: 'cover',
-                width: '100%',
-                height: '200px',
-              }}
-            ></div>
-            {feed.id <= 181 && isDrySelected && dryFoodData.length > 0 && (
-              <p style={descriptionStyle}>
-                {dryFoodData[feed.id - 1]?.Column2}
-              </p>
-            )}
-            {feed.id > 181 && isWetSelected && wetFoodData.length > 0 && (
-              <p style={descriptionStyle}>
-                {wetFoodData[feed.id - 182]?.Column2}
-              </p>
-            )}
-          </Link>
-        </div>
-      );
-    } else {
-      return null; // 선택되지 않은 유형의 사료는 표시하지 않음
-    }
-  });
+
+  const imageBoxes = dummyFeeds.map((feed, index) => (
+    <div key={feed.id} style={imageBoxStyle}>
+      <Link to={`/ImageDetailFeed/${feed.id}`} style={linkStyle}>
+        <div
+          style={{
+            backgroundImage: `url(${
+              index < 181
+                ? `건식사진/건식${feed.id}.jpg`
+                : `건식사진/습식${feed.id - 181}.jpg`
+            })`,
+            backgroundSize: 'cover',
+            width: '100%',
+            height: '200px',
+          }}
+        ></div>
+        {feed.id <= 181 && dryFoodData.length > 0 && (
+          <p style={descriptionStyle}>
+            {dryFoodData[feed.id - 1]?.Column2}
+          </p>
+        )}
+        {feed.id > 181 && wetFoodData.length > 0 && (
+          <p style={descriptionStyle}>
+            {wetFoodData[feed.id - 182]?.Column2}
+          </p>
+        )}
+      </Link>
+    </div>
+  ));
+  
 
 
   // ------------------------------------------------
@@ -403,11 +375,11 @@ const Feed = () => {
             검색하기
           </Button>
         </div>
-        <strong style={{ color: 'black', fontSize: '25px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>214개의 사료 추천</strong>
+        <strong style={{ color: 'black', fontSize: '25px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>사료 추천</strong>
       </div>
 
       {/* 사료 추천 박스 컨테이너 */}
-      <div style={{ margin: 'auto', width: '1200px', backgroundColor: 'white', borderRadius: '20px', padding: '40px 40px 10px 40px' }}>
+      <div style={{ margin: 'auto', width: '1200px', backgroundColor: 'white', borderRadius: '20px', padding: '60px 40px 10px 40px' }}>
         <div style={imageBoxContainerStyle}>{imageBoxes}</div>
       </div>
 
