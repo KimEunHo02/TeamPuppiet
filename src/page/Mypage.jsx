@@ -12,9 +12,10 @@ import genderImage from '../icon/gender.png'
 import manpf from '../profile/profile_man.png'
 import womanpf from '../profile/profile_woman.png'
 
-import { firebaseAuth } from '../config/firebase'; 
+import { auth } from '../config/firebase'; 
 import { db } from '../config/firebase'; 
 import { getDoc, doc, collection, getDocs, updateDoc } from 'firebase/firestore'
+import { onAuthStateChanged } from "firebase/auth";
 
 // GenderSelection 컴포넌트 정의 (남, 여 선택 버튼)
 const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
@@ -81,9 +82,21 @@ const Mypage = () => {
     birth: '',
     gender: '여성',
   });
+  
+  // 현재 유저를 저장을 위해 useState 선언
+  const [currentUser, setCurrentUser] = useState({});
 
+  // 현재 유저 정보를 currentUser에 저장
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+      console.log(user);
+    });
+  }, []);
   // user 데이터 가져오기
-  const userId = sessionStorage.getItem('userId')
+  // firebase에서 현재 유저의 이메일 가져오기
+  const userId = currentUser.email
+  
   const getUsers = async () => {
     const docRef = doc(db, "users", String(userId));
     const docSnap = await getDoc(docRef);

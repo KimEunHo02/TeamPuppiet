@@ -26,7 +26,6 @@ import 'firebase/firestore';
 const jsonFilePath = '/강아지정보총합.json';
 
 
-
 // GenderSelection 컴포넌트 정의 (남, 여 선택 버튼)
 const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
     const [selected, setSelected] = useState(selectedGender);
@@ -191,6 +190,7 @@ const Dogkind2 = ({ options, onSelect, dogCate, selectedDogkind }) => {
       ))}
     </select>
   );};
+
 
 
 const Mypage2 = () => {
@@ -449,7 +449,6 @@ const Mypage2 = () => {
     //         });
             
     // }, []);
-
     const [dogCate, setDogCate] = useState('')
     useEffect(()=>{
         let cate = ""
