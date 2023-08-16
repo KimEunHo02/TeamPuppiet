@@ -150,21 +150,21 @@ const Mainpage = () => {
                         <Modal.Header closeButton>
                             <Modal.Title>PUPPIET🐾</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>로그인이 필요합니다.</Modal.Body>
+                        <Modal.Body style={{fontSize: '18px'}}>로그인이 필요합니다.</Modal.Body>
                         <Modal.Footer>
-                            <Button variant="secondary"
-                                onClick={handleClose}
-                                style={closeButtonStyle}
-                                onMouseOver={handleResetMouseOver}
-                                onMouseOut={handleResetMouseOut}>
-                                닫기
-                            </Button>
                             <Button variant="secondary"
                                 onClick={handleLoginClick}
                                 style={searchButtonStyle}
                                 onMouseOver={handleSearchMouseOver}
                                 onMouseOut={handleSearchMouseOut}>
                                 로그인
+                            </Button>
+                            <Button variant="secondary"
+                                onClick={handleClose}
+                                style={closeButtonStyle}
+                                onMouseOver={handleResetMouseOver}
+                                onMouseOut={handleResetMouseOut}>
+                                닫기
                             </Button>
                         </Modal.Footer>
                     </Modal>
