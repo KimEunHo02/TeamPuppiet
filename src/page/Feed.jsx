@@ -237,14 +237,15 @@ const Feed = () => {
   };
 
   // 이미지 박스 마우스 오버 효과 설정
-const handleImageBoxMouseOver = (event) => {
-  event.currentTarget.style.transform = 'scale(1.05)'; // 이미지 박스 확대
-};
+  const handleImageBoxMouseOver = (event) => {
+    event.currentTarget.style.transform = 'scale(1.05)'; // 이미지 박스 확대
+  };
 
-// 이미지 박스 마우스 아웃 효과 설정
-const handleImageBoxMouseOut = (event) => {
-  event.currentTarget.style.transform = 'scale(1)'; // 이미지 박스 원래 크기로 복원
-};
+  // 이미지 박스 마우스 아웃 효과 설정
+  const handleImageBoxMouseOut = (event) => {
+    event.currentTarget.style.transform = 'scale(1)'; // 이미지 박스 원래 크기로 복원
+  };
+
   // 이미지 스타일
   const imageStyle = {
     width: '100%',
@@ -283,8 +284,8 @@ const handleImageBoxMouseOut = (event) => {
         <div
           style={{
             backgroundImage: `url(${index < 181
-                ? `건식사진/건식${feed.id}.jpg`
-                : `건식사진/습식${feed.id - 181}.jpg`
+              ? `건식사진/건식${feed.id}.jpg`
+              : `건식사진/습식${feed.id - 181}.jpg`
               })`,
             backgroundSize: 'cover',
             width: '100%',
