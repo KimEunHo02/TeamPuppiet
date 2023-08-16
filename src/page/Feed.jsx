@@ -83,9 +83,14 @@ const Feed = () => {
 
   // 유형 선택 핸들러
   const handleTypeClick = (type) => {
-    setSelectedTypes([type]); // 선택한 유형만 선택된 상태로 설정
+    setSelectedTypes((prevSelectedTypes) => {
+      if (prevSelectedTypes.includes(type)) {
+        return prevSelectedTypes.filter((t) => t !== type);
+      } else {
+        return [...prevSelectedTypes, type];
+      }
+    });
   };
-
   // 영양소 선택 핸들러
   const handleNutrientClick = (nutrient) => {
     setSelectedNutrients((prevSelectedNutrients) => {
@@ -278,34 +283,45 @@ const Feed = () => {
 
 
 
-  const imageBoxes = dummyFeeds.map((feed, index) => (
-    <div key={feed.id} style={imageBoxStyle} onMouseOver={handleImageBoxMouseOver} onMouseOut={handleImageBoxMouseOut}>
-      <Link to={`/ImageDetailFeed/${feed.id}`} style={linkStyle}>
-        <div
-          style={{
-            backgroundImage: `url(${index < 181
-              ? `건식사진/건식${feed.id}.jpg`
-              : `건식사진/습식${feed.id - 181}.jpg`
-              })`,
-            backgroundSize: 'cover',
-            width: '100%',
-            height: '200px',
-          }}
-        ></div>
-        {feed.id <= 181 && dryFoodData.length > 0 && (
-          <p style={descriptionStyle}>
-            {dryFoodData[feed.id - 1]?.Column2}
-          </p>
-        )}
-        {feed.id > 181 && wetFoodData.length > 0 && (
-          <p style={descriptionStyle}>
-            {wetFoodData[feed.id - 182]?.Column2}
-          </p>
-        )}
-      </Link>
-    </div>
-  ));
-
+  const imageBoxes = dummyFeeds.map((feed, index) => {
+    const isDry = feed.id <= 181;
+    const isWet = feed.id > 181;
+    const isDrySelected = selectedTypes.includes('건식');
+    const isWetSelected = selectedTypes.includes('습식');
+  
+    // 아무 옵션이 선택되지 않은 경우 모든 사료를 표시
+    if ((selectedTypes.length === 0 || (isDry && isDrySelected) || (isWet && isWetSelected))) {
+      return (
+        <div key={feed.id} style={imageBoxStyle} onMouseOver={handleImageBoxMouseOver} onMouseOut={handleImageBoxMouseOut}>
+          <Link to={`/ImageDetailFeed/${feed.id}`} style={linkStyle}>
+            <div
+              style={{
+                backgroundImage: `url(${index < 181
+                  ? `건식사진/건식${feed.id}.jpg`
+                  : `건식사진/습식${feed.id - 181}.jpg`
+                })`,
+                backgroundSize: 'cover',
+                width: '100%',
+                height: '200px',
+              }}
+            ></div>
+            {feed.id <= 181 && isDrySelected && dryFoodData.length > 0 && (
+              <p style={descriptionStyle}>
+                {dryFoodData[feed.id - 1]?.Column2}
+              </p>
+            )}
+            {feed.id > 181 && isWetSelected && wetFoodData.length > 0 && (
+              <p style={descriptionStyle}>
+                {wetFoodData[feed.id - 182]?.Column2}
+              </p>
+            )}
+          </Link>
+        </div>
+      );
+    } else {
+      return null; // 선택되지 않은 유형의 사료는 표시하지 않음
+    }
+  });
 
 
   // ------------------------------------------------
