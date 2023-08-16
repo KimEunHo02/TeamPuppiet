@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import '../css/login.css';
 import '../css/input.css';
+import Modal from 'react-bootstrap/Modal';
 
 import iconImage from '../icon/name.png'
 import pwImage from '../icon/password.png'
@@ -13,6 +14,35 @@ import { firebaseAuth, signInWithEmailAndPassword } from '../config/firebase'; /
 
 
 const Login = () => {
+
+  // ---------------------- 로그인 성공 시 모달 창 띄우기 ---------------------
+  const handleClose = () => setShowModal(false);
+  const [isResetActive, setIsResetActive] = useState(false); // 닫기 버튼 활성화 상태 관리
+
+  // 닫기 버튼 스타일
+  const closeButtonStyle = {
+    backgroundColor: isResetActive ? '#FFC9C9' : '#F0F0F0',
+    color: 'black',
+    fontSize: '18px',
+    border: 'none', // 기본 테두리 제거
+    boxShadow: 'none', // 기본 박스 쉐도우 제거
+    outline: 'none', // 포커스 테두리 제거
+  };
+
+  // 닫기 버튼 마우스 오버 이벤트 핸들러
+  const handleResetMouseOver = () => {
+    if (!isResetActive) {
+      setIsResetActive(true);
+    }
+  };
+
+  // 닫기 버튼 마우스 아웃 이벤트 핸들러
+  const handleResetMouseOut = () => {
+    if (isResetActive) {
+      setIsResetActive(false);
+    }
+  };
+// ------------------------------ 모달 창 끝 ------------------------------
 
   const box1 = {
     margin: '0 auto',
@@ -35,6 +65,20 @@ const Login = () => {
   const pwRef = useRef(); // 사용자 비번
   const nav = useNavigate();
 
+  // 로그인 성공 시 모달 창 띄우기
+  const [showModal, setShowModal] = useState(false); // 모달창 상태
+  const [loggedInUser, setLoggedInUser] = useState(''); // 로그인한 사용자 정보
+
+  const handleCloseModal = () => {
+    setShowModal(false); // 모달 닫기
+    nav('/main2'); // main2 페이지로 이동
+  };
+
+  const handleShowModal = (user) => {
+    setLoggedInUser(user); // 로그인한 사용자 정보 저장
+    setShowModal(true); // 모달 열기 
+  };
+
   // 로그인 기능 함수
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -45,10 +89,12 @@ const Login = () => {
       // Firebase Authentication을 통한 로그인 처리
       await signInWithEmailAndPassword(firebaseAuth, email, password);
 
-      // 로그인 성공 처리
-      sessionStorage.setItem('userId', email);
-      alert(email + '님 환영합니다!');
-      nav('/main2');
+      // // 로그인 성공 처리
+      // sessionStorage.setItem('userId', email);
+      // alert(email + '님 환영합니다!');
+      // nav('/main2');
+      handleShowModal(email);
+
     } catch (error) {
       // 로그인 실패 처리
       alert('로그인 실패 - 아이디 또는 비밀번호를 올바르게 입력해 주세요.');
@@ -74,19 +120,20 @@ const Login = () => {
     // }
   };
 
-    // console.log('handle Login Function', idRef.current.value, pwRef.current.value);
-    // if (idRef.current.value === 'puppiet' && pwRef.current.value === '1234') {
-    //   sessionStorage.setItem('userId', idRef.current.value); // sessionStorage에 로그인 데이터 저장
-    //   alert(idRef.current.value + '님 환영합니다!');
-    //   nav('/main2');
+  // console.log('handle Login Function', idRef.current.value, pwRef.current.value);
+  // if (idRef.current.value === 'puppiet' && pwRef.current.value === '1234') {
+  //   sessionStorage.setItem('userId', idRef.current.value); // sessionStorage에 로그인 데이터 저장
+  //   alert(idRef.current.value + '님 환영합니다!');
+  //   nav('/main2');
 
-    // } else {
-    //   alert('로그인 실패 - 아이디 또는 비밀번호를 올바르게 입력해 주세요.')
-    //   idRef.current.value = '';
-    //   pwRef.current.value = '';
-    //   idRef.current.focus();
-    // }
-  
+  // } else {
+  //   alert('로그인 실패 - 아이디 또는 비밀번호를 올바르게 입력해 주세요.')
+  //   idRef.current.value = '';
+  //   pwRef.current.value = '';
+  //   idRef.current.focus();
+  // }
+
+
 
   return (
     <div>
@@ -139,7 +186,22 @@ const Login = () => {
               }}>
                 로그인
               </Button>
-
+              {/* 모달 컴포넌트 */}
+              <Modal show={showModal} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                  <Modal.Title>PUPPIET🐾</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{fontSize: "18px"}}>{loggedInUser}님, 환영합니다!</Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary"
+                    onClick={handleCloseModal}
+                    style={closeButtonStyle}
+                    onMouseOver={handleResetMouseOver}
+                    onMouseOut={handleResetMouseOut}>
+                    닫기
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </div>
 
 

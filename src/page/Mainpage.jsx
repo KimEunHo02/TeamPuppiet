@@ -5,6 +5,7 @@ import '../css/Main.module.css';
 import '../css/Main.css'
 import ImageSlider from '../pages/ImageSlider';
 import SnackImageSlider from '../pages/SnackImageSlider';
+import { Modal, Button } from 'react-bootstrap';
 
 // import dietGif from '../images/diet.gif'; // 이미지 가져오기
 // import calendarGif from '../images/calendar.gif'; // 이미지 가져오기
@@ -14,6 +15,12 @@ import maininfoGif from '../images/main_230813.gif'; // 이미지 가져오기
 // 유정) 로고 이미지 눌렀을 때 Main 화면 보이게 설정한 페이지입니다.
 
 const Mainpage = () => {
+
+    const [showModal, setShowModal] = useState(false); // 모달의 열림/닫힘 상태를 관리하는 상태
+
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
+
 
     const textstyle = {
         fontWeight: 'bold',
@@ -31,20 +38,76 @@ const Mainpage = () => {
 
     // 사료 이미지 빈리스트만남겨놓고 내용지워도됨
     const feedImages = ['/feedimg/습식사료4.jpg', '/feedimg/습식사료6.jpg', '/feedimg/습식사료8.jpg', '/feedimg/습식사료10.jpg',
-    '/feedimg/습식사료12.jpg', '/feedimg/습식사료15.jpg', '/feedimg/습식사료17.jpg', '/feedimg/습식사료19.jpg'
-];
+        '/feedimg/습식사료12.jpg', '/feedimg/습식사료15.jpg', '/feedimg/습식사료17.jpg', '/feedimg/습식사료19.jpg'
+    ];
 
     // 간식 이미지 
     const snackImages = ['/snackimg/간식1.png', '/snackimg/간식2.png', '/snackimg/간식3.png', '/snackimg/간식4.png',
-    '/snackimg/간식5.png', '/snackimg/간식6.png', '/snackimg/간식7.png', '/snackimg/간식8.png',
-];
+        '/snackimg/간식5.png', '/snackimg/간식6.png', '/snackimg/간식7.png', '/snackimg/간식8.png',
+    ];
 
-    // 로그인하지 않은 상태이므로 메뉴바 눌렀을 때 로그인 페이지로 이동하게 설정
-    const handleMenuClick = () => {
-        alert("로그인이 필요합니다.");
-        window.location.href = '/login'; // 로그인 페이지 경로로 변경
+    // // 로그인하지 않은 상태이므로 메뉴바 눌렀을 때 로그인 페이지로 이동하게 설정
+    // const handleMenuClick = () => {
+    //     alert("로그인이 필요합니다.");
+    //     window.location.href = '/login'; // 로그인 페이지 경로로 변경
+    // };
+
+    // 로그인 버튼 클릭 시 로그인 페이지로 이동하는 함수
+    const handleLoginClick = () => {
+        handleClose(); // 모달 닫기
+        window.location.href = '/login'; // 로그인 페이지로 이동
     };
 
+    const [isResetActive, setIsResetActive] = useState(false); // 닫기 버튼 활성화 상태 관리
+    const [isSearchActive, setIsSearchActive] = useState(false); // 로그인 버튼 활성화 상태 관리
+
+    // 닫기 버튼 스타일
+    const closeButtonStyle = {
+        backgroundColor: isResetActive ? '#FFC9C9' : '#F0F0F0',
+        color: 'black',
+        fontSize: '18px',
+        border: 'none', // 기본 테두리 제거
+        boxShadow: 'none', // 기본 박스 쉐도우 제거
+        outline: 'none', // 포커스 테두리 제거
+    };
+
+    // 검색하기 버튼 스타일
+    const searchButtonStyle = {
+        backgroundColor: isSearchActive ? '#FFC9C9' : '#F0F0F0',
+        color: 'black',
+        fontSize: '18px',
+        border: 'none', // 기본 테두리 제거
+        boxShadow: 'none', // 기본 박스 쉐도우 제거
+        outline: 'none', // 포커스 테두리 제거
+    };
+
+    // 닫기 버튼 마우스 오버 이벤트 핸들러
+    const handleResetMouseOver = () => {
+        if (!isResetActive) {
+            setIsResetActive(true);
+        }
+    };
+
+    // 닫기 버튼 마우스 아웃 이벤트 핸들러
+    const handleResetMouseOut = () => {
+        if (isResetActive) {
+            setIsResetActive(false);
+        }
+    };
+
+    // 검색하기 버튼 마우스 오버 이벤트 핸들러
+    const handleSearchMouseOver = () => {
+        if (!isSearchActive) {
+            setIsSearchActive(true);
+        }
+    };
+
+    // 검색하기 버튼 마우스 아웃 이벤트 핸들러
+    const handleSearchMouseOut = () => {
+        if (isSearchActive) {
+            setIsSearchActive(false);
+        }
+    };
 
     return (
 
@@ -80,15 +143,39 @@ const Mainpage = () => {
                         <Link to="/signup" style={{ marginRight: '30px' }} className='maintext'>회원가입</Link>
                     </div>
 
+                    {/* 모달 컴포넌트 사용 */}
+                    <Modal show={showModal} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>PUPPIET🐾</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>로그인이 필요합니다.</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary"
+                                onClick={handleClose}
+                                style={closeButtonStyle}
+                                onMouseOver={handleResetMouseOver}
+                                onMouseOut={handleResetMouseOut}>
+                                닫기
+                            </Button>
+                            <Button variant="secondary"
+                                onClick={handleLoginClick}
+                                style={searchButtonStyle}
+                                onMouseOver={handleSearchMouseOver}
+                                onMouseOut={handleSearchMouseOut}>
+                                로그인
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+
                 </div>
             </header>
 
             {/* 타이틀 */}
             <div className='bar-container'>
-                <Link href="#" onClick={handleMenuClick} className='bartext'>정보 보기</Link>
-                <Link href="#" onClick={handleMenuClick} className='bartext'>사료 추천</Link>
-                <Link href="#" onClick={handleMenuClick} className='bartext'>간식 레시피 추천</Link>
-                <Link href="#" onClick={handleMenuClick} className='bartext'>캘린더</Link>
+                <Link href="#" onClick={handleShow} className='bartext'>정보 보기</Link>
+                <Link href="#" onClick={handleShow} className='bartext'>사료 추천</Link>
+                <Link href="#" onClick={handleShow} className='bartext'>간식 레시피 추천</Link>
+                <Link href="#" onClick={handleShow} className='bartext'>캘린더</Link>
             </div>
 
             {/* ------------------------------------ */}
@@ -131,12 +218,12 @@ const Mainpage = () => {
                             <ImageSlider images={feedImages} />
                         </div>
 
-                        </div> 
-                        {/* 사료 추천 전체 div 끝 */}
+                    </div>
+                    {/* 사료 추천 전체 div 끝 */}
 
-                        {/* 간식 레시피 추천 */}
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: '50px' }}>
-                            <a style={textstyle} className='mainboxcontent'>🦴 간식 레시피 🦴</a>
+                    {/* 간식 레시피 추천 */}
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: '50px' }}>
+                        <a style={textstyle} className='mainboxcontent'>🦴 간식 레시피 🦴</a>
                     </div>
 
                     <div style={{
@@ -155,9 +242,9 @@ const Mainpage = () => {
 
                 </div>
 
-                </div>
             </div>
-            )
+        </div>
+    )
 }
 
-            export default Mainpage
+export default Mainpage
