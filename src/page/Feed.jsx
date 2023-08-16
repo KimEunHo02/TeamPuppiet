@@ -221,9 +221,11 @@ const Feed = () => {
   const imageBoxStyle = {
     display: 'inline-block',
     width: 'calc(25% - 40px)',
-    margin: 'auto',
+    margin: '15px auto',
     overflow: 'hidden',
-    position: 'relative'
+    position: 'relative',
+    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)', // 그림자 효과
+    transition: 'transform 0.1s ease', // 트랜지션 설정
   };
 
   // 이미지 박스 컨테이너 스타일
@@ -232,6 +234,16 @@ const Feed = () => {
     flexWrap: 'wrap', // 한 줄에 4개씩
     justifyContent: 'space-between', // 좌우 간격 맞춤
   };
+
+   // 이미지 박스 마우스 오버 효과 설정
+const handleImageBoxMouseOver = (event) => {
+  event.currentTarget.style.transform = 'scale(1.05)'; // 이미지 박스 확대
+};
+
+// 이미지 박스 마우스 아웃 효과 설정
+const handleImageBoxMouseOut = (event) => {
+  event.currentTarget.style.transform = 'scale(1)'; // 이미지 박스 원래 크기로 복원
+};
 
   // 이미지 스타일
   const imageStyle = {
@@ -266,7 +278,7 @@ const Feed = () => {
   
 
   const imageBoxes = dummyFeeds.map((feed, index) => (
-    <div key={feed.id} style={imageBoxStyle}>
+    <div key={feed.id} style={imageBoxStyle} onMouseOver={handleImageBoxMouseOver} onMouseOut={handleImageBoxMouseOut}>
       <Link to={`/ImageDetailFeed/${feed.id}`} style={linkStyle}>
         <div
           style={{
@@ -379,7 +391,7 @@ const Feed = () => {
       </div>
 
       {/* 사료 추천 박스 컨테이너 */}
-      <div style={{ margin: 'auto', width: '1200px', backgroundColor: 'white', borderRadius: '20px', padding: '60px 40px 10px 40px' }}>
+      <div style={{ margin: 'auto', width: '1200px', backgroundColor: 'white', borderRadius: '20px', padding: '40px 40px 10px 40px' }}>
         <div style={imageBoxContainerStyle}>{imageBoxes}</div>
       </div>
 
