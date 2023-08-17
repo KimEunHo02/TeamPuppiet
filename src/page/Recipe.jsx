@@ -45,7 +45,7 @@ useEffect(() => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [searchText, setSearchText] = useState(''); // 검색어 입력 상태 관리
   const [isResetActive, setIsResetActive] = useState(false); // 초기화 버튼 활성화 상태 관리
-  const [isSearchActive, setIsSearchActive] = useState(false); // 검색하기 버튼 활성화 상태 관리
+  // const [isSearchActive, setIsSearchActive] = useState(false); // 검색하기 버튼 활성화 상태 관리
 
   const ingredients = [
     '채소', '육류', '과일', '달걀', '유제품'
@@ -94,26 +94,26 @@ useEffect(() => {
     }, 300); // 300ms (0.3초) 후에 초기화 상태 해제
   };
 
-  // 검색하기 버튼 스타일
-  const searchButtonStyle = {
-    width: '100px',
-    height: '40px',
-    backgroundColor: isSearchActive ? '#FFC9C9' : '#F0F0F0',
-    color: 'black',
-    fontSize: '20px',
-    border: 'none', // 기본 테두리 제거
-    boxShadow: 'none', // 기본 박스 쉐도우 제거
-    outline: 'none', // 포커스 테두리 제거
-  };
+  // // 검색하기 버튼 스타일
+  // const searchButtonStyle = {
+  //   width: '100px',
+  //   height: '40px',
+  //   backgroundColor: isSearchActive ? '#FFC9C9' : '#F0F0F0',
+  //   color: 'black',
+  //   fontSize: '20px',
+  //   border: 'none', // 기본 테두리 제거
+  //   boxShadow: 'none', // 기본 박스 쉐도우 제거
+  //   outline: 'none', // 포커스 테두리 제거
+  // };
 
-  // 검색하기 버튼 클릭 핸들러
-  const handleSearchClick = () => {
-    // 검색 로직 구현
-    setIsSearchActive(true); // 활성화 상태로 설정
-    setTimeout(() => {
-      setIsSearchActive(false); // 일정 시간 후에 검색하기 상태 해제
-    }, 300); // 300ms (0.3초) 후에 검색하기 상태 해제
-  };
+  // // 검색하기 버튼 클릭 핸들러
+  // const handleSearchClick = () => {
+  //   // 검색 로직 구현
+  //   setIsSearchActive(true); // 활성화 상태로 설정
+  //   setTimeout(() => {
+  //     setIsSearchActive(false); // 일정 시간 후에 검색하기 상태 해제
+  //   }, 300); // 300ms (0.3초) 후에 검색하기 상태 해제
+  // };
 
   // 초기화 버튼 마우스 오버 이벤트 핸들러
   const handleResetMouseOver = () => {
@@ -129,19 +129,19 @@ useEffect(() => {
     }
   };
 
-  // 검색하기 버튼 마우스 오버 이벤트 핸들러
-  const handleSearchMouseOver = () => {
-    if (!isSearchActive) {
-      setIsSearchActive(true);
-    }
-  };
+  // // 검색하기 버튼 마우스 오버 이벤트 핸들러
+  // const handleSearchMouseOver = () => {
+  //   if (!isSearchActive) {
+  //     setIsSearchActive(true);
+  //   }
+  // };
 
-  // 검색하기 버튼 마우스 아웃 이벤트 핸들러
-  const handleSearchMouseOut = () => {
-    if (isSearchActive) {
-      setIsSearchActive(false);
-    }
-  };
+  // // 검색하기 버튼 마우스 아웃 이벤트 핸들러
+  // const handleSearchMouseOut = () => {
+  //   if (isSearchActive) {
+  //     setIsSearchActive(false);
+  //   }
+  // };
 
   // 재료 버튼 두 줄로 나눠 표시하기 위한 배열
   const ingredientsRows = [];
@@ -310,7 +310,7 @@ useEffect(() => {
           >
             초기화
           </Button>
-          <Button
+          {/* <Button
             variant="primary"
             style={{ ...searchButtonStyle, marginRight: '100px', color: 'black', width: '100px' }}
             onClick={handleSearchClick}
@@ -318,7 +318,7 @@ useEffect(() => {
             onMouseOut={handleSearchMouseOut}
           >
             검색하기
-          </Button>
+          </Button> */}
         </div>
         <strong style={{ color: 'black', fontSize: '25px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>간식 레시피 추천</strong>
       </div>
