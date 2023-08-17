@@ -18,6 +18,8 @@ const Login = () => {
   // ---------------------- 로그인 성공 시 모달 창 띄우기 ---------------------
   const handleClose = () => setShowModal(false);
   const [isResetActive, setIsResetActive] = useState(false); // 닫기 버튼 활성화 상태 관리
+  const [loginError, setLoginError] = useState('');
+
 
   // 닫기 버튼 스타일
   const closeButtonStyle = {
@@ -42,7 +44,7 @@ const Login = () => {
       setIsResetActive(false);
     }
   };
-// ------------------------------ 모달 창 끝 ------------------------------
+  // ------------------------------ 모달 창 끝 ------------------------------
 
   const box1 = {
     margin: '0 auto',
@@ -71,7 +73,9 @@ const Login = () => {
 
   const handleCloseModal = () => {
     setShowModal(false); // 모달 닫기
-    nav('/main2'); // main2 페이지로 이동
+    if (!loginError) {
+      nav('/main2'); // 로그인 성공일 경우에만 main2 페이지로 이동
+    }
   };
 
   const handleShowModal = (user) => {
@@ -97,7 +101,8 @@ const Login = () => {
 
     } catch (error) {
       // 로그인 실패 처리
-      alert('로그인 실패 - 아이디 또는 비밀번호를 올바르게 입력해 주세요.');
+      setLoginError('로그인 실패 - 아이디 또는 비밀번호를 올바르게 입력해 주세요.');
+      setShowModal(true);
       idRef.current.value = '';
       pwRef.current.value = '';
       idRef.current.focus();
@@ -191,13 +196,17 @@ const Login = () => {
                 <Modal.Header closeButton>
                   <Modal.Title>PUPPIET🐾</Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{fontSize: "18px"}}>{loggedInUser}님, 환영합니다!</Modal.Body>
+                <Modal.Body style={{ fontSize: '18px' }}>
+                  {loginError ? loginError : `${loggedInUser}님, 환영합니다!`}
+                </Modal.Body>
                 <Modal.Footer>
-                  <Button variant="secondary"
+                  <Button
+                    variant="secondary"
                     onClick={handleCloseModal}
                     style={closeButtonStyle}
                     onMouseOver={handleResetMouseOver}
-                    onMouseOut={handleResetMouseOut}>
+                    onMouseOut={handleResetMouseOut}
+                  >
                     닫기
                   </Button>
                 </Modal.Footer>
