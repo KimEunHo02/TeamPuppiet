@@ -250,10 +250,7 @@ const handleImageBoxMouseOut = (event) => {
     image: `건식${index + 1}.jpg`,
     nutrient: `브랜드명 ${index + 1}`, // 브랜드명 추가
   }));
-  // 브랜드명이 포함된 배열
-  const wetBrands = ['내추로', '네이처스', '스텔라앤츄이스', '시저', 'RAWZ', '테라카니스', '네츄럴코어', '로얄캐닌'];
-  const dryBrands = ['네츄럴코어', 'NOW', 'ANF', '오리젠', '뉴트리나', '로얄캐닌', '뉴웨이브', '시저', '내추럴발란스', '하림펫푸드', '아카나', '나인케어', 'GO', '지그니쳐', '네이처스', '퓨어비타', '테라카니스', '아보덤', '시리우스', '아투', '힐스', '더마독', '인섹트도그', '마이펫닥터'];
-
+  
   
 
   // 이미지 박스 클릭 시 각 사료의 상세페이지 이동
@@ -263,7 +260,7 @@ const imageBoxes = dummyFeeds.map((feed, index) => {
   const isDrySelected = selectedTypes.includes('건식');
   const isWetSelected = selectedTypes.includes('습식');
   const brandName = feed.id <= 181 ? dryFoodData[feed.id - 1]?.브랜드명 : wetFoodData[feed.id - 182]?.브랜드명;
-  const isOtherBrand = ['NOW', 'ANF', '오리젠', '뉴트리나', '뉴웨이브', '시저', '내추럴발란스', '하림펫푸드', '아카나', '나인케어', 'GO', '지그니쳐', '네이처스', '퓨어비타', '테라카니스', '아보덤', '시리우스', '아투', '힐스', '더마독', '인섹트도그', '마이펫닥터'].includes(brandName);
+  const isOtherBrand = ['내추로','스텔라앤츄이스','RAWZ','NOW', 'ANF', '오리젠',  '뉴웨이브',  '내추럴발란스', '하림펫푸드', '아카나', '나인케어', 'GO', '지그니쳐', '퓨어비타', '아보덤', '시리우스', '아투', '힐스', '더마독', '인섹트도그', '마이펫닥터'].includes(brandName);
 
   if (
     (selectedTypes.length === 0 || (isDry && isDrySelected) || (isWet && isWetSelected))
