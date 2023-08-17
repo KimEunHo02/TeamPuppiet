@@ -16,12 +16,12 @@ import stamp3_1 from '../stamp/stamp3_click.png'
 import stamp4_1 from '../stamp/stamp4_click.png'
 
 // 파이어베이스
-
+import { auth, db,} from '../config/firebase';
 import { initializeApp } from 'firebase/app';
 import { firebaseApp, getFirestore } from '../config/firebase';
 import { firebaseConfig } from '../config/firebase';
 import { updateDoc, doc, addDoc, collection } from "@firebase/firestore";
-import { getDocs} from 'firebase/firestore';
+import { getDocs, getDoc, setDoc} from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 // 랜덤 운동 목록
@@ -85,14 +85,6 @@ const Stamp = ({challengeCompleted, selectedDate,stamps, setStamps, setChallenge
     }
   }
 
-
-  // Firebase (유정)
-  
-const firebaseApp = initializeApp(firebaseConfig);
-const db = getFirestore(firebaseApp);
-const stampsCollection = collection(db, "stamps");
-
-// 스탬프 찍기 처리 함수
 const handleStampClick = async () => {
   const auth = getAuth();
   const user = auth.currentUser; // 현재 로그인된 사용자 정보 가져오기
@@ -112,15 +104,18 @@ const handleStampClick = async () => {
     // Firestore에 데이터 추가 또는 업데이트
     if (stampIndex !== -1) {
       newStamps[stampIndex].imageIndex = selectedImageIndex;
+      newStamps[stampIndex].email = user.email; // 사용자 이메일 추가
       await updateDoc(doc(db, "userstamp", user.uid, "stamps", newStamps[stampIndex].id), {
         imageIndex: selectedImageIndex,
         timestamp: new Date(), // 현재 시간 저장
+        email: user.email, // 사용자 이메일 추가
       });
     } else {
       const newStampData = {
         date: stampDate,
         imageIndex: selectedImageIndex,
         timestamp: new Date(), // 현재 시간 저장
+        email: user.email, // 사용자 이메일 추가
       };
       const docRef = await addDoc(collection(db, "userstamp", user.uid, "stamps"), newStampData);
       newStampData.id = docRef.id;
@@ -332,7 +327,6 @@ export const Calendar = () => {
     return () => unsubscribe(); // cleanup 함수로 리스너 제거
   }, []);
 
-  
 
   const stampImages = [
     { normal: stamp1, clicked: stamp1_1 },
