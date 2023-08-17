@@ -3,7 +3,8 @@ import Logo from './Logo'
 import '../css/mypage.css'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import '../css/input.css'
 
 import iconImage from '../icon/name.png'
 import birthImage from '../icon/birthday.png'
@@ -12,28 +13,29 @@ import genderImage from '../icon/gender.png'
 import manpf from '../profile/profile_man.png'
 import womanpf from '../profile/profile_woman.png'
 
-import { auth } from '../config/firebase'; 
-import { db } from '../config/firebase'; 
+import { auth } from '../config/firebase';
+import { db } from '../config/firebase';
 import { getDoc, doc, collection, getDocs, updateDoc } from 'firebase/firestore'
 import { onAuthStateChanged } from "firebase/auth";
 
 // GenderSelection 컴포넌트 정의 (남, 여 선택 버튼)
 const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
+  // const [selected, setSelected] = useState(selectedGender);
   const [selected, setSelected] = useState(selectedGender);
 
-    const handleButtonClick = (value) => {
-        setSelected(value);
-        handleGenderButtonClick(value);
-    };
+  const handleButtonClick = (value) => {
+    setSelected(value);
+    handleGenderButtonClick(value);
+  };
   return (
     <div className="d-flex align-items-center" style={{ marginTop: '20px' }}>
       <img src={genderImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-      <a style={{marginLeft:'15px'}}>성별</a>
+      <a style={{ marginLeft: '15px' }}>성별</a>
       <div className='custom-box'>
-        <div className="custom-input-box" style={{ width: '450px', marginLeft: '-8px'}}>
+        <div className="custom-input-box" style={{ width: '450px', marginLeft: '-8px' }}>
           {/* "남성" 버튼 */}
           <Button
-            variant={selectedGender === "남성" ? 'primary' : 'light'}
+            variant={selected === "남성" ? 'primary' : 'light'}
             onClick={() => handleButtonClick("남성")}
             style={{
               width: '60px',
@@ -42,17 +44,18 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
               marginLeft: '42px',
               backgroundColor: selected === "남성" ? 'skyblue' : null,
               borderColor: selected === "남성" ? 'skyblue' : '#F0F0F0',
-              color: selected === "남성" ? 'black': null
-              
+              color: selected === "남성" ? 'black' : null
+
             }}
-            
+
+
           >
             남성
           </Button>
           {' '}
           {/* "여성" 버튼 */}
           <Button
-            variant={selectedGender === "여성" ? 'primary' : 'light'}
+            variant={selected === "여성" ? 'primary' : 'light'}
             onClick={() => handleButtonClick("여성")}
             style={{
               width: '60px',
@@ -60,10 +63,10 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
               margin: '1px 50px auto -15px',
               backgroundColor: selected === "여성" ? '#FFC9C9' : null,
               borderColor: selected === "여성" ? '#FFC9C9' : '#F0F0F0',
-              color: selected === "여성" ? 'black': null
-              
+              color: selected === "여성" ? 'black' : null
+
             }}
-            
+
           >
             여성
           </Button>
@@ -74,6 +77,9 @@ const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
 };
 
 const Mypage = () => {
+  const location = useLocation();
+  const userData = location.state; // 추가 230815
+  console.log('전달된 품종 데이터:', userData);
   //230816 12:59(주석) const [user, setUser] = useState(null); // 230814 정희석  사용자 정보를 저장할 상태 변수
 
   // 흰색 박스
@@ -86,13 +92,21 @@ const Mypage = () => {
     borderRadius: '0 30px 30px 30px'
   }
 
-  // Signup 페이지에서 담긴 데이터
   const [data, setData] = useState({
-    name: 'test',
-    birth: '',
-    gender: '여성',
+    userName: '',
+    userGender: '',
+    userBirth: '',
+    userWeight: '',
+    userNeutered: '',
+    userKind: '', // 이전에는 dogCate라는 이름으로 사용되던 값인데, 수정함
   });
-  
+  // Signup 페이지에서 담긴 데이터
+  //const [data, setData] = useState({
+  // name: 'test',
+  //birth: '',
+  //gender: '여성',
+  //});
+
   // // 현재 유저를 저장을 위해 useState 선언
   // const [currentUser, setCurrentUser] = useState({});
 
@@ -106,7 +120,7 @@ const Mypage = () => {
   // // user 데이터 가져오기
   // // firebase에서 현재 유저의 이메일 가져오기
   // const userId = currentUser.email
-  
+
   // const getUsers = async () => {
   //   const docRef = doc(db, "users", String(userId));
   //   const docSnap = await getDoc(docRef);
@@ -125,40 +139,43 @@ const Mypage = () => {
   const [currentUser, setCurrentUser] = useState({});
 
 
-// 현재 유저 정보를 currentUser에 저장
-useEffect(() => {
-  const unsub = onAuthStateChanged(auth, (user) => {
-    setCurrentUser(user);
+  // 현재 유저 정보를 currentUser에 저장
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
 
-    console.log(user);
-  });
-}, []);
+      console.log(user);
+    });
+  }, []);
 
-// user 데이터 가져오기
-// firebase에서 현재 유저의 이메일 가져오기
-const userId = currentUser.email;
 
-const getUsers = async () => {
-  const docRef = doc(db, "users", String(userId));
-  const docSnap = await getDoc(docRef);
-  if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-    setData(docSnap.data());
-  } else {
-    console.log("No such document!");
-  }
-};
 
-useEffect(() => {
-  if (currentUser.email) {
-    getUsers();
-  }
-}, [currentUser]); // currentUser 업데이트 시 getUsers() 호출
+  // user 데이터 가져오기
+  // firebase에서 현재 유저의 이메일 가져오기
+  const userId = currentUser.email;
+
+  const getUsers = async () => {
+    const docRef = doc(db, "users", String(userId));
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      setData(docSnap.data());
+    } else {
+      console.log("No such document!");
+    }
+  };
+  
+  useEffect(() => {
+    if (currentUser.email) {
+      getUsers();
+    }
+  }, [currentUser]); // currentUser 업데이트 시 getUsers() 호출
 
   // 마이페이지 2 이동
   const nav = useNavigate();
-  const moveToMy2 = ()=>{
-    nav('/mypage2', {state : data})
+  const moveToMy2 = () => {
+    nav('/mypage2', { state: data })
   }
 
   const handleChange = (e) => {
@@ -168,6 +185,8 @@ useEffect(() => {
       [name]: value
     }));
   };
+
+  
 
   // 성별 선택 버튼 클릭 이벤트 핸들러
   const handleGenderButtonClick = (gender) => {
@@ -189,21 +208,21 @@ useEffect(() => {
     console.log('저장된 데이터:', data);
     // 여기에 저장 또는 수정 로직을 추가할 수 있습니다.
   };
+
+  //   // 사용자 정보 가져오기 -- 230814 정희석
+  //   useEffect(() => {
+  //     const unsubscribe = firebaseAuth.onAuthStateChanged((authUser) => {
+  //       if (authUser) {
+  //         setUser(authUser);
+  //       } else {
+  //         setUser(null);
+  //       }
+  //     });
+
+  //   return () => unsubscribe(); // 컴포넌트 언마운트 시에도 unsubscribe
+  // }, []);
+
   
-//   // 사용자 정보 가져오기 -- 230814 정희석
-//   useEffect(() => {
-//     const unsubscribe = firebaseAuth.onAuthStateChanged((authUser) => {
-//       if (authUser) {
-//         setUser(authUser);
-//       } else {
-//         setUser(null);
-//       }
-//     });
-
-//   return () => unsubscribe(); // 컴포넌트 언마운트 시에도 unsubscribe
-// }, []);
-
-
   return (
     <div
       style={{ backgroundColor: '#F0F0F0' }}>
@@ -213,8 +232,8 @@ useEffect(() => {
         backgroundColor: '#F0F0F0', minHeight: '1000px',
         paddingTop: '80px'
       }}>
-        <div style={{backgroundColor:'white', borderRadius:'20px 20px 0 0', width:'200px', height:'40px', marginLeft: '360px'}}>
-          <a className='mypagetext' style={{padding:'10px', marginLeft: '45px'}}>마이페이지</a>
+        <div style={{ backgroundColor: 'white', borderRadius: '20px 20px 0 0', width: '200px', height: '40px', marginLeft: '360px' }}>
+          <a className='mypagetext' style={{ padding: '10px', marginLeft: '45px' }}>마이페이지</a>
 
         </div>
 
@@ -225,8 +244,9 @@ useEffect(() => {
 
           <div style={{ display: 'flex', justifyContent: 'center' }}>
 
-            <span className='title'>내 정보</span>
-            <a onClick={moveToMy2} className='hideTitle'>강아지 정보</a>
+            <span className='title' style={{ cursor: 'pointer' }}>내 정보</span>
+            <a onClick={moveToMy2} className='hideTitle'
+              style={{ cursor: 'pointer' }}>강아지 정보</a>
 
           </div>
           {/* 링크 div 끝 */}
@@ -252,7 +272,7 @@ useEffect(() => {
                 <Form.Label></Form.Label>
                 <div className="d-flex align-items-center">
                   <img src={iconImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-                  <a style={{marginLeft:'15px'}}>이름</a>
+                  <a style={{ marginLeft: '15px' }}>이름</a>
                   <Form.Control
                     type="text"
                     name="name"
@@ -267,7 +287,7 @@ useEffect(() => {
               <Form.Label htmlFor="inputBirth"></Form.Label>
               <div className="d-flex align-items-center">
                 <img src={birthImage} style={{ width: '20px', marginRight: '10px' }} alt="Icon" />
-                <a style={{marginLeft:'5px'}}>생년월일</a>
+                <a style={{ marginLeft: '5px' }}>생년월일</a>
                 <Form.Control
                   type="text"
                   name="birth"
@@ -285,7 +305,7 @@ useEffect(() => {
           <div style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
             <Button variant='primary' type='submit'
               style={{
-                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9',  color: 'black',
+                backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'black',
                 width: '160px', height: '50px', margin: '0 50px',
               }}
               // 수정했을 때 일단 console에 출력되게 구현

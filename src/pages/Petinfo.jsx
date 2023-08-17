@@ -184,16 +184,6 @@ const Petinfo = () => {
     });
 
 
-    const isInputsValid = () => {
-        return (
-            inputValues.name.trim() !== '' &&
-            inputValues.gender.trim() !== '' &&
-            inputValues.birth.trim() !== '' &&
-            inputValues.weight.trim() !== '' &&
-            inputValues.neutered.trim() !== ''
-        );
-    }
-
     const handleInputChange = (inputName, inputValue) => {
         setInputValues((prevValues) => ({
             ...prevValues,
@@ -256,11 +246,11 @@ const Petinfo = () => {
             }
         )
     };
-    navigate('/mypage2', { state: { selectedDogKind } });
+    navigate('/petinfo', { state: { selectedDogKind } });
     // 추가 230815
     <Link
     to={{
-        pathname: '/mypage2',
+        pathname: '/petinfo',
         state: {
             dogName: inputValues.name, // 선택한 강아지 이름
             dogKind: selectedDogKind, // 선택한 강아지 종류

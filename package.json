@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "assert": "^2.0.0",
     "audit": "^0.0.6",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.1",
@@ -14,6 +15,7 @@
     "date-fns": "^2.30.0",
     "firebase": "^10.1.0",
     "firebase-admin": "^11.10.1",
+    "path-browserify": "^1.0.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",
     "react-datepicker": "^4.16.0",
@@ -22,10 +24,12 @@
     "react-router-dom": "^6.14.2",
     "react-scripts": "5.0.1",
     "recharts": "^2.7.3",
+    "url": "^0.11.1",
+    "util": "^0.12.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start cross-env NODE_OPTIONS=--max-old-space-size=8192 webpack-dev-server --mode development",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -47,5 +51,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.10",
+    "@babel/preset-env": "^7.22.10",
+    "@babel/preset-react": "^7.22.5",
+    "babel-loader": "^9.1.3",
+    "webpack-cli": "^5.1.4"
   }
 }
