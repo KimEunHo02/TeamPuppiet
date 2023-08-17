@@ -7,15 +7,49 @@ import kongsoon from '../main2Image/kongsoon2.png'
 import feedicon from '../main2Image/feedicon.png'
 import exerciseicon from '../main2Image/exerciseicon.png'
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Mainpage2 = ({ mainArr }) => {
 
- //간식이미지불러오기
- const [snacksData, setSnacksData] = useState([]);
- const [randomSnackImages, setRandomSnackImages] = useState([]);
+  const nav = useNavigate()
 
-  
+  // 사료 이미지 불러오기
+  const [feedData, setFeedData] = useState([]);
+  const [randomFeedImages, setRandomFeedImages] = useState([]);
+
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/건식사료-성분.json`)
+      .then((response) => response.json())
+      .then((data) => {
+        setFeedData(data);
+      })
+      .catch((error) => {
+        console.error("사료 데이터 가져오기 오류:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    // 랜덤 사료 이미지 설정
+    const newRandomFeedImages = Array.from({ length: 3 }, (_, index) => {
+      const randomIndex = Math.floor(Math.random() * feedData.length);
+      const selectedFeed = feedData[randomIndex];
+      return selectedFeed;
+    });
+    setRandomFeedImages(newRandomFeedImages);
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [feedData]); // feedData 변경 시에만 실행
+
+
+  // 간식 이미지 불러오기
+  const [snacksData, setSnacksData] = useState([]);
+  const [randomSnackImages, setRandomSnackImages] = useState([]);
+
+
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/recipebom.json`)
       .then((response) => response.json())
@@ -47,7 +81,7 @@ const Mainpage2 = ({ mainArr }) => {
 
   let sessionData = sessionStorage.getItem('userId')
 
-  
+
   console.log('session :', sessionData)
 
   // 스크롤 위치 상태 추가
@@ -98,7 +132,15 @@ const Mainpage2 = ({ mainArr }) => {
   const imgbox = {
     width: '200px',
     height: '200px',
+    marginTop: '-100px'
   }
+
+  const imgbox2 = {
+    width: '200px',
+    height: '200px',
+    marginTop: '-20px'
+  }
+
   const textstyle = {
     fontWeight: 'bold',
     fontSize: '23px',
@@ -195,28 +237,22 @@ const Mainpage2 = ({ mainArr }) => {
             className='mainboxcontainer'>
 
 
-              {/* 여기서부터 사료 이미지 들어가는 공간입니다 */}
-
-            <div className='foodbox'>
-              <div style={imgbox} className='mainboxcontent'>
-                <img src='\img\사료.jpg' alt='사료 임시 사진' style={imageStyle} />
-                <a className='foodtext'>사료1</a>
+            {/* 여기서부터 사료 이미지 들어가는 공간입니다 */}
+            {randomFeedImages.map((selectedFeed, index) => (
+              <div className='foodbox' key={index}>
+                <div style={imgbox} className='mainboxcontent' onClick={() => { nav(`/feed`); window.scrollTo(0, 0); }}>
+                  {selectedFeed && (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/건식사진/건식${selectedFeed.Column1}.jpg`}
+                      alt='사료 이미지'
+                      style={imageStyle}
+                    />
+                  )}
+                  <a className='foodtext'>{selectedFeed && selectedFeed.Column2}</a>
+                </div>
               </div>
-            </div>
+            ))}
 
-            <div className='foodbox'>
-              <div style={imgbox} className='mainboxcontent'>
-                <img src='\img\사료.jpg' alt='사료 임시 사진' style={imageStyle} />
-                <a className='foodtext'>사료2</a>
-              </div>
-            </div>
-
-            <div className='foodbox'>
-              <div style={imgbox} className='mainboxcontent'>
-                <img src='\img\사료.jpg' alt='사료 임시 사진' style={imageStyle} />
-                <a className='foodtext'>사료3</a>
-              </div>
-            </div>
 
           </div>
           {/* 흰색 공간 div 끝 */}
@@ -235,27 +271,27 @@ const Mainpage2 = ({ mainArr }) => {
             className='mainboxcontainer'>
 
 
-              {/* 여기서부터 간식 이미지 들어가는 공간입니다 */}
+            {/* 여기서부터 간식 이미지 들어가는 공간입니다 */}
 
-              
 
-          {randomSnackImages.map((selectedSnack, index) => (
-            <div className='foodbox' key={index}>
-              <div style={imgbox} className='mainboxcontent'>
-                {selectedSnack && (
-                  <img
-                    src={`${process.env.PUBLIC_URL}/간식2/image (${selectedSnack.Column1}).png`}
-                    alt='간식 이미지'
-                    style={imageStyle}
-                  />
-                )}
-                <a className='foodtext'>{selectedSnack && selectedSnack.레시피명}</a>
+
+            {randomSnackImages.map((selectedSnack, index) => (
+              <div className='foodbox' key={index}>
+                <div style={imgbox2} className='mainboxcontent' onClick={() => { nav(`/recipe`); window.scrollTo(0, 0); }}>
+                  {selectedSnack && (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/간식2/image (${selectedSnack.Column1}).png`}
+                      alt='간식 이미지'
+                      style={imageStyle}
+                    />
+                  )}
+                  <a className='foodtext'>{selectedSnack && selectedSnack.레시피명}</a>
+                </div>
               </div>
-            </div>
-              ))}
-            </div>
-
+            ))}
           </div>
+
+        </div>
 
       </div>
     </div>
