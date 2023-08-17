@@ -11,6 +11,7 @@ import dummyFeeds from './dummyFeedsData'; // dummyFeeds 데이터를 가져옵�
 const Feed = () => {
   const [dryFoodData, setDryFoodData] = useState([]);
   const [wetFoodData, setWetFoodData] = useState([]);
+  const [filteredBrands, setFilteredBrands] = useState([]);
 
   useEffect(() => {
     // JSON 파일 경로
@@ -21,6 +22,7 @@ const Feed = () => {
     axios.get(dryJsonFilePath)
     .then(response => {
       setDryFoodData(response.data);
+      console.log('Dry food data:', response.data);
     })
     .catch(error => {
       console.error('Error fetching dry food data:', error);
@@ -30,6 +32,7 @@ const Feed = () => {
     axios.get(wetJsonFilePath)
     .then(response => {
       setWetFoodData(response.data);
+      console.log('wet food data:', response.data);
     })
     .catch(error => {
       console.error('Error fetching wet food data:', error);
@@ -66,7 +69,7 @@ const Feed = () => {
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [selectedNutrients, setSelectedNutrients] = useState([]);
   const [isResetActive, setIsResetActive] = useState(false); // 초기화 버튼 활성화 상태 관리
-  const [isSearchActive, setIsSearchActive] = useState(false); // 검색하기 버튼 활성화 상태 관리
+
 
   const categories = ['소형견', '중형견', '대형견'];
   const types = ['건식', '습식'];
@@ -82,10 +85,11 @@ const Feed = () => {
 
   // 유형 선택 핸들러
   const handleTypeClick = (type) => {
+    console.log("handleNutrientClick:", type);
     setSelectedTypes([type]); // 선택한 유형만 선택된 상태로 설정
   };
 
-  // 영양소 선택 핸들러
+  // 브랜드 선택 핸들러
   const handleNutrientClick = (nutrient) => {
     setSelectedNutrients((prevSelectedNutrients) => {
       if (prevSelectedNutrients.includes(nutrient)) {
@@ -120,27 +124,10 @@ const Feed = () => {
     outline: 'none', // 포커스 테두리 제거
   };
 
-  // 검색하기 버튼 스타일
-  const searchButtonStyle = {
-    width: '100px',
-    height: '40px',
-    backgroundColor: isSearchActive ? '#FFC9C9' : '#F0F0F0',
-    color: 'black',
-    fontSize: '20px',
-    border: 'none', // 기본 테두리 제거
-    boxShadow: 'none', // 기본 박스 쉐도우 제거
-    outline: 'none', // 포커스 테두리 제거
-  };
+ 
 
 
-  // 검색하기 버튼 클릭 핸들러
-  const handleSearchClick = () => {
-    // 검색 로직 구현
-    setIsSearchActive(true); // 활성화 상태로 설정
-    setTimeout(() => {
-      setIsSearchActive(false); // 일정 시간 후에 검색하기 상태 해제
-    }, 300); // 300ms (0.3초) 후에 검색하기 상태 해제
-  };
+  
 
   // 초기화 버튼 마우스 오버 이벤트 핸들러
   const handleResetMouseOver = () => {
@@ -156,20 +143,7 @@ const Feed = () => {
     }
   };
 
-  // 검색하기 버튼 마우스 오버 이벤트 핸들러
-  const handleSearchMouseOver = () => {
-    if (!isSearchActive) {
-      setIsSearchActive(true);
-    }
-  };
-
-  // 검색하기 버튼 마우스 아웃 이벤트 핸들러
-  const handleSearchMouseOut = () => {
-    if (isSearchActive) {
-      setIsSearchActive(false);
-    }
-  };
-
+ 
   // 선택된 카테고리/유형/영양소에 따라 스타일 적용
   // 구분 버튼 스타일
   const getCategoryButtonStyle = (category) => ({
@@ -272,40 +246,52 @@ const handleImageBoxMouseOut = (event) => {
   // 이미지 박스 클릭 시 각 사료의 상세페이지 이동
   const dummyFeeds = Array.from({ length: 214 }, (_, index) => ({
     id: index + 1,
-    description: `Feed ${index + 1}`,
+    description: `사료 이름 ${index + 1}`,
+    image: `건식${index + 1}.jpg`,
+    nutrient: `브랜드명 ${index + 1}`, // 브랜드명 추가
   }));
-
+  
   
 
-  const imageBoxes = dummyFeeds.map((feed, index) => (
-    <div key={feed.id} style={imageBoxStyle} onMouseOver={handleImageBoxMouseOver} onMouseOut={handleImageBoxMouseOut}>
-      <Link to={`/ImageDetailFeed/${feed.id}`} style={linkStyle}>
-        <div
-          style={{
-            backgroundImage: `url(${
-              index < 181
+  // 이미지 박스 클릭 시 각 사료의 상세페이지 이동
+const imageBoxes = dummyFeeds.map((feed, index) => {
+  const isDry = feed.id <= 181;
+  const isWet = feed.id > 181;
+  const isDrySelected = selectedTypes.includes('건식');
+  const isWetSelected = selectedTypes.includes('습식');
+  const brandName = feed.id <= 181 ? dryFoodData[feed.id - 1]?.브랜드명 : wetFoodData[feed.id - 182]?.브랜드명;
+  const isOtherBrand = ['내추로','스텔라앤츄이스','RAWZ','NOW', 'ANF', '오리젠',  '뉴웨이브',  '내추럴발란스', '하림펫푸드', '아카나', '나인케어', 'GO', '지그니쳐', '퓨어비타', '아보덤', '시리우스', '아투', '힐스', '더마독', '인섹트도그', '마이펫닥터'].includes(brandName);
+
+  if (
+    (selectedTypes.length === 0 || (isDry && isDrySelected) || (isWet && isWetSelected))
+    && (selectedNutrients.length === 0 || selectedNutrients.includes(brandName) || (selectedNutrients.includes('기타') && isOtherBrand))
+  ) {
+    return (
+      <div key={feed.id} style={imageBoxStyle} onMouseOver={handleImageBoxMouseOver} onMouseOut={handleImageBoxMouseOut}>
+        <Link to={`/ImageDetailFeed/${feed.id}`} style={linkStyle}>
+          <div
+            style={{
+              backgroundImage: `url(${index < 181
                 ? `건식사진/건식${feed.id}.jpg`
                 : `건식사진/습식${feed.id - 181}.jpg`
-            })`,
-            backgroundSize: 'cover',
-            width: '100%',
-            height: '200px',
-          }}
-        ></div>
-        {feed.id <= 181 && dryFoodData.length > 0 && (
+              })`,
+              backgroundSize: 'cover',
+              width: '100%',
+              height: '200px',
+            }}
+          ></div>
+          {/* 사료 이름 표시 */}
           <p style={descriptionStyle}>
-            {dryFoodData[feed.id - 1]?.Column2}
+            {feed.id <= 181 ? dryFoodData[feed.id - 1]?.Column2 : wetFoodData[feed.id - 182]?.Column2}
           </p>
-        )}
-        {feed.id > 181 && wetFoodData.length > 0 && (
-          <p style={descriptionStyle}>
-            {wetFoodData[feed.id - 182]?.Column2}
-          </p>
-        )}
-      </Link>
-    </div>
-  ));
-  
+        </Link>
+      </div>
+    );
+  } else {
+    return null; // 선택되지 않은 유형의 사료는 표시하지 않습니다.
+  }
+});
+
 
 
   // ------------------------------------------------
@@ -377,15 +363,7 @@ const handleImageBoxMouseOut = (event) => {
           >
             초기화
           </Button>
-          <Button
-            variant="light"
-            style={searchButtonStyle}
-            onClick={handleSearchClick}
-            onMouseOver={handleSearchMouseOver}
-            onMouseOut={handleSearchMouseOut}
-          >
-            검색하기
-          </Button>
+      
         </div>
         <strong style={{ color: 'black', fontSize: '25px', position: 'absolute', top: 'calc(100% + 20px)', left: '20px' }}>사료 추천</strong>
       </div>
@@ -410,4 +388,4 @@ const handleImageBoxMouseOut = (event) => {
 };
 
 export default Feed;
-export { dummyFeeds };
+export { dummyFeeds }; 
