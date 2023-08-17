@@ -277,18 +277,16 @@ const Mainpage2 = ({ mainArr }) => {
 
             {randomSnackImages.map((selectedSnack, index) => (
               <div className='foodbox' key={index}>
-                <Link to={'/recipe'}>
-                  <div style={imgbox2} className='mainboxcontent' onClick={() => { nav(`/recipe`); window.scrollTo({ top: 0}); }}>
-                    {selectedSnack && (
-                      <img
-                        src={`${process.env.PUBLIC_URL}/간식2/image (${selectedSnack.Column1}).png`}
-                        alt='간식 이미지'
-                        style={imageStyle}
-                      />
-                    )}
-                    <a className='foodtext'>{selectedSnack && selectedSnack.레시피명}</a>
-                  </div>
-                </Link>
+                <div style={imgbox2} className='mainboxcontent' onClick={() => { nav(`/recipe`); window.scrollTo(0, 0); }}>
+                  {selectedSnack && (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/간식2/image (${selectedSnack.Column1}).png`}
+                      alt='간식 이미지'
+                      style={imageStyle}
+                    />
+                  )}
+                  <a className='foodtext'>{selectedSnack && selectedSnack.레시피명}</a>
+                </div>
               </div>
             ))}
           </div>
