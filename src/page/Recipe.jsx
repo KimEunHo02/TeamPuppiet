@@ -303,7 +303,7 @@ useEffect(() => {
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
           <Button
             variant="light"
-            style={{ ...resetButtonStyle, marginRight: '20px', color: 'black', width: '100px' }}
+            style={{ ...resetButtonStyle, marginRight: '20px', marginBottom: '20px', color: 'black', width: '100px' }}
             onClick={handleResetClick}
             onMouseOver={handleResetMouseOver}
             onMouseOut={handleResetMouseOut}

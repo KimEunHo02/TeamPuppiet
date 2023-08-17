@@ -115,7 +115,7 @@ const Feed = () => {
   const resetButtonStyle = {
     width: '100px',
     height: '40px',
-    marginRight: '30px',
+    marginRight: '-50px',
     backgroundColor: isResetActive ? '#FFC9C9' : '#F0F0F0',
     color: 'black',
     fontSize: '20px',
