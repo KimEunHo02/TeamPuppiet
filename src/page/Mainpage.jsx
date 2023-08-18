@@ -216,7 +216,7 @@ const Mainpage = () => {
 
                         {/* 사료 추천 이미지 ImageSlider 컴포넌트 */}
                         {/* Mainpage1은 이미지 슬라이더 사용하여 데이터 이 페이지 feedImage, snackImage 안에 데이터 넣으면 됨 */}
-                        <div className="app" onClick={handleShow}>
+                        <div className="app">
                             <ImageSlider images={feedImages} />
                         </div>
 
@@ -236,7 +236,7 @@ const Mainpage = () => {
 
                         {/* snack 추천 이미지 ImageSlider 컴포넌트 */}
 
-                        <div className="app" onClick={handleShow}>
+                        <div className="app">
                             <SnackImageSlider images={snackImages} />
                         </div>
                     </div>
