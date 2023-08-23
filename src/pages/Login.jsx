@@ -107,39 +107,7 @@ const Login = () => {
       pwRef.current.value = '';
       idRef.current.focus();
     }
-
-    // try { // firebase 로그인 처리
-    //   const userCredential = await signInWithEmailAndPassword(idRef.current.value, pwRef.current.value);
-    //   const user = userCredential.user;
-
-    //   // 로그인 성공 처리
-    //   sessionStorage.setItem('userId', user.email);
-    //   alert(user.email + '님 환영합니다!');
-    //   nav('/main2');
-    // } catch (error) {
-    //   // 로그인 실패 처리
-    //   alert('로그인 실패 - 아이디 또는 비밀번호를 올바르게 입력해 주세요.');
-    //   idRef.current.value = '';
-    //   pwRef.current.value = '';
-    //   idRef.current.focus();
-    // }
-  };
-
-  // console.log('handle Login Function', idRef.current.value, pwRef.current.value);
-  // if (idRef.current.value === 'puppiet' && pwRef.current.value === '1234') {
-  //   sessionStorage.setItem('userId', idRef.current.value); // sessionStorage에 로그인 데이터 저장
-  //   alert(idRef.current.value + '님 환영합니다!');
-  //   nav('/main2');
-
-  // } else {
-  //   alert('로그인 실패 - 아이디 또는 비밀번호를 올바르게 입력해 주세요.')
-  //   idRef.current.value = '';
-  //   pwRef.current.value = '';
-  //   idRef.current.focus();
-  // }
-
-
-
+  }
   return (
     <div>
       <br />

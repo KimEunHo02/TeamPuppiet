@@ -17,7 +17,6 @@ import dog1pf from '../profile/profile_largedog.png'
 import dog2pf from '../profile/profile_mediumdog.png'
 import dog3pf from '../profile/profile_smalldog.png'
 
-// import { firestore } from "../config/firebase"; // Firebase 초기화 및 Firestore 가져오기 -- 추가 230815
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { auth, db } from '../config/firebase';
@@ -125,35 +124,6 @@ const NeuteredSelection = ({ selectedNeutered, handleNeuteredButtonClick }) => {
           >
             X
           </Button>
-          {/*<Button
-                        variant={selectedNeutered === "O" ? 'primary' : 'light'}
-                        style={{
-                            backgroundColor: selectedNeutered === "O" ? '#F6E781' : '#F0F0F0',
-                            borderColor: selectedNeutered === "O" ? '#F6E781' : '#F0F0F0',
-                            color: 'black',
-                            width: '60px',
-                            height: '40px',
-                            margin: '-10px 50px -10px 34px',
-                        }}
-                        onClick={() => handleNeuteredButtonClick("O")}
-                    >
-                        O
-                    </Button>
-                    
-                    <Button
-                        variant={selectedNeutered === "X" ? 'primary' : 'light'}
-                        style={{
-                            backgroundColor: selectedNeutered === "X" ? '#F6E781' : '#F0F0F0',
-                            borderColor: selectedNeutered === "X" ? '#F6E781' : '#F0F0F0',
-                            color: 'black',
-                            width: '60px',
-                            height: '40px',
-                            margin: '21px 50px 20px -15px',
-                        }}
-                        onClick={() => handleNeuteredButtonClick("X")}
-                    >
-                        X
-                    </Button>*/}
         </div>
       </div>
     </div>
@@ -198,7 +168,6 @@ const Mypage2 = () => {
   const location = useLocation();
   const dogData = location.state; // 추가 230815
   console.log('전달된 품종 데이터:', dogData); // 확인용 출력 230815
-  //const selectedDogKind = location.state && location.state.selectedDogKind; 230816 12:58
   const Box = {
     margin: '0 auto',
     width: '1200px',
@@ -207,19 +176,7 @@ const Mypage2 = () => {
     padding: '20px',
     borderRadius: '0 30px 30px 30px'
   }
-  // Firestore에서 사용자의 품종 선택 정보를 가져오는 함수  --- 추가 230815   주석 230816 14:32
-  // const getBreedSelection = async (userId) => {
-  //     try {
-  //     const userRef = db.collection("users").doc(userId); // firestore 대신 db로 바꿈
-  //     const userDoc = await userRef.get();
-  //     if (userDoc.exists) {
-  //         const userData = userDoc.data();
-  //         return userData.breed || ""; // 품종 정보가 없는 경우 빈 문자열 반환
-  //     }
-  //     } catch (error) {
-  //     console.error("품종 선택 정보 불러오기 실패:", error);
-  //     }
-  // };
+  
   // 마이페이지 이동   
   const nav = useNavigate();
   const moveToMy1 = () => {
@@ -244,17 +201,7 @@ const Mypage2 = () => {
   // 가져온 품종 정보를 상태에 저장하거나 필요한 곳에 사용
   //}, []);
   // -------------------------------------------------------------------
-  // Signup 페이지에서 담긴 데이터
-  // 이곳에 원래의 회원 정보 담겨야 함
-  // 지금은 임시로 비워 놓음
-
-  // const [data, setData] = useState({
-  //     name: '',
-  //     gender: '',
-  //     birth: '',
-  //     weight: '',
-  //     neutered: ''
-  // });
+  
 
   //const [data, setData] = useState([]); // 품종 데이터 옵션 ---- 230816 13:10 주석
   const [data, setData] = useState({
@@ -367,34 +314,6 @@ const Mypage2 = () => {
 
   const [selectedDogkind, setSelectedDogkind] = useState('');
 
-  // const handleDogkindSelect = (value) => {   ----- 기존 코드 230816
-  //     setSelectedDogkind(value);
-  // };
-
-  // const getImagePath = () => {
-
-  //     if (selectedDogkind === "소형견" || dogCate === "소형견") {
-  //         return dog3pf;
-  //     } else if (selectedDogkind === "중형견" || dogCate === "중형견") {
-  //         return dog2pf;
-  //     } else if (selectedDogkind === "대형견" || dogCate === "대형견") {
-  //         return dog1pf;
-  //     } else {
-  //         return null; // 기본 이미지 경로 또는 처리
-  //     }
-  // };
-
-
-  // 성별 선택 버튼 클릭 이벤트 핸들러 ------------------------------
-  // const handleGenderButtonClick = (gender) => {
-  //     setData({ ...data, gender: gender });
-  // };
-
-  // // 중성화 여부 선택 버튼 클릭 이벤트 핸들러
-  // const handleNeuteredButtonClick = (neutered) => {
-  //     setData({ ...data, neutered: neutered });
-  // };
-
   // 성별 선택 버튼 클릭 이벤트 핸들러
   const handleGenderButtonClick = (gender) => {
     setData(prevData => ({
@@ -410,11 +329,6 @@ const Mypage2 = () => {
       dogNeutered: neutered,
     }));
   };
-
-  // 견종 선택 이벤트 핸들러
-  //const handleDogkindSelect = (value) => {
-  //    setSelectedDogkind(value);
-  //};
 
   const handleDogkindSelect = (value) => {
     setData(prevData => ({
@@ -433,24 +347,7 @@ const Mypage2 = () => {
   };
 
   const Dogdata = useLocation().state
-
-  // useEffect(() => {
-  //     fetch(jsonFilePath) // JSON 파일 경로로 수정
-  //         .then(response => response.json())
-  //         .then(data => {
-  //             // const options = data.map(breed => ({
-  //             //     label: breed.품종,
-  //             //     value: breed.품종,
-  //             // }));
-
-  //             setBreedsData(data);
-  //             //setDataOptions(options);
-  //         })
-  //         .catch(error => {
-  //             console.error('Error fetching breeds data:', error);
-  //         });
-
-  // }, []);
+  
   const [dogCate, setDogCate] = useState('')
   useEffect(() => {
     let cate = ""

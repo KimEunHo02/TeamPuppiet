@@ -13,8 +13,6 @@ import pwImage from '../icon/password.png'
 import birthImage from '../icon/birthday.png'
 import genderImage from '../icon/gender.png'
 
-// import { onAuthStateChanged } from "firebase/auth"; // 230814 -- 정희석 firebase 로그인
-// import { createUserWithEmailAndPassword } from "../config/firebase"; // Firebase 연동
 
 import './Signup.css';
 
@@ -237,13 +235,6 @@ const Signup = () => {
       return;
     }
 
-    // if (isFormValid()) {
-    //   console.log('회원가입 폼 데이터:', formData);
-    //   // 여기에 회원가입 로직을 추가할 수 있음
-    //   register(); // 2330814 -- 정희석 추가(firebase 연동)
-    // } else {
-    //   alert('입력값이 유효하지 않습니다. 모든 필드를 올바르게 입력해주세요.');
-    // }
     if (isFormValid()) {
       console.log('회원가입 폼 데이터:', formData);
       try {
@@ -303,20 +294,6 @@ const Signup = () => {
   console.log('isBirthValid:', isBirthValid(formData.birth));
   console.log('isNextButtonEnabled:', isNextButtonEnabled);
 
-
-  // const register = async () => {     ---> 사용할거면 버튼 맨 마지막 Onclick 함수 확인
-  //   try {
-  //     const createdUser = await createUserWithEmailAndPassword(firebaseAuth, formData.username, formData.password);
-  //     console.log(createdUser);
-  //     // 테스트후 이상하면 다시 복구
-  //     // setRegisterEmail("");
-  //     // setRegisterPassword("");
-  //     sessionStorage.setItem('userId', createdUser.user.email); // 2330814 -- 정희석 추가(firebase 연동)
-  //     nav('/petinfo', {state: formData})
-  //   }catch(err){
-  //     console.log(err.code);
-  //   }
-  // }
 
   const [isResetActive, setIsResetActive] = useState(false); // 닫기 버튼 활성화 상태 관리
 

@@ -87,11 +87,6 @@ const Mainpage2 = ({ mainArr }) => {
   }, [snacksData]); // snacksData 변경 시에만 실행
 
 
-
-  //let sessionData = sessionStorage.getItem('userId')
-
-  // console.log('session :', sessionData)
-
   // 스크롤 위치 상태 추가
   const [scrollY, setScrollY] = useState(0)
 

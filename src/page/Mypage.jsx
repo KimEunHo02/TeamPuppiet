@@ -20,7 +20,6 @@ import { onAuthStateChanged } from "firebase/auth";
 
 // GenderSelection 컴포넌트 정의 (남, 여 선택 버튼)
 const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
-  // const [selected, setSelected] = useState(selectedGender);
   const [selected, setSelected] = useState(selectedGender);
 
   const handleButtonClick = (value) => {
@@ -80,7 +79,6 @@ const Mypage = () => {
   const location = useLocation();
   const userData = location.state; // 추가 230815
   console.log('전달된 품종 데이터:', userData);
-  //230816 12:59(주석) const [user, setUser] = useState(null); // 230814 정희석  사용자 정보를 저장할 상태 변수
 
   // 흰색 박스
   const Box = {
@@ -100,41 +98,6 @@ const Mypage = () => {
     userNeutered: '',
     userKind: '', // 이전에는 dogCate라는 이름으로 사용되던 값인데, 수정함
   });
-  // Signup 페이지에서 담긴 데이터
-  //const [data, setData] = useState({
-  // name: 'test',
-  //birth: '',
-  //gender: '여성',
-  //});
-
-  // // 현재 유저를 저장을 위해 useState 선언
-  // const [currentUser, setCurrentUser] = useState({});
-
-  // // 현재 유저 정보를 currentUser에 저장
-  // useEffect(() => {
-  //   const unsub = onAuthStateChanged(auth, (user) => {
-  //     setCurrentUser(user);
-  //     console.log(user);
-  //   });
-  // }, []);
-  // // user 데이터 가져오기
-  // // firebase에서 현재 유저의 이메일 가져오기
-  // const userId = currentUser.email
-
-  // const getUsers = async () => {
-  //   const docRef = doc(db, "users", String(userId));
-  //   const docSnap = await getDoc(docRef);
-  //   if (docSnap.exists()) {
-  //     console.log("Document data:", docSnap.data());
-  //     setData(docSnap.data());
-  //   } else {
-  //     console.log("No such document!");
-  //   }
-  // };
-
-  // useEffect(()=>{
-  //   getUsers();
-  // },[])
 
   const [currentUser, setCurrentUser] = useState({});
 
@@ -209,20 +172,6 @@ const Mypage = () => {
     // 여기에 저장 또는 수정 로직을 추가할 수 있습니다.
   };
 
-  //   // 사용자 정보 가져오기 -- 230814 정희석
-  //   useEffect(() => {
-  //     const unsubscribe = firebaseAuth.onAuthStateChanged((authUser) => {
-  //       if (authUser) {
-  //         setUser(authUser);
-  //       } else {
-  //         setUser(null);
-  //       }
-  //     });
-
-  //   return () => unsubscribe(); // 컴포넌트 언마운트 시에도 unsubscribe
-  // }, []);
-
-  
   return (
     <div
       style={{ backgroundColor: '#F0F0F0' }}>
@@ -308,8 +257,6 @@ const Mypage = () => {
                 backgroundColor: '#FFC9C9', borderColor: '#FFC9C9', color: 'black',
                 width: '160px', height: '50px', margin: '0 50px',
               }}
-              // 수정했을 때 일단 console에 출력되게 구현
-              // Server 연동 후 수정 필요
               onClick={handleSave}>
               수정하기
             </Button>

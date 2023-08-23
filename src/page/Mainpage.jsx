@@ -7,9 +7,6 @@ import ImageSlider from '../pages/ImageSlider';
 import SnackImageSlider from '../pages/SnackImageSlider';
 import { Modal, Button } from 'react-bootstrap';
 
-// import dietGif from '../images/diet.gif'; // 이미지 가져오기
-// import calendarGif from '../images/calendar.gif'; // 이미지 가져오기
-// import serviceGif from '../images/service.gif'; // 이미지 가져오기
 import maininfoGif from '../images/main_230813.gif'; // 이미지 가져오기
 
 // 유정) 로고 이미지 눌렀을 때 Main 화면 보이게 설정한 페이지입니다.
@@ -45,12 +42,6 @@ const Mainpage = () => {
     const snackImages = ['/snackimg/간식1.png', '/snackimg/간식2.png', '/snackimg/간식3.png', '/snackimg/간식4.png',
         '/snackimg/간식5.png', '/snackimg/간식6.png', '/snackimg/간식7.png', '/snackimg/간식8.png',
     ];
-
-    // // 로그인하지 않은 상태이므로 메뉴바 눌렀을 때 로그인 페이지로 이동하게 설정
-    // const handleMenuClick = () => {
-    //     alert("로그인이 필요합니다.");
-    //     window.location.href = '/login'; // 로그인 페이지 경로로 변경
-    // };
 
     // --------------------- 모달 창 띄우기 ----------------------------
     // 로그인 버튼 클릭 시 로그인 페이지로 이동하는 함수
@@ -187,15 +178,6 @@ const Mainpage = () => {
                 marginLeft: '350px',
                 marginRight: '350px'
             }}>
-                {/* 서비스 소개 */}
-                {/* <div style={{ height: '404px', width: '1200px', background: `url(${serviceGif}) no-repeat center`, backgroundSize: 'cover' }}></div> */}
-
-                {/* 반려견 다이어트 정보 */}
-                {/* <div style={{ height: '404px', width: '1200px', background: `url(${dietGif}) no-repeat center`, backgroundSize: 'cover' }}></div> */}
-
-                {/* 이벤트 캘린더 이미지 */}
-                {/* <div style={{ height: '404px', width: '1200px', background: `url(${calendarGif}) no-repeat center`, backgroundSize: 'cover' }}></div> */}
-
                 <div style={{ height: '1222px', width: '1200px', background: `url(${maininfoGif}) no-repeat center`, backgroundSize: 'cover' }}></div>
 
                 {/* 사료 추천 */}

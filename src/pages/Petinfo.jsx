@@ -18,8 +18,6 @@ import neuteredImage from '../icon/neutered.png'
 import { db } from '../config/firebase';
 import { setDoc, doc } from '@firebase/firestore';
 
-// breedsData = 강아지정보총합.json파일 불러오기 위한 명칭
-// import breedsData from './강아지정보총합.json';
 
 // GenderSelection 컴포넌트 정의 (남, 여 선택 버튼)
 const GenderSelection = ({ selectedGender, handleGenderButtonClick }) => {
@@ -145,16 +143,6 @@ const Petinfo = () => {
         marginBottom: '100px',
         borderRadius: '20px',
     }
-
-    // 견종 데이터 선택 기능 breedsData
-    // const dataOptions = [
-    //     { label: '김은호', value: '김은호' },
-    //     { label: '류하경', value: '류하경' },
-    //     { label: '서유민', value: '서유민' },
-    //     { label: '서유정', value: '서유정' },
-    //     { label: '정희석', value: '정희석' },
-
-    // ];
 
     const [breedsData, setBreedsData] = useState([]);
 
